@@ -1,197 +1,99 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio Link - Premium Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --accent-color: #00d2ff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sóng Nhạc Remix</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+<style>
+body {
+    margin: 0;
+    background: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #fff;
+}
 
-        body {
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.container {
+    max-width: 420px;
+    margin: 40px auto;
+    background: #161616;
+    border-radius: 18px;
+    padding: 18px;
+}
 
-        /* Music Button */
-        .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer; color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
+.cover {
+    width: 100%;
+    border-radius: 14px;
+}
 
-        .rotating { animation: rotate 3s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+h2 {
+    text-align: center;
+    margin: 12px 0 4px;
+}
 
-        /* Main Card */
-        .bio-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px 25px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: slideUp 0.8s ease-out;
-        }
+p {
+    text-align: center;
+    color: #aaa;
+    margin: 0;
+    font-size: 14px;
+}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+audio {
+    width: 100%;
+    margin-top: 14px;
+}
 
-        /* Avatar Styling */
-        .avatar-wrapper {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
-        }
+.playlist {
+    margin-top: 18px;
+}
 
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover; /* Giữ tỉ lệ ảnh không bị móp */
-            border: 3px solid var(--accent-color);
-            padding: 4px;
-            background: rgba(255,255,255,0.1);
-        }
+.song {
+    padding: 14px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
 
-        .verified-badge {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: #1DA1F2;
-            color: white;
-            border-radius: 50%;
-            width: 26px; height: 26px;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 13px;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        h1 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .subtitle { color: #00d2ff; font-size: 0.85rem; margin-bottom: 30px; font-weight: 600; letter-spacing: 2px; }
-
-        /* Links */
-        .links-stack { display: flex; flex-direction: column; gap: 15px; }
-
-        .link-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .link-btn i { width: 30px; font-size: 1.2rem; margin-right: 15px; text-align: center; }
-
-        .link-btn:hover {
-            background: #fff;
-            color: #203a43;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        footer { margin-top: 40px; color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 2px; }
-    </style>
+.song:active {
+    background: #1db954;
+    color: #000;
+}
+</style>
 </head>
+
 <body>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg">
-    </audio>
+<div class="container">
+    <img src="cover.jpg" class="cover">
 
-    <div class="music-control" id="music-btn">
-        <i class="fas fa-music" id="music-icon"></i>
-    </div>
+    <h2>Sóng Nhạc Remix</h2>
+    <p>Quý Official 🇻🇳</p>
 
-    <div class="bio-card">
-        <div class="avatar-wrapper">
-            <img src="https://sf-static.upanhlaylink.com/img/image_202601284695cafa6bedc3848a112e8f04f05347.jpg" alt="Avatar" class="profile-img">
-            <div class="verified-badge"><i class="fas fa-check"></i></div>
+    <!-- iOS SAFE AUDIO -->
+    <audio id="player" controls preload="metadata"></audio>
+
+    <div class="playlist">
+        <div class="song" id="song1">
+            🎵 Vở Kịch Của Em – Uchiha Remix
         </div>
-        
-        <h1>LÂM PHÚ QUÝ</h1>
-        <p class="subtitle">CREATIVE & MINIMALIST</p>
-
-        <div class="links-stack">
-            <a href="https://www.facebook.com/share/1ArmaHG85s/?mibextid=wwXIfr" class="link-btn" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-                <span>Facebook Cá Nhân</span>
-            </a>
-
-            <a href="#" class="link-btn">
-                <i class="fab fa-tiktok"></i>
-                <span>Kênh TikTok</span>
-            </a>
-
-            <a href="#" class="link-btn">
-                <i class="fab fa-instagram"></i>
-                <span>Instagram Feed</span>
-            </a>
-
-            <a href="mailto:contact@yourdomain.com" class="link-btn">
-                <i class="fas fa-envelope"></i>
-                <span>Liên Hệ Công Việc</span>
-            </a>
-        </div>
-
-        <footer>© 2026 DESIGN BY GEMINI</footer>
     </div>
+</div>
 
-    <script>
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-btn');
-        const musicIcon = document.getElementById('music-icon');
-        let isPlaying = false;
+<script>
+const player = document.getElementById("player");
+const song1 = document.getElementById("song1");
 
-        musicBtn.addEventListener('click', function() {
-            if (isPlaying) {
-                music.pause();
-                musicIcon.classList.remove('rotating');
-                musicIcon.classList.replace('fa-pause', 'fa-music');
-            } else {
-                music.play();
-                musicIcon.classList.add('rotating');
-                musicIcon.classList.replace('fa-music', 'fa-pause');
-            }
-            isPlaying = !isPlaying;
-        });
-    </script>
+song1.addEventListener("click", function () {
+    player.pause();
+    player.src = "vo-kich-cua-em-uchiha-remix.mp3";
+    player.load();
+    player.play().catch(err => {
+        alert("iPhone chặn phát nhạc. Hãy bấm Play lần nữa.");
+    });
+});
+</script>
 
 </body>
 </html>
