@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login → Bio | Quý Official</title>
+<title>Login → Bio Editor | Quý Official</title>
 
 <style>
 :root{
     --main:#1db954;
-    --bg:#0b0b0b;
-    --glass:rgba(255,255,255,0.08);
+    --glass:rgba(255,255,255,.08);
 }
 
 *{box-sizing:border-box}
@@ -29,175 +28,135 @@ body{
 
 .box{
     width:100%;
-    max-width:380px;
+    max-width:390px;
     padding:22px;
     border-radius:20px;
     background:var(--glass);
     backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,.15);
     box-shadow:0 20px 50px rgba(0,0,0,.6);
-    animation:fadeUp .6s ease;
 }
 
-@keyframes fadeUp{
-    from{opacity:0;transform:translateY(30px)}
-    to{opacity:1;transform:none}
-}
+h2{text-align:center;margin:0 0 16px}
 
-h2{
-    text-align:center;
-    margin:0 0 18px;
-    font-weight:600;
-}
-
-input{
+input, textarea{
     width:100%;
     padding:14px;
-    margin-bottom:14px;
+    margin-bottom:12px;
     border-radius:14px;
     border:none;
     outline:none;
     background:#111;
     color:#fff;
-    font-size:15px;
 }
-
-input::placeholder{color:#777}
 
 button{
     width:100%;
     padding:14px;
     border:none;
     border-radius:14px;
-    font-size:16px;
     font-weight:600;
     cursor:pointer;
     background:linear-gradient(135deg,#1db954,#19e68c);
     color:#000;
-    transition:.25s;
 }
 
-button:hover{transform:scale(1.02)}
-
-.switch{
-    text-align:center;
-    margin-top:14px;
-    font-size:14px;
-    color:#aaa;
-    cursor:pointer;
-}
-
-.switch:hover{color:#fff}
-
-.bio{
-    text-align:center;
-}
+.bio{text-align:center}
 
 .avatar{
-    width:110px;
-    height:110px;
+    width:120px;
+    height:120px;
     border-radius:50%;
-    margin:10px auto 12px;
+    margin:10px auto;
     display:block;
+    object-fit:cover;
     border:3px solid var(--main);
-}
-
-.bio h2{
-    margin:8px 0 6px;
-}
-
-.bio p{
-    margin:4px 0;
-    color:#ccc;
-    font-size:14px;
-}
-
-.links{
-    margin-top:18px;
 }
 
 .links a{
     display:block;
-    padding:13px;
+    padding:12px;
     margin-bottom:10px;
     border-radius:14px;
-    text-decoration:none;
-    color:#fff;
     background:#141414;
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.links a:hover{
-    background:var(--main);
-    color:#000;
-}
-
-.logout{
-    margin-top:18px;
-    background:#ff3b3b;
     color:#fff;
+    text-decoration:none;
 }
+
+.edit{background:#333;color:#fff;margin-top:10px}
+.logout{background:#ff3b3b;color:#fff;margin-top:10px}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN / REGISTER -->
+<!-- LOGIN -->
 <div class="box" id="authBox">
     <h2 id="title">Đăng nhập</h2>
-
-    <input type="text" id="username" placeholder="Tên đăng nhập">
-    <input type="password" id="password" placeholder="Mật khẩu">
-
+    <input id="username" placeholder="Tên đăng nhập">
+    <input id="password" type="password" placeholder="Mật khẩu">
     <button onclick="handleAuth()">Tiếp tục</button>
-
-    <div class="switch" onclick="toggleMode()">
+    <p style="text-align:center;color:#aaa;cursor:pointer" onclick="toggleMode()">
         Chưa có tài khoản? Đăng ký
-    </div>
+    </p>
 </div>
 
-<!-- BIO PAGE -->
+<!-- BIO -->
 <div class="box bio" id="bioBox" style="display:none;">
-    <img src="https://i.imgur.com/8Km9tLL.jpg" class="avatar">
+    <img id="avatarImg" class="avatar">
     <h2 id="bioName"></h2>
-
-    <p>🌐 Nhà sáng tạo nội dung</p>
-    <p>🎧 Sóng nhạc Remix</p>
-    <p>🇻🇳 Việt Nam</p>
+    <p id="bioDesc"></p>
 
     <div class="links">
-        <a href="#">🎵 YouTube</a>
-        <a href="#">📸 Instagram</a>
-        <a href="#">💬 Telegram</a>
+        <a id="link1" target="_blank"></a>
+        <a id="link2" target="_blank"></a>
     </div>
 
+    <button class="edit" onclick="openEdit()">✏️ Chỉnh sửa Bio</button>
     <button class="logout" onclick="logout()">Đăng xuất</button>
 </div>
 
+<!-- EDIT BIO -->
+<div class="box" id="editBox" style="display:none;">
+    <h2>✏️ Chỉnh sửa Bio</h2>
+
+    <input type="file" accept="image/*" onchange="uploadAvatar(this)">
+    <input id="editName" placeholder="Tên hiển thị">
+    <textarea id="editDesc" rows="3" placeholder="Mô tả"></textarea>
+    <input id="editLink1" placeholder="Link 1">
+    <input id="editLink2" placeholder="Link 2">
+
+    <button onclick="saveBio()">💾 Lưu Bio</button>
+</div>
+
 <script>
-let isLogin = true;
+let isLogin=true, currentUser="";
 
 function toggleMode(){
     isLogin=!isLogin;
     title.innerText=isLogin?"Đăng nhập":"Đăng ký";
-    document.querySelector(".switch").innerText=
-        isLogin?"Chưa có tài khoản? Đăng ký":"Đã có tài khoản? Đăng nhập";
 }
 
 function handleAuth(){
     const u=username.value,p=password.value;
-    if(!u||!p){alert("Vui lòng nhập đầy đủ");return}
+    if(!u||!p){alert("Nhập đầy đủ");return}
 
     if(isLogin){
-        if(localStorage.getItem(u)===p){
+        if(localStorage.getItem("pass_"+u)===p){
             localStorage.setItem("loggedIn",u);
             showBio();
-        }else alert("Sai tài khoản hoặc mật khẩu");
+        }else alert("Sai thông tin");
     }else{
-        if(localStorage.getItem(u)) alert("Tài khoản đã tồn tại");
+        if(localStorage.getItem("pass_"+u)) alert("Tài khoản tồn tại");
         else{
-            localStorage.setItem(u,p);
+            localStorage.setItem("pass_"+u,p);
+            localStorage.setItem("bio_"+u,JSON.stringify({
+                name:u,
+                desc:"🌐 Nhà sáng tạo nội dung",
+                link1:"",
+                link2:"",
+                avatar:""
+            }));
             alert("Đăng ký thành công");
             toggleMode();
         }
@@ -205,12 +164,56 @@ function handleAuth(){
 }
 
 function showBio(){
-    const u=localStorage.getItem("loggedIn");
-    if(u){
-        authBox.style.display="none";
-        bioBox.style.display="block";
-        bioName.innerText=u;
+    currentUser=localStorage.getItem("loggedIn");
+    if(!currentUser) return;
+
+    authBox.style.display="none";
+    editBox.style.display="none";
+    bioBox.style.display="block";
+
+    const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
+    bioName.innerText=bio.name;
+    bioDesc.innerText=bio.desc;
+    avatarImg.src=bio.avatar || "https://i.imgur.com/8Km9tLL.jpg";
+
+    link1.innerText=bio.link1;
+    link1.href=bio.link1||"#";
+    link2.innerText=bio.link2;
+    link2.href=bio.link2||"#";
+}
+
+function openEdit(){
+    bioBox.style.display="none";
+    editBox.style.display="block";
+    const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
+    editName.value=bio.name;
+    editDesc.value=bio.desc;
+    editLink1.value=bio.link1;
+    editLink2.value=bio.link2;
+}
+
+function uploadAvatar(input){
+    const file=input.files[0];
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=function(){
+        const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
+        bio.avatar=reader.result;
+        localStorage.setItem("bio_"+currentUser,JSON.stringify(bio));
     }
+    reader.readAsDataURL(file);
+}
+
+function saveBio(){
+    const bio={
+        name:editName.value,
+        desc:editDesc.value,
+        link1:editLink1.value,
+        link2:editLink2.value,
+        avatar:JSON.parse(localStorage.getItem("bio_"+currentUser)).avatar
+    };
+    localStorage.setItem("bio_"+currentUser,JSON.stringify(bio));
+    showBio();
 }
 
 function logout(){
