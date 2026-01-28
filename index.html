@@ -3,272 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Music Bio System | Quý Official</title>
+<title>Quý Official</title>
 
 <style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:#0d0d0d;
-  color:#fff;
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#000;color:#fff;height:100vh;overflow:hidden}
+
+/* ===== MAINTENANCE ===== */
+#maintenance{
+    position:fixed;inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle,#111,#000);
 }
-.box{
-  max-width:420px;
-  margin:40px auto;
-  background:#161616;
-  border-radius:18px;
-  padding:20px;
-  text-align:center;
+.m-box{
+    width:90%;
+    max-width:420px;
+    background:#141414;
+    padding:26px;
+    border-radius:20px;
+    text-align:center;
 }
-.hidden{display:none}
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border-radius:10px;
-  border:none;
+.m-box h1{margin-bottom:8px}
+.m-box p{color:#aaa;font-size:14px}
+.countdown{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:20px 0;
 }
-button{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border:none;
-  border-radius:12px;
-  font-weight:600;
+.time{
+    background:#0d0d0d;
+    border-radius:14px;
+    padding:12px 4px;
 }
-.green{background:#1db954}
-.red{background:#ff3b3b;color:#fff}
-.blue{background:#3498db}
-.purple{background:#8e44ad}
-.gray{background:#555;color:#fff}
+.time h2{color:#1db954}
+.time span{font-size:12px;color:#777}
+
+/* ===== BIO ===== */
+#bio{
+    display:none;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(160deg,#0b0b0b,#000);
+}
+.bio-box{
+    width:90%;
+    max-width:380px;
+    background:#111;
+    padding:26px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,255,170,.15);
+}
 .avatar{
-  width:110px;height:110px;border-radius:50%;object-fit:cover;
+    width:120px;height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #1db954;
+    margin-bottom:12px;
 }
-.list{
-  background:#222;
-  padding:10px;
-  border-radius:12px;
-  margin-top:10px;
+.bio-box h2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
 }
-audio{width:100%;margin-top:6px}
+.tick{
+    width:18px;height:18px;
+}
+.bio-box p{color:#aaa;margin:6px 0}
+.music-btn{
+    margin-top:18px;
+    padding:12px;
+    width:100%;
+    border:none;
+    border-radius:12px;
+    background:#1db954;
+    color:#000;
+    font-size:16px;
+    font-weight:600;
+}
 </style>
 </head>
 
 <body>
 
-<!-- MAINTENANCE -->
-<div class="box hidden" id="maintenanceBox">
-  <h2>🚧 Website đang bảo trì</h2>
-  <p>Hệ thống sẽ sớm quay lại</p>
+<!-- ===== MAINTENANCE ===== -->
+<div id="maintenance">
+    <div class="m-box">
+        <h1>🚧 BẢO TRÌ HỆ THỐNG</h1>
+        <p>Admin / Thư ký / Trợ lý đang nâng cấp</p>
+
+        <div class="countdown">
+            <div class="time"><h2 id="d">0</h2><span>Ngày</span></div>
+            <div class="time"><h2 id="h">0</h2><span>Giờ</span></div>
+            <div class="time"><h2 id="m">0</h2><span>Phút</span></div>
+            <div class="time"><h2 id="s">0</h2><span>Giây</span></div>
+        </div>
+    </div>
 </div>
 
-<!-- ADMIN LOGIN -->
-<div class="box hidden" id="adminLogin">
-  <h2>👑 Admin Login</h2>
-  <input id="adminUser" placeholder="admin">
-  <input id="adminPass" type="password" placeholder="Mật khẩu">
-  <button class="green" onclick="loginRole('admin')">Đăng nhập</button>
+<!-- ===== BIO + MUSIC ===== -->
+<div id="bio">
+    <div class="bio-box">
+        <img src="https://i.imgur.com/8Km9tLL.jpg" class="avatar">
+
+        <h2>
+            Quý Official
+            <img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg">
+        </h2>
+
+        <p>🎧 Sóng nhạc Remix</p>
+        <p>🌐 Nhà sáng tạo nội dung</p>
+        <p>🇻🇳 Việt Nam</p>
+
+        <button class="music-btn" onclick="toggleMusic()">▶ Phát nhạc</button>
+    </div>
 </div>
 
-<!-- SECRETARY LOGIN -->
-<div class="box hidden" id="secretaryLogin">
-  <h2>🧑‍💼 Thư ký Login</h2>
-  <input id="secUser" placeholder="secretary">
-  <input id="secPass" type="password" placeholder="Mật khẩu">
-  <button class="blue" onclick="loginRole('secretary')">Đăng nhập</button>
-</div>
-
-<!-- ASSISTANT LOGIN -->
-<div class="box hidden" id="assistantLogin">
-  <h2>🤖 Trợ lý Login</h2>
-  <input id="asUser" placeholder="assistant">
-  <input id="asPass" type="password" placeholder="Mật khẩu">
-  <button class="purple" onclick="loginRole('assistant')">Đăng nhập</button>
-</div>
-
-<!-- USER -->
-<div class="box hidden" id="userBox">
-  <img id="userAvatar" class="avatar">
-  <h2 id="userName"></h2>
-  <textarea id="bioText" placeholder="Bio của bạn"></textarea>
-  <input type="file" accept="image/*" onchange="uploadAvatar(this)">
-  <input type="file" accept="audio/*" onchange="uploadMusic(this)">
-  <button class="green" onclick="saveBio()">Lưu Bio</button>
-  <h3>🎵 Nhạc đã duyệt</h3>
-  <div id="userMusic"></div>
-  <button class="red" onclick="logout()">Đăng xuất</button>
-</div>
-
-<!-- ASSISTANT PANEL -->
-<div class="box hidden" id="assistantBox">
-  <h2>🤖 Trợ lý</h2>
-  <div id="assistantList"></div>
-  <button class="purple" onclick="logout()">Đăng xuất</button>
-</div>
-
-<!-- SECRETARY PANEL -->
-<div class="box hidden" id="secretaryBox">
-  <h2>🧑‍💼 Thư ký</h2>
-  <div id="secretaryList"></div>
-  <button class="blue" onclick="logout()">Đăng xuất</button>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="box hidden" id="adminBox">
-  <h2>👑 Admin Panel</h2>
-  <button onclick="toggleMaintenance()">🔧 Bật / Tắt bảo trì</button>
-  <button class="red" onclick="resetSystem()">⚠ Reset hệ thống</button>
-  <div id="adminInfo"></div>
-  <button class="gray" onclick="logout()">Đăng xuất</button>
-</div>
+<!-- ===== AUDIO ===== -->
+<audio id="music" loop>
+    <source src="Vở Kịch Của Em - Uchiha Remix-2098040957.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* ===== TÀI KHOẢN HỆ THỐNG ===== */
-const accounts={
-  admin:{pass:"admin123",role:"admin"},
-  secretary:{pass:"123456",role:"secretary"},
-  assistant:{pass:"123456",role:"assistant"}
-};
+/* ===== SET THỜI GIAN BẢO TRÌ (4 THÁNG) ===== */
+const start = new Date();
+const end = new Date(start);
+end.setMonth(end.getMonth() + 4);
 
-if(localStorage.maintenance===undefined){
-  localStorage.maintenance="on";
-}
-if(!localStorage.musicDB){
-  localStorage.musicDB=JSON.stringify([]);
-}
+function update(){
+    const now = new Date();
+    const diff = end - now;
 
-/* ===== LOGIN RIÊNG ===== */
-function loginRole(role){
-  let u,p;
-  if(role==="admin"){u=adminUser.value;p=adminPass.value;}
-  if(role==="secretary"){u=secUser.value;p=secPass.value;}
-  if(role==="assistant"){u=asUser.value;p=asPass.value;}
+    if(diff <= 0){
+        document.getElementById("maintenance").style.display="none";
+        document.getElementById("bio").style.display="flex";
+        return;
+    }
 
-  if(accounts[u] && accounts[u].pass===p && accounts[u].role===role){
-    localStorage.session=u;
-    location.reload();
-  }else alert("Sai thông tin đăng nhập");
+    document.getElementById("d").innerText = Math.floor(diff/86400000);
+    document.getElementById("h").innerText = Math.floor(diff/3600000)%24;
+    document.getElementById("m").innerText = Math.floor(diff/60000)%60;
+    document.getElementById("s").innerText = Math.floor(diff/1000)%60;
 }
+setInterval(update,1000);
+update();
 
-/* ===== USER ===== */
-function saveBio(){localStorage["bio_"+session]=bioText.value;}
-function uploadAvatar(f){
-  let r=new FileReader();
-  r.onload=e=>localStorage["ava_"+session]=e.target.result;
-  r.readAsDataURL(f.files[0]);
-}
-function uploadMusic(f){
-  let r=new FileReader();
-  r.onload=e=>{
-    let db=JSON.parse(localStorage.musicDB);
-    db.push({user:session,src:e.target.result,status:"pending"});
-    localStorage.musicDB=JSON.stringify(db);
-    loadUser();
-  };
-  r.readAsDataURL(f.files[0]);
-}
-function loadUser(){
-  userBox.classList.remove("hidden");
-  userName.innerText=session;
-  userAvatar.src=localStorage["ava_"+session]||"https://i.imgur.com/8Km9tLL.jpg";
-  bioText.value=localStorage["bio_"+session]||"";
-  userMusic.innerHTML="";
-  JSON.parse(localStorage.musicDB)
-    .filter(m=>m.user===session && m.status==="approved")
-    .forEach(m=>userMusic.innerHTML+=`<audio controls src="${m.src}"></audio>`);
-}
-
-/* ===== ASSISTANT ===== */
-function loadAssistant(){
-  assistantBox.classList.remove("hidden");
-  assistantList.innerHTML="";
-  JSON.parse(localStorage.musicDB)
-    .filter(m=>m.status==="pending")
-    .forEach((m,i)=>{
-      assistantList.innerHTML+=`
-      <div class="list">
-        ${m.user}
-        <audio controls src="${m.src}"></audio>
-        <button onclick="checkMusic(${i})">Gửi đề xuất</button>
-      </div>`;
-    });
-}
-function checkMusic(i){
-  let db=JSON.parse(localStorage.musicDB);
-  db[i].status="checked";
-  localStorage.musicDB=JSON.stringify(db);
-  loadAssistant();
-}
-
-/* ===== SECRETARY ===== */
-function loadSecretary(){
-  secretaryBox.classList.remove("hidden");
-  secretaryList.innerHTML="";
-  JSON.parse(localStorage.musicDB)
-    .filter(m=>m.status==="checked")
-    .forEach((m,i)=>{
-      secretaryList.innerHTML+=`
-      <div class="list">
-        ${m.user}
-        <audio controls src="${m.src}"></audio>
-        <button onclick="approve(${i})">✅ Duyệt</button>
-        <button class="red" onclick="reject(${i})">❌ Từ chối</button>
-      </div>`;
-    });
-}
-function approve(i){
-  let db=JSON.parse(localStorage.musicDB);
-  db[i].status="approved";
-  localStorage.musicDB=JSON.stringify(db);
-  loadSecretary();
-}
-function reject(i){
-  let db=JSON.parse(localStorage.musicDB);
-  db.splice(i,1);
-  localStorage.musicDB=JSON.stringify(db);
-  loadSecretary();
-}
-
-/* ===== ADMIN ===== */
-function loadAdmin(){
-  adminBox.classList.remove("hidden");
-  adminInfo.innerText="Tổng bài nhạc: "+JSON.parse(localStorage.musicDB).length;
-}
-function toggleMaintenance(){
-  localStorage.maintenance =
-    localStorage.maintenance==="on"?"off":"on";
-  alert("Đã đổi trạng thái bảo trì");
-}
-function resetSystem(){
-  if(confirm("XÓA TOÀN BỘ HỆ THỐNG?")){
-    localStorage.clear();
-    location.reload();
-  }
-}
-
-/* ===== ĐIỀU HƯỚNG ===== */
-let session=localStorage.session;
-let hash=location.hash.replace("#","");
-let maintenance=localStorage.maintenance==="on";
-
-if(session && accounts[session]){
-  loadRole(accounts[session].role);
-}else{
-  if(hash==="admin") adminLogin.classList.remove("hidden");
-  else if(hash==="secretary") secretaryLogin.classList.remove("hidden");
-  else if(hash==="assistant") assistantLogin.classList.remove("hidden");
-  else maintenanceBox.classList.remove("hidden");
-}
-
-function loadRole(role){
-  if(role==="admin") loadAdmin();
-  if(role==="secretary") loadSecretary();
-  if(role==="assistant") loadAssistant();
-}
-
-function logout(){
-  localStorage.removeItem("session");
-  location.reload();
+/* ===== MUSIC CONTROL ===== */
+let playing=false;
+function toggleMusic(){
+    const audio=document.getElementById("music");
+    const btn=document.querySelector(".music-btn");
+    if(!playing){
+        audio.play();
+        btn.innerText="⏸ Tạm dừng";
+    }else{
+        audio.pause();
+        btn.innerText="▶ Phát nhạc";
+    }
+    playing=!playing;
 }
 </script>
 
