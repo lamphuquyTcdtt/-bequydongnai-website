@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login → Bio Editor | Quý Official</title>
+<title>Bio System + Admin Panel | Quý Official</title>
 
 <style>
 :root{
     --main:#1db954;
     --glass:rgba(255,255,255,.08);
 }
-
 *{box-sizing:border-box}
 
 body{
@@ -28,16 +27,16 @@ body{
 
 .box{
     width:100%;
-    max-width:390px;
+    max-width:420px;
     padding:22px;
-    border-radius:20px;
+    border-radius:22px;
     background:var(--glass);
     backdrop-filter:blur(18px);
     border:1px solid rgba(255,255,255,.15);
     box-shadow:0 20px 50px rgba(0,0,0,.6);
 }
 
-h2{text-align:center;margin:0 0 16px}
+h2{text-align:center;margin-bottom:16px}
 
 input, textarea{
     width:100%;
@@ -45,7 +44,6 @@ input, textarea{
     margin-bottom:12px;
     border-radius:14px;
     border:none;
-    outline:none;
     background:#111;
     color:#fff;
 }
@@ -61,30 +59,44 @@ button{
     color:#000;
 }
 
-.bio{text-align:center}
+button.gray{background:#333;color:#fff;margin-top:8px}
+button.danger{background:#ff3b3b;color:#fff;margin-top:8px}
 
 .avatar{
-    width:120px;
-    height:120px;
+    width:100px;
+    height:100px;
     border-radius:50%;
-    margin:10px auto;
-    display:block;
     object-fit:cover;
     border:3px solid var(--main);
-}
-
-.links a{
+    margin:10px auto;
     display:block;
-    padding:12px;
-    margin-bottom:10px;
-    border-radius:14px;
-    background:#141414;
-    color:#fff;
-    text-decoration:none;
 }
 
-.edit{background:#333;color:#fff;margin-top:10px}
-.logout{background:#ff3b3b;color:#fff;margin-top:10px}
+.name-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+}
+
+.verify{
+    width:18px;
+    height:18px;
+    background:#1d9bf0;
+    color:#fff;
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+}
+
+.user-item{
+    background:#141414;
+    padding:12px;
+    border-radius:14px;
+    margin-bottom:10px;
+}
 </style>
 </head>
 
@@ -101,127 +113,134 @@ button{
     </p>
 </div>
 
-<!-- BIO -->
-<div class="box bio" id="bioBox" style="display:none;">
+<!-- USER BIO -->
+<div class="box" id="bioBox" style="display:none;text-align:center">
     <img id="avatarImg" class="avatar">
-    <h2 id="bioName"></h2>
-    <p id="bioDesc"></p>
-
-    <div class="links">
-        <a id="link1" target="_blank"></a>
-        <a id="link2" target="_blank"></a>
+    <div class="name-wrap">
+        <h2 id="bioName"></h2>
+        <span id="verifyBadge" class="verify" style="display:none">✔</span>
     </div>
-
-    <button class="edit" onclick="openEdit()">✏️ Chỉnh sửa Bio</button>
-    <button class="logout" onclick="logout()">Đăng xuất</button>
+    <p id="bioDesc"></p>
+    <button class="gray" onclick="logout()">Đăng xuất</button>
 </div>
 
-<!-- EDIT BIO -->
-<div class="box" id="editBox" style="display:none;">
-    <h2>✏️ Chỉnh sửa Bio</h2>
-
-    <input type="file" accept="image/*" onchange="uploadAvatar(this)">
-    <input id="editName" placeholder="Tên hiển thị">
-    <textarea id="editDesc" rows="3" placeholder="Mô tả"></textarea>
-    <input id="editLink1" placeholder="Link 1">
-    <input id="editLink2" placeholder="Link 2">
-
-    <button onclick="saveBio()">💾 Lưu Bio</button>
+<!-- ADMIN PANEL -->
+<div class="box" id="adminBox" style="display:none">
+    <h2>👑 Admin Panel</h2>
+    <div id="userList"></div>
+    <button class="danger" onclick="logout()">Đăng xuất Admin</button>
 </div>
 
 <script>
-let isLogin=true, currentUser="";
+// ===== ADMIN CỐ ĐỊNH =====
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "123456";
+
+// Tự tạo admin nếu chưa có
+if (!localStorage.getItem("pass_" + ADMIN_USER)) {
+    localStorage.setItem("pass_" + ADMIN_USER, ADMIN_PASS);
+    localStorage.setItem("bio_" + ADMIN_USER, JSON.stringify({
+        name: "Quý Admin",
+        desc: "👑 Administrator",
+        avatar: "",
+        verified: true
+    }));
+}
+
+let isLogin = true;
+let currentUser = "";
 
 function toggleMode(){
-    isLogin=!isLogin;
-    title.innerText=isLogin?"Đăng nhập":"Đăng ký";
+    isLogin = !isLogin;
+    title.innerText = isLogin ? "Đăng nhập" : "Đăng ký";
 }
 
 function handleAuth(){
-    const u=username.value,p=password.value;
-    if(!u||!p){alert("Nhập đầy đủ");return}
+    const u = username.value.trim();
+    const p = password.value.trim();
+    if(!u || !p){ alert("Nhập đầy đủ thông tin"); return; }
 
-    if(isLogin){
-        if(localStorage.getItem("pass_"+u)===p){
-            localStorage.setItem("loggedIn",u);
-            showBio();
-        }else alert("Sai thông tin");
-    }else{
-        if(localStorage.getItem("pass_"+u)) alert("Tài khoản tồn tại");
-        else{
-            localStorage.setItem("pass_"+u,p);
-            localStorage.setItem("bio_"+u,JSON.stringify({
-                name:u,
-                desc:"🌐 Nhà sáng tạo nội dung",
-                link1:"",
-                link2:"",
-                avatar:""
-            }));
-            alert("Đăng ký thành công");
-            toggleMode();
-        }
+    if(!isLogin){
+        if(localStorage.getItem("pass_"+u)){ alert("User đã tồn tại"); return; }
+        if(u === ADMIN_USER){ alert("Tên admin được bảo vệ"); return; }
+
+        localStorage.setItem("pass_"+u, p);
+        localStorage.setItem("bio_"+u, JSON.stringify({
+            name: u,
+            desc: "🌐 Nhà sáng tạo nội dung",
+            avatar: "",
+            verified: false
+        }));
+        alert("Đăng ký thành công");
+        toggleMode();
+        return;
     }
+
+    if(localStorage.getItem("pass_"+u) !== p){
+        alert("Sai tài khoản hoặc mật khẩu");
+        return;
+    }
+
+    currentUser = u;
+    u === ADMIN_USER ? showAdmin() : showBio();
 }
 
 function showBio(){
-    currentUser=localStorage.getItem("loggedIn");
-    if(!currentUser) return;
-
     authBox.style.display="none";
-    editBox.style.display="none";
+    adminBox.style.display="none";
     bioBox.style.display="block";
 
-    const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
-    bioName.innerText=bio.name;
-    bioDesc.innerText=bio.desc;
-    avatarImg.src=bio.avatar || "https://i.imgur.com/8Km9tLL.jpg";
-
-    link1.innerText=bio.link1;
-    link1.href=bio.link1||"#";
-    link2.innerText=bio.link2;
-    link2.href=bio.link2||"#";
+    const bio = JSON.parse(localStorage.getItem("bio_"+currentUser));
+    bioName.innerText = bio.name;
+    bioDesc.innerText = bio.desc;
+    avatarImg.src = bio.avatar || "https://i.imgur.com/8Km9tLL.jpg";
+    verifyBadge.style.display = bio.verified ? "inline-flex" : "none";
 }
 
-function openEdit(){
+function showAdmin(){
+    authBox.style.display="none";
     bioBox.style.display="none";
-    editBox.style.display="block";
-    const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
-    editName.value=bio.name;
-    editDesc.value=bio.desc;
-    editLink1.value=bio.link1;
-    editLink2.value=bio.link2;
+    adminBox.style.display="block";
+    renderUsers();
 }
 
-function uploadAvatar(input){
-    const file=input.files[0];
-    if(!file) return;
-    const reader=new FileReader();
-    reader.onload=function(){
-        const bio=JSON.parse(localStorage.getItem("bio_"+currentUser));
-        bio.avatar=reader.result;
-        localStorage.setItem("bio_"+currentUser,JSON.stringify(bio));
-    }
-    reader.readAsDataURL(file);
+function renderUsers(){
+    userList.innerHTML="";
+    Object.keys(localStorage).forEach(k=>{
+        if(k.startsWith("bio_")){
+            const u = k.replace("bio_","");
+            const bio = JSON.parse(localStorage.getItem(k));
+            if(u === ADMIN_USER) return;
+
+            userList.innerHTML += `
+            <div class="user-item">
+                <b>${u}</b> ${bio.verified?"✔️":""}
+                <button onclick="toggleVerify('${u}')">
+                    ${bio.verified?"❌ Bỏ tích xanh":"✅ Bật tích xanh"}
+                </button>
+                <button class="danger" onclick="deleteUser('${u}')">Xóa user</button>
+            </div>`;
+        }
+    });
 }
 
-function saveBio(){
-    const bio={
-        name:editName.value,
-        desc:editDesc.value,
-        link1:editLink1.value,
-        link2:editLink2.value,
-        avatar:JSON.parse(localStorage.getItem("bio_"+currentUser)).avatar
-    };
-    localStorage.setItem("bio_"+currentUser,JSON.stringify(bio));
-    showBio();
+function toggleVerify(u){
+    const bio = JSON.parse(localStorage.getItem("bio_"+u));
+    bio.verified = !bio.verified;
+    localStorage.setItem("bio_"+u, JSON.stringify(bio));
+    renderUsers();
+}
+
+function deleteUser(u){
+    if(!confirm("Xóa user "+u+" ?")) return;
+    localStorage.removeItem("bio_"+u);
+    localStorage.removeItem("pass_"+u);
+    renderUsers();
 }
 
 function logout(){
-    localStorage.removeItem("loggedIn");
     location.reload();
 }
-
-showBio();
 </script>
 
 </body>
