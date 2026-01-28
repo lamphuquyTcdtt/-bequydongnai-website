@@ -3,96 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sóng Nhạc Remix</title>
+<title>Login → Bio | Quý Official</title>
 
 <style>
-body {
-    margin: 0;
-    background: #0d0d0d;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #fff;
+:root{
+    --main:#1db954;
+    --bg:#0b0b0b;
+    --glass:rgba(255,255,255,0.08);
 }
 
-.container {
-    max-width: 420px;
-    margin: 40px auto;
-    background: #161616;
-    border-radius: 18px;
-    padding: 18px;
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    background:
+        radial-gradient(circle at top,#1db95433,transparent 40%),
+        linear-gradient(180deg,#050505,#0b0b0b);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.cover {
-    width: 100%;
-    border-radius: 14px;
+.box{
+    width:100%;
+    max-width:380px;
+    padding:22px;
+    border-radius:20px;
+    background:var(--glass);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 20px 50px rgba(0,0,0,.6);
+    animation:fadeUp .6s ease;
 }
 
-h2 {
-    text-align: center;
-    margin: 12px 0 4px;
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:none}
 }
 
-p {
-    text-align: center;
-    color: #aaa;
-    margin: 0;
-    font-size: 14px;
+h2{
+    text-align:center;
+    margin:0 0 18px;
+    font-weight:600;
 }
 
-audio {
-    width: 100%;
-    margin-top: 14px;
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:14px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    background:#111;
+    color:#fff;
+    font-size:15px;
 }
 
-.playlist {
-    margin-top: 18px;
+input::placeholder{color:#777}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#1db954,#19e68c);
+    color:#000;
+    transition:.25s;
 }
 
-.song {
-    padding: 14px;
-    background: #1e1e1e;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 15px;
+button:hover{transform:scale(1.02)}
+
+.switch{
+    text-align:center;
+    margin-top:14px;
+    font-size:14px;
+    color:#aaa;
+    cursor:pointer;
 }
 
-.song:active {
-    background: #1db954;
-    color: #000;
+.switch:hover{color:#fff}
+
+.bio{
+    text-align:center;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    margin:10px auto 12px;
+    display:block;
+    border:3px solid var(--main);
+}
+
+.bio h2{
+    margin:8px 0 6px;
+}
+
+.bio p{
+    margin:4px 0;
+    color:#ccc;
+    font-size:14px;
+}
+
+.links{
+    margin-top:18px;
+}
+
+.links a{
+    display:block;
+    padding:13px;
+    margin-bottom:10px;
+    border-radius:14px;
+    text-decoration:none;
+    color:#fff;
+    background:#141414;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.links a:hover{
+    background:var(--main);
+    color:#000;
+}
+
+.logout{
+    margin-top:18px;
+    background:#ff3b3b;
+    color:#fff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <img src="cover.jpg" class="cover">
+<!-- LOGIN / REGISTER -->
+<div class="box" id="authBox">
+    <h2 id="title">Đăng nhập</h2>
 
-    <h2>Sóng Nhạc Remix</h2>
-    <p>Quý Official 🇻🇳</p>
+    <input type="text" id="username" placeholder="Tên đăng nhập">
+    <input type="password" id="password" placeholder="Mật khẩu">
 
-    <!-- iOS SAFE AUDIO -->
-    <audio id="player" controls preload="metadata"></audio>
+    <button onclick="handleAuth()">Tiếp tục</button>
 
-    <div class="playlist">
-        <div class="song" id="song1">
-            🎵 Vở Kịch Của Em – Uchiha Remix
-        </div>
+    <div class="switch" onclick="toggleMode()">
+        Chưa có tài khoản? Đăng ký
     </div>
 </div>
 
-<script>
-const player = document.getElementById("player");
-const song1 = document.getElementById("song1");
+<!-- BIO PAGE -->
+<div class="box bio" id="bioBox" style="display:none;">
+    <img src="https://i.imgur.com/8Km9tLL.jpg" class="avatar">
+    <h2 id="bioName"></h2>
 
-song1.addEventListener("click", function () {
-    player.pause();
-    player.src = "vo-kich-cua-em-uchiha-remix.mp3";
-    player.load();
-    player.play().catch(err => {
-        alert("iPhone chặn phát nhạc. Hãy bấm Play lần nữa.");
-    });
-});
+    <p>🌐 Nhà sáng tạo nội dung</p>
+    <p>🎧 Sóng nhạc Remix</p>
+    <p>🇻🇳 Việt Nam</p>
+
+    <div class="links">
+        <a href="#">🎵 YouTube</a>
+        <a href="#">📸 Instagram</a>
+        <a href="#">💬 Telegram</a>
+    </div>
+
+    <button class="logout" onclick="logout()">Đăng xuất</button>
+</div>
+
+<script>
+let isLogin = true;
+
+function toggleMode(){
+    isLogin=!isLogin;
+    title.innerText=isLogin?"Đăng nhập":"Đăng ký";
+    document.querySelector(".switch").innerText=
+        isLogin?"Chưa có tài khoản? Đăng ký":"Đã có tài khoản? Đăng nhập";
+}
+
+function handleAuth(){
+    const u=username.value,p=password.value;
+    if(!u||!p){alert("Vui lòng nhập đầy đủ");return}
+
+    if(isLogin){
+        if(localStorage.getItem(u)===p){
+            localStorage.setItem("loggedIn",u);
+            showBio();
+        }else alert("Sai tài khoản hoặc mật khẩu");
+    }else{
+        if(localStorage.getItem(u)) alert("Tài khoản đã tồn tại");
+        else{
+            localStorage.setItem(u,p);
+            alert("Đăng ký thành công");
+            toggleMode();
+        }
+    }
+}
+
+function showBio(){
+    const u=localStorage.getItem("loggedIn");
+    if(u){
+        authBox.style.display="none";
+        bioBox.style.display="block";
+        bioName.innerText=u;
+    }
+}
+
+function logout(){
+    localStorage.removeItem("loggedIn");
+    location.reload();
+}
+
+showBio();
 </script>
 
 </body>
