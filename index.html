@@ -3,307 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>China Mobile UI Pro</title>
-
+    <title>Bio Link - Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: #111;
-            color: white;
-            overflow-x: hidden;
-        }
-
         :root {
-            --red: #d32f2f;
-            --gold: #ffd700;
-            --dark: #151515;
-            --card: #1c1c1c;
+            --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-color: #00d2ff;
         }
 
-        /* HEADER */
-        header {
-            background: var(--dark);
-            padding: 12px 0;
-            text-align: center;
-            border-bottom: 1px solid var(--red);
-            color: var(--gold);
-            font-size: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
 
-        /* SECTIONS (TAB CONTENT) */
-        .page {
-            display: none;
-            animation: fade 0.4s ease;
-            padding-bottom: 80px; /* chừa chỗ cho bottom nav */
-        }
-
-        .active {
-            display: block;
-        }
-
-        @keyframes fade {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-
-        /* HERO */
-        .hero {
-            padding: 35px 20px;
-            text-align: center;
-            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba')
-            center/cover no-repeat;
-            height: 260px;
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            background-blend-mode: multiply;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .hero h1 {
-            font-size: 32px;
-            color: var(--gold);
-        }
-        .hero p {
-            margin-top: 8px;
-            font-size: 16px;
-        }
-
-        /* CARDS */
-        .card {
-            background: var(--card);
-            padding: 18px;
-            margin: 15px;
-            border-radius: 14px;
-            border: 1px solid var(--red);
-        }
-
-        .card h3 {
-            margin-bottom: 8px;
-            color: var(--gold);
-        }
-
-        .card-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* LINKS BUTTON LIST */
-        .link-item {
-            padding: 15px;
-            background: var(--dark);
-            text-align: center;
-            border-radius: 12px;
-            border: 1px solid var(--red);
-            color: var(--gold);
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            display: block;
-            transition: 0.25s;
-        }
-
-        .link-item:hover {
-            background: var(--red);
-            border-color: var(--gold);
-            color: #fff;
-            transform: scale(1.03);
-        }
-
-        /* BOTTOM NAVIGATION BAR */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 65px;
-            background: #000;
-            border-top: 1px solid var(--red);
-            display: flex;
-            justify-content: space-around;
             align-items: center;
-            z-index: 1000;
-        }
-
-        .nav-item {
-            text-align: center;
-            width: 20%;
-            color: #aaa;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .nav-item.active {
-            color: var(--gold);
-            transform: scale(1.08);
-        }
-
-        .nav-item i {
-            font-size: 22px;
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        /* CONTACT FORM */
-        input, textarea {
-            width: 90%;
-            padding: 14px;
-            margin: 12px auto;
-            display: block;
-            border-radius: 12px;
-            background: #222;
-            border: 1px solid var(--red);
-            color: white;
-            font-size: 15px;
-        }
-
-        button {
-            width: 90%;
-            padding: 15px;
-            margin: auto;
-            display: block;
-            background: var(--red);
-            border: 1px solid var(--gold);
-            border-radius: 12px;
-            color: white;
-            font-size: 17px;
-        }
-
-        footer {
-            text-align: center;
             padding: 20px;
-            background: #000;
-            color: var(--gold);
-            margin-top: 30px;
         }
+
+        /* Music Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .rotating { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Main Card */
+        .bio-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Avatar Styling */
+        .avatar-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover; /* Giữ tỉ lệ ảnh không bị móp */
+            border: 3px solid var(--accent-color);
+            padding: 4px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: #1DA1F2;
+            color: white;
+            border-radius: 50%;
+            width: 26px; height: 26px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 13px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        h1 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { color: #00d2ff; font-size: 0.85rem; margin-bottom: 30px; font-weight: 600; letter-spacing: 2px; }
+
+        /* Links */
+        .links-stack { display: flex; flex-direction: column; gap: 15px; }
+
+        .link-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn i { width: 30px; font-size: 1.2rem; margin-right: 15px; text-align: center; }
+
+        .link-btn:hover {
+            background: #fff;
+            color: #203a43;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer { margin-top: 40px; color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 2px; }
     </style>
 </head>
-
 <body>
 
-<header>中国风 Pro UI</header>
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- TAB 1 — HOME -->
-<div class="page active" id="tab-home">
-    <div class="hero">
-        <h1>Giao Diện Trung Quốc</h1>
-        <p>Đẹp – Sang – Chuẩn App Mobile</p>
+    <div class="music-control" id="music-btn">
+        <i class="fas fa-music" id="music-icon"></i>
     </div>
 
-    <div class="card">
-        <h3>Giới thiệu</h3>
-        <p>Tôi chuyên thiết kế giao diện chuẩn phong cách Trung Quốc hiện đại.</p>
-    </div>
+    <div class="bio-card">
+        <div class="avatar-wrapper">
+            <img src="https://sf-static.upanhlaylink.com/img/image_202601284695cafa6bedc3848a112e8f04f05347.jpg" alt="Avatar" class="profile-img">
+            <div class="verified-badge"><i class="fas fa-check"></i></div>
+        </div>
+        
+        <h1>LÂM PHÚ QUÝ</h1>
+        <p class="subtitle">CREATIVE & MINIMALIST</p>
 
-    <div class="card">
-        <h3>Điểm nổi bật</h3>
-        <ul>
-            <li>Chuẩn mobile 100%</li>
-            <li>Đa tab hiện đại như app Douyin</li>
-            <li>Tông màu China Luxury</li>
-        </ul>
-    </div>
-</div>
+        <div class="links-stack">
+            <a href="https://www.facebook.com/share/1ArmaHG85s/?mibextid=wwXIfr" class="link-btn" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook Cá Nhân</span>
+            </a>
 
-<!-- TAB 2 — SERVICES -->
-<div class="page" id="tab-services">
-    <div class="card-list">
+            <a href="#" class="link-btn">
+                <i class="fab fa-tiktok"></i>
+                <span>Kênh TikTok</span>
+            </a>
 
-        <div class="card">
-            <h3>Thiết kế Web</h3>
-            <p>Giao diện Trung Quốc – bo góc – bóng đổ – neon đỏ vàng.</p>
+            <a href="#" class="link-btn">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram Feed</span>
+            </a>
+
+            <a href="mailto:contact@yourdomain.com" class="link-btn">
+                <i class="fas fa-envelope"></i>
+                <span>Liên Hệ Công Việc</span>
+            </a>
         </div>
 
-        <div class="card">
-            <h3>Thiết kế App</h3>
-            <p>UI Style Douyin / WeChat / XiaoHongShu.</p>
-        </div>
-
-        <div class="card">
-            <h3>Poster Trung Quốc</h3>
-            <p>China Luxury – China Neon – China New Year.</p>
-        </div>
-
-    </div>
-</div>
-
-<!-- TAB 3 — LINKS -->
-<div class="page" id="tab-links">
-    <h2 style="text-align:center;color:var(--gold);margin-top:25px;">Liên Kết Quan Trọng</h2>
-
-    <div style="margin: 0 15px;">
-        <a class="link-item" href="https://facebook.com" target="_blank">🌟 Facebook</a>
-        <a class="link-item" href="https://tiktok.com" target="_blank">🎵 TikTok</a>
-        <a class="link-item" href="https://zalo.me" target="_blank">💬 Zalo</a>
-        <a class="link-item" href="https://youtube.com" target="_blank">▶ YouTube</a>
-        <a class="link-item" href="https://google.com" target="_blank">🌐 Website</a>
-    </div>
-</div>
-
-<!-- TAB 4 — ABOUT -->
-<div class="page" id="tab-about">
-    <div class="card">
-        <h3>Về Tôi</h3>
-        <p>Nhà thiết kế giao diện chuyên Trung Quốc – tối ưu mobile.</p>
+        <footer>© 2026 DESIGN BY GEMINI</footer>
     </div>
 
-    <div class="card">
-        <h3>Kỹ năng chính</h3>
-        <ul>
-            <li>Thiết kế UI/UX</li>
-            <li>HTML / CSS</li>
-            <li>China Branding</li>
-        </ul>
-    </div>
-</div>
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
 
-<!-- TAB 5 — CONTACT -->
-<div class="page" id="tab-contact">
-    <h2 style="text-align:center;color:var(--gold);margin-top:25px;">Liên hệ</h2>
-
-    <input type="text" placeholder="Tên của bạn">
-    <input type="email" placeholder="Email">
-    <textarea rows="5" placeholder="Tin nhắn..."></textarea>
-    <button>Gửi ngay</button>
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('home', this)">
-        <i>🏠</i> Home
-    </div>
-    <div class="nav-item" onclick="switchTab('services', this)">
-        <i>🛠️</i> Dịch vụ
-    </div>
-    <div class="nav-item" onclick="switchTab('links', this)">
-        <i>🔗</i> Links
-    </div>
-    <div class="nav-item" onclick="switchTab('about', this)">
-        <i>👤</i> Giới thiệu
-    </div>
-    <div class="nav-item" onclick="switchTab('contact', this)">
-        <i>📩</i> Liên hệ
-    </div>
-</div>
-
-<footer>
-    © 2026 LÂM PHÚ QUÝ | All Rights Reserved
-</footer>
-
-<script>
-function switchTab(tab, element) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("tab-" + tab).classList.add("active");
-
-    document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
-    element.classList.add("active");
-}
-</script>
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('rotating');
+                musicIcon.classList.replace('fa-pause', 'fa-music');
+            } else {
+                music.play();
+                musicIcon.classList.add('rotating');
+                musicIcon.classList.replace('fa-music', 'fa-pause');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
 
 </body>
 </html>
