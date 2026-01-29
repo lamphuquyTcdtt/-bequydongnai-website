@@ -1,0 +1,55 @@
+
+<html>
+    <head>
+        
+        <link href="bootstrap.min.css" rel="stylesheet"/>
+       
+    </head>
+    <body >
+     <div class="container">
+        <h1 style="text-align:center;"> trang quản trị danh mục </h1>
+        <div class="row">
+            <div class="col_6">
+                <form action="cate.html" method="post">
+                    Nhập vào tên danh mục:
+                    <input type="text" name="txt_cate_name" id="" class="form-control">
+                </div>
+                <div class="form-group">
+                    Nhập vào trạng thái:
+                    <input type="text" name="txt_status" id="" class="form-control">
+                </div>
+                <br>
+                <input type="submit" value="Thêm mới" name="insert" class="btn btn-primary">
+                <br> Tìm kiếm danh mục:
+                <div class="form-group">
+                    <input type="text" name="txt_search" id="" class="form-control">
+                </div>
+                <input type="submit" value="Tìm kiếm" class="btn btn-success">
+                    <br>
+                </form>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-stripped">
+            <tr>
+                <th>ma danh muc</th>
+                <th>tem danh muc</th>
+                <th> trang thai</th>
+                <th> thao tac</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>tin tuc</td>
+                <td>1</td>
+                <td>
+                    <a class="btn btn-warning" href="#">sua</a>
+                    <a class="btn btn-danger" href="#">xoa</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+     </div>
+    </body>
+</html>

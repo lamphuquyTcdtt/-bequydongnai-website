@@ -1,0 +1,91 @@
+
+<html>
+    <head>
+        <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    </head>
+    <body >
+     <div class="container">
+        <h1 style="text-align:center;"> trang quản trị danh mục </h1>
+        <div class="row">
+            <div class="col_6">
+                <form action="cate.html" method="post" >
+                    chon danh muc
+                    <select class="form-control" name="cate_id" id="">
+                        <option value="1">Tin tuc</option>
+                        <option value="2">thong bao</option>
+                    </select>
+                    nhập vao tieu de:
+                    <input class="form-control" type"text" name="txt_title" id="">
+                    nhập vao noi dung tin:
+                   <!-- <textarea class="form-control" name="" id="" cols="" rows="10 "> </textarea> -->
+                   <div id="editor">nhập chi tiết </div>
+                   <script>
+                           ClassicEditor
+                                   .create( document.querySelector( '#editor' ) )
+                                   .then( editor => {
+                                           console.log( editor );
+                                   } )
+                                   .catch( error => {
+                                           console.error( error );
+                                   } );
+                   </script>
+                   chọn ảnh đại diện:
+                        <input class="form-control" type="file" name="img" id="">
+                    nguoi dang:
+                        <input class="form-control" type="text" name="" id="">
+                    ngay dang:
+                        <input class="form-control" type="date" name="" id="">
+                    
+                        Nhập vào tên danh mục:
+                        <input type="text" name="txt_cate_name" id="" class="form-control">
+                    <div class="form-group">
+                        Nhập vào trạng thái:
+                        <input type="text" name="txt_status" id="" class="form-control">
+                    </div>
+                    <br>
+                    <input type="submit" value="Thêm mới" name="insert" class="btn btn-primary">
+                    <br> Tìm kiếm danh mục:
+                    <div class="form-group">
+                        <input type="text" name="txt_search" id="" class="form-control">
+                    </div>
+                    <input type="submit" value="Tìm kiếm" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-stripped">
+            <tr>
+                <th> ma tin</th>
+                <th> danh muc</th>
+                <th>tieu de tin</th>
+                <th> noi dung tin</th>
+                <th> nguoi dang</th>
+                <th> ngay dang</th>
+                <th> trang thai</th>
+                <th> thao tac</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>tin tuc</td>
+                <td>ban tin so 1</td>
+                <td>noi dung ban tin so 1</td>
+                <td> 
+                    <img src="a1 ().png" alt="">
+                </td>
+                <td>admin</td>
+                <td>15/9/2023</td>
+                <td>1</td>
+                <td>
+                    <a class="btn btn-warning" href="#">sua</a>
+                    <a class="btn btn-danger" href="#">xoa</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+     </div>
+    </body>
+</html>
