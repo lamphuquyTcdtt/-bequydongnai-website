@@ -2,278 +2,164 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Girl Shop – Mỹ phẩm & Thời trang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thông Báo Hệ Thống</title>
 
 <style>
-:root{
-    --pink:#ff4d8d;
-    --pink-soft:#fff0f6;
-    --pink-grad:linear-gradient(135deg,#ff7eb3,#ff4d8d);
-    --shadow:0 10px 25px rgba(255,77,141,.25);
-}
-*{box-sizing:border-box}
-body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-    background:var(--pink-soft);
-    padding-bottom:80px;
-}
-.page{
-    display:none;
-    padding:16px;
-    animation:fade .3s ease;
-}
-@keyframes fade{
-    from{opacity:0;transform:translateY(8px)}
-    to{opacity:1;transform:none}
-}
-h3{margin:8px 0 16px;color:#ff3b82}
-h4{margin:14px 0 6px;color:#ff5c9a}
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        position: relative;
+    }
 
-/* CARD */
-.card{
-    background:#fff;
-    border-radius:22px;
-    padding:16px;
-    margin:14px 0;
-    box-shadow:var(--shadow);
-}
-.price{
-    font-size:18px;
-    color:var(--pink);
-    font-weight:700;
-    margin:8px 0;
-}
+    .box {
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 35px 30px;
+        max-width: 420px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        animation: fadeIn 1.2s ease;
+        position: relative;
+        z-index: 2;
+    }
 
-/* INPUT & BUTTON */
-input{
-    width:100%;
-    padding:14px;
-    margin:10px 0;
-    border-radius:18px;
-    border:1px solid #ffd6e7;
-    font-size:15px;
-}
-button{
-    width:100%;
-    padding:14px;
-    border-radius:18px;
-    border:none;
-    font-size:15px;
-    background:var(--pink-grad);
-    color:#fff;
-    font-weight:600;
-    cursor:pointer;
-}
-button:active{transform:scale(.96)}
+    .icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
 
-/* SOCIAL */
-.social{display:flex;gap:10px}
-.social button{
-    background:#fff;
-    color:#333;
-    border:1px solid #eee;
-}
+    h1 {
+        margin: 0;
+        font-size: 24px;
+    }
 
-/* BOTTOM MENU */
-.bottom-menu{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:70px;
-    background:#fff;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    box-shadow:0 -6px 25px rgba(0,0,0,.15);
-    border-radius:22px 22px 0 0;
-}
-.bottom-menu div{
-    text-align:center;
-    font-size:12px;
-    color:#999;
-    cursor:pointer;
-}
-.bottom-menu .icon{font-size:22px;display:block}
-.bottom-menu .active{
-    color:var(--pink);
-    font-weight:700;
-    transform:translateY(-4px);
-}
-#payBox img{
-    width:100%;
-    border-radius:18px;
-    margin-top:10px;
-}
+    p {
+        font-size: 15px;
+        line-height: 1.6;
+        opacity: 0.9;
+        margin: 15px 0 25px;
+    }
+
+    .time {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    button {
+        margin-top: 18px;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        background: #00d2ff;
+        color: #000;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #00aacc;
+    }
+
+    .music-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+        border-radius: 50%;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* 🔒 BẢN QUYỀN */
+    .copyright {
+        position: absolute;
+        bottom: 12px;
+        width: 100%;
+        text-align: center;
+        font-size: 13px;
+        opacity: 0.6;
+        z-index: 1;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<!-- SHOP -->
-<div id="shop" class="page">
-    <h3>💄 Mỹ phẩm & Thời trang nữ</h3>
+<div class="box">
+    <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
-    <div class="card">
-        <b>Son môi Hàn Quốc</b>
-        <div class="price">199.000đ</div>
-        <button onclick="buy(199000)">🛍 Mua ngay</button>
-    </div>
+    <div class="icon">🔔</div>
+    <h1>Thông báo hệ thống</h1>
+    <p>
+        Website hiện đang được nâng cấp.<br>
+        Cảm ơn bạn đã kiên nhẫn chờ đợi 💙
+    </p>
 
-    <div class="card">
-        <b>Váy nữ pastel</b>
-        <div class="price">349.000đ</div>
-        <button onclick="buy(349000)">🛍 Mua ngay</button>
-    </div>
-
-    <!-- THƯ KÝ / TRỢ LÝ -->
-    <h4>👩‍💼 Thời trang thư ký – trợ lý</h4>
-
-    <div class="card">
-        <b>Áo sơ mi công sở nữ</b>
-        <div class="price">259.000đ</div>
-        <button onclick="buy(259000)">🛍 Mua ngay</button>
-    </div>
-
-    <div class="card">
-        <b>Chân váy bút chì công sở</b>
-        <div class="price">289.000đ</div>
-        <button onclick="buy(289000)">🛍 Mua ngay</button>
-    </div>
-
-    <div class="card">
-        <b>Set vest nữ trợ lý thanh lịch</b>
-        <div class="price">699.000đ</div>
-        <button onclick="buy(699000)">🛍 Mua ngay</button>
-    </div>
-
-    <div class="card">
-        <b>Đầm công sở cao cấp</b>
-        <div class="price">459.000đ</div>
-        <button onclick="buy(459000)">🛍 Mua ngay</button>
-    </div>
+    <div class="time" id="timeNow"></div>
+    <button onclick="location.reload()">Tải lại trang</button>
 </div>
 
-<!-- LOGIN -->
-<div id="login" class="page">
-    <h3>💗 Đăng nhập</h3>
-    <input id="user" placeholder="Tên đăng nhập">
-    <button onclick="login()">Đăng nhập</button>
-    <div class="social">
-        <button onclick="loginGoogle()">🔴 Google</button>
-        <button onclick="loginFacebook()">🔵 Facebook</button>
-    </div>
+<!-- 🔻 BẢN QUYỀN -->
+<div class="copyright">
+    © 2026 BÉ QUÝ ĐỒNG NAI. All rights reserved.
 </div>
 
-<!-- PAYMENT -->
-<div id="pay" class="page">
-    <h3>💳 Thanh toán</h3>
-    <div class="card">
-        <b>Tổng tiền</b>
-        <div class="price" id="payTotal">0đ</div>
-    </div>
-    <div class="card">
-        <button onclick="payMethod('qr')">📷 QR Chuyển khoản</button>
-        <button onclick="payMethod('momo')">🟣 Momo</button>
-        <button onclick="payMethod('zalo')">🔵 ZaloPay</button>
-    </div>
-    <div id="payBox"></div>
-</div>
-
-<!-- ACCOUNT -->
-<div id="account" class="page">
-    <h3>👩 Tài khoản</h3>
-    <p id="info"></p>
-    <button onclick="logout()">Đăng xuất</button>
-    <h4>📦 Đơn hàng</h4>
-    <div id="orders"></div>
-</div>
-
-<!-- NAV -->
-<div class="bottom-menu">
-    <div class="active" onclick="nav(this,'shop')"><span class="icon">🏠</span>Shop</div>
-    <div onclick="nav(this,'pay')"><span class="icon">💳</span>Thanh toán</div>
-    <div onclick="nav(this,'login')"><span class="icon">🔐</span>Login</div>
-    <div onclick="nav(this,'account')"><span class="icon">👩</span>Tôi</div>
-</div>
+<!-- 🎧 NHẠC NỀN NHẸ -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b2f2f0c8a.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let currentUser = localStorage.getItem("user");
-let cartTotal = 0;
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
 
-function nav(el,page){
-    document.querySelectorAll(".bottom-menu div").forEach(m=>m.classList.remove("active"));
-    el.classList.add("active");
-    show(page);
-}
-function show(id){
-    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-    document.getElementById(id).style.display="block";
-}
-function login(){
-    if(!user.value) return alert("Nhập tên đăng nhập");
-    currentUser=user.value;
-    localStorage.setItem("user",currentUser);
-    showAccount();
-}
-function loginGoogle(){currentUser="Google User";localStorage.setItem("user",currentUser);showAccount()}
-function loginFacebook(){currentUser="Facebook User";localStorage.setItem("user",currentUser);showAccount()}
-function logout(){localStorage.removeItem("user");currentUser=null;show("login")}
-
-function buy(price){
-    if(!currentUser){show("login");return}
-    cartTotal+=price;
-    payTotal.innerText=cartTotal.toLocaleString()+"đ";
-    show("pay");
-}
-
-function payMethod(type){
-    let html="";
-    if(type==="qr"){
-        html=`<div class="card"><h4>📷 Quét mã QR</h4>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=GirlShop-${cartTotal}">
-        <button onclick="donePay()">Đã thanh toán</button></div>`;
+    function toggleMusic() {
+        if (!isPlaying) {
+            music.volume = 0.3;
+            music.play();
+            isPlaying = true;
+        } else {
+            music.pause();
+            isPlaying = false;
+        }
     }
-    if(type==="momo"){
-        html=`<div class="card"><h4>🟣 Momo</h4>
-        <p>SĐT: <b>0909 999 999</b></p>
-        <p>Nội dung: <b>GirlShop ${cartTotal}</b></p>
-        <button onclick="donePay()">Đã chuyển</button></div>`;
-    }
-    if(type==="zalo"){
-        html=`<div class="card"><h4>🔵 ZaloPay</h4>
-        <p>Nội dung: <b>GirlShop ${cartTotal}</b></p>
-        <button onclick="donePay()">Đã thanh toán</button></div>`;
-    }
-    payBox.innerHTML=html;
-}
 
-function donePay(){
-    let orders=JSON.parse(localStorage.getItem("orders")||"[]");
-    orders.push({user:currentUser,total:cartTotal,time:new Date().toLocaleString(),status:"Đã thanh toán"});
-    localStorage.setItem("orders",JSON.stringify(orders));
-    cartTotal=0;
-    payTotal.innerText="0đ";
-    payBox.innerHTML="";
-    alert("🎉 Thanh toán thành công!");
-    showAccount();
-}
-function showAccount(){
-    show("account");
-    info.innerHTML="Xin chào 💕 <b>"+currentUser+"</b>";
-    loadOrders();
-}
-function loadOrders(){
-    orders.innerHTML="";
-    JSON.parse(localStorage.getItem("orders")||"[]")
-    .filter(o=>o.user===currentUser)
-    .forEach(o=>{
-        orders.innerHTML+=`<div class="card">🛍 ${o.total.toLocaleString()}đ<br>⏰ ${o.time}<br>✅ ${o.status}</div>`;
-    });
-}
-if(currentUser) showAccount(); else show("shop");
+    function updateTime() {
+        const now = new Date();
+        document.getElementById("timeNow").innerText =
+            "Thời gian hiện tại: " + now.toLocaleString("vi-VN");
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
 </script>
 
 </body>
