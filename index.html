@@ -2,260 +2,278 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Beauty & Fashion Shop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Girl Shop – Mỹ phẩm & Thời trang</title>
 
 <style>
-/* ===== BASE ===== */
+:root{
+    --pink:#ff4d8d;
+    --pink-soft:#fff0f6;
+    --pink-grad:linear-gradient(135deg,#ff7eb3,#ff4d8d);
+    --shadow:0 10px 25px rgba(255,77,141,.25);
+}
+*{box-sizing:border-box}
 body{
     margin:0;
-    font-family:'Segoe UI', Arial, sans-serif;
-    background:#fff5f8;
-    color:#333;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+    background:var(--pink-soft);
+    padding-bottom:80px;
 }
-
-/* ===== HEADER ===== */
-header{
-    background:linear-gradient(135deg,#ff9acb,#ff6fae);
-    color:white;
+.page{
+    display:none;
     padding:16px;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
+    animation:fade .3s ease;
 }
+@keyframes fade{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:none}
+}
+h3{margin:8px 0 16px;color:#ff3b82}
+h4{margin:14px 0 6px;color:#ff5c9a}
 
-/* ===== MENU ===== */
-.menu{
-    display:flex;
-    justify-content:space-around;
-    background:white;
-    padding:12px 0;
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-.menu div{
-    cursor:pointer;
-    font-weight:600;
-}
-.active{
-    color:#ff4d8d;
-}
-
-/* ===== BANNER ===== */
-.banner{
-    margin:15px;
-    border-radius:18px;
-    padding:25px;
-    background:linear-gradient(135deg,#ffe0ec,#ffd1e3);
-}
-.banner h2{
-    margin:0;
-    color:#ff4d8d;
-}
-.banner p{
-    margin-top:8px;
-    font-size:14px;
-}
-
-/* ===== PRODUCT ===== */
-.products{
-    padding:15px;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-.product{
-    background:white;
-    border-radius:18px;
-    padding:12px;
-    box-shadow:0 6px 20px rgba(255,105,180,.25);
-}
-.product img{
-    width:100%;
-    border-radius:14px;
-}
-.product h3{
-    font-size:14px;
-    margin:8px 0 4px;
+/* CARD */
+.card{
+    background:#fff;
+    border-radius:22px;
+    padding:16px;
+    margin:14px 0;
+    box-shadow:var(--shadow);
 }
 .price{
-    color:#ff4d8d;
-    font-weight:bold;
+    font-size:18px;
+    color:var(--pink);
+    font-weight:700;
+    margin:8px 0;
+}
+
+/* INPUT & BUTTON */
+input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:18px;
+    border:1px solid #ffd6e7;
+    font-size:15px;
 }
 button{
     width:100%;
-    padding:10px;
-    margin-top:8px;
+    padding:14px;
+    border-radius:18px;
     border:none;
-    border-radius:20px;
-    background:#ff85b3;
-    color:white;
-    font-weight:bold;
+    font-size:15px;
+    background:var(--pink-grad);
+    color:#fff;
+    font-weight:600;
     cursor:pointer;
 }
-button:hover{
-    background:#ff5c9a;
+button:active{transform:scale(.96)}
+
+/* SOCIAL */
+.social{display:flex;gap:10px}
+.social button{
+    background:#fff;
+    color:#333;
+    border:1px solid #eee;
 }
 
-/* ===== PAGE ===== */
-.page{
-    display:none;
-    padding:15px;
+/* BOTTOM MENU */
+.bottom-menu{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:70px;
+    background:#fff;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    box-shadow:0 -6px 25px rgba(0,0,0,.15);
+    border-radius:22px 22px 0 0;
 }
-.cart-item{
-    background:white;
-    border-radius:14px;
-    padding:10px;
-    margin-bottom:10px;
-    border-left:5px solid #ff85b3;
+.bottom-menu div{
+    text-align:center;
+    font-size:12px;
+    color:#999;
+    cursor:pointer;
 }
-.total{
-    font-size:18px;
-    font-weight:bold;
-    color:#ff4d8d;
+.bottom-menu .icon{font-size:22px;display:block}
+.bottom-menu .active{
+    color:var(--pink);
+    font-weight:700;
+    transform:translateY(-4px);
 }
-
-/* ===== ADMIN ===== */
-input{
+#payBox img{
     width:100%;
-    padding:12px;
-    margin-bottom:10px;
-    border-radius:14px;
-    border:1px solid #ddd;
+    border-radius:18px;
+    margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<header>💄 BEAUTY & FASHION SHOP</header>
-
-<!-- MENU -->
-<div class="menu">
-    <div class="active" onclick="nav(this);showShop()">Shop</div>
-    <div onclick="nav(this);showCart()">Giỏ hàng</div>
-    <div onclick="nav(this);showPay()">Thanh toán</div>
-    <div onclick="nav(this);showAdmin()">Admin</div>
-</div>
-
 <!-- SHOP -->
-<div id="shop">
-    <div class="banner">
-        <h2>Ưu đãi cho nàng 💗</h2>
-        <p>Mỹ phẩm chính hãng – Thời trang hot trend</p>
+<div id="shop" class="page">
+    <h3>💄 Mỹ phẩm & Thời trang nữ</h3>
+
+    <div class="card">
+        <b>Son môi Hàn Quốc</b>
+        <div class="price">199.000đ</div>
+        <button onclick="buy(199000)">🛍 Mua ngay</button>
     </div>
 
-    <div class="products">
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300">
-            <h3>Son lì cao cấp</h3>
-            <div class="price">259.000 đ</div>
-            <button onclick="add('Son lì cao cấp',259000)">Thêm vào giỏ</button>
-        </div>
+    <div class="card">
+        <b>Váy nữ pastel</b>
+        <div class="price">349.000đ</div>
+        <button onclick="buy(349000)">🛍 Mua ngay</button>
+    </div>
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300">
-            <h3>Váy nữ pastel</h3>
-            <div class="price">399.000 đ</div>
-            <button onclick="add('Váy nữ pastel',399000)">Thêm vào giỏ</button>
-        </div>
+    <!-- THƯ KÝ / TRỢ LÝ -->
+    <h4>👩‍💼 Thời trang thư ký – trợ lý</h4>
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300">
-            <h3>Kem dưỡng da</h3>
-            <div class="price">189.000 đ</div>
-            <button onclick="add('Kem dưỡng da',189000)">Thêm vào giỏ</button>
-        </div>
+    <div class="card">
+        <b>Áo sơ mi công sở nữ</b>
+        <div class="price">259.000đ</div>
+        <button onclick="buy(259000)">🛍 Mua ngay</button>
+    </div>
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x300">
-            <h3>Túi xách thời trang</h3>
-            <div class="price">499.000 đ</div>
-            <button onclick="add('Túi xách thời trang',499000)">Thêm vào giỏ</button>
-        </div>
+    <div class="card">
+        <b>Chân váy bút chì công sở</b>
+        <div class="price">289.000đ</div>
+        <button onclick="buy(289000)">🛍 Mua ngay</button>
+    </div>
+
+    <div class="card">
+        <b>Set vest nữ trợ lý thanh lịch</b>
+        <div class="price">699.000đ</div>
+        <button onclick="buy(699000)">🛍 Mua ngay</button>
+    </div>
+
+    <div class="card">
+        <b>Đầm công sở cao cấp</b>
+        <div class="price">459.000đ</div>
+        <button onclick="buy(459000)">🛍 Mua ngay</button>
     </div>
 </div>
 
-<!-- CART -->
-<div id="cart" class="page">
-    <h3>🛍️ Giỏ hàng của bạn</h3>
-    <div id="cartItems"></div>
-    <div class="total">Tổng: <span id="total">0</span> đ</div>
+<!-- LOGIN -->
+<div id="login" class="page">
+    <h3>💗 Đăng nhập</h3>
+    <input id="user" placeholder="Tên đăng nhập">
+    <button onclick="login()">Đăng nhập</button>
+    <div class="social">
+        <button onclick="loginGoogle()">🔴 Google</button>
+        <button onclick="loginFacebook()">🔵 Facebook</button>
+    </div>
 </div>
 
 <!-- PAYMENT -->
 <div id="pay" class="page">
     <h3>💳 Thanh toán</h3>
-    <p>Momo / ZaloPay (QR demo)</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=BeautyShopPayment" width="100%">
+    <div class="card">
+        <b>Tổng tiền</b>
+        <div class="price" id="payTotal">0đ</div>
+    </div>
+    <div class="card">
+        <button onclick="payMethod('qr')">📷 QR Chuyển khoản</button>
+        <button onclick="payMethod('momo')">🟣 Momo</button>
+        <button onclick="payMethod('zalo')">🔵 ZaloPay</button>
+    </div>
+    <div id="payBox"></div>
 </div>
 
-<!-- ADMIN -->
-<div id="admin" class="page">
-    <h3>🔐 Admin đăng nhập</h3>
-    <input id="user" placeholder="Tài khoản">
-    <input id="pass" type="password" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng nhập</button>
-    <p id="msg"></p>
+<!-- ACCOUNT -->
+<div id="account" class="page">
+    <h3>👩 Tài khoản</h3>
+    <p id="info"></p>
+    <button onclick="logout()">Đăng xuất</button>
+    <h4>📦 Đơn hàng</h4>
+    <div id="orders"></div>
+</div>
 
-    <div id="dashboard" style="display:none">
-        <h4>📊 Thống kê</h4>
-        <p>Đơn hàng: <b id="orders">0</b></p>
-        <p>Doanh thu: <b id="revenue">0</b> đ</p>
-    </div>
+<!-- NAV -->
+<div class="bottom-menu">
+    <div class="active" onclick="nav(this,'shop')"><span class="icon">🏠</span>Shop</div>
+    <div onclick="nav(this,'pay')"><span class="icon">💳</span>Thanh toán</div>
+    <div onclick="nav(this,'login')"><span class="icon">🔐</span>Login</div>
+    <div onclick="nav(this,'account')"><span class="icon">👩</span>Tôi</div>
 </div>
 
 <script>
-let cart=[];
+let currentUser = localStorage.getItem("user");
+let cartTotal = 0;
 
-/* NAV */
-function nav(el){
-    document.querySelectorAll('.menu div').forEach(i=>i.classList.remove('active'));
-    el.classList.add('active');
+function nav(el,page){
+    document.querySelectorAll(".bottom-menu div").forEach(m=>m.classList.remove("active"));
+    el.classList.add("active");
+    show(page);
 }
-function hideAll(){
-    shop.style.display="none";
-    cartDiv().style.display="none";
-    pay.style.display="none";
-    admin.style.display="none";
+function show(id){
+    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+    document.getElementById(id).style.display="block";
 }
-function cartDiv(){ return document.getElementById("cart"); }
-function showShop(){ hideAll(); shop.style.display="block"; }
-function showCart(){ hideAll(); cartDiv().style.display="block"; renderCart(); }
-function showPay(){ hideAll(); pay.style.display="block"; }
-function showAdmin(){ hideAll(); admin.style.display="block"; }
-
-/* CART */
-function add(name,price){
-    cart.push({name,price});
-    alert("Đã thêm vào giỏ 💗");
-}
-function renderCart(){
-    cartItems.innerHTML="";
-    let total=0;
-    cart.forEach(i=>{
-        total+=i.price;
-        cartItems.innerHTML+=`
-            <div class="cart-item">
-                ${i.name} - ${i.price.toLocaleString()} đ
-            </div>`;
-    });
-    document.getElementById("total").innerText=total.toLocaleString();
-}
-
-/* ADMIN */
 function login(){
-    if(user.value==="admin" && pass.value==="123"){
-        msg.innerText="Đăng nhập thành công";
-        dashboard.style.display="block";
-        orders.innerText=cart.length;
-        revenue.innerText=cart.reduce((s,i)=>s+i.price,0).toLocaleString();
-    }else{
-        msg.innerText="Sai tài khoản hoặc mật khẩu";
-    }
+    if(!user.value) return alert("Nhập tên đăng nhập");
+    currentUser=user.value;
+    localStorage.setItem("user",currentUser);
+    showAccount();
 }
+function loginGoogle(){currentUser="Google User";localStorage.setItem("user",currentUser);showAccount()}
+function loginFacebook(){currentUser="Facebook User";localStorage.setItem("user",currentUser);showAccount()}
+function logout(){localStorage.removeItem("user");currentUser=null;show("login")}
+
+function buy(price){
+    if(!currentUser){show("login");return}
+    cartTotal+=price;
+    payTotal.innerText=cartTotal.toLocaleString()+"đ";
+    show("pay");
+}
+
+function payMethod(type){
+    let html="";
+    if(type==="qr"){
+        html=`<div class="card"><h4>📷 Quét mã QR</h4>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=GirlShop-${cartTotal}">
+        <button onclick="donePay()">Đã thanh toán</button></div>`;
+    }
+    if(type==="momo"){
+        html=`<div class="card"><h4>🟣 Momo</h4>
+        <p>SĐT: <b>0909 999 999</b></p>
+        <p>Nội dung: <b>GirlShop ${cartTotal}</b></p>
+        <button onclick="donePay()">Đã chuyển</button></div>`;
+    }
+    if(type==="zalo"){
+        html=`<div class="card"><h4>🔵 ZaloPay</h4>
+        <p>Nội dung: <b>GirlShop ${cartTotal}</b></p>
+        <button onclick="donePay()">Đã thanh toán</button></div>`;
+    }
+    payBox.innerHTML=html;
+}
+
+function donePay(){
+    let orders=JSON.parse(localStorage.getItem("orders")||"[]");
+    orders.push({user:currentUser,total:cartTotal,time:new Date().toLocaleString(),status:"Đã thanh toán"});
+    localStorage.setItem("orders",JSON.stringify(orders));
+    cartTotal=0;
+    payTotal.innerText="0đ";
+    payBox.innerHTML="";
+    alert("🎉 Thanh toán thành công!");
+    showAccount();
+}
+function showAccount(){
+    show("account");
+    info.innerHTML="Xin chào 💕 <b>"+currentUser+"</b>";
+    loadOrders();
+}
+function loadOrders(){
+    orders.innerHTML="";
+    JSON.parse(localStorage.getItem("orders")||"[]")
+    .filter(o=>o.user===currentUser)
+    .forEach(o=>{
+        orders.innerHTML+=`<div class="card">🛍 ${o.total.toLocaleString()}đ<br>⏰ ${o.time}<br>✅ ${o.status}</div>`;
+    });
+}
+if(currentUser) showAccount(); else show("shop");
 </script>
 
 </body>
