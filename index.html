@@ -2,171 +2,259 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<title>Beauty & Fashion Shop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quý Official</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-body{background:#000;color:#fff;height:100vh;overflow:hidden}
+/* ===== BASE ===== */
+body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:#fff5f8;
+    color:#333;
+}
 
-/* ===== MAINTENANCE ===== */
-#maintenance{
-    position:fixed;inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:radial-gradient(circle,#111,#000);
-}
-.m-box{
-    width:90%;
-    max-width:420px;
-    background:#141414;
-    padding:26px;
-    border-radius:20px;
+/* ===== HEADER ===== */
+header{
+    background:linear-gradient(135deg,#ff9acb,#ff6fae);
+    color:white;
+    padding:16px;
     text-align:center;
+    font-size:20px;
+    font-weight:bold;
 }
-.m-box h1{margin-bottom:8px}
-.m-box p{color:#aaa;font-size:14px}
-.countdown{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin:20px 0;
-}
-.time{
-    background:#0d0d0d;
-    border-radius:14px;
-    padding:12px 4px;
-}
-.time h2{color:#1db954}
-.time span{font-size:12px;color:#777}
 
-/* ===== BIO ===== */
-#bio{
-    display:none;
-    height:100vh;
+/* ===== MENU ===== */
+.menu{
     display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(160deg,#0b0b0b,#000);
+    justify-content:space-around;
+    background:white;
+    padding:12px 0;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
-.bio-box{
-    width:90%;
-    max-width:380px;
-    background:#111;
-    padding:26px;
-    border-radius:22px;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,255,170,.15);
-}
-.avatar{
-    width:120px;height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #1db954;
-    margin-bottom:12px;
-}
-.bio-box h2{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:6px;
-}
-.tick{
-    width:18px;height:18px;
-}
-.bio-box p{color:#aaa;margin:6px 0}
-.music-btn{
-    margin-top:18px;
-    padding:12px;
-    width:100%;
-    border:none;
-    border-radius:12px;
-    background:#1db954;
-    color:#000;
-    font-size:16px;
+.menu div{
+    cursor:pointer;
     font-weight:600;
+}
+.active{
+    color:#ff4d8d;
+}
+
+/* ===== BANNER ===== */
+.banner{
+    margin:15px;
+    border-radius:18px;
+    padding:25px;
+    background:linear-gradient(135deg,#ffe0ec,#ffd1e3);
+}
+.banner h2{
+    margin:0;
+    color:#ff4d8d;
+}
+.banner p{
+    margin-top:8px;
+    font-size:14px;
+}
+
+/* ===== PRODUCT ===== */
+.products{
+    padding:15px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+.product{
+    background:white;
+    border-radius:18px;
+    padding:12px;
+    box-shadow:0 6px 20px rgba(255,105,180,.25);
+}
+.product img{
+    width:100%;
+    border-radius:14px;
+}
+.product h3{
+    font-size:14px;
+    margin:8px 0 4px;
+}
+.price{
+    color:#ff4d8d;
+    font-weight:bold;
+}
+button{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border:none;
+    border-radius:20px;
+    background:#ff85b3;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover{
+    background:#ff5c9a;
+}
+
+/* ===== PAGE ===== */
+.page{
+    display:none;
+    padding:15px;
+}
+.cart-item{
+    background:white;
+    border-radius:14px;
+    padding:10px;
+    margin-bottom:10px;
+    border-left:5px solid #ff85b3;
+}
+.total{
+    font-size:18px;
+    font-weight:bold;
+    color:#ff4d8d;
+}
+
+/* ===== ADMIN ===== */
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:14px;
+    border:1px solid #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== MAINTENANCE ===== -->
-<div id="maintenance">
-    <div class="m-box">
-        <h1>🚧 BẢO TRÌ HỆ THỐNG</h1>
-        <p>Admin / Thư ký / Trợ lý đang nâng cấp</p>
+<header>💄 BEAUTY & FASHION SHOP</header>
 
-        <div class="countdown">
-            <div class="time"><h2 id="d">0</h2><span>Ngày</span></div>
-            <div class="time"><h2 id="h">0</h2><span>Giờ</span></div>
-            <div class="time"><h2 id="m">0</h2><span>Phút</span></div>
-            <div class="time"><h2 id="s">0</h2><span>Giây</span></div>
+<!-- MENU -->
+<div class="menu">
+    <div class="active" onclick="nav(this);showShop()">Shop</div>
+    <div onclick="nav(this);showCart()">Giỏ hàng</div>
+    <div onclick="nav(this);showPay()">Thanh toán</div>
+    <div onclick="nav(this);showAdmin()">Admin</div>
+</div>
+
+<!-- SHOP -->
+<div id="shop">
+    <div class="banner">
+        <h2>Ưu đãi cho nàng 💗</h2>
+        <p>Mỹ phẩm chính hãng – Thời trang hot trend</p>
+    </div>
+
+    <div class="products">
+        <div class="product">
+            <img src="https://via.placeholder.com/300x300">
+            <h3>Son lì cao cấp</h3>
+            <div class="price">259.000 đ</div>
+            <button onclick="add('Son lì cao cấp',259000)">Thêm vào giỏ</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/300x300">
+            <h3>Váy nữ pastel</h3>
+            <div class="price">399.000 đ</div>
+            <button onclick="add('Váy nữ pastel',399000)">Thêm vào giỏ</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/300x300">
+            <h3>Kem dưỡng da</h3>
+            <div class="price">189.000 đ</div>
+            <button onclick="add('Kem dưỡng da',189000)">Thêm vào giỏ</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/300x300">
+            <h3>Túi xách thời trang</h3>
+            <div class="price">499.000 đ</div>
+            <button onclick="add('Túi xách thời trang',499000)">Thêm vào giỏ</button>
         </div>
     </div>
 </div>
 
-<!-- ===== BIO + MUSIC ===== -->
-<div id="bio">
-    <div class="bio-box">
-        <img src="https://i.imgur.com/8Km9tLL.jpg" class="avatar">
+<!-- CART -->
+<div id="cart" class="page">
+    <h3>🛍️ Giỏ hàng của bạn</h3>
+    <div id="cartItems"></div>
+    <div class="total">Tổng: <span id="total">0</span> đ</div>
+</div>
 
-        <h2>
-            Quý Official
-            <img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg">
-        </h2>
+<!-- PAYMENT -->
+<div id="pay" class="page">
+    <h3>💳 Thanh toán</h3>
+    <p>Momo / ZaloPay (QR demo)</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=BeautyShopPayment" width="100%">
+</div>
 
-        <p>🎧 Sóng nhạc Remix</p>
-        <p>🌐 Nhà sáng tạo nội dung</p>
-        <p>🇻🇳 Việt Nam</p>
+<!-- ADMIN -->
+<div id="admin" class="page">
+    <h3>🔐 Admin đăng nhập</h3>
+    <input id="user" placeholder="Tài khoản">
+    <input id="pass" type="password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+    <p id="msg"></p>
 
-        <button class="music-btn" onclick="toggleMusic()">▶ Phát nhạc</button>
+    <div id="dashboard" style="display:none">
+        <h4>📊 Thống kê</h4>
+        <p>Đơn hàng: <b id="orders">0</b></p>
+        <p>Doanh thu: <b id="revenue">0</b> đ</p>
     </div>
 </div>
 
-<!-- ===== AUDIO ===== -->
-<audio id="music" loop>
-    <source src="Vở Kịch Của Em - Uchiha Remix-2098040957.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-/* ===== SET THỜI GIAN BẢO TRÌ (4 THÁNG) ===== */
-const start = new Date();
-const end = new Date(start);
-end.setMonth(end.getMonth() + 4);
+let cart=[];
 
-function update(){
-    const now = new Date();
-    const diff = end - now;
-
-    if(diff <= 0){
-        document.getElementById("maintenance").style.display="none";
-        document.getElementById("bio").style.display="flex";
-        return;
-    }
-
-    document.getElementById("d").innerText = Math.floor(diff/86400000);
-    document.getElementById("h").innerText = Math.floor(diff/3600000)%24;
-    document.getElementById("m").innerText = Math.floor(diff/60000)%60;
-    document.getElementById("s").innerText = Math.floor(diff/1000)%60;
+/* NAV */
+function nav(el){
+    document.querySelectorAll('.menu div').forEach(i=>i.classList.remove('active'));
+    el.classList.add('active');
 }
-setInterval(update,1000);
-update();
+function hideAll(){
+    shop.style.display="none";
+    cartDiv().style.display="none";
+    pay.style.display="none";
+    admin.style.display="none";
+}
+function cartDiv(){ return document.getElementById("cart"); }
+function showShop(){ hideAll(); shop.style.display="block"; }
+function showCart(){ hideAll(); cartDiv().style.display="block"; renderCart(); }
+function showPay(){ hideAll(); pay.style.display="block"; }
+function showAdmin(){ hideAll(); admin.style.display="block"; }
 
-/* ===== MUSIC CONTROL ===== */
-let playing=false;
-function toggleMusic(){
-    const audio=document.getElementById("music");
-    const btn=document.querySelector(".music-btn");
-    if(!playing){
-        audio.play();
-        btn.innerText="⏸ Tạm dừng";
+/* CART */
+function add(name,price){
+    cart.push({name,price});
+    alert("Đã thêm vào giỏ 💗");
+}
+function renderCart(){
+    cartItems.innerHTML="";
+    let total=0;
+    cart.forEach(i=>{
+        total+=i.price;
+        cartItems.innerHTML+=`
+            <div class="cart-item">
+                ${i.name} - ${i.price.toLocaleString()} đ
+            </div>`;
+    });
+    document.getElementById("total").innerText=total.toLocaleString();
+}
+
+/* ADMIN */
+function login(){
+    if(user.value==="admin" && pass.value==="123"){
+        msg.innerText="Đăng nhập thành công";
+        dashboard.style.display="block";
+        orders.innerText=cart.length;
+        revenue.innerText=cart.reduce((s,i)=>s+i.price,0).toLocaleString();
     }else{
-        audio.pause();
-        btn.innerText="▶ Phát nhạc";
+        msg.innerText="Sai tài khoản hoặc mật khẩu";
     }
-    playing=!playing;
 }
 </script>
 
