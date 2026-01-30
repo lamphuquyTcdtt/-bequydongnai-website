@@ -2,164 +2,211 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thông Báo Hệ Thống</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanh toán an toàn</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        position: relative;
-    }
-
-    .box {
-        background: rgba(255,255,255,0.08);
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 35px 30px;
-        max-width: 420px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-        animation: fadeIn 1.2s ease;
-        position: relative;
-        z-index: 2;
-    }
-
-    .icon {
-        font-size: 50px;
-        margin-bottom: 15px;
-    }
-
-    h1 {
-        margin: 0;
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 15px;
-        line-height: 1.6;
-        opacity: 0.9;
-        margin: 15px 0 25px;
-    }
-
-    .time {
-        font-size: 14px;
-        opacity: 0.8;
-    }
-
-    button {
-        margin-top: 18px;
-        padding: 10px 22px;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        background: #00d2ff;
-        color: #000;
-        font-weight: 600;
-        transition: 0.3s;
-    }
-
-    button:hover {
-        background: #00aacc;
-    }
-
-    .music-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: rgba(255,255,255,0.15);
-        color: #fff;
-        border-radius: 50%;
-        width: 42px;
-        height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* 🔒 BẢN QUYỀN */
-    .copyright {
-        position: absolute;
-        bottom: 12px;
-        width: 100%;
-        text-align: center;
-        font-size: 13px;
-        opacity: 0.6;
-        z-index: 1;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
+    background:#020617;
+    color:#e5e7eb;
+}
+.container{
+    max-width:420px;
+    margin:auto;
+    padding:20px;
+}
+.card{
+    background:#0b1220;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+    border:1px solid rgba(255,255,255,.08);
+}
+h2,h3{margin:0 0 10px}
+input,button{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:none;
+    margin-top:10px;
+    font-size:15px;
+}
+input{
+    background:#020617;
+    border:1px solid #1e293b;
+    color:white;
+}
+button{
+    background:#0a84ff;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+button:disabled{
+    background:#334155;
+    cursor:not-allowed;
+}
+.qr{
+    width:100%;
+    max-width:260px;
+    display:block;
+    margin:10px auto;
+    border-radius:16px;
+}
+.preview{
+    width:100%;
+    border-radius:14px;
+    margin-top:10px;
+}
+.status{font-size:14px;margin-top:10px}
+.admin{
+    display:none;
+}
+.order{
+    border-left:3px solid #0a84ff;
+    padding-left:10px;
+    margin-bottom:10px;
+}
+.watermark{
+    text-align:center;
+    font-size:12px;
+    opacity:.4;
+    margin-top:20px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
-    <button class="music-btn" onclick="toggleMusic()">🎵</button>
+<div class="container">
 
-    <div class="icon">🔔</div>
-    <h1>Thông báo hệ thống</h1>
-    <p>
-        Website hiện đang được nâng cấp.<br>
-        Cảm ơn bạn đã kiên nhẫn chờ đợi 💙
-    </p>
-
-    <div class="time" id="timeNow"></div>
-    <button onclick="location.reload()">Tải lại trang</button>
+<!-- USER -->
+<div id="userPage">
+<div class="card">
+<h2>📷 Quét QR HDBank</h2>
+<img src="qr-hdbank.jpg" class="qr">
+<p>
+<b>LÂM PHÚ QUÝ</b><br>
+STK: 135704070101902<br>
+HDBank
+</p>
 </div>
 
-<!-- 🔻 BẢN QUYỀN -->
-<div class="copyright">
-    © 2026 BÉ QUÝ ĐỒNG NAI. All rights reserved.
+<div class="card">
+<h3>🧾 Nội dung chuyển khoản</h3>
+<input id="note" readonly>
+
+<label>📸 Upload bill</label>
+<input type="file" id="bill" accept="image/*">
+<img id="preview" class="preview" style="display:none">
+
+<button id="confirmBtn" disabled onclick="sendConfirm()">✅ Xác nhận đã chuyển</button>
+<div class="status" id="status"></div>
 </div>
 
-<!-- 🎧 NHẠC NỀN NHẸ -->
-<audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b2f2f0c8a.mp3" type="audio/mpeg">
-</audio>
+<button onclick="openAdmin()" style="background:#1e293b">👨‍💼 Admin</button>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPage" class="admin">
+<div class="card">
+<h2>👨‍💼 ADMIN – Xem bill</h2>
+<button onclick="backUser()">⬅ Quay lại</button>
+</div>
+
+<div id="orders"></div>
+</div>
+
+<div class="watermark">© 2026 BÉ QUÝ ĐỒNG NAI</div>
+
+</div>
 
 <script>
-    const music = document.getElementById("bgMusic");
-    let isPlaying = false;
-
-    function toggleMusic() {
-        if (!isPlaying) {
-            music.volume = 0.3;
-            music.play();
-            isPlaying = true;
-        } else {
-            music.pause();
-            isPlaying = false;
-        }
+/* 🔐 CHỐNG DEVTOOLS */
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.onkeydown = function(e){
+    if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && [73,74,67].includes(e.keyCode))){
+        return false;
     }
+};
 
-    function updateTime() {
-        const now = new Date();
-        document.getElementById("timeNow").innerText =
-            "Thời gian hiện tại: " + now.toLocaleString("vi-VN");
+/* TELEGRAM CONFIG */
+const BOT_TOKEN = "YOUR_BOT_TOKEN";
+const CHAT_ID = "YOUR_CHAT_ID";
+
+/* ORDER CODE */
+const orderCode = "BDN" + Date.now().toString().slice(-6);
+note.value = orderCode;
+
+bill.onchange = ()=>{
+    const f = bill.files[0];
+    if(!f) return;
+    preview.src = URL.createObjectURL(f);
+    preview.style.display="block";
+    confirmBtn.disabled = false;
+};
+
+function sendConfirm(){
+    confirmBtn.disabled = true;
+    status.innerHTML="⏳ Đang gửi xác nhận...";
+
+    const reader = new FileReader();
+    reader.onload = ()=>{
+        const orders = JSON.parse(localStorage.getItem("orders")||"[]");
+        const data = {
+            code: orderCode,
+            time: new Date().toLocaleString(),
+            img: reader.result,
+            status: "Chờ duyệt"
+        };
+        orders.push(data);
+        localStorage.setItem("orders",JSON.stringify(orders));
+
+        sendTelegram(data);
+
+        status.innerHTML="🕒 Đã gửi – chờ admin duyệt";
+    };
+    reader.readAsDataURL(bill.files[0]);
+}
+
+function sendTelegram(o){
+    const text = `🧾 BILL MỚI\nMã: ${o.code}\nThời gian: ${o.time}`;
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({chat_id:CHAT_ID,text})
+    });
+}
+
+/* ADMIN */
+function openAdmin(){
+    userPage.style.display="none";
+    adminPage.style.display="block";
+    loadOrders();
+}
+function backUser(){
+    adminPage.style.display="none";
+    userPage.style.display="block";
+}
+function loadOrders(){
+    orders.innerHTML="";
+    const data = JSON.parse(localStorage.getItem("orders")||"[]");
+    if(!data.length){
+        orders.innerHTML="<p style='opacity:.6'>Chưa có bill</p>";
+        return;
     }
-
-    updateTime();
-    setInterval(updateTime, 1000);
+    data.reverse().forEach(o=>{
+        orders.innerHTML+=`
+        <div class="card order">
+            <b>Mã: ${o.code}</b><br>
+            <small>${o.time}</small>
+            <img src="${o.img}" class="preview">
+            <div style="color:#facc15">⏳ ${o.status}</div>
+        </div>`;
+    });
+}
 </script>
 
 </body>
