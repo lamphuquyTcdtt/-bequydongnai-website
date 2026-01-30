@@ -2,211 +2,208 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thanh toán an toàn</title>
+<title>Prompt AI Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+    --bg:#0b0f1a;
+    --card:#131a2a;
+    --neon:#00f2ff;
+    --text:#e8ecf1;
+    --sub:#9aa4b2;
+}
+*{box-sizing:border-box}
 body{
     margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
-    background:#020617;
-    color:#e5e7eb;
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:radial-gradient(circle at top,#141b34,#070a13);
+    color:var(--text);
+}
+header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(10,15,30,.75);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.logo{font-size:20px;font-weight:700}
+.logo span{color:var(--neon)}
+.add-btn{
+    background:linear-gradient(135deg,#00f2ff,#00c2ff);
+    color:#000;
+    padding:10px 16px;
+    border-radius:12px;
+    border:none;
+    font-weight:600;
 }
 .container{
-    max-width:420px;
+    max-width:1200px;
     margin:auto;
+    padding:25px 20px 50px;
+}
+.form{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
     padding:20px;
-}
-.card{
-    background:#0b1220;
     border-radius:18px;
-    padding:18px;
-    margin-bottom:15px;
-    border:1px solid rgba(255,255,255,.08);
+    margin-bottom:35px;
 }
-h2,h3{margin:0 0 10px}
-input,button{
+.form input,.form textarea{
     width:100%;
+    margin:8px 0;
     padding:14px;
     border-radius:14px;
-    border:none;
-    margin-top:10px;
-    font-size:15px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#0e1424;
+    color:#fff;
 }
-input{
-    background:#020617;
-    border:1px solid #1e293b;
-    color:white;
-}
-button{
-    background:#0a84ff;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-}
-button:disabled{
-    background:#334155;
-    cursor:not-allowed;
-}
-.qr{
+.form button{
     width:100%;
-    max-width:260px;
-    display:block;
-    margin:10px auto;
+    margin-top:10px;
+    padding:14px;
     border-radius:16px;
+    border:none;
+    font-weight:600;
+    background:linear-gradient(135deg,#00f2ff,#00bfff);
 }
-.preview{
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:22px;
+}
+.card{
+    background:linear-gradient(180deg,#141c34,#0d1224);
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+.card img{
     width:100%;
+    height:200px;
+    object-fit:cover;
+}
+.card-body{padding:16px}
+.badges span{
+    display:inline-block;
+    padding:4px 10px;
+    margin:2px;
+    border-radius:999px;
+    font-size:11px;
+    background:rgba(0,242,255,.15);
+    color:var(--neon);
+}
+.prompt{
+    background:#080c1a;
     border-radius:14px;
-    margin-top:10px;
+    padding:12px;
+    font-size:13px;
+    white-space:pre-wrap;
+    margin:12px 0;
 }
-.status{font-size:14px;margin-top:10px}
-.admin{
-    display:none;
+.actions{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.order{
-    border-left:3px solid #0a84ff;
-    padding-left:10px;
-    margin-bottom:10px;
+.actions button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,.12);
+    color:#fff;
+    padding:8px 14px;
+    border-radius:12px;
 }
-.watermark{
-    text-align:center;
-    font-size:12px;
-    opacity:.4;
-    margin-top:20px;
-}
+.actions small{color:var(--sub)}
 </style>
 </head>
 
 <body>
 
+<header>
+<div class="header-inner">
+    <div class="logo">Prompt<span>AI</span></div>
+    <button class="add-btn">✨ Share Prompt</button>
+</div>
+</header>
+
 <div class="container">
 
-<!-- USER -->
-<div id="userPage">
-<div class="card">
-<h2>📷 Quét QR HDBank</h2>
-<img src="qr-hdbank.jpg" class="qr">
-<p>
-<b>LÂM PHÚ QUÝ</b><br>
-STK: 135704070101902<br>
-HDBank
-</p>
+<div class="form">
+    <input id="img" placeholder="Link ảnh minh họa (có thể bỏ trống)">
+    <textarea id="prompt" rows="4" placeholder="Prompt tạo ảnh..."></textarea>
+    <input id="tag" placeholder="Tag (Midjourney, Anime, 16:9...)">
+    <button onclick="add()">Đăng Prompt</button>
 </div>
 
-<div class="card">
-<h3>🧾 Nội dung chuyển khoản</h3>
-<input id="note" readonly>
-
-<label>📸 Upload bill</label>
-<input type="file" id="bill" accept="image/*">
-<img id="preview" class="preview" style="display:none">
-
-<button id="confirmBtn" disabled onclick="sendConfirm()">✅ Xác nhận đã chuyển</button>
-<div class="status" id="status"></div>
-</div>
-
-<button onclick="openAdmin()" style="background:#1e293b">👨‍💼 Admin</button>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPage" class="admin">
-<div class="card">
-<h2>👨‍💼 ADMIN – Xem bill</h2>
-<button onclick="backUser()">⬅ Quay lại</button>
-</div>
-
-<div id="orders"></div>
-</div>
-
-<div class="watermark">© 2026 BÉ QUÝ ĐỒNG NAI</div>
+<div class="grid" id="grid"></div>
 
 </div>
 
 <script>
-/* 🔐 CHỐNG DEVTOOLS */
-document.addEventListener("contextmenu",e=>e.preventDefault());
-document.onkeydown = function(e){
-    if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && [73,74,67].includes(e.keyCode))){
-        return false;
-    }
-};
+const DEFAULT_IMG = "https://sf-static.upanhlaylink.com/view/image_20260130301af1cb84fcbeeab67df1d5435bf03e.jpg";
 
-/* TELEGRAM CONFIG */
-const BOT_TOKEN = "YOUR_BOT_TOKEN";
-const CHAT_ID = "YOUR_CHAT_ID";
+let data = JSON.parse(localStorage.getItem("promptAI")) || [];
 
-/* ORDER CODE */
-const orderCode = "BDN" + Date.now().toString().slice(-6);
-note.value = orderCode;
-
-bill.onchange = ()=>{
-    const f = bill.files[0];
-    if(!f) return;
-    preview.src = URL.createObjectURL(f);
-    preview.style.display="block";
-    confirmBtn.disabled = false;
-};
-
-function sendConfirm(){
-    confirmBtn.disabled = true;
-    status.innerHTML="⏳ Đang gửi xác nhận...";
-
-    const reader = new FileReader();
-    reader.onload = ()=>{
-        const orders = JSON.parse(localStorage.getItem("orders")||"[]");
-        const data = {
-            code: orderCode,
-            time: new Date().toLocaleString(),
-            img: reader.result,
-            status: "Chờ duyệt"
-        };
-        orders.push(data);
-        localStorage.setItem("orders",JSON.stringify(orders));
-
-        sendTelegram(data);
-
-        status.innerHTML="🕒 Đã gửi – chờ admin duyệt";
-    };
-    reader.readAsDataURL(bill.files[0]);
-}
-
-function sendTelegram(o){
-    const text = `🧾 BILL MỚI\nMã: ${o.code}\nThời gian: ${o.time}`;
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({chat_id:CHAT_ID,text})
+function draw(){
+    grid.innerHTML="";
+    data.slice().reverse().forEach(d=>{
+        const imgSrc = d.img && d.img.trim() ? d.img : DEFAULT_IMG;
+        const card=document.createElement("div");
+        card.className="card";
+        card.innerHTML=`
+            <img src="${imgSrc}">
+            <div class="card-body">
+                <div class="badges">
+                    ${d.tag.split(",").map(t=>`<span>${t.trim()}</span>`).join("")}
+                </div>
+                <div class="prompt">${d.prompt}</div>
+                <div class="actions">
+                    <button onclick="copyPrompt(\`${d.prompt}\`)">📋 Copy</button>
+                    <small>AI Prompt</small>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
     });
 }
 
-/* ADMIN */
-function openAdmin(){
-    userPage.style.display="none";
-    adminPage.style.display="block";
-    loadOrders();
-}
-function backUser(){
-    adminPage.style.display="none";
-    userPage.style.display="block";
-}
-function loadOrders(){
-    orders.innerHTML="";
-    const data = JSON.parse(localStorage.getItem("orders")||"[]");
-    if(!data.length){
-        orders.innerHTML="<p style='opacity:.6'>Chưa có bill</p>";
-        return;
-    }
-    data.reverse().forEach(o=>{
-        orders.innerHTML+=`
-        <div class="card order">
-            <b>Mã: ${o.code}</b><br>
-            <small>${o.time}</small>
-            <img src="${o.img}" class="preview">
-            <div style="color:#facc15">⏳ ${o.status}</div>
-        </div>`;
+function add(){
+    if(!prompt.value.trim()) return alert("Nhập prompt trước!");
+    data.push({
+        img: img.value,
+        prompt: prompt.value,
+        tag: tag.value || "AI"
     });
+    localStorage.setItem("promptAI",JSON.stringify(data));
+    img.value=""; prompt.value=""; tag.value="";
+    draw();
 }
+
+function copyPrompt(t){
+    navigator.clipboard.writeText(t);
+    alert("Đã copy prompt!");
+}
+
+const img=document.getElementById("img");
+const prompt=document.getElementById("prompt");
+const tag=document.getElementById("tag");
+const grid=document.getElementById("grid");
+
+draw();
 </script>
 
 </body>
