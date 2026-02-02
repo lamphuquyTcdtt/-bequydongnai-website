@@ -1,227 +1,964 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Prompt AI – BÉ QUÝ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Links V3 - Premium Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-:root{
-    --bg:#0b0f1a;
-    --card:#131a2a;
-    --neon:#00f2ff;
-    --text:#e8ecf1;
-    --sub:#9aa4b2;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-*{box-sizing:border-box}
+        /* Dynamic Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 25%, 
+                #f093fb 50%, 
+                #4facfe 75%, 
+                #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientMove 20s ease infinite;
+            z-index: 0;
+        }
 
-body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:radial-gradient(circle at top,#141b34,#070a13);
-    color:var(--text);
-}
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+        }
 
-/* HEADER */
-header{
-    position:sticky;
-    top:0;
-    z-index:10;
-    background:rgba(10,15,30,.75);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,.05);
-}
-.header-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:14px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.logo{font-size:20px;font-weight:700}
-.logo span{color:var(--neon)}
+        /* Glass Morphism Overlay */
+        .glass-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(100px);
+            z-index: 1;
+            opacity: 0.8;
+        }
 
-/* CONTAINER */
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:25px 20px 50px;
-}
+        /* Animated Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+        }
 
-/* FORM */
-.form{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.06);
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:35px;
-}
-.form input,.form textarea{
-    width:100%;
-    margin:8px 0;
-    padding:14px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.08);
-    background:#0e1424;
-    color:#fff;
-}
-.form button{
-    width:100%;
-    margin-top:10px;
-    padding:14px;
-    border-radius:16px;
-    border:none;
-    font-weight:600;
-    background:linear-gradient(135deg,#00f2ff,#00bfff);
-    cursor:pointer;
-}
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
 
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-    gap:22px;
-}
+        /* Container with 3D effect */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px) saturate(180%);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50px;
+            padding: 70px 50px;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                inset 0 0 60px rgba(255, 255, 255, 0.08),
+                0 0 100px rgba(102, 126, 234, 0.3);
+            animation: containerFloat 6s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+        }
 
-/* CARD */
-.card{
-    background:linear-gradient(180deg,#141c34,#0d1224);
-    border-radius:20px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.06);
-    transition:.3s;
-}
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 20px 40px rgba(0,0,0,.6);
-}
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg); }
+        }
 
-/* 9:16 IMAGE BOX */
-.image-box{
-    position:relative;
-    width:100%;
-    aspect-ratio:9/16;
-    overflow:hidden;
-    background:#000;
-}
-.image-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover; /* ép ảnh đúng 9:16 */
-}
+        /* Border Animation */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731, #ff6b6b);
+            background-size: 400% 400%;
+            border-radius: 50px;
+            z-index: -1;
+            animation: borderGlow 8s ease infinite;
+            opacity: 0.6;
+            filter: blur(10px);
+        }
 
-/* WATERMARK */
-.watermark{
-    position:absolute;
-    bottom:8px;
-    right:8px;
-    font-size:12px;
-    font-weight:600;
-    color:#fff;
-    opacity:.8;
-    background:rgba(0,0,0,.45);
-    padding:4px 8px;
-    border-radius:8px;
-    user-select:none;
-}
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-/* BODY */
-.card-body{padding:14px}
+        /* Music Control - Ultra Modern */
+        .music-control {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 
+                0 15px 40px rgba(255, 107, 107, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            animation: musicPulse 3s ease-in-out infinite;
+        }
 
-.prompt{
-    background:#080c1a;
-    border-radius:14px;
-    padding:12px;
-    font-size:13px;
-    white-space:pre-wrap;
-    margin-bottom:10px;
-}
+        @keyframes musicPulse {
+            0%, 100% { 
+                box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6),
+                           inset 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 0 20px 60px rgba(255, 107, 107, 0.9),
+                           0 0 40px rgba(255, 107, 107, 0.7),
+                           inset 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+        }
 
-.actions{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.actions button{
-    background:transparent;
-    border:1px solid rgba(255,255,255,.15);
-    color:#fff;
-    padding:8px 14px;
-    border-radius:12px;
-}
-.actions small{color:var(--sub)}
-</style>
+        .music-control:hover {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 
+                0 25px 60px rgba(255, 107, 107, 0.8),
+                0 0 50px rgba(255, 107, 107, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .music-control.playing {
+            animation: musicSpin 8s linear infinite, musicPulse 3s ease-in-out infinite;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            box-shadow: 
+                0 15px 40px rgba(78, 205, 196, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes musicSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-icon {
+            font-size: 36px;
+            color: white;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Visualizer Bars */
+        .music-visualizer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            padding: 0 20px;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .music-visualizer.active {
+            opacity: 1;
+        }
+
+        .visualizer-bar {
+            width: 8px;
+            background: linear-gradient(to top, #ff6b6b, #4ecdc4);
+            border-radius: 4px 4px 0 0;
+            animation: visualize 0.8s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+
+        @keyframes visualize {
+            0%, 100% { height: 20px; }
+            50% { height: 60px; }
+        }
+
+        /* Profile Image with Holographic Effect */
+        .profile-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 30px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 255, 255, 0.3),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            object-fit: cover;
+            animation: profileFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(255, 255, 255, 0.5),
+                inset 0 0 40px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        /* Holographic Ring */
+        .profile-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: ringRotate 6s linear infinite;
+            filter: blur(2px);
+        }
+
+        @keyframes ringRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Name with 3D Text Effect */
+        .profile-name {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 30px rgba(255, 255, 255, 0.8),
+                0 0 60px rgba(78, 205, 196, 0.6),
+                0 10px 20px rgba(0, 0, 0, 0.5),
+                2px 2px 0px rgba(78, 205, 196, 0.4),
+                4px 4px 0px rgba(69, 183, 209, 0.3);
+            animation: textGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 2px;
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.8),
+                    0 0 60px rgba(78, 205, 196, 0.6),
+                    0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+            50% {
+                text-shadow: 
+                    0 0 50px rgba(255, 255, 255, 1),
+                    0 0 90px rgba(78, 205, 196, 0.9),
+                    0 0 120px rgba(69, 183, 209, 0.7),
+                    0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(29, 161, 242, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 8px 25px rgba(29, 161, 242, 0.8), 0 0 20px rgba(29, 161, 242, 0.6);
+            }
+        }
+
+        /* Bio Text */
+        .profile-bio {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 19px;
+            margin-bottom: 50px;
+            line-height: 2;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        /* Links with Neo-Morphism */
+        .link-button {
+            display: block;
+            text-decoration: none;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15), 
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 22px 40px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: left 0.7s ease;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+
+        .link-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(78, 205, 196, 0.6),
+                inset 0 0 40px rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, 
+                rgba(78, 205, 196, 0.4), 
+                rgba(69, 183, 209, 0.4));
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .link-button:active {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        /* Social Icons - Premium Style */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.25), 
+                rgba(238, 90, 111, 0.25));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            filter: blur(10px);
+        }
+
+        .social-icon:hover::after {
+            opacity: 1;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-12px) rotate(360deg) scale(1.2);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 107, 107, 0.8),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.5), 
+                rgba(238, 90, 111, 0.5));
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+
+        /* Floating Particles - Enhanced */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent);
+            border-radius: 50%;
+            animation: particleFloat 25s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes particleFloat {
+            0% {
+                bottom: -200px;
+                opacity: 0;
+                transform: translateX(0) scale(0.5) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateX(100px) scale(1.2) rotate(180deg);
+            }
+            100% {
+                bottom: 120vh;
+                opacity: 0;
+                transform: translateX(-100px) scale(0.5) rotate(360deg);
+            }
+        }
+
+        /* Stars - Enhanced */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: starTwinkle 4s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(2);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            }
+        }
+
+        /* Music Status */
+        .music-status {
+            position: fixed;
+            top: 140px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .music-status.show {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 50px 30px;
+                border-radius: 40px;
+            }
+
+            .profile-name {
+                font-size: 36px;
+            }
+
+            .link-button {
+                padding: 18px 30px;
+                font-size: 16px;
+            }
+
+            .music-control {
+                width: 70px;
+                height: 70px;
+                top: 30px;
+                right: 30px;
+            }
+
+            .music-icon {
+                font-size: 32px;
+            }
+
+            .social-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+
+            .profile-bio {
+                font-size: 16px;
+            }
+
+            .link-button {
+                padding: 16px 25px;
+                font-size: 15px;
+            }
+
+            .music-control {
+                width: 60px;
+                height: 60px;
+                top: 20px;
+                right: 20px;
+            }
+
+            .music-status {
+                top: 100px;
+                right: 20px;
+                font-size: 13px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Background Layers -->
+    <div class="gradient-bg"></div>
+    <div class="glass-overlay"></div>
+    <div class="grid-bg"></div>
 
-<header>
-<div class="header-inner">
-    <div class="logo">Prompt<span>AI</span> • © BÉ QUÝ</div>
-</div>
-</header>
+    <!-- Music Control Button -->
+    <div class="music-control" id="musicControl">
+        <span class="music-icon" id="musicIcon">🎵</span>
+    </div>
 
-<div class="container">
+    <div class="music-status" id="musicStatus">Click để phát nhạc</div>
 
-<div class="form">
-    <input id="img" placeholder="Link ảnh (ảnh sẽ tự ép 9:16)">
-    <textarea id="prompt" rows="4" placeholder="Prompt tạo ảnh..."></textarea>
-    <button onclick="add()">Đăng Prompt</button>
-</div>
+    <!-- Music Visualizer -->
+    <div class="music-visualizer" id="visualizer">
+        <div class="visualizer-bar" style="animation-delay: 0s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.1s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.2s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.3s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.4s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.5s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.6s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.7s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.8s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 0.9s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 1s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 1.1s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 1.2s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 1.3s;"></div>
+        <div class="visualizer-bar" style="animation-delay: 1.4s;"></div>
+    </div>
 
-<div class="grid" id="grid"></div>
+    <div class="particles" id="particles"></div>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container" id="container">
+        <div class="profile-container">
+            <div class="profile-ring"></div>
+            <img src="data:image/jpeg;base64,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" alt="Profile Picture" class="profile-img" id="profileImg">
+        </div>
+        
+        <h1 class="profile-name">Lâm Phú Quý <span style="display: inline-block; background: linear-gradient(135deg, #1DA1F2, #0E7FC1); border-radius: 50%; width: 40px; height: 40px; line-height: 40px; text-align: center; font-size: 24px; vertical-align: middle; box-shadow: 0 5px 15px rgba(29, 161, 242, 0.5); animation: badgePulse 2s ease-in-out infinite;">✓</span></h1>
+        <p class="profile-bio">
+            ✨ Content Creator | Developer | Dreamer ✨<br>
+            Chào mừng đến với không gian của tôi!
+        </p>
 
-</div>
+        <div class="links">
+            <a href="https://facebook.com" class="link-button" target="_blank">
+                📘 Facebook
+            </a>
+            <a href="https://instagram.com" class="link-button" target="_blank">
+                📸 Instagram
+            </a>
+            <a href="https://youtube.com" class="link-button" target="_blank">
+                🎥 YouTube
+            </a>
+            <a href="https://tiktok.com" class="link-button" target="_blank">
+                🎵 TikTok
+            </a>
+            <a href="https://github.com" class="link-button" target="_blank">
+                💻 GitHub
+            </a>
+            <a href="mailto:your@email.com" class="link-button">
+                ✉️ Email Me
+            </a>
+        </div>
 
-<script>
-let data = JSON.parse(localStorage.getItem("BEQUY_PROMPT")) || [];
+        <div class="social-links">
+            <a href="https://twitter.com" class="social-icon" target="_blank" title="Twitter">
+                🐦
+            </a>
+            <a href="https://linkedin.com" class="social-icon" target="_blank" title="LinkedIn">
+                💼
+            </a>
+            <a href="https://discord.com" class="social-icon" target="_blank" title="Discord">
+                🎮
+            </a>
+            <a href="https://telegram.org" class="social-icon" target="_blank" title="Telegram">
+                ✈️
+            </a>
+        </div>
 
-function draw(){
-    grid.innerHTML="";
-    data.slice().reverse().forEach(d=>{
-        const card=document.createElement("div");
-        card.className="card";
-        card.innerHTML=`
-            <div class="image-box">
-                <img src="${d.img}">
-                <div class="watermark">© BÉ QUÝ</div>
-            </div>
-            <div class="card-body">
-                <div class="prompt">${d.prompt}</div>
-                <div class="actions">
-                    <button onclick="copyPrompt(\`${d.prompt}\`)">📋 Copy</button>
-                    <small>Anti-Fake</small>
-                </div>
-            </div>
+        <div class="footer">
+            Made with ❤️ | © 2024<br>
+            <small style="opacity: 0.8; font-size: 14px;">🎵 Thời Gian Sẽ Trả Lời Remix</small>
+        </div>
+    </div>
+
+    <script>
+        // Music Control
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicStatus = document.getElementById('musicStatus');
+        const visualizer = document.getElementById('visualizer');
+        let audioContext;
+        let audioBuffer;
+        let source;
+        let isPlaying = false;
+        let isPaused = false;
+        let pausedAt = 0;
+        let startedAt = 0;
+
+        // Load music file
+        async function loadMusic() {
+            try {
+                showStatus('⏳ Đang tải nhạc...');
+                const response = await fetch('music-fixed.mp3');
+                
+                if (!response.ok) {
+                    throw new Error('Không thể tải file nhạc');
+                }
+                
+                const arrayBuffer = await response.arrayBuffer();
+                
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                showStatus('✅ Nhạc đã sẵn sàng!');
+                console.log('Music loaded successfully!');
+            } catch (error) {
+                console.error('Error loading music:', error);
+                showStatus('❌ Lỗi: ' + error.message);
+            }
+        }
+
+        function showStatus(message) {
+            musicStatus.textContent = message;
+            musicStatus.classList.add('show');
+            setTimeout(() => {
+                musicStatus.classList.remove('show');
+            }, 2500);
+        }
+
+        function playMusic() {
+            if (!audioContext || !audioBuffer) {
+                showStatus('⏳ Đang tải nhạc...');
+                loadMusic().then(() => {
+                    if (audioBuffer) playMusic();
+                });
+                return;
+            }
+
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            source = audioContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(audioContext.destination);
+            source.loop = true;
+
+            if (isPaused) {
+                source.start(0, pausedAt % audioBuffer.duration);
+                startedAt = audioContext.currentTime - pausedAt;
+            } else {
+                source.start(0);
+                startedAt = audioContext.currentTime;
+            }
+
+            isPlaying = true;
+            isPaused = false;
+            musicIcon.textContent = '⏸️';
+            musicControl.classList.add('playing');
+            visualizer.classList.add('active');
+            showStatus('🎵 Đang phát nhạc');
+        }
+
+        function pauseMusic() {
+            if (source && isPlaying) {
+                pausedAt = audioContext.currentTime - startedAt;
+                source.stop();
+                isPlaying = false;
+                isPaused = true;
+                musicIcon.textContent = '▶️';
+                musicControl.classList.remove('playing');
+                visualizer.classList.remove('active');
+                showStatus('⏸️ Đã tạm dừng');
+            }
+        }
+
+        musicControl.addEventListener('click', function() {
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        });
+
+        // 3D Tilt Effect for Container
+        const container = document.getElementById('container');
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        });
+
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 10 + 4;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 25 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add click effect to links
+        document.querySelectorAll('.link-button, .social-icon').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!e.target.href) return;
+                
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.7)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.8s ease-out';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2.5);
+                    opacity: 0;
+                }
+            }
         `;
-        grid.appendChild(card);
-    });
-}
+        document.head.appendChild(style);
 
-function add(){
-    if(!img.value.trim() || !prompt.value.trim()){
-        alert("Cần link ảnh và prompt!");
-        return;
-    }
-    data.push({img:img.value,prompt:prompt.value});
-    localStorage.setItem("BEQUY_PROMPT",JSON.stringify(data));
-    img.value=""; prompt.value="";
-    draw();
-}
+        // Initialize
+        createStars();
+        createParticles();
+        loadMusic();
 
-function copyPrompt(t){
-    navigator.clipboard.writeText(t);
-    alert("Đã copy prompt!");
-}
+        // Profile image click effect
+        document.getElementById('profileImg').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'profileFloat 4s ease-in-out infinite';
+            }, 10);
+        });
 
-const img=document.getElementById("img");
-const prompt=document.getElementById("prompt");
-const grid=document.getElementById("grid");
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                musicControl.click();
+            }
+        });
 
-draw();
-</script>
-
+        // Show initial hint
+        setTimeout(() => {
+            showStatus('🎵 Nhấn Space hoặc Click để phát nhạc');
+        }, 1500);
+    </script>
 </body>
 </html>
