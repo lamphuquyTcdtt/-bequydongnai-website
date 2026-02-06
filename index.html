@@ -320,6 +320,85 @@
             font-weight: 500;
         }
 
+        /* ========== PHẦN KỸ NĂNG LẬP TRÌNH ========== */
+        .skills-section {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(60px) saturate(200%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            animation: slideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: white;
+            font-size: 1em;
+        }
+
+        .skill-percent {
+            font-weight: 700;
+            color: var(--accent-light);
+            font-size: 1em;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ========== END PHẦN KỸ NĂNG LẬP TRÌNH ========== */
+
         /* Links Section */
         .links-section {
             background: rgba(15, 23, 42, 0.6);
@@ -660,6 +739,40 @@
             z-index: 2;
         }
 
+        /* ========== PHẦN BẢN QUYỀN ========== */
+        .copyright {
+            text-align: center;
+            padding: 25px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9em;
+            grid-column: 1 / -1;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 30px;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+
+        .copyright a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .copyright a:hover {
+            color: var(--primary);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ========== END PHẦN BẢN QUYỀN ========== */
+
         /* Floating Elements */
         .floating-elements {
             position: fixed;
@@ -734,6 +847,10 @@
                 justify-content: center;
             }
             
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .links-grid {
                 grid-template-columns: 1fr;
             }
@@ -755,6 +872,7 @@
 
         @media (max-width: 480px) {
             .profile-card,
+            .skills-section,
             .links-section,
             .music-card,
             .social-card {
@@ -839,6 +957,73 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ========== PHẦN KỸ NĂNG LẬP TRÌNH ========== -->
+            <div class="skills-section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Kỹ năng lập trình</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML/CSS/JavaScript</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React.js / Vue.js</span>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Node.js / Express</span>
+                            <span class="skill-percent">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="92"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python / Django</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Database (SQL/NoSQL)</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">UI/UX Design</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ========== END PHẦN KỸ NĂNG LẬP TRÌNH ========== -->
 
             <!-- Links Section -->
             <div class="links-section">
@@ -967,6 +1152,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- ========== PHẦN BẢN QUYỀN ========== -->
+        <footer class="copyright">
+            <p>&copy; 2024 <strong>Lâm Phú Quý</strong> | Portfolio Premium. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: #ec4899;"></i> and <i class="fas fa-code" style="color: #14b8a6;"></i> | Phiên bản 2.0</p>
+        </footer>
+        <!-- ========== END PHẦN BẢN QUYỀN ========== -->
     </div>
 
     <!-- Audio Element -->
@@ -986,6 +1178,9 @@
             
             // Initialize interactive elements
             initInteractions();
+            
+            // Initialize skills animation
+            initSkillsAnimation();
         });
 
         // Stats Counter
@@ -1008,6 +1203,43 @@
                 }, 16);
             });
         }
+
+        // ========== PHẦN KỸ NĂNG ANIMATION ==========
+        function initSkillsAnimation() {
+            const skillProgresses = document.querySelectorAll('.skill-progress');
+            
+            // Intersection Observer để kích hoạt animation khi scroll đến
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBar = entry.target;
+                        const width = progressBar.getAttribute('data-width');
+                        
+                        // Delay nhẹ để tạo hiệu ứng tuần tự
+                        setTimeout(() => {
+                            progressBar.style.width = width + '%';
+                        }, 100);
+                        
+                        observer.unobserve(progressBar);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+            
+            skillProgresses.forEach(progress => {
+                observer.observe(progress);
+            });
+            
+            // Cũng có thể kích hoạt khi trang tải xong
+            setTimeout(() => {
+                skillProgresses.forEach(progress => {
+                    const width = progress.getAttribute('data-width');
+                    progress.style.width = width + '%';
+                });
+            }, 500);
+        }
+        // ========== END PHẦN KỸ NĂNG ANIMATION ==========
 
         // Music Player
         function initMusicPlayer() {
