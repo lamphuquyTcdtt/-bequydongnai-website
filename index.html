@@ -1,107 +1,58 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thông báo cập nhật</title>
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-body {
-  height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-}
-
-.box {
-  background: rgba(0,0,0,0.45);
-  padding: 40px 30px;
-  border-radius: 16px;
-  text-align: center;
-  max-width: 360px;
-  width: 90%;
-  box-shadow: 0 0 40px rgba(0,255,255,0.15);
-}
-
-.box h1 {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
-.box p {
-  font-size: 15px;
-  opacity: 0.9;
-  margin-bottom: 20px;
-}
-
-.loader {
-  width: 60px;
-  height: 60px;
-  border: 5px solid rgba(255,255,255,0.2);
-  border-top: 5px solid #00ffff;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-.countdown {
-  font-size: 18px;
-  color: #00ffff;
-  margin-top: 10px;
-}
-
-.footer {
-  margin-top: 20px;
-  font-size: 13px;
-  opacity: 0.6;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlock Our Memory</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <div class="lock-screen">
+    <form class="password-form" id="passwordForm">
+      <img src="avatar.jpg" alt="Ảnh đại diện" class="password-form__avatar" />
 
-<div class="box">
-  <div class="loader"></div>
-  <h1>Website đang cập nhật</h1>
-  <p>Chúng tôi đang nâng cấp hệ thống để mang lại trải nghiệm tốt hơn.</p>
+      <div class="password-form__main">
+        <h1 class="password-form__title">NHẬP MẬT KHẨU</h1>
 
-  <div class="countdown">
-    Quay lại sau <span id="time">30</span> giây
+        <div class="password-form__input-wrapper">
+          <label for="passwordInput" class="sr-only">Mật khẩu</label>
+          <input
+            type="number"
+            id="passwordInput"
+            class="password-form__input"
+            readonly
+          />
+        </div>
+
+        <p class="password-form__hint">
+          Gợi ý: <span>ngày bắt đầu của chúng ta, 8 số</span>
+        </p>
+
+        <div class="keypad" id="keypad">
+          <button type="button" class="keypad__button" data-value="1">1</button>
+          <button type="button" class="keypad__button" data-value="2">2</button>
+          <button type="button" class="keypad__button" data-value="3">3</button>
+          <button type="button" class="keypad__button" data-value="4">4</button>
+          <button type="button" class="keypad__button" data-value="5">5</button>
+          <button type="button" class="keypad__button" data-value="6">6</button>
+          <button type="button" class="keypad__button" data-value="7">7</button>
+          <button type="button" class="keypad__button" data-value="8">8</button>
+          <button type="button" class="keypad__button" data-value="9">9</button>
+          <button
+            type="button"
+            class="keypad__button keypad__button--clear"
+            data-action="clear"
+          >✖</button>
+          <button type="button" class="keypad__button" data-value="0">0</button>
+          <button
+            type="submit"
+            class="keypad__button keypad__button--submit"
+            data-action="submit"
+          >✔</button>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <div class="footer">
-    © 2026 • Cảm ơn bạn đã chờ đợi 💙
-  </div>
-</div>
-
-<script>
-let time = 30;
-const display = document.getElementById("time");
-
-const timer = setInterval(() => {
-  time--;
-  display.textContent = time;
-
-  if (time <= 0) {
-    clearInterval(timer);
-    display.textContent = "0";
-    // window.location.href = "https://yourwebsite.com";
-  }
-}, 1000);
-</script>
-
 </body>
 </html>
