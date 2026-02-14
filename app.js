@@ -1,10 +1,12 @@
-console.log("%cValentine 2026 💗 | Music gate build", "color:#ff2e8a;font-weight:900;");
+console.log("%cValentine 2026 💗 Clean Build", "color:#ff2e8a;font-weight:900;");
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 
 function show(el){ el.classList.remove("hidden"); el.setAttribute("aria-hidden","false"); }
 function hide(el){ el.classList.add("hidden"); el.setAttribute("aria-hidden","true"); }
+
+/* ================= MUSIC GATE ================= */
 
 const musicGate = $("#musicGate");
 const gateOk = $("#gateOk");
@@ -22,11 +24,11 @@ function closeGate(){
 gateOk?.addEventListener("click", async ()=>{
   try{
     gateHint.textContent = "Đang bật nhạc…";
-    music.volume = 0.9;
+    music.volume = 0.8;
     await music.play();
     closeGate();
   }catch(e){
-    gateHint.textContent = "Không bật được. Thử bấm OK lại nhé.";
+    gateHint.textContent = "Không bật được. Thử bấm lại nhé 💗";
   }
 });
 
@@ -35,6 +37,9 @@ document.addEventListener("pointerdown", (e)=>{
   e.preventDefault();
   e.stopPropagation();
 }, {capture:true});
+
+
+/* ================= FLOATING HEARTS ================= */
 
 const heartsCanvas = $("#hearts");
 const hctx = heartsCanvas.getContext("2d");
@@ -105,6 +110,9 @@ function heartsLoop(){
 }
 heartsLoop();
 
+
+/* ================= HEART BURST ================= */
+
 const fx = $("#fx");
 const fctx = fx.getContext("2d");
 let fW=0, fH=0;
@@ -117,6 +125,7 @@ window.addEventListener("resize", fxResize);
 fxResize();
 
 const bursts = [];
+
 function rand(a,b){ return a + Math.random()*(b-a); }
 
 function heartBurst(x, y){
@@ -180,15 +189,17 @@ document.addEventListener("pointerdown", (e)=>{
   if(gateLocked) return;
   const tag = (e.target.tagName || "").toLowerCase();
   if(tag === "button" || tag === "a") return;
-  if(e.target.closest(".modal") || e.target.closest(".lightbox")) return;
+  if(e.target.closest(".modal")) return;
   heartBurst(e.clientX, e.clientY);
 });
 
-const modalNotes   = $("#modalNotes");
-const modalGallery = $("#modalGallery");
 
-const noteWrap = document.getElementById("noteText");
-const noteMuted = document.getElementById("noteMuted");
+/* ================= MODAL NOTES ================= */
+
+const modalNotes = $("#modalNotes");
+const noteWrap = $("#noteText");
+const noteMuted = $("#noteMuted");
+
 let noteTimer = null;
 let noteOriginal = null;
 let mutedOriginal = null;
@@ -257,11 +268,6 @@ $("#btnOpenNotes").addEventListener("click", ()=>{
   setTimeout(runNotesTypewriter, 80);
 });
 
-$("#btnOpenGallery").addEventListener("click", ()=>{
-  if(gateLocked) return;
-  show(modalGallery);
-});
-
 $$("[data-close]").forEach(btn=>{
   btn.addEventListener("click", (e)=>{
     const id = e.currentTarget.getAttribute("data-close");
@@ -273,116 +279,12 @@ $$("[data-close]").forEach(btn=>{
   });
 });
 
-[modalNotes, modalGallery].forEach(m=>{
-  m.addEventListener("click", (e)=>{
-    if(e.target === m){
-      if(m.id === "modalNotes") clearTypewriter();
-      hide(m);
-    }
-  });
-});
-
-const lightbox = $("#lightbox");
-const lbImg = $("#lbImg");
-const lbCaption = $("#lbCaption");
-const lbClose = $("#lbClose");
-const lbBackdrop = $("#lbBackdrop");
-const lbPrev = $("#lbPrev");
-const lbNext = $("#lbNext");
-
-const galleryFigures = Array.from($$(".ph"));
-const galleryItems = galleryFigures.map((fig, idx)=>{
-  const img = fig.querySelector("img");
-  const label = fig.getAttribute("data-label") || img?.alt || `Khoảnh khắc #${idx+1}`;
-  const src = img?.getAttribute("src") || "";
-  return { fig, img, label, src, idx };
-});
-
-let currentIndex = -1;
-
-function isOpen(){ return !lightbox.classList.contains("hidden"); }
-
-function openAt(index){
-  if(gateLocked) return;
-  const item = galleryItems[index];
-  if(!item) return;
-  if(item.fig.classList.contains("broken")) return;
-
-  currentIndex = index;
-  lbImg.src = item.img?.currentSrc || item.src;
-  lbCaption.textContent = item.label;
-  show(lightbox);
-}
-
-function closeLightbox(){
-  hide(lightbox);
-  lbImg.src = "";
-  currentIndex = -1;
-}
-
-function step(dir){
-  if(currentIndex < 0) return;
-
-  let tries = 0;
-  let i = currentIndex;
-
-  do{
-    i = (i + dir + galleryItems.length) % galleryItems.length;
-    tries++;
-    if(tries > galleryItems.length) return;
-  }while(galleryItems[i].fig.classList.contains("broken"));
-
-  openAt(i);
-}
-
-lbClose.addEventListener("click", closeLightbox);
-lbBackdrop.addEventListener("click", closeLightbox);
-lbPrev.addEventListener("click", ()=> step(-1));
-lbNext.addEventListener("click", ()=> step(1));
-
-document.addEventListener("keydown", (e)=>{
-  if(!isOpen()) return;
-  if(e.key === "Escape") closeLightbox();
-  if(e.key === "ArrowLeft") step(-1);
-  if(e.key === "ArrowRight") step(1);
-});
-
-galleryItems.forEach((item)=>{
-  if(!item.img) return;
-
-  item.img.addEventListener("error", ()=> item.fig.classList.add("broken"));
-  item.img.addEventListener("load", ()=> item.fig.classList.remove("broken"));
-
-  item.fig.addEventListener("click", ()=>{
-    if(item.fig.classList.contains("broken")) return;
-    openAt(item.idx);
-  });
-});
-
-let touchX = null;
-let touchY = null;
-
-const lbCard = lightbox.querySelector(".lb-card");
-lbCard.addEventListener("touchstart", (e)=>{
-  if(!isOpen()) return;
-  const t = e.touches[0];
-  touchX = t.clientX;
-  touchY = t.clientY;
-}, {passive:true});
-
-lbCard.addEventListener("touchend", (e)=>{
-  if(!isOpen() || touchX === null || touchY === null) return;
-  const t = e.changedTouches[0];
-  const dx = t.clientX - touchX;
-  const dy = t.clientY - touchY;
-  touchX = null;
-  touchY = null;
-
-  if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.2){
-    if(dx < 0) step(1);
-    else step(-1);
+modalNotes.addEventListener("click", (e)=>{
+  if(e.target === modalNotes){
+    clearTypewriter();
+    hide(modalNotes);
   }
-}, {passive:true});
+});
 
 $("#btnTheme").addEventListener("click", ()=>{
   if(gateLocked) return;

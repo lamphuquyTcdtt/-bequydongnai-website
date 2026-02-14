@@ -1,38 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const CORRECT_PASSWORD = '27112008';
-  const MAX_LENGTH = 8;
+  const CORRECT_PASSWORD = '5201314';
+  const MAX_LENGTH = CORRECT_PASSWORD.length;
 
   const form = document.getElementById('passwordForm');
-  const passwordInput = document.getElementById('passwordInput');
   const keypad = document.getElementById('keypad');
+  const dots = document.querySelectorAll('#passcodeDots span');
+
+  let currentInput = '';
+
+  function updateDots() {
+    dots.forEach((dot, index) => {
+      if (index < currentInput.length) {
+        dot.classList.add('filled');
+      } else {
+        dot.classList.remove('filled');
+      }
+    });
+  }
 
   function appendValue(number) {
-    if (passwordInput.value.length < MAX_LENGTH) {
-      passwordInput.value += number;
+    if (currentInput.length >= MAX_LENGTH) return;
+
+    currentInput += number;
+    updateDots();
+
+    if (currentInput.length === MAX_LENGTH) {
+      setTimeout(checkPassword, 200);
     }
   }
 
-  function clearPassword() {
-    passwordInput.value = '';
+  function deleteLast() {
+    currentInput = currentInput.slice(0, -1);
+    updateDots();
+  }
+
+  function resetInput() {
+    currentInput = '';
+    updateDots();
   }
 
   function checkPassword() {
-    const enteredPassword = passwordInput.value;
-
-    if (enteredPassword === CORRECT_PASSWORD) {
-      passwordInput.classList.add('correct');
-      alert('Mật khẩu đúng! Chuẩn bị đón bất ngờ nè!!');
-      window.location.href = 'main.html';
-    } else {
-      passwordInput.classList.add('incorrect');
+    if (currentInput === CORRECT_PASSWORD) {
       setTimeout(() => {
-        passwordInput.classList.remove('incorrect');
-        alert('Mật khẩu sai! Vui lòng thử lại.');
-        clearPassword();
+        window.location.href = 'main.html';
+      }, 400);
+    } else {
+      const dotsContainer = document.getElementById('passcodeDots');
+      dotsContainer.classList.add('incorrect');
+
+      setTimeout(() => {
+        dotsContainer.classList.remove('incorrect');
+        resetInput();
       }, 500);
     }
   }
+
+  keypad.addEventListener('click', (event) => {
+    const button = event.target.closest('button');
+    if (!button) return;
+
+    const value = button.dataset.value;
+    const action = button.dataset.action;
+
+    if (value) {
+      appendValue(value);
+    } else if (action === 'delete') {
+      deleteLast();
+    }
+  });
+
+  /* ===== HEART BACKGROUND ===== */
 
   function createHeartEffects() {
     if (document.querySelector('.heart-particle')) return;
@@ -43,29 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
       heart.style.left = `${Math.random() * 100}vw`;
       heart.style.animationDelay = `${Math.random() * 8}s`;
       heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
-      heart.style.backgroundColor = `hsl(${Math.random() * 20 + 330}, 80%, ${Math.random() * 20 + 60}%)`;
+      heart.style.backgroundColor =
+        `hsl(${Math.random() * 20 + 330}, 80%, ${Math.random() * 20 + 60}%)`;
       document.body.appendChild(heart);
     }
   }
 
-  keypad.addEventListener('click', (event) => {
-    const target = event.target.closest('button');
-    if (!target) return;
-
-    const value = target.dataset.value;
-    const action = target.dataset.action;
-
-    if (value) {
-      appendValue(value);
-    } else if (action === 'clear') {
-      clearPassword();
-    }
-  });
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    checkPassword();
-  });
-
   createHeartEffects();
+
 });
