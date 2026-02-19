@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Lâm Phú Quý · Dev v6.0 chuyên nghiệp</title>
+    <title>Lâm Phú Quý · Dev v7.0 chuyên nghiệp</title>
     <!-- Font & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1235,7 +1235,7 @@
     <header class="site-header">
         <div class="container header-inner">
             <div class="logo-name">
-                LÂM PHÚ QUÝ <span>DEV <span class="version-badge">v6.0</span></span>
+                LÂM PHÚ QUÝ <span>DEV <span class="version-badge">v7.0</span></span>
             </div>
             <nav class="nav-links">
                 <a href="#home">Trang chủ</a>
@@ -1382,7 +1382,7 @@
                     <div class="team-avatar">
                         <i class="fas fa-user-headset"></i>
                     </div>
-                    <h3>Nguyễn Thị Hồng</h3>
+                    <h3>Nguyễn Thị Lan Anh</h3>
                     <div class="role">Thư ký trợ lý</div>
                     <span class="team-badge"><i class="fas fa-check-circle"></i> Đã xác thực</span>
                     <p style="margin-top: 10px; font-size:0.9rem;">Hỗ trợ khách hàng, quản lý lịch và dự án</p>
@@ -1634,13 +1634,13 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2025 Lâm Phú Quý · built with <i class="fas fa-heart" style="color: #b23db2;"></i> v6.0 - mở rộng hợp tác</p>
+            <p>© 2025 Lâm Phú Quý · built with <i class="fas fa-heart" style="color: #b23db2;"></i> v7.0 - nâng cấp toàn diện</p>
             <div class="footer-stats">
                 <div class="visitor-counter" id="visitorCounter">
                     <i class="fas fa-eye"></i> <span id="visitCount">0</span> lượt xem
                 </div>
                 <div class="version-footer">
-                    <i class="fas fa-code-branch"></i> phiên bản v6.0
+                    <i class="fas fa-code-branch"></i> phiên bản v7.0
                 </div>
             </div>
         </div>
@@ -1770,7 +1770,7 @@
             function updateVisitorCounter() {
                 let count = localStorage.getItem('portfolio_visitor_count_v6');
                 if (count) count = parseInt(count, 10) + 1;
-                else count = 6800; // khởi điểm cho v6
+                else count = 6800; // khởi điểm cho v6 (giữ lại để đồng bộ dữ liệu)
                 localStorage.setItem('portfolio_visitor_count_v6', count);
                 document.getElementById('visitCount').textContent = count.toLocaleString();
             }
