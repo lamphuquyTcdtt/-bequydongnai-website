@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Đang Cập Nhật</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+.container{
+max-width:600px;
+padding:40px;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 40px rgba(0,0,0,0.4);
+animation:fadeIn 1.5s ease;
+}
+
+h1{
+font-size:40px;
+margin-bottom:15px;
+}
+
+p{
+font-size:18px;
+opacity:0.9;
+margin-bottom:30px;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+margin-bottom:10px;
+color:#00eaff;
+}
+
+.loader{
+width:70px;
+height:70px;
+border:6px solid rgba(255,255,255,0.2);
+border-top:6px solid #00eaff;
+border-radius:50%;
+margin:30px auto;
+animation:spin 1s linear infinite;
+}
+
+.countdown{
+font-size:20px;
+margin-top:10px;
+color:#00eaff;
+}
+
+.footer{
+margin-top:30px;
+font-size:14px;
+opacity:0.7;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+@keyframes fadeIn{
+0%{opacity:0;transform:translateY(20px);}
+100%{opacity:1;transform:translateY(0);}
+}
+
+/* hiệu ứng nền */
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.05);
+animation:move 10s infinite alternate;
+}
+
+.circle:nth-child(1){
+width:200px;
+height:200px;
+top:10%;
+left:10%;
+}
+
+.circle:nth-child(2){
+width:300px;
+height:300px;
+bottom:10%;
+right:10%;
+}
+
+@keyframes move{
+0%{transform:translateY(0);}
+100%{transform:translateY(-40px);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="container">
+
+<div class="logo">
+LÂM PHÚ QUÝ
+</div>
+
+<h1>🚧 Website Đang Cập Nhật</h1>
+
+<p>
+Chúng tôi đang nâng cấp hệ thống để mang lại trải nghiệm tốt hơn.<br>
+Vui lòng quay lại sau ít phút.
+</p>
+
+<div class="loader"></div>
+
+<div class="countdown" id="countdown">
+Đang khởi động lại hệ thống...
+</div>
+
+<div class="footer">
+© 2026 Bản quyền thuộc về <b>LÂM PHÚ QUÝ</b>
+</div>
+
+</div>
+
+<script>
+
+let time = 60;
+
+function updateCountdown(){
+let countdown = document.getElementById("countdown");
+
+if(time <= 0){
+countdown.innerHTML = "Hệ thống sắp hoạt động trở lại...";
+return;
+}
+
+countdown.innerHTML = "Website sẽ hoạt động sau: " + time + " giây";
+
+time--;
+}
+
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
