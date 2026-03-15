@@ -1,168 +1,435 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website Đang Cập Nhật</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LÂM PHÚ QUÝ • Cập nhật thời thế</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 10%, #1b2f3a, #0b1a24 80%);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-body{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-color:white;
-text-align:center;
-overflow:hidden;
-}
+    /* hiệu ứng nền nâng cấp */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 0 60px rgba(0, 234, 255, 0.2), 0 0 80px rgba(0, 234, 255, 0.1);
+      animation: float 18s infinite alternate ease-in-out;
+    }
 
-.container{
-max-width:600px;
-padding:40px;
-background:rgba(255,255,255,0.05);
-border-radius:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 40px rgba(0,0,0,0.4);
-animation:fadeIn 1.5s ease;
-}
+    .orb:nth-child(1) {
+      width: 350px;
+      height: 350px;
+      top: -100px;
+      left: -100px;
+      background: rgba(0, 234, 255, 0.02);
+      animation-duration: 22s;
+    }
 
-h1{
-font-size:40px;
-margin-bottom:15px;
-}
+    .orb:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      bottom: -200px;
+      right: -150px;
+      background: rgba(170, 0, 255, 0.02);
+      box-shadow: inset 0 0 80px rgba(170, 0, 255, 0.15);
+      animation-duration: 28s;
+      animation-delay: -5s;
+    }
 
-p{
-font-size:18px;
-opacity:0.9;
-margin-bottom:30px;
-}
+    .orb:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      top: 40%;
+      left: 15%;
+      background: rgba(255, 215, 0, 0.02);
+      box-shadow: inset 0 0 60px rgba(255, 215, 0, 0.1);
+      animation-duration: 14s;
+      animation-delay: -2s;
+    }
 
-.logo{
-font-size:26px;
-font-weight:bold;
-margin-bottom:10px;
-color:#00eaff;
-}
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0) scale(1); }
+      100% { transform: translateY(-60px) translateX(30px) scale(1.05); }
+    }
 
-.loader{
-width:70px;
-height:70px;
-border:6px solid rgba(255,255,255,0.2);
-border-top:6px solid #00eaff;
-border-radius:50%;
-margin:30px auto;
-animation:spin 1s linear infinite;
-}
+    .container {
+      max-width: 700px;
+      width: 90%;
+      padding: 40px 30px;
+      background: rgba(20, 30, 40, 0.5);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 48px;
+      border: 1px solid rgba(0, 234, 255, 0.25);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(0, 234, 255, 0.2) inset, 0 0 30px rgba(0, 234, 255, 0.3);
+      animation: fadeInUp 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      z-index: 10;
+    }
 
-.countdown{
-font-size:20px;
-margin-top:10px;
-color:#00eaff;
-}
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-.footer{
-margin-top:30px;
-font-size:14px;
-opacity:0.7;
-}
+    /* AVATAR hiện đại */
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: url('https://sf-static.upanhlaylink.com/img/image_20260312ed595fdbdce05a36dcfc534135c5841d.jpg') center/cover no-repeat;
+      border: 4px solid transparent;
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(0, 234, 255, 0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: avatarPulse 4s infinite alternate;
+    }
 
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
+    .avatar:hover {
+      transform: scale(1.03) rotate(2deg);
+      box-shadow: 0 20px 40px rgba(0, 234, 255, 0.5), 0 0 0 4px #00eaff;
+    }
 
-@keyframes fadeIn{
-0%{opacity:0;transform:translateY(20px);}
-100%{opacity:1;transform:translateY(0);}
-}
+    @keyframes avatarPulse {
+      0% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(0, 234, 255, 0.6); }
+      100% { box-shadow: 0 15px 45px rgba(0, 234, 255, 0.7), 0 0 0 5px rgba(0, 234, 255, 0.9); }
+    }
 
-/* hiệu ứng nền */
-.circle{
-position:absolute;
-border-radius:50%;
-background:rgba(255,255,255,0.05);
-animation:move 10s infinite alternate;
-}
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #fff, #a0f0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      text-shadow: 0 0 20px #00eaff55;
+    }
 
-.circle:nth-child(1){
-width:200px;
-height:200px;
-top:10%;
-left:10%;
-}
+    h1 {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    }
 
-.circle:nth-child(2){
-width:300px;
-height:300px;
-bottom:10%;
-right:10%;
-}
+    h1 span {
+      background: linear-gradient(145deg, #00eaff, #ffb347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
 
-@keyframes move{
-0%{transform:translateY(0);}
-100%{transform:translateY(-40px);}
-}
-</style>
+    .description {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 25px;
+      background: rgba(0,0,0,0.2);
+      padding: 12px 20px;
+      border-radius: 60px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: inline-block;
+    }
+
+    /* MUSIC PLAYER TÙY CHỈNH */
+    .music-player {
+      background: rgba(0, 15, 25, 0.7);
+      border-radius: 60px;
+      padding: 12px 20px;
+      margin: 20px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 234, 255, 0.5);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .track-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .now-playing-icon {
+      width: 10px;
+      height: 10px;
+      background: #00eaff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00eaff;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .track-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #b5f0ff;
+      letter-spacing: 0.5px;
+    }
+
+    .track-name i {
+      font-style: normal;
+      color: #ffdb7e;
+      margin-left: 6px;
+      font-weight: 400;
+    }
+
+    .play-btn {
+      background: linear-gradient(145deg, #00eaff, #008bb0);
+      border: none;
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 5px 15px #00eaff55, 0 0 0 1px rgba(255,255,255,0.2) inset;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.07);
+      background: linear-gradient(145deg, #1efff0, #00a6d1);
+      box-shadow: 0 8px 25px #00eaffcc;
+    }
+
+    .play-btn.playing {
+      background: linear-gradient(145deg, #ffb347, #ff7e05);
+      box-shadow: 0 5px 15px #ffb34799;
+    }
+
+    /* LOADER và COUNTDOWN */
+    .loader {
+      width: 80px;
+      height: 80px;
+      border: 5px solid rgba(255,255,255,0.1);
+      border-top: 5px solid #00eaff;
+      border-right: 5px solid #ffb347;
+      border-radius: 50%;
+      margin: 15px auto 20px;
+      animation: spin 1.2s linear infinite;
+      box-shadow: 0 0 30px #00eaff33;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .countdown {
+      font-size: 26px;
+      font-weight: 600;
+      background: linear-gradient(145deg, #00eaff, #aadcff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 15px 0 5px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      margin-top: 35px;
+      font-size: 15px;
+      opacity: 0.7;
+      border-top: 1px dashed rgba(255,255,255,0.2);
+      padding-top: 20px;
+    }
+
+    .footer b {
+      color: #00eaff;
+      font-weight: 600;
+      text-shadow: 0 0 5px cyan;
+    }
+
+    /* ẩn audio gốc */
+    audio {
+      display: none;
+    }
+
+    /* responsive */
+    @media (max-width: 500px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 32px; }
+      .avatar { width: 100px; height: 100px; }
+    }
+  </style>
 </head>
-
 <body>
+  <!-- các khối orb nền (thay thế circle cũ) -->
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
 
-<div class="circle"></div>
-<div class="circle"></div>
+  <div class="container">
+    <!-- AVATAR từ link ảnh -->
+    <div class="avatar" title="LÂM PHÚ QUÝ"></div>
 
-<div class="container">
+    <div class="logo">LÂM PHÚ QUÝ</div>
 
-<div class="logo">
-LÂM PHÚ QUÝ
-</div>
+    <h1>🚧 <span>THỜI THẾ</span> ĐANG CẬP NHẬT</h1>
 
-<h1>🚧 Website Đang Cập Nhật</h1>
+    <p class="description">
+      Nâng cấp giao diện & trải nghiệm • quay lại sau ít phút
+    </p>
 
-<p>
-Chúng tôi đang nâng cấp hệ thống để mang lại trải nghiệm tốt hơn.<br>
-Vui lòng quay lại sau ít phút.
-</p>
+    <!-- KHU VỰC NHẠC HIỆN ĐẠI -->
+    <div class="music-player">
+      <div class="track-info">
+        <span class="now-playing-icon"></span>
+        <span class="track-name">
+          Thời Thế Thế Thời <i>(AIR Remix)</i>
+        </span>
+      </div>
+      <button class="play-btn" id="playPauseBtn" aria-label="Play/Pause">▶</button>
+    </div>
 
-<div class="loader"></div>
+    <!-- loader và countdown giữ nguyên phong cách -->
+    <div class="loader"></div>
+    <div class="countdown" id="countdown">Đang khởi động lại...</div>
 
-<div class="countdown" id="countdown">
-Đang khởi động lại hệ thống...
-</div>
+    <div class="footer">
+      © 2026 Bản quyền thuộc về <b>LÂM PHÚ QUÝ</b> •  bản quyền âm nhạc
+    </div>
+  </div>
 
-<div class="footer">
-© 2026 Bản quyền thuộc về <b>LÂM PHÚ QUÝ</b>
-</div>
+  <!-- AUDIO ẨN VỚI LINK NHẠC MỚI -->
+  <audio id="bgMusic" preload="metadata" loop>
+    <source src="https://files.catbox.moe/qupbw0.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ audio.
+  </audio>
 
-</div>
+  <script>
+    (function() {
+      // -------------------- COUNTDOWN --------------------
+      let timeLeft = 60;
+      const countdownEl = document.getElementById('countdown');
 
-<script>
+      function updateCountdown() {
+        if (timeLeft <= 0) {
+          countdownEl.innerHTML = '⏳ Hệ thống sắp hoạt động trở lại...';
+          return;
+        }
+        countdownEl.innerHTML = `⏰ Hoạt động sau: ${timeLeft} giây`;
+        timeLeft--;
+      }
+      updateCountdown(); // hiện ngay lập tức
+      setInterval(updateCountdown, 1000);
 
-let time = 60;
+      // -------------------- MUSIC PLAYER CUSTOM --------------------
+      const audio = document.getElementById('bgMusic');
+      const playBtn = document.getElementById('playPauseBtn');
 
-function updateCountdown(){
-let countdown = document.getElementById("countdown");
+      // Hàm cập nhật giao diện nút
+      function updatePlayButton() {
+        if (audio.paused) {
+          playBtn.innerHTML = '▶';
+          playBtn.classList.remove('playing');
+        } else {
+          playBtn.innerHTML = '⏸️';
+          playBtn.classList.add('playing');
+        }
+      }
 
-if(time <= 0){
-countdown.innerHTML = "Hệ thống sắp hoạt động trở lại...";
-return;
-}
+      // Xử lý play/pause khi click
+      playBtn.addEventListener('click', function() {
+        if (audio.paused) {
+          // Phát nhạc (có thể bị chặn auto nhưng do người dùng click => được phép)
+          audio.play()
+            .then(() => updatePlayButton())
+            .catch(err => {
+              console.warn('Không thể phát nhạc:', err);
+              alert('Nhấn thêm lần nữa nếu trình duyệt chặn tự động phát.');
+            });
+        } else {
+          audio.pause();
+          updatePlayButton();
+        }
+      });
 
-countdown.innerHTML = "Website sẽ hoạt động sau: " + time + " giây";
+      // Khi audio kết thúc (loop đã bật, nhưng nếu không loop thì reset)
+      audio.addEventListener('ended', function() {
+        // nếu không loop thì đưa về đầu và dừng
+        if (!audio.loop) {
+          audio.currentTime = 0;
+          updatePlayButton();
+        } else {
+          // vẫn giữ trạng thái playing
+        }
+      });
 
-time--;
-}
+      // Nếu audio bị dừng vì lý do khác
+      audio.addEventListener('pause', updatePlayButton);
+      audio.addEventListener('play', updatePlayButton);
 
-setInterval(updateCountdown,1000);
+      // Khởi tạo trạng thái nút
+      updatePlayButton();
 
-</script>
+      // optional: xử lý lỗi tải nhạc
+      audio.addEventListener('error', function(e) {
+        console.error('Lỗi tải nhạc:', e);
+        playBtn.disabled = true;
+        playBtn.style.opacity = 0.5;
+        playBtn.title = 'Không thể tải nhạc';
+      });
 
+      // Hiệu ứng phụ: xoay nhẹ avatar khi nhạc phát? (không bắt buộc)
+      // Thêm class cho container khi nhạc phát (thử chút)
+      audio.addEventListener('play', function() {
+        document.querySelector('.avatar').style.animation = 'avatarPulse 2s infinite alternate, spinGlow 10s infinite linear';
+      });
+      audio.addEventListener('pause', function() {
+        document.querySelector('.avatar').style.animation = 'avatarPulse 4s infinite alternate';
+      });
+    })();
+  </script>
+
+  <!-- thêm 1 chút style động cho avatar khi phát nhạc (tuỳ chọn) -->
+  <style>
+    /* hiệu ứng xoay nhẹ khi nhạc phát (sáng tạo thêm) */
+    @keyframes spinGlow {
+      0% { box-shadow: 0 0 0 3px #00eaff, 0 0 30px #00eaff; }
+      50% { box-shadow: 0 0 0 5px #ffb347, 0 0 50px #ffb347; }
+      100% { box-shadow: 0 0 0 3px #00eaff, 0 0 30px #00eaff; }
+    }
+    .avatar.playing-glow {
+      animation: avatarPulse 2s infinite alternate, spinGlow 8s infinite;
+    }
+  </style>
 </body>
 </html>
