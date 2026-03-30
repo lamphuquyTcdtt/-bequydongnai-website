@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Note Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+<link rel="icon" href="https://readme.so/favicon.ico"/>
+  <!-- Markdown renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header>
+        <div class="app-title">
+          <span class="logo-dot"></span>
+          Note Builder
+        </div>
+      <div>
+    <div class="top-row">
+      <button id="insertBtn" class="btn btn-primary">
+        ✚ Chèn / chỉnh sửa
+      </button>
+
+      <div class="desktop-tools">
+        <button class="btn btn-ghost btn-copy">📋 Copy</button>
+        <button class="btn btn-ghost btn-export">⬇ Export</button>
+        <button class="btn btn-ghost btn-import">⬆ Import</button>
+        <input id="importInput" type="file" accept=".md,.markdown,.txt" class="hidden">
+      </div>
+    </div>
+      </div>
+    </header>
+
+
+
+    <main class="main">
+      <!-- Mobile Tools Panel -->
+      <section id="toolsPanel">
+        <div class="tools-grid">
+          <button class="btn btn-ghost btn-copy">📋 Copy</button>
+          <button class="btn btn-ghost btn-export">⬇ Export</button>
+          <button class="btn btn-ghost btn-import">⬆ Ịmport</button>
+        </div>
+        <p class="tools-note">
+          Tip: Bạn có thể nhập file README.md, chỉnh sửa trực tiếp code và xem kết quả ở tab "Xem trước".
+        </p>
+      </section>
+      <div class="panes">
+        <section class="pane pane-code" data-view="code">
+          <div class="pane-header">
+            <div class="pane-header-title">
+              <strong>Code Markdown</strong>
+              <span class="pane-header-badge" id="currentFileName">README.md</span>
+            </div>
+          </div>
+          <textarea id="markdownInput" placeholder="# Tiêu đề bản tin
+Mô tả ngắn về bản tin của bạn...
+
+## Tính năng
+- Tính năng 1
+- Tính năng 2
+
+## Các bước thực hiện
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
+"></textarea>
+        </section>
+
+        <section class="pane pane-preview" data-view="preview">
+          <div class="pane-header">
+            <div class="pane-header-title">
+              <strong>Xem trước</strong>
+              <span class="pane-header-badge">Rendered</span>
+            </div>
+          </div>
+          <div id="preview"></div>
+        </section>
+      </div>
+
+
+    </main>
+  </div>
+
+  <!-- Mobile bottom tabs -->
+  <div class="mobile-tabs">
+    <button data-target="code">
+      <span class="icon"><svg class="svg-icon" style="width: 25px; height: 25px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M293.0688 755.2c-12.0832 0-24.2688-4.2496-33.9968-12.9024L0 512l273.4592-243.0976C294.5536 250.2144 326.912 252.0064 345.7024 273.152c18.7904 21.1456 16.896 53.504-4.2496 72.2944L154.112 512l172.9536 153.7024c21.1456 18.7904 23.04 51.1488 4.2496 72.2944C321.2288 749.4144 307.1488 755.2 293.0688 755.2zM751.0528 755.0976 1024.512 512l-259.072-230.2976c-21.1456-18.7904-53.504-16.896-72.2432 4.2496-18.7904 21.1456-16.896 53.504 4.2496 72.2944L870.4 512l-187.3408 166.5024c-21.1456 18.7904-23.04 51.1488-4.2496 72.2944C688.896 762.2144 702.976 768 717.056 768 729.1392 768 741.3248 763.7504 751.0528 755.0976zM511.5392 827.648l102.4-614.4c4.6592-27.904-14.1824-54.272-42.0864-58.9312-28.0064-4.7104-54.3232 14.1824-58.88 42.0864l-102.4 614.4c-4.6592 27.904 14.1824 54.272 42.0864 58.9312C455.5264 870.1952 458.2912 870.4 461.1072 870.4 485.6832 870.4 507.392 852.6336 511.5392 827.648z"  /></svg></span>
+      Code
+    </button>
+    <button data-target="preview">
+      <span class="icon"><svg class="svg-icon" style="width: 25px; height: 25px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M614.4 1024H128c-70.656 0-128-57.344-128-128V128C0 57.344 57.344 0 128 0h614.4c70.656 0 128 57.344 128 128v230.4c0 14.336-11.264 25.6-25.6 25.6s-25.6-11.264-25.6-25.6V128c0-42.496-34.304-76.8-76.8-76.8H128c-42.496 0-76.8 34.304-76.8 76.8v768c0 42.496 34.304 76.8 76.8 76.8h486.4c14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6z" fill="" /><path d="M691.2 256H179.2c-14.336 0-25.6-11.264-25.6-25.6s11.264-25.6 25.6-25.6h512c14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6zM384 443.904H179.2c-14.336 0-25.6-11.264-25.6-25.6s11.264-25.6 25.6-25.6h204.8c14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6zM281.6 631.296H179.2c-14.336 0-25.6-11.264-25.6-25.6s11.264-25.6 25.6-25.6h102.4c14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6zM332.8 819.2H179.2c-14.336 0-25.6-11.264-25.6-25.6s11.264-25.6 25.6-25.6h153.6c14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6zM640 896c-141.312 0-256-114.688-256-256s114.688-256 256-256 256 114.688 256 256-114.688 256-256 256z m0-460.8c-113.152 0-204.8 91.648-204.8 204.8s91.648 204.8 204.8 204.8 204.8-91.648 204.8-204.8-91.648-204.8-204.8-204.8z" fill="" /><path d="M998.4 1024c-6.656 0-13.312-2.56-17.92-7.68l-189.44-189.44c-10.24-10.24-10.24-26.112 0-36.352s26.112-10.24 36.352 0l189.44 189.44c10.24 10.24 10.24 26.112 0 36.352-5.12 5.12-11.776 7.68-18.432 7.68z" fill="" /></svg></span>
+      Xem trước
+    </button>
+    <button class="active" data-target="tools">
+      <span class="icon">
+<svg class="svg-icon" style="width: 25px;height: 25px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M900.70711 378.107569a179.653234 179.653234 0 0 1-254.346019 0 185.023303 185.023303 0 0 1-32.708605-44.913308 179.653234 179.653234 0 0 1 162.566649-262.157029l-108.377766 108.377766a70.299092 70.299092 0 0 0 0 97.637627l77.621914 79.574666a70.299092 70.299092 0 0 0 97.637627 0l108.865954-108.377766a179.653234 179.653234 0 0 1-51.259754 129.858044z m-439.369322 261.180653a252.393266 252.393266 0 0 0-76.645537-77.621914l177.212293-177.212293a252.393266 252.393266 0 0 0 77.621914 77.621914z m-83.480171 261.180652a179.653234 179.653234 0 0 1-130.346232 52.724319l108.865954-108.865954a70.299092 70.299092 0 0 0 0-97.637627l-77.621914-79.574667a70.299092 70.299092 0 0 0-97.637627 0l-110.818706 108.865955a180.141422 180.141422 0 0 1 307.070337-129.858044 185.023303 185.023303 0 0 1 32.708605 44.913308 179.653234 179.653234 0 0 1-32.220417 209.43271zM984.187281 114.974164l-190.393373 190.393373-77.621913-77.621914L906.077179 37.840439a250.440514 250.440514 0 0 0-374.440299 276.802673l-216.267344 216.755532a250.440514 250.440514 0 0 0-277.290861 373.952112l189.905184-189.416997 77.621914 77.621914-190.393373 190.393372a250.440514 250.440514 0 0 0 377.857617-274.84992l216.267344-215.779156a250.440514 250.440514 0 0 0 275.338108-377.369429z" fill="#5E5C5C" /></svg></span>
+      Công cụ
+    </button>
+  </div>
+
+  <!-- Insert Modal -->
+  <div id="insertModalBackdrop" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Chèn nội dung</div>
+        <button id="closeInsertModal" class="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" data-section="section-text">✏️ Text</button>
+          <button class="modal-tab-btn" data-section="section-list">☰ Danh sách</button>
+          <button class="modal-tab-btn" data-section="section-video">🎬 Video</button>
+          <button class="modal-tab-btn" data-section="section-image">🖼 Ảnh</button>
+          <button class="modal-tab-btn" data-section="section-link">🔗 Link</button>
+
+        </div>
+
+        <div>
+          <!-- TEXT -->
+          <div id="section-text" class="modal-section active">
+            <div class="field">
+              <label for="textType">Loại text</label>
+              <select id="textType">
+                <option value="p">Đoạn văn thường</option>
+                <option value="h1">Tiêu đề H1 (#)</option>
+                <option value="h2">Tiêu đề H2 (##)</option>
+                <option value="h3">Tiêu đề H3 (###)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="textContent">Nội dung</label>
+              <textarea id="textContent" placeholder="Nhập nội dung..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <button id="insertTextBtn" class="btn btn-primary">Chèn text</button>
+            </div>
+          </div>
+
+          <!-- IMAGE -->
+          <div id="section-image" class="modal-section">
+            <div class="field">
+              <label>Chọn Ảnh</label>
+              <div class="image-actions">
+                <button id="imagePasteBtn" type="button" class="btn btn-ghost btn-sm">
+                  📎 Dán link ảnh
+                </button>
+                <button id="imageUploadBtn" type="button" class="btn btn-ghost btn-sm">
+                  ⬆ Upload ảnh
+                </button>
+                <input id="imageFile" type="file" accept="image/*" class="hidden" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="imageUrl">URL ảnh đã chọn / upload</label>
+              <input id="imageUrl" type="url" placeholder="https://..." />
+              <div class="help-text">
+                Nút "Upload ảnh" sẽ tự upload lên imgbb và điền URL vào đây.
+              </div>
+            </div>
+            <div class="field">
+              <label for="imageAlt">Alt text (tuỳ chọn)</label>
+              <input id="imageAlt" type="text" placeholder="Mô tả ngắn cho ảnh..." />
+            </div>
+            <div class="modal-footer">
+              <button id="insertImageBtn" class="btn btn-primary">Chèn ảnh</button>
+            </div>
+          </div>
+
+<!-- VIDEO -->
+<div id="section-video" class="modal-section">
+  <div class="field">
+    <label for="videoUrl">URL video (YouTube, v.v.)</label>
+    <input id="videoUrl" type="url" placeholder="https://youtube.com/watch?v=..." />
+  </div>
+
+  <!-- NEW: giống phần IMAGE -->
+  <div class="field">
+    <label>Chọn Ảnh thumbnail</label>
+    <div class="image-actions">
+      <button id="videoThumbPasteBtn" type="button" class="btn btn-ghost btn-sm">
+        📎 Dán link ảnh
+      </button>
+      <button id="videoThumbUploadBtn" type="button" class="btn btn-ghost btn-sm">
+        ⬆ Upload ảnh
+      </button>
+      <input id="videoThumbFile" type="file" accept="image/*" class="hidden" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="videoThumbUrl">URL thumbnail đã chọn / upload</label>
+    <input id="videoThumbUrl" type="url" placeholder="https://..." />
+  </div>
+
+  <div class="field">
+    <label for="videoAlt">Alt text (tuỳ chọn)</label>
+    <input id="videoAlt" type="text" placeholder="Ví dụ: Xem video demo" />
+    <div class="help-text">
+      Sẽ chèn dạng: <code>[![alt](thumbnail)](video-url)</code>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button id="insertVideoBtn" class="btn btn-primary">Chèn video</button>
+  </div>
+</div>
+
+
+          <!-- LINK -->
+          <div id="section-link" class="modal-section">
+            <div class="field">
+              <label for="linkText">Tên hiển thị</label>
+              <input id="linkText" type="text" placeholder="Ví dụ: Đọc chi tiết" />
+            </div>
+	    <div class="field">
+              <label for="typeUrl">Tùy chọn</label>
+              <select id="typeUrl" value="0"><option value="0">None</option><option value="1">Tin tức</option><option value="2">Ứng dụng</option></select>
+            </div>
+            <div class="field">
+              <label for="linkUrl">URL</label>
+              <input id="linkUrl" type="url" placeholder="https://..." />
+              <div class="help-text">
+                Điền tên file.md nếu chèn tin tức, điền bundleId nếu chèn ứng dụng.
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="insertLinkBtn" class="btn btn-primary">Chèn link</button>
+            </div>
+          </div>
+
+          <!-- LIST -->
+          <div id="section-list" class="modal-section">
+            <div class="field">
+              <label for="listType">Loại danh sách</label>
+              <select id="listType">
+                <option value="unordered">Dấu chấm tròn (-)</option>
+                <option value="ordered">Đánh số (1.)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="listItems">Các mục (mỗi dòng là 1 item)</label>
+              <textarea id="listItems" placeholder="Item 1
+Item 2
+Item 3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button id="insertListBtn" class="btn btn-primary">Chèn danh sách</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- IMPORT WARNING POPUP -->
+<div id="importPopup" class="modal-backdrop hidden">
+  <div class="modal" style="max-width:360px;">
+    <div class="modal-header">
+      <div class="modal-title">Dữ liệu hiện có sẽ bị ghi đè</div>
+      <button id="importPopupClose" class="modal-close">✕</button>
+    </div>
+
+    <div class="modal-body" style="grid-template-columns:1fr;">
+      <p>Bạn muốn làm gì?</p>
+
+      <div class="modal-footer" style="flex-direction:column; gap:6px;">
+        <button id="importContinueBtn" class="btn btn-primary" style="width:100%;">Continue</button>
+        <button id="importExportBtn" class="btn btn-ghost" style="width:100%;">⬇ Export</button>
+        <button id="importCopyBtn" class="btn btn-ghost" style="width:100%;">📋 Copy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span class="toast-icon"></span>
+    <span id="toastMessage"></span>
+  </div>
+</body>
+</html>

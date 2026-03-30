@@ -1,0 +1,22 @@
+{
+  "name": "AltStudio",
+  "short_name": "AltStudio",
+  "description": "AltStudio",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EE350F",
+  "theme_color": "#EE350F",
+  "icons": [
+    {
+      "src": "/KhoIPA/icon/logo.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/KhoIPA/icon/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
