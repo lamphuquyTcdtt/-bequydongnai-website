@@ -1,281 +1,95 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LÂM PHÚ QUÝ — Profile v2 | Music Menu</title>
-<meta name="theme-color" content="#000000" />
-<meta name="description" content="LinkBio neon galaxy — DarkStack Team — Nhạc nền mới" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='52'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảo trì hệ thống</title>
+
 <style>
-:root{
-  --bg:#02030A; --fg:#e6ffff; --cyan:#00ffff; --vio:#8a2be2;
-  --glow:0 0 25px rgba(0,255,255,.45),0 0 60px rgba(138,43,226,.25);
-  --card-bg:rgba(2,8,20,.48);
-}
-html,body{
-  height:100%; margin:0; background:var(--bg); color:var(--fg);
-  font-family:system-ui,Segoe UI,Inter,Roboto,Arial,sans-serif;
-  overflow: auto;
-}
-.wrap{position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:28px}
-.shell{width:100%; max-width:1100px; display:grid; grid-template-columns:1.1fr .9fr; gap:26px}
-@media (max-width:900px){ .shell{grid-template-columns:1fr; gap:20px} }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
 
-.panel{padding:22px; border-radius:18px; background:var(--card-bg); backdrop-filter:saturate(150%) blur(12px); box-shadow:var(--glow); transition:.3s}
-.panel:hover{box-shadow:0 0 50px var(--cyan),0 0 100px var(--vio); transform:scale(1.02)}
+    .container {
+        max-width: 500px;
+        padding: 30px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    }
 
-.head{display:flex; align-items:center; gap:16px}
-.avatar{position:relative; width:96px; height:96px; border-radius:50%; overflow:hidden; border:2px solid var(--cyan); box-shadow:var(--glow); cursor:pointer; transition:.3s}
-.avatar::after{content:""; position:absolute; inset:-6px; border-radius:50%;
-  background:conic-gradient(from 0deg, rgba(0,255,255,.25), rgba(138,43,226,.25), rgba(0,255,255,.25));
-  filter:blur(14px); z-index:-1; animation:halo 6s linear infinite}
-@keyframes halo{to{transform:rotate(360deg)}}
-.avatar:hover{box-shadow:0 0 60px var(--cyan),0 0 100px var(--vio); transform:scale(1.08)}
-.avatar img{width:100%; height:100%; object-fit:cover}
-.online{position:absolute; right:6px; bottom:6px; width:12px; height:12px; border-radius:50%; background:linear-gradient(135deg,var(--cyan),var(--vio)); box-shadow:0 0 10px var(--cyan)}
+    h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
 
-.title h1{margin:0; font-size:1.6rem; letter-spacing:.3px; color:var(--cyan); text-shadow:0 0 14px currentColor; display:flex; align-items:center; gap:8px}
-.badge-verify{display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px}
-.badge-verify svg{display:block}
+    p {
+        opacity: 0.8;
+    }
 
-.sub{color:#bfefff; opacity:.9}
-.badges{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 6px}
-.badge{font-size:.9rem; padding:6px 10px; border-radius:10px; background:rgba(0,0,0,.25); border:1px solid rgba(0,255,255,.35); color:var(--fg)}
-.badge a{color:inherit; text-decoration:none}
-.bio{margin:12px 0 16px; color:#dfffff}
+    .countdown {
+        font-size: 40px;
+        margin: 20px 0;
+        font-weight: bold;
+    }
 
-.actions{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
-.btn{padding:12px 10px; border-radius:12px; border:1.6px solid var(--cyan); background:transparent; color:var(--cyan); font-weight:700; cursor:pointer; transition:.25s transform,color,box-shadow; text-align:center}
-.btn:hover{transform:translateY(-2px); background:radial-gradient(120% 120% at 50% 10%, rgba(0,255,255,.22), rgba(138,43,226,.22)); box-shadow:var(--glow); color:#001217}
+    .status {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #00ffcc;
+    }
 
-.section{margin:4px 0 12px; color:var(--cyan); font-weight:800; text-shadow:0 0 10px var(--cyan); position:relative}
-.section::after{content:""; position:absolute; left:0; bottom:-6px; width:72px; height:3px; background:linear-gradient(90deg,var(--cyan),var(--vio)); border-radius:2px}
-.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
-@media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:520px){ .grid{grid-template-columns:1fr} }
-.tile{display:flex; justify-content:center; align-items:center; gap:8px; padding:14px 12px; border-radius:14px; text-decoration:none; color:var(--fg); background:rgba(0,0,0,.35); border:1px solid rgba(0,255,255,.25); transition:.25s all}
-.tile:hover{background:radial-gradient(circle at center, rgba(0,255,255,.25), rgba(138,43,226,.2)); box-shadow:var(--glow); transform:scale(1.05)}
-.footer{text-align:center; margin-top:18px; color:#bfefff}
-
-.toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,var(--cyan),var(--vio)); color:#001217; padding:10px 16px; border-radius:12px; font-weight:800; display:none; z-index:5; box-shadow:var(--glow)}
-
-#galaxy{position:fixed; top:0; left:0; width:100%; height:100%; z-index:0}
-
-:focus-visible{outline:2px dashed var(--cyan); outline-offset:4px}
-@media (prefers-reduced-motion:reduce){
-  .panel:hover,.avatar:hover{transform:none}
-  .avatar::after{animation:none}
-}
+    .logo {
+        font-size: 20px;
+        margin-bottom: 15px;
+        opacity: 0.7;
+    }
 </style>
+
 </head>
 <body>
-<canvas id="galaxy" aria-hidden="true"></canvas>
-<div class="wrap">
-  <div class="shell">
-    <!-- Hồ sơ bên trái -->
-    <section class="panel" aria-label="Hồ sơ">
-      <div class="head">
-        <div class="avatar" id="avatar" title="Nhấn để thả tim">
-          <img src="https://sf-static.upanhlaylink.com/img/image_20260329b66398b9d006cb3bd830913b14a7747c.jpg" alt="Avatar" loading="lazy" />
-          <span class="online" aria-hidden="true"></span>
-        </div>
-        <div class="title">
-          <h1>Bé QUÝ
-            <span class="badge-verify" title="Verified">
-              <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 2l2.3 1.3 2.6-.1 1.7 2 .1 2.6L20 10l1.7 2.2-.1 2.6-1.7 2-2.6-.1L12 22l-2.3-1.3-2.6.1-1.7-2-.1-2.6L4 12l-1.7-2.2.1-2.6 1.7-2 2.6.1L12 2z" fill="url(#g)"/>
-                <path d="M10.2 13.3l-2-2 1.4-1.4 1.3 1.3 3.5-3.5 1.4 1.4-4.9 5.2z" fill="#001217"/>
-                <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#00ffff"/><stop offset="1" stop-color="#8a2be2"/></linearGradient></defs>
-              </svg>
-            </span>
-          </h1>
-          <div class="sub">Coder • Reverse Eng • 0xSec</div>
-        </div>
-      </div>
-      <div class="badges">
-        <span class="badge">📍 Nhơn Trạh, Việt Nam</span>
-        <span class="badge">☎ 0817813259</span>
-        <span class="badge">✉ lamphuquy04@gmail.com</span>
-      </div>
-      <p class="bio">💻 Developer | Tool | MMO | DarkStack 💕</p>
-      <div class="actions">
-        <a class="btn" id="cta" href="https://www.facebook.com/haomundev" target="_blank" rel="noopener">LIÊN HỆ</a>
-        <button class="btn" id="toggleMusicBtn" aria-pressed="true">🔊 Tắt nhạc</button>
-      </div>
-    </section>
 
-    <!-- Liên kết & mạng xã hội + MENU NHẠC MỚI -->
-    <section class="panel" aria-label="Liên kết & mạng xã hội">
-      <div class="section">Tài nguyên</div>
-      <div class="grid">
-        <a class="tile" href="https://github.com/" target="_blank" rel="noopener">💻 <strong>GitHub</strong></a>
-        <a class="tile" href="https://lamphuquy.site/khoapp" target="_blank" rel="noopener">👀 <strong>Shop Scoure</strong></a>
-        <a class="tile" href="https://t.me/" target="_blank" rel="noopener">📝 <strong>Nhóm Tele</strong></a>
-      </div>
-      <div class="section">Theo dõi nhanh</div>
-      <div class="grid">
-        <a class="tile" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ <strong>YouTube</strong></a>
-        <a class="tile" href="https://www.facebook.com/share/1BdqVoEn2u/?mibextid=wwXIfr" target="_blank" rel="noopener">📘 <strong>Facebook</strong></a>
-        <a class="tile" href="https://zalo.me/0817813259" target="_blank" rel="noopener">💬 <strong>Zalo</strong></a>
-        <a class="tile" href="#">✉ <strong>Email</strong></a>
-        <a class="tile" href="#" id="copyMail">📎 <strong>Copy Email</strong></a>
-        <a class="tile" href="#" id="copyPhone">📞 <strong>Copy Phone</strong></a>
-      </div>
-
-      <!-- 🎵 MENU NHẠC MỚI: hiển thị link nhạc theo yêu cầu -->
-      <div class="section">🎵 Menu nhạc</div>
-      <a class="tile" href="https://files.catbox.moe/6wke8d.m4a" target="_blank" rel="noopener" style="display:flex; justify-content:space-between; width:auto; margin-bottom:8px;">
-        <span>🎧 <strong>Nhạc nền - Chill Lofi</strong></span>
-        <span style="opacity:0.8; font-size:0.85rem;">🔗 Mở link m4a ▶</span>
-      </a>
-      <div style="margin: 6px 0 4px 0; font-size:0.8rem; opacity:0.75; background:rgba(0,255,255,.08); border-radius:12px; padding:6px 10px;">
-        🎵 Bản nhạc nền tự động (có thể bật/tắt nút bên trái). Nhấn vào link trên để nghe trực tiếp hoặc tải về.
-      </div>
-
-      <div class="footer">© 2025 • Lâm Phú Quý | DarkStack Team</div>
-    </section>
-  </div>
+<div class="container">
+    <div class="logo">🌐 Website đang bảo trì</div>
+    <h1>Bảo trì hệ thống</h1>
+    <p>Chúng tôi đang nâng cấp để mang đến trải nghiệm tốt hơn.</p>
+    
+    <div class="countdown" id="timer">72:00:00</div>
+    
+    <p>Vui lòng quay lại sau</p>
+    <div class="status">⚙️ Dự kiến hoàn tất trong 72 giờ</div>
 </div>
 
-<div class="toast" id="toast">Đã copy!</div>
-
-<!-- AUDIO với link nhạc M4A mới (thay thế hoàn toàn) -->
-<audio id="backgroundAudio" loop preload="auto" style="display:none">
-  <source src="https://files.catbox.moe/6wke8d.m4a" type="audio/mp4" />
-  <!-- fallback nếu trình duyệt không hỗ trợ m4a -->
-  Your browser does not support the audio element.
-</audio>
-
 <script>
-// --- MUSIC TOGGLE (sử dụng source m4a mới) ---
-const audio = document.getElementById('backgroundAudio');
-const btn = document.getElementById('toggleMusicBtn');
+    // Thời gian 72 giờ (tính bằng giây)
+    let totalTime = 72 * 60 * 60;
 
-// tự động thử phát nhạc nền khi tải trang (có thể bị trình duyệt chặn)
-(async () => {
-  try {
-    await audio.play();
-    btn.textContent = '🔊 Tắt nhạc';
-  } catch (err) {
-    btn.textContent = '🔈 Bật nhạc';
-  }
-})();
+    function updateTimer() {
+        let hours = Math.floor(totalTime / 3600);
+        let minutes = Math.floor((totalTime % 3600) / 60);
+        let seconds = totalTime % 60;
 
-btn.addEventListener('click', async () => {
-  if (audio.paused) {
-    try {
-      await audio.play();
-      btn.textContent = '🔊 Tắt nhạc';
-    } catch (e) {
-      // nếu vẫn lỗi autoplay, giữ nguyên
-      btn.textContent = '🔈 Bật nhạc';
+        document.getElementById("timer").innerText =
+            String(hours).padStart(2, '0') + ":" +
+            String(minutes).padStart(2, '0') + ":" +
+            String(seconds).padStart(2, '0');
+
+        if (totalTime > 0) {
+            totalTime--;
+        }
     }
-  } else {
-    audio.pause();
-    btn.textContent = '🔈 Bật nhạc';
-  }
-});
 
-// --- TOAST & COPY (giữ nguyên gốc) ---
-const toast = document.getElementById('toast');
-function showToast(text) { 
-  toast.textContent = text; 
-  toast.style.display = 'block'; 
-  clearTimeout(showToast.t); 
-  showToast.t = setTimeout(() => toast.style.display = 'none', 1500); 
-}
-function safeCopy(t) { 
-  if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(t).then(() => showToast('Đã copy!')); 
-  } else { 
-    const ta = document.createElement('textarea'); 
-    ta.value = t; 
-    document.body.appendChild(ta); 
-    ta.select(); 
-    document.execCommand('copy'); 
-    ta.remove(); 
-    showToast('Đã copy!'); 
-  } 
-}
-document.getElementById('copyMail')?.addEventListener('click', (e) => { e.preventDefault(); safeCopy('haohaone1029@gmail.com'); });
-document.getElementById('copyPhone')?.addEventListener('click', (e) => { e.preventDefault(); safeCopy('0559705922'); });
-
-// --- AVATAR HEARTS (thả tim đẹp) ---
-const avatar = document.getElementById('avatar');
-avatar.addEventListener('click', (e) => {
-  // lấy tọa độ tương đối trong avatar để hiệu ứng tim
-  const rect = avatar.getBoundingClientRect();
-  const offsetX = e.clientX - rect.left;
-  const offsetY = e.clientY - rect.top;
-  for (let i = 0; i < 7; i++) spawnHeart(offsetX, offsetY);
-});
-function spawnHeart(x, y) {
-  const el = document.createElement('div'); 
-  el.textContent = '💖'; 
-  el.style.position = 'absolute'; 
-  el.style.left = x + 'px'; 
-  el.style.top = y + 'px'; 
-  el.style.pointerEvents = 'none';
-  const fs = 14 + Math.random() * 12; 
-  el.style.fontSize = fs + 'px'; 
-  el.style.opacity = 1;
-  const dx = (Math.random() - .5) * 60, 
-        dy = -(30 + Math.random() * 60); 
-  const rot = (Math.random() - .5) * 60;
-  avatar.appendChild(el); 
-  const t0 = performance.now();
-  function step(t) { 
-    const k = Math.min(1, (t - t0) / 900); 
-    el.style.transform = `translate(${dx * k}px, ${dy * k}px) rotate(${rot * k}deg)`; 
-    el.style.opacity = (1 - k).toFixed(2); 
-    if (k < 1) requestAnimationFrame(step); 
-    else el.remove(); 
-  }
-  requestAnimationFrame(step);
-}
-
-// --- GALAXY BACKGROUND (giữ nguyên hiệu ứng vũ trụ) ---
-const cvs = document.getElementById('galaxy'), ctx = cvs.getContext('2d');
-let W, H, stars = [], meteors = []; 
-function size() { W = cvs.width = innerWidth; H = cvs.height = innerHeight; }
-function makeStars(n) {
-  stars = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.5 + 0.2, v: Math.random() * 0.25 + 0.08 }));
-}
-function draw() {
-  ctx.clearRect(0, 0, W, H);
-  const grd = ctx.createRadialGradient(W * .7, H * .3, 0, W * .7, H * .3, Math.max(W, H) * .8); 
-  grd.addColorStop(0, 'rgba(0,255,255,.06)'); 
-  grd.addColorStop(1, 'transparent'); 
-  ctx.fillStyle = grd; 
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = '#fff'; 
-  for (const s of stars) { 
-    s.y += s.v; 
-    if (s.y > H) { s.y = 0; s.x = Math.random() * W; } 
-    ctx.beginPath(); 
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); 
-    ctx.fill(); 
-  }
-  ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--cyan'); 
-  ctx.lineWidth = 1.6;
-  for (let i = meteors.length; i--;) { 
-    const m = meteors[i]; 
-    ctx.beginPath(); 
-    ctx.moveTo(m.x, m.y); 
-    ctx.lineTo(m.x - m.l * .6, m.y + m.l); 
-    ctx.stroke(); 
-    m.x += m.v * .35; 
-    m.y += m.v; 
-    if (m.y > H) meteors.splice(i, 1); 
-  }
-  if (Math.random() < 0.015) meteors.push({ x: Math.random() * W, y: 0, l: Math.random() * 90 + 40, v: Math.random() * 4 + 5 });
-  requestAnimationFrame(draw);
-}
-addEventListener('resize', () => { size(); makeStars(280); }); 
-size(); 
-makeStars(280); 
-draw();
+    setInterval(updateTimer, 1000);
 </script>
+
 </body>
 </html>
