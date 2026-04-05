@@ -1,554 +1,800 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>DarkStack | LÂM PHÚ QUÝ • 7 Màu Huyền Thoại</title>
-<meta name="theme-color" content="#000000" />
-<meta name="description" content="Dịch vụ Tool MMO, Security, Web Dev uy tín. Hơn 15.000 khách hàng hài lòng. Hệ sinh thái Liquid Glass." />
-<!-- ========== SEO & OPEN GRAPH ========== -->
-<meta property="og:title" content="LÂM PHÚ QUÝ — DarkStack 7 Màu" />
-<meta property="og:image" content="https://sf-static.upanhlaylink.com/img/image_20260404fcdb2ec3d455149111f9f4bf0cb5334f.jpg" />
-<meta property="og:description" content="⚡ Tool MMO, Security, Web Dev, AI. Hơn 15.000 khách hàng. Trải nghiệm Liquid Glass ngay." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://lamphuquy.site" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='52'%3E%F0%9F%92%8E%3C/text%3E%3C/svg%3E" />
-<style>
-/* ----- RESET & LIQUID GLASS CORE ----- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Lâm Phú Quý | Chuyên gia Sáng tạo Số</title>
+    <!-- Google Fonts & Font Awesome 6 (miễn phí) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-:root {
-  --bg-deep: #02040c;
-  --cyan-glow: #00ffff;
-  --violet-glow: #b77eff;
-  --glass-bg: rgba(8, 18, 32, 0.55);
-  --glass-border: rgba(0, 255, 255, 0.28);
-  --glass-highlight: rgba(255, 255, 255, 0.08);
-  --card-radius: 2rem;
-  --tile-radius: 1.25rem;
-  --transition-smooth: cubic-bezier(0.25, 0.8, 0.5, 1);
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0c10;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-body.light-mode {
-  --bg-deep: #eef5ff;
-  --glass-bg: rgba(245, 248, 255, 0.7);
-  --glass-border: rgba(0, 150, 200, 0.4);
-  color: #021c2c;
-}
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f1f2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6c63ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8a82ff;
+        }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  background: var(--bg-deep);
-  color: #edf5ff;
-  font-family: 'Inter', system-ui, 'Segoe UI', 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  transition: background 0.3s ease, color 0.2s ease;
-}
+        /* Dynamic gradient background animation */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #02040c);
+        }
+        .animated-bg::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 40% 50%, rgba(108, 99, 255, 0.15), transparent 70%);
+            animation: slowDrift 28s infinite alternate ease-in-out;
+        }
+        @keyframes slowDrift {
+            0% { transform: translate(0%, 0%) scale(1); opacity: 0.4; }
+            100% { transform: translate(-8%, -6%) scale(1.2); opacity: 0.8; }
+        }
 
-body {
-  position: relative;
-  min-height: 100vh;
-}
+        /* Glassmorphism + glow effects */
+        .glass-card {
+            background: rgba(18, 22, 35, 0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(108, 99, 255, 0.25);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(108, 99, 255, 0.7);
+            box-shadow: 0 25px 40px -12px rgba(108, 99, 255, 0.3);
+            transform: translateY(-5px);
+        }
 
-/* ========== 7 MÀU SẮC THAY ĐỔI LIÊN TỤC ========== */
-@keyframes rainbow7 {
-  0% { color: #ff0000; text-shadow: 0 0 8px #ff0000; }
-  14% { color: #ff7700; text-shadow: 0 0 8px #ff7700; }
-  28% { color: #ffff00; text-shadow: 0 0 8px #ffff00; }
-  42% { color: #00ff00; text-shadow: 0 0 8px #00ff00; }
-  57% { color: #0000ff; text-shadow: 0 0 8px #0000ff; }
-  71% { color: #4b0082; text-shadow: 0 0 8px #4b0082; }
-  85% { color: #9400d3; text-shadow: 0 0 8px #9400d3; }
-  100% { color: #ff0000; text-shadow: 0 0 8px #ff0000; }
-}
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-.rainbow-name {
-  animation: rainbow7 3s linear infinite;
-  font-weight: 800;
-  display: inline-block;
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-}
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 10, 20, 0.75);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.3);
+            padding: 1rem 0;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #a28eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #dfe6ff;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #b1a9ff;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #6c63ff, #a97cff);
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
 
-/* Badge xanh kiểu mới chuyên nghiệp */
-.verified-pro {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  border-radius: 40px;
-  padding: 4px 12px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: white;
-  gap: 6px;
-  box-shadow: 0 0 12px rgba(0, 114, 255, 0.6);
-  border: 1px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(4px);
-  letter-spacing: 0.5px;
-  animation: glowPulse 2s infinite alternate;
-}
-.verified-pro svg {
-  width: 14px;
-  height: 14px;
-  fill: white;
-}
-@keyframes glowPulse {
-  0% { box-shadow: 0 0 4px #0072ff; }
-  100% { box-shadow: 0 0 20px #00c6ff; }
-}
+        /* Buttons */
+        .btn-primary, .btn-outline {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 2.5rem;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: linear-gradient(95deg, #6c63ff, #8a6eff);
+            color: white;
+            box-shadow: 0 8px 18px -6px #6c63ff80;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -8px #6c63ff;
+            background: linear-gradient(95deg, #7f77ff, #9b7eff);
+        }
+        .btn-outline {
+            border: 1.5px solid #8f86ff;
+            background: transparent;
+            color: #dedeff;
+        }
+        .btn-outline:hover {
+            background: rgba(108, 99, 255, 0.2);
+            border-color: #b7acff;
+            transform: translateY(-2px);
+        }
 
-/* LOADING SCREEN */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  background: #010514;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1.5rem;
-  backdrop-filter: blur(10px);
-  transition: opacity 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  pointer-events: none;
-}
-.loading-screen .logo-glow {
-  font-size: 4rem;
-  animation: pulseGlow 1.4s infinite alternate;
-  filter: drop-shadow(0 0 15px cyan);
-}
-.loading-screen .loading-text {
-  font-weight: 700;
-  letter-spacing: 3px;
-  background: linear-gradient(135deg, cyan, violet);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-@keyframes pulseGlow {
-  0% { text-shadow: 0 0 2px cyan; transform: scale(1); opacity: 0.7; }
-  100% { text-shadow: 0 0 30px cyan, 0 0 10px violet; transform: scale(1.08); opacity: 1; }
-}
-.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
+        /* Hero */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0 2rem;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .hero-badge {
+            background: rgba(108, 99, 255, 0.2);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+            margin-bottom: 1rem;
+            border-left: 3px solid #6c63ff;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 1rem 0;
+        }
+        .gradient-text {
+            background: linear-gradient(125deg, #ffffff, #cbb2ff, #a06eff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .typed-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #b5a9ff;
+            margin: 0.5rem 0 1.5rem;
+            min-height: 4rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .avatar {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            aspect-ratio: 1/1;
+            background: linear-gradient(135deg, #222842, #14182b);
+            border-radius: 38% 62% 62% 38% / 56% 48% 52% 44%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), inset 0 0 30px rgba(108,99,255,0.2);
+            border: 1px solid rgba(108,99,255,0.4);
+            transition: 0.5s;
+        }
+        .avatar span {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0eeff, #b9acff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            justify-content: flex-start;
+        }
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #cbb2ff;
+        }
 
-/* galaxy + liquid */
-#galaxy { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.liquid-light { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(0, 255, 255, 0.22), rgba(138, 43, 226, 0.08) 65%, transparent 85%); mix-blend-mode: overlay; transition: background 0.08s ease-out; }
-.liquid-light.disabled { display: none; }
-.wrap { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem 5rem; }
+        /* Section common */
+        section {
+            padding: 5rem 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #6c63ff, #b37eff);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
 
-/* BOTTOM STICKY BAR (Mobile wow) */
-.bottom-sticky-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(30px);
-  border-top: 1px solid rgba(0, 255, 255, 0.3);
-  display: flex;
-  justify-content: space-around;
-  padding: 0.6rem 1rem;
-  z-index: 50;
-  gap: 0.5rem;
-}
-.bottom-sticky-bar a {
-  color: cyan;
-  text-decoration: none;
-  font-size: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  font-weight: 600;
-  transition: 0.2s;
-}
-.bottom-sticky-bar a:hover { color: white; text-shadow: 0 0 8px cyan; transform: translateY(-2px); }
+        /* About */
+        .about-content {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .about-text {
+            flex: 2;
+            font-size: 1.1rem;
+            background: rgba(20, 24, 40, 0.4);
+            padding: 1.8rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(8px);
+        }
+        .info-list {
+            flex: 1;
+            background: rgba(28, 32, 52, 0.5);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            backdrop-filter: blur(8px);
+        }
+        .info-list p {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .info-list i {
+            width: 2rem;
+            color: #8f86ff;
+        }
 
-/* Floating action buttons */
-.floating-buttons {
-  position: fixed;
-  bottom: 80px;
-  right: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 60;
-}
-.float-btn {
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(12px);
-  border-radius: 60px;
-  padding: 10px 14px;
-  border: 1px solid cyan;
-  color: cyan;
-  font-weight: bold;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-.float-btn:hover { background: cyan; color: black; box-shadow: 0 0 12px cyan; transform: scale(1.05); }
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .skill-card {
+            background: rgba(18, 22, 38, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 1.2rem;
+            border-radius: 1.5rem;
+            transition: 0.3s;
+        }
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #2a2e4a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6c63ff, #b27dff);
+            border-radius: 8px;
+            width: 0%;
+            transition: width 1s ease-out;
+        }
 
-/* panels, glass */
-.panel { padding: 1.8rem; border-radius: var(--card-radius); background: var(--glass-bg); backdrop-filter: blur(14px) saturate(180%); border: 1px solid var(--glass-border); box-shadow: 0 18px 35px -12px rgba(0, 0, 0, 0.4); transition: all 0.35s; overflow: hidden; }
-.panel:hover { transform: translateY(-4px); border-color: rgba(0, 255, 255, 0.6); background: rgba(8, 22, 38, 0.65); }
-.shell { width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.8rem; }
-@media (max-width: 900px) { .shell { grid-template-columns: 1fr; } }
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: rgba(15, 19, 34, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            transition: 0.3s;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+        .project-icon {
+            font-size: 2.5rem;
+            color: #a28eff;
+            margin-bottom: 1rem;
+        }
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .project-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        .project-tags span {
+            background: rgba(108, 99, 255, 0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
 
-.section { margin: 1rem 0 0.8rem; font-weight: 700; font-size: 1.2rem; color: var(--cyan-glow); text-shadow: 0 0 6px rgba(0, 255, 255, 0.5); display: inline-block; }
-.section::after { content: ''; display: block; width: 56px; height: 3px; background: linear-gradient(90deg, var(--cyan-glow), var(--violet-glow)); border-radius: 4px; margin-top: 5px; }
+        /* Contact */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: rgba(25, 29, 48, 0.6);
+            padding: 1rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(6px);
+        }
+        .contact-item i {
+            font-size: 1.6rem;
+            width: 3rem;
+            color: #9e92ff;
+        }
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: #cfcaff;
+            font-size: 1.6rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: #fff;
+            transform: translateY(-4px);
+        }
+        .contact-form {
+            background: rgba(18, 22, 38, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 1.8rem;
+            border-radius: 2rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: #11152a;
+            border: 1px solid #323a60;
+            padding: 0.9rem;
+            border-radius: 1.2rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-family: inherit;
+        }
+        .contact-form button {
+            width: 100%;
+        }
 
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-@media (max-width: 700px) { .grid { grid-template-columns: repeat(2,1fr); } }
-.tile { display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem; border-radius: var(--tile-radius); background: rgba(0,0,0,0.35); backdrop-filter: blur(4px); border: 1px solid rgba(0,255,255,0.25); text-decoration: none; color: #eef5ff; font-weight: 500; transition: all 0.3s; cursor: pointer; }
-.tile:hover { background: radial-gradient(circle at 30% 20%, rgba(0,255,255,0.2), rgba(0,0,0,0.5)); border-color: cyan; transform: translateY(-3px); color: white; }
-.btn { padding: 0.8rem 0.6rem; border-radius: 2rem; border: 1px solid rgba(0, 255, 255, 0.7); background: rgba(0,0,0,0.3); backdrop-filter: blur(8px); font-weight: 700; text-align: center; cursor: pointer; transition: 0.25s; color: cyan; text-decoration: none; display: inline-block; }
-.btn:hover { background: rgba(0,255,255,0.2); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,255,255,0.3); color: white; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+            background: rgba(0,0,0,0.3);
+        }
 
-/* PLAYLIST PRO */
-.playlist-item-pro { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.4); border-radius: 1.2rem; padding: 0.5rem; margin-bottom: 0.6rem; border: 1px solid rgba(0,255,255,0.2); transition: 0.2s; cursor: pointer; }
-.playlist-item-pro:hover { background: rgba(0,255,255,0.1); border-color: cyan; }
-.thumbnail { width: 44px; height: 44px; background: linear-gradient(145deg, #00ffff30, #b77eff30); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.song-info { flex: 1; }
-.song-title { font-weight: 700; font-size: 0.85rem; }
-.song-artist { font-size: 0.65rem; opacity: 0.7; }
-.progress-bar-container { margin-top: 8px; width: 100%; background: rgba(255,255,255,0.2); border-radius: 20px; height: 4px; cursor: pointer; }
-.progress-fill { width: 0%; background: cyan; height: 4px; border-radius: 20px; }
-.volume-slider { width: 80px; margin-left: 8px; accent-color: cyan; }
-.waveform { display: flex; gap: 2px; align-items: center; height: 24px; margin-left: 8px; }
-.wave-bar { width: 3px; background: cyan; border-radius: 2px; animation: wave 0.8s infinite ease alternate; }
-@keyframes wave { 0% { height: 5px; } 100% { height: 18px; } }
+        /* scroll reveal animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* feedback carousel */
-.feedback-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1rem; padding: 0.5rem 0; scroll-behavior: smooth; }
-.feedback-card { min-width: 260px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 1.5rem; padding: 1rem; scroll-snap-align: start; border: 1px solid cyan; }
-.logo-partner { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
-.partner-item { background: rgba(255,255,255,0.1); padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.7rem; font-weight: bold; }
-
-/* dark/light toggle */
-.theme-toggle { position: fixed; top: 20px; right: 20px; z-index: 200; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 60px; padding: 8px 14px; border: 1px solid cyan; cursor: pointer; font-size: 1.2rem; }
-
-/* Avatar mới + hiệu ứng */
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-.avatar:hover img {
-  transform: scale(1.05);
-}
-</style>
+        @media (max-width: 850px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .stats {
+                justify-content: center;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .typed-text {
+                font-size: 1.3rem;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="animated-bg"></div>
 
-<div class="loading-screen" id="loadingScreen">
-  <div class="logo-glow">💎</div>
-  <div class="loading-text">LÂM PHÚ QUÝ • 7 SẮC MÀU</div>
-  <div style="font-size:12px;">⚡ tải giao diện vũ trụ...</div>
-</div>
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">LÂM PHÚ QUÝ</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Trang chủ</a></li>
+            <li><a href="#about" class="nav-link">Giới thiệu</a></li>
+            <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
+            <li><a href="#projects" class="nav-link">Dự án</a></li>
+            <li><a href="#contact" class="nav-link">Liên hệ</a></li>
+        </ul>
+    </div>
+</nav>
 
-<canvas id="galaxy"></canvas>
-<div class="liquid-light" id="liquidLight"></div>
-<div class="theme-toggle" id="themeToggleBtn">🌙 Dark</div>
-<div class="floating-buttons">
-  <a href="https://m.me/haomundev" target="_blank" class="float-btn">💬 Messenger</a>
-  <a href="https://zalo.me/0817813259" target="_blank" class="float-btn">💚 Zalo</a>
-</div>
-
-<div class="wrap" id="mainUI" style="opacity:0; transform: translateY(20px); transition: all 1s ease;">
-  <div class="cover-banner">
-    <img src="https://sf-static.upanhlaylink.com/img/image_202604039bfb33a758ba46a0a71a22b0105045c8.jpg" alt="DarkStack Banner" loading="lazy" style="width:100%; border-radius:2rem;" />
-  </div>
-  <div class="shell">
-    <!-- LEFT: Profile + DỊCH VỤ + CTA mới -->
-    <section class="panel">
-      <div class="head">
-        <div class="avatar" id="avatar">
-          <!-- ẢNH AVATAR MỚI ĐƯỢC CẬP NHẬT -->
-          <img src="https://sf-static.upanhlaylink.com/img/image_20260404fcdb2ec3d455149111f9f4bf0cb5334f.jpg" alt="Lâm Phú Quý" />
-          <span class="online"></span>
+<main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-left fade-up">
+                <div class="hero-badge"><i class="fas fa-code"></i> Sáng tạo không giới hạn</div>
+                <h1 class="hero-title">Xin chào, tôi là <span class="gradient-text">Lâm Phú Quý</span></h1>
+                <div class="typed-text" id="typedRole"></div>
+                <p style="margin-bottom: 1.2rem; opacity: 0.9;">Kiến tạo giải pháp số đỉnh cao, nơi công nghệ gặp cảm xúc. Tôi biến ý tưởng thành trải nghiệm đẳng cấp.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Kết nối ngay</a>
+                    <a href="#" class="btn-outline" id="downloadCVBtn"><i class="fas fa-download"></i> Tải CV</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-item"><h3>5+</h3><p>Dự án</p></div>
+                    <div class="stat-item"><h3>3+</h3><p>Năm KN</p></div>
+                    <div class="stat-item"><h3>12+</h3><p>Đối tác</p></div>
+                </div>
+            </div>
+            <div class="hero-right fade-up">
+                <div class="avatar">
+                    <span>LQ</span>
+                </div>
+            </div>
         </div>
-        <div>
-          <!-- TÊN HIỆU ỨNG 7 MÀU -->
-          <h1><span class="rainbow-name">LÂM PHÚ QUÝ</span>
-            <!-- BADGE XANH KIỂU MỚI CHUYÊN NGHIỆP -->
-            <span class="verified-pro">
-              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              XÁC THỰC PRO
-            </span>
-          </h1>
-          <div class="sub">CEO DarkStack • 8 năm kinh nghiệm • 7 màu huyền thoại</div>
-        </div>
-      </div>
-      <div class="badges"><span class="badge">📍 Nhơn Trạch</span><span class="badge">☎ 0817813259</span><span class="badge">✉ lamphuquy04@gmail.com</span></div>
-      <p class="bio">💎 Hơn 15.000 khách hàng | Tool MMO | Bảo mật | Web3 | 7 Sắc Màu Công Nghệ</p>
-      
-      <!-- Section Dịch vụ sản phẩm thật -->
-      <div class="section">🚀 Dịch vụ & sản phẩm</div>
-      <div class="grid">
-        <div class="tile">⚙ Tool MMO Auto</div>
-        <div class="tile">🔐 Security Audit</div>
-        <div class="tile">💻 Web Dev React</div>
-        <div class="tile">🤖 AI Bot Telegram</div>
-        <div class="tile">📊 Data Scraper</div>
-        <div class="tile">🌐 Cloud Hosting</div>
-      </div>
-      
-      <!-- CTA chuyển đổi kiếm tiền -->
-      <div class="section">💰 Giao dịch ngay</div>
-      <div class="actions" style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-        <a class="btn" id="buyToolBtn">🛒 MUA TOOL</a>
-        <a class="btn" id="hireServiceBtn">🧑‍💻 THUÊ DV</a>
-        <a class="btn" id="donateBtn">☕ DONATE</a>
-        <button class="btn" id="toggleMusicBtn">🎧 Tắt nhạc</button>
-        <button class="btn" id="toggleLiquidGlassBtn">💧 Tắt Glass</button>
-      </div>
     </section>
 
-    <!-- RIGHT PANEL: Trust, Playlist Pro, Thống kê realtime -->
-    <section class="panel">
-      <div class="section">📢 Khách hàng nói</div>
-      <div class="feedback-slider" id="feedbackSlider">
-        <div class="feedback-card">⭐️⭐️⭐️⭐️⭐️ "Tool MMO siêu ổn định, support 24/7" — Anh Tuấn</div>
-        <div class="feedback-card">🔥 "Bảo mật website cực tốt, team chuyên nghiệp" — Ms. Thảo</div>
-        <div class="feedback-card">💎 "Giao diện liquid glass đẹp vũ trụ, tương lai của web" — Huy Dev</div>
-      </div>
-      <div class="section">🤝 Đối tác & Trust</div>
-      <div class="logo-partner">
-        <span class="partner-item">✅ Đã phục vụ <span id="customerCount">15.247</span>+ khách</span>
-        <span class="partner-item">🔒 Bảo mật SSL 256bit</span>
-        <span class="partner-item">🏆 Đối tác: AWS, Google Cloud</span>
-      </div>
-      
-      <!-- PLAYLIST PRO: thumbnail + progress + volume + waveform ảo -->
-      <div class="section">🎵 Spotify Mini Pro</div>
-      <div id="playlistProContainer" style="margin-bottom: 12px;"></div>
-      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 8px;">
-        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.7" style="width:100px;" />
-        <div id="waveformContainer" class="waveform" style="gap:3px;"></div>
-        <span id="timeDisplay" style="font-size:0.7rem;">0:00 / 0:00</span>
-      </div>
-      
-      <!-- Thống kê realtime tăng dần -->
-      <div class="section">📈 Thống kê trực tiếp</div>
-      <div class="stats-container" style="display: flex; gap:1rem; flex-wrap:wrap;">
-        <div class="stat-card">👥 Đang online<br><strong id="onlineCount">2.000.000</strong></div>
-        <div class="stat-card">💃 Live đơn nữ<br><strong id="liveSingle">5.000.000</strong></div>
-        <div class="stat-card">👥 Live nhóm<br><strong id="liveGroup">2</strong></div>
-      </div>
-      <div class="footer">© 2026 DarkStack | LÂM PHÚ QUÝ 7 MÀU | Liquid Glass Pro</div>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Về tôi</h2>
+            <div class="about-content">
+                <div class="about-text fade-up">
+                    <p>👋 Tôi là <strong>Lâm Phú Quý</strong>, chuyên gia phát triển web và thiết kế giao diện với tình yêu mãnh liệt dành cho công nghệ hiện đại. Tôi đã xây dựng nhiều ứng dụng web phức tạp, tối ưu hiệu suất và mang đến trải nghiệm người dùng mượt mà.</p>
+                    <p style="margin-top: 1rem;">✨ Triết lý của tôi: "Mỗi dòng code đều kể một câu chuyện". Tôi luôn cập nhật xu hướng mới nhất, từ React, Vue đến thiết kế AI. Sẵn sàng hợp tác để tạo ra sản phẩm độc đáo.</p>
+                </div>
+                <div class="info-list fade-up">
+                    <p><i class="fas fa-user-astronaut"></i> <strong>Họ tên:</strong> Lâm Phú Quý</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Địa điểm:</strong> TP. Hồ Chí Minh, Việt Nam</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> lamphuquy04@gmail.com</p>
+                    <p><i class="fas fa-laptop-code"></i> <strong>Chuyên môn:</strong> Fullstack & UI/UX</p>
+                </div>
+            </div>
+        </div>
     </section>
-  </div>
-</div>
 
-<!-- bottom sticky bar mobile app style -->
-<div class="bottom-sticky-bar">
-  <a href="#"><span>🏠</span> Home</a>
-  <a href="#" id="scrollToService"><span>🚀</span> Dịch vụ</a>
-  <a href="#" id="scrollToPlaylist"><span>🎵</span> Nhạc</a>
-  <a href="#" id="contactSticky"><span>💬</span> Liên hệ</a>
-</div>
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Kỹ năng chuyên môn</h2>
+            <div class="skills-grid" id="skillsContainer">
+                <!-- Dữ liệu sẽ được render bằng JS để progress fill animation -->
+            </div>
+        </div>
+    </section>
 
-<audio id="bgAudio" preload="auto" style="display:none"></audio>
-<div class="toast" id="toast" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:cyan; color:black; padding:8px 20px; border-radius:40px; z-index:999; display:none;"></div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Dự án nổi bật</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-up">
+                    <div class="project-icon"><i class="fas fa-store"></i></div>
+                    <h3>Elysian Shop</h3>
+                    <p>Nền tảng thương mại điện tử với React, Node.js, thanh toán tự động, giao diện tối giản nhưng sang trọng.</p>
+                    <div class="project-tags"><span>React</span><span>Express</span><span>MongoDB</span></div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Bảng điều khiển thông minh, trực quan hóa dữ liệu thời gian thực, tích hợp AI dự báo.</p>
+                    <div class="project-tags"><span>Vue.js</span><span>D3.js</span><span>Firebase</span></div>
+                </div>
+                <div class="project-card fade-up">
+                    <div class="project-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Content Studio</h3>
+                    <p>Ứng dụng tạo nội dung bằng AI, hỗ trợ sinh ảnh và văn bản thông minh dành cho marketer.</p>
+                    <div class="project-tags"><span>Python</span><span>OpenAI</span><span>FastAPI</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Kết nối với tôi</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info fade-up">
+                    <div class="contact-item"><i class="fas fa-phone-alt"></i> <span>0817813259</span></div>
+                    <div class="contact-item"><i class="fas fa-envelope-open-text"></i> <span>lamphuquy04@gmail.com</span></div>
+                    <div class="contact-item"><i class="fab fa-github"></i> <span>github.com/
+</span></div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form fade-up">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Họ tên" id="nameInput" required>
+                        <input type="email" placeholder="Email liên hệ" id="emailInput" required>
+                        <textarea rows="3" placeholder="Lời nhắn của bạn..." id="msgInput" required></textarea>
+                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Gửi thông điệp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Lâm Phú Quý — Thiết kế đỉnh cao, trải nghiệm tuyệt đối. <i class="fas fa-heart" style="color:#a97cff;"></i></p>
+</footer>
 
 <script>
-// ************** LOADING SCREEN + FADE **************
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const loader = document.getElementById('loadingScreen');
-    loader.classList.add('fade-out');
-    const mainUI = document.getElementById('mainUI');
-    mainUI.style.opacity = '1';
-    mainUI.style.transform = 'translateY(0px)';
-    setTimeout(() => loader.style.display = 'none', 1000);
-  }, 800);
-});
+    // Typing animation for roles
+    const roles = ["Fullstack Developer", "UI/UX Architect", "Creative Coder", "Digital Alchemist"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedElement = document.getElementById("typedRole");
+    function typeEffect() {
+        const currentRole = roles[roleIndex];
+        if (isDeleting) {
+            typedElement.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(typeEffect, 200);
+            } else {
+                setTimeout(typeEffect, 60);
+            }
+        } else {
+            typedElement.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === currentRole.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 1800);
+            } else {
+                setTimeout(typeEffect, 100);
+            }
+        }
+    }
+    typeEffect();
 
-// ************** DARK MODE TOGGLE + localStorage **************
-const themeBtn = document.getElementById('themeToggleBtn');
-let darkMode = true;
-function applyTheme() {
-  if (darkMode) {
-    document.body.classList.remove('light-mode');
-    themeBtn.innerHTML = '🌙 Dark';
-  } else {
-    document.body.classList.add('light-mode');
-    themeBtn.innerHTML = '☀️ Light';
-  }
-  localStorage.setItem('darkstack_theme', darkMode ? 'dark' : 'light');
-}
-themeBtn.addEventListener('click', () => { darkMode = !darkMode; applyTheme(); });
-const savedTheme = localStorage.getItem('darkstack_theme');
-if (savedTheme === 'light') { darkMode = false; applyTheme(); }
+    // Skills data with percentages
+    const skillsData = [
+        { name: "HTML5 / CSS3", percent: 95 },
+        { name: "JavaScript (ES6+)", percent: 92 },
+        { name: "React / Next.js", percent: 88 },
+        { name: "Node.js / Express", percent: 85 },
+        { name: "UI/UX Design (Figma)", percent: 86 },
+        { name: "Python / Django", percent: 78 }
+    ];
 
-// ************** REAL-TIME STATS (tăng dần random) **************
-let online = 2000000, liveSingle = 5000000, liveGroup = 2;
-const onlineEl = document.getElementById('onlineCount');
-const singleEl = document.getElementById('liveSingle');
-const groupEl = document.getElementById('liveGroup');
-setInterval(() => {
-  online += Math.floor(Math.random() * 200) + 50;
-  liveSingle += Math.floor(Math.random() * 300) + 80;
-  liveGroup += Math.random() > 0.7 ? 1 : 0;
-  onlineEl.innerText = online.toLocaleString();
-  singleEl.innerText = liveSingle.toLocaleString();
-  groupEl.innerText = liveGroup;
-  const custSpan = document.getElementById('customerCount');
-  if (custSpan) custSpan.innerText = (15247 + Math.floor((Date.now() - 1743000000000)/86400000)).toLocaleString();
-}, 2800);
+    const skillsContainer = document.getElementById("skillsContainer");
+    function renderSkills() {
+        skillsContainer.innerHTML = "";
+        skillsData.forEach(skill => {
+            const card = document.createElement("div");
+            card.className = "skill-card fade-up";
+            card.innerHTML = `
+                <div class="skill-name">
+                    <span>${skill.name}</span>
+                    <span>${skill.percent}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-width="${skill.percent}"></div>
+                </div>
+            `;
+            skillsContainer.appendChild(card);
+        });
+    }
+    renderSkills();
 
-// ************** PLAYLIST PRO (thumbnail, progress, volume, waveform) **************
-const playlistSongs = [
-  { title: "Liquid Dreams", artist: "DarkStack", thumb: "🌊", url: "https://files.catbox.moe/20ote6.mp3" },
-  { title: "Neon Pulse", artist: "SoundHelix", thumb: "⚡", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-  { title: "Cyberwave", artist: "RetroWave", thumb: "🌀", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-  { title: "Galactic Breeze", artist: "Liquid Core", thumb: "🌌", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
-];
-const audio = document.getElementById('bgAudio');
-let currentIdx = 0;
-let isPlayingGlobal = false;
-const musicBtn = document.getElementById('toggleMusicBtn');
+    // Animate progress bars when visible + scroll reveal observer
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const progressBars = document.querySelectorAll('.progress-fill');
 
-function buildProPlaylist() {
-  const container = document.getElementById('playlistProContainer');
-  container.innerHTML = '';
-  playlistSongs.forEach((song, idx) => {
-    const div = document.createElement('div');
-    div.className = 'playlist-item-pro';
-    div.innerHTML = `
-      <div class="thumbnail">${song.thumb}</div>
-      <div class="song-info">
-        <div class="song-title">${song.title}</div>
-        <div class="song-artist">${song.artist}</div>
-        <div class="progress-bar-container" data-idx="${idx}"><div class="progress-fill" id="progFill_${idx}" style="width:0%"></div></div>
-      </div>
-    `;
-    div.addEventListener('click', (e) => { e.stopPropagation(); playSpecificSong(idx); });
-    container.appendChild(div);
-  });
-}
-function playSpecificSong(index) {
-  currentIdx = index;
-  audio.src = playlistSongs[index].url;
-  audio.load();
-  audio.play().then(() => {
-    isPlayingGlobal = true;
-    musicBtn.textContent = '🎧 Tắt nhạc';
-    updateNowPlayingUI();
-  }).catch(() => { showToastMsg('⚠️ Cần tương tác trước'); });
-}
-function updateNowPlayingUI() {
-  document.querySelectorAll('.playlist-item-pro').forEach((item, i) => {
-    const fill = document.getElementById(`progFill_${i}`);
-    if (fill && i === currentIdx && isPlayingGlobal && !audio.paused) fill.style.width = (audio.currentTime / audio.duration) * 100 + '%';
-    else if (fill && i !== currentIdx) fill.style.width = '0%';
-  });
-}
-audio.addEventListener('timeupdate', () => {
-  if (audio.duration) {
-    const percent = (audio.currentTime / audio.duration) * 100;
-    const fillDiv = document.getElementById(`progFill_${currentIdx}`);
-    if (fillDiv) fillDiv.style.width = percent + '%';
-    const mins = Math.floor(audio.currentTime / 60);
-    const secs = Math.floor(audio.currentTime % 60);
-    document.getElementById('timeDisplay').innerText = `${mins}:${secs<10?'0'+secs:secs} / ${Math.floor(audio.duration/60)}:${Math.floor(audio.duration%60)<10?'0'+Math.floor(audio.duration%60):Math.floor(audio.duration%60)}`;
-  }
-});
-audio.addEventListener('ended', () => { playSpecificSong((currentIdx+1)%playlistSongs.length); });
-musicBtn.addEventListener('click', () => {
-  if (audio.paused) { audio.play(); isPlayingGlobal=true; musicBtn.textContent='🎧 Tắt nhạc'; }
-  else { audio.pause(); isPlayingGlobal=false; musicBtn.textContent='🔊 Bật nhạc'; }
-  updateNowPlayingUI();
-});
-const volumeSlider = document.getElementById('volumeControl');
-volumeSlider.addEventListener('input', (e) => { audio.volume = e.target.value; localStorage.setItem('audio_vol', e.target.value); });
-const savedVol = localStorage.getItem('audio_vol');
-if(savedVol) audio.volume = parseFloat(savedVol); else audio.volume = 0.7;
-volumeSlider.value = audio.volume;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // if the target is a skill card, fill its progress bar
+                if (entry.target.classList.contains('skill-card')) {
+                    const fill = entry.target.querySelector('.progress-fill');
+                    if (fill && !fill.style.width) {
+                        const widthVal = fill.getAttribute('data-width');
+                        fill.style.width = widthVal + '%';
+                    }
+                }
+                // also trigger for any progress-fill directly not yet filled
+                if (entry.target.classList.contains('progress-fill') && !entry.target.style.width) {
+                    const w = entry.target.getAttribute('data-width');
+                    entry.target.style.width = w + '%';
+                }
+            }
+        });
+    }, { threshold: 0.2 });
 
-// waveform animation giả lập
-const waveformDiv = document.getElementById('waveformContainer');
-function createWaveBars() { for(let i=0;i<12;i++){ let bar=document.createElement('div'); bar.classList.add('wave-bar'); bar.style.animationDelay=`${i*0.05}s`; waveformDiv.appendChild(bar); } }
-createWaveBars();
-setInterval(() => {
-  if(!audio.paused && isPlayingGlobal){
-    document.querySelectorAll('.wave-bar').forEach(bar => { bar.style.height = (Math.random() * 18 + 3) + 'px'; });
-  } else { document.querySelectorAll('.wave-bar').forEach(bar => bar.style.height = '3px'); }
-}, 200);
+    fadeElements.forEach(el => observer.observe(el));
+    // Also observe all progress bars individually in case
+    document.querySelectorAll('.progress-fill').forEach(bar => observer.observe(bar));
 
-// ************** TOGGLE LIQUID GLASS + local storage **************
-const liquidDiv = document.getElementById('liquidLight');
-const toggleLiquid = document.getElementById('toggleLiquidGlassBtn');
-let liquidEnabled = true;
-function setLiquid(enabled) {
-  liquidEnabled = enabled;
-  if(enabled) { liquidDiv.classList.remove('disabled'); toggleLiquid.textContent = '💧 Tắt Liquid Glass'; }
-  else { liquidDiv.classList.add('disabled'); toggleLiquid.textContent = '✨ Bật Liquid Glass'; }
-  localStorage.setItem('liquid_state', enabled ? 'on' : 'off');
-}
-toggleLiquid.addEventListener('click', () => setLiquid(!liquidEnabled));
-const savedLiquid = localStorage.getItem('liquid_state');
-if(savedLiquid === 'off') setLiquid(false);
-else setLiquid(true);
+    // Smooth navigation and active link highlight
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    function updateActiveLink() {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                current = section.getAttribute("id");
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${current}`) {
+                link.classList.add("active");
+            }
+        });
+    }
+    window.addEventListener("scroll", updateActiveLink);
+    window.addEventListener("load", updateActiveLink);
 
-// mouse follow liquid
-window.addEventListener('mousemove', (e) => { if(liquidEnabled) liquidDiv.style.setProperty('--x', (e.clientX/window.innerWidth*100)+'%'); liquidDiv.style.setProperty('--y', (e.clientY/window.innerHeight*100)+'%'); });
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: "smooth" });
+                history.pushState(null, null, `#${targetId}`);
+            }
+        });
+    });
 
-// ************** TOAST **************
-function showToastMsg(msg) { const toast = document.getElementById('toast'); toast.innerText = msg; toast.style.display='block'; setTimeout(()=>toast.style.display='none',2000); }
-document.getElementById('buyToolBtn')?.addEventListener('click',()=>showToastMsg('💰 Liên hệ Zalo 0817813259 để mua Tool'));
-document.getElementById('hireServiceBtn')?.addEventListener('click',()=>showToastMsg('🧑‍💻 Thuê Dev: lamphuquy04@gmail.com'));
-document.getElementById('donateBtn')?.addEventListener('click',()=>showToastMsg('☕ Donate qua Momo: 0817813259 | Cảm ơn bạn!'));
-document.getElementById('avatar')?.addEventListener('click',()=>{ for(let i=0;i<10;i++) spawnHeart(); });
-function spawnHeart(){ const heart=document.createElement('div'); heart.innerText='💖'; heart.style.position='fixed'; heart.style.left=Math.random()*window.innerWidth+'px'; heart.style.bottom='20px'; heart.style.fontSize='20px'; heart.style.zIndex='999'; heart.style.transition='all 1s ease'; document.body.appendChild(heart); setTimeout(()=>{ heart.style.transform='translateY(-150px)'; heart.style.opacity='0'; setTimeout(()=>heart.remove(),1000); },10); }
+    // Contact form handling (demo)
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const name = document.getElementById("nameInput").value.trim();
+            const email = document.getElementById("emailInput").value.trim();
+            const msg = document.getElementById("msgInput").value.trim();
+            if (name && email && msg) {
+                alert(`✨ Cảm ơn ${name}, Lâm Phú Quý sẽ liên hệ bạn sớm nhất! ✨`);
+                contactForm.reset();
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin.");
+            }
+        });
+    }
 
-// ************** STAR BACKGROUND **************
-const canvas = document.getElementById('galaxy'), ctx = canvas.getContext('2d');
-let w,h, stars=[], meteors=[];
-function resize(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; initStars(300); }
-function initStars(n){ stars=[]; for(let i=0;i<n;i++) stars.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.5, v:Math.random()*0.2+0.05}); }
-function draw(){ if(!ctx)return; ctx.clearRect(0,0,w,h); stars.forEach(s=>{ s.y+=s.v; if(s.y>h){ s.y=0; s.x=Math.random()*w; } ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); });
-  if(Math.random()<0.02) meteors.push({x:Math.random()*w, y:0, l:50+Math.random()*60, vx:(Math.random()-0.5)*3, vy:Math.random()*5+4});
-  ctx.strokeStyle='#0ff'; ctx.lineWidth=1.2;
-  meteors.forEach((m,i)=>{ ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m.x-m.l*0.5, m.y+m.l); ctx.stroke(); m.x+=m.vx; m.y+=m.vy; if(m.y>h+100) meteors.splice(i,1); });
-  requestAnimationFrame(draw);
-}
-window.addEventListener('resize',()=>{ resize(); }); resize(); draw();
+    // Fake Download CV Button (Demo)
+    const downloadBtn = document.getElementById("downloadCVBtn");
+    if (downloadBtn) {
+        downloadBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            alert("📄 CV của Lâm Phú Quý sẽ được gửi đến email của bạn (bản demo). Liên hệ trực tiếp để nhận file đầy đủ.");
+        });
+    }
 
-// ************** INIT PLAYLIST, AUTO PLAY FIRST SONG **************
-buildProPlaylist();
-audio.src = playlistSongs[0].url;
-audio.load();
-audio.play().catch(()=>{ showToastMsg('🔊 Nhấn "Bật nhạc" để trải nghiệm'); musicBtn.textContent='🔊 Bật nhạc'; isPlayingGlobal=false; });
-audio.addEventListener('play',()=>{ isPlayingGlobal=true; musicBtn.textContent='🎧 Tắt nhạc'; updateNowPlayingUI(); });
-audio.addEventListener('pause',()=>{ isPlayingGlobal=false; musicBtn.textContent='🔊 Bật nhạc'; updateNowPlayingUI(); });
-
-// sticky scroll helper
-document.getElementById('scrollToService')?.addEventListener('click',(e)=>{ e.preventDefault(); document.querySelector('.shell .panel:first-child .section')?.scrollIntoView({behavior:'smooth'}); });
-document.getElementById('scrollToPlaylist')?.addEventListener('click',(e)=>{ e.preventDefault(); document.querySelector('.playlist-item-pro')?.scrollIntoView({behavior:'smooth'}); });
-document.getElementById('contactSticky')?.addEventListener('click',(e)=>{ e.preventDefault(); showToastMsg('📱 Zalo: 0817813259 | Messenger: Bequy'); });
-
-// feedback slider tự động swipe nhẹ (mobile wow)
-let autoSlide = setInterval(()=>{ const slider=document.getElementById('feedbackSlider'); if(slider) slider.scrollBy({left:280, behavior:'smooth'}); if(slider.scrollLeft+slider.clientWidth>=slider.scrollWidth) slider.scrollLeft=0; }, 5000);
+    // Add extra fade-up class to all needed cards
+    document.querySelectorAll('.project-card, .skill-card, .about-text, .info-list, .contact-item, .contact-form, .hero-left, .hero-right').forEach(el => {
+        if (!el.classList.contains('fade-up')) el.classList.add('fade-up');
+        observer.observe(el);
+    });
+    // Manual trigger for already visible cards (progress bar load)
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelectorAll('.skill-card').forEach(card => {
+                if (card.getBoundingClientRect().top < window.innerHeight - 100) {
+                    card.classList.add('visible');
+                    const fill = card.querySelector('.progress-fill');
+                    if (fill && !fill.style.width) fill.style.width = fill.getAttribute('data-width') + '%';
+                }
+            });
+        }, 300);
+    });
 </script>
 </body>
 </html>
