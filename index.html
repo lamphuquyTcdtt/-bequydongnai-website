@@ -387,6 +387,85 @@
             font-size: 0.7rem;
         }
 
+        /* Announcement Section (mới) */
+        .announcement-card {
+            background: rgba(25, 20, 45, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            border-left: 6px solid #ff6b6b;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+            transition: all 0.3s;
+        }
+        .announcement-content {
+            flex: 2;
+        }
+        .announcement-image {
+            flex: 1;
+            min-width: 200px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.5);
+        }
+        .announcement-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .announcement-image img:hover {
+            transform: scale(1.02);
+        }
+        .announcement-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #ffb4a2;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .announcement-title i {
+            font-size: 2rem;
+            color: #ff8c6b;
+        }
+        .notice-date {
+            background: rgba(255, 107, 107, 0.2);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ff8c6b;
+        }
+        .announcement-content h4 {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.5rem;
+            color: #d6ccff;
+        }
+        .announcement-content ul, .announcement-content p {
+            margin-bottom: 0.8rem;
+            opacity: 0.95;
+        }
+        .announcement-content li {
+            margin-left: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .divider-light {
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 1rem 0;
+        }
+        .contact-small {
+            background: rgba(0,0,0,0.3);
+            padding: 0.8rem;
+            border-radius: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
         /* Contact */
         .contact-wrapper {
             display: grid;
@@ -490,6 +569,9 @@
             .container {
                 padding: 0 1.5rem;
             }
+            .announcement-card {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -504,6 +586,7 @@
             <li><a href="#about" class="nav-link">Giới thiệu</a></li>
             <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
             <li><a href="#projects" class="nav-link">Dự án</a></li>
+            <li><a href="#announcement" class="nav-link">Thông báo</a></li>
             <li><a href="#contact" class="nav-link">Liên hệ</a></li>
         </ul>
     </div>
@@ -592,6 +675,50 @@
         </div>
     </section>
 
+    <!-- 🔔 THÔNG BÁO NGỪNG HOẠT ĐỘNG (Bài viết mới) -->
+    <section id="announcement">
+        <div class="container">
+            <h2 class="section-title">🔔 Thông báo quan trọng</h2>
+            <div class="announcement-card fade-up">
+                <div class="announcement-content">
+                    <div class="announcement-title">
+                        <i class="fas fa-bell"></i> 
+                        <span>Ngừng hoạt động website lamphuquy.click</span>
+                    </div>
+                    <div class="notice-date"><i class="far fa-calendar-alt"></i> Hiệu lực từ ngày 08/04/2026</div>
+                    <p>Kính gửi quý người dùng và đối tác,</p>
+                    <p>Sau một thời gian hoạt động và phát triển, <strong>lamphuquy.click</strong> đã nhận được rất nhiều sự quan tâm, ủng hộ và đồng hành từ cộng đồng. Chúng tôi vô cùng trân trọng và biết ơn điều đó.</p>
+                    <p>Tuy nhiên, vì một số định hướng mới trong chiến lược phát triển cũng như việc tái cấu trúc hệ thống, chúng tôi xin chính thức thông báo:</p>
+                    <p><strong>👉 Website lamphuquy.click sẽ ngừng hoạt động kể từ ngày 08/04/2026.</strong></p>
+                    <div class="divider-light"></div>
+                    <h4><i class="fas fa-chart-line"></i> 📌 Lý do ngừng hoạt động</h4>
+                    <ul>
+                        <li>Thay đổi định hướng phát triển lâu dài</li>
+                        <li>Nâng cấp và chuyển sang nền tảng mới hiện đại hơn</li>
+                        <li>Tối ưu trải nghiệm người dùng trong tương lai</li>
+                    </ul>
+                    <h4><i class="fas fa-database"></i> 📂 Dữ liệu & dịch vụ</h4>
+                    <ul>
+                        <li>Tất cả dữ liệu liên quan sẽ được xử lý và lưu trữ theo chính sách bảo mật</li>
+                        <li>Các dịch vụ hiện tại sẽ dừng hoàn toàn sau thời gian thông báo</li>
+                        <li>Người dùng nên sao lưu dữ liệu quan trọng trước thời điểm đóng</li>
+                    </ul>
+                    <h4><i class="fas fa-heart"></i> 💬 Lời cảm ơn</h4>
+                    <p>Chúng tôi xin gửi lời cảm ơn chân thành đến tất cả những ai đã tin tưởng, sử dụng và đồng hành cùng lamphuquy.click trong suốt thời gian qua. Sự ủng hộ của bạn chính là động lực lớn nhất để chúng tôi phát triển những dự án tốt hơn trong tương lai.</p>
+                    <h4><i class="fas fa-rocket"></i> 🚀 Kế hoạch sắp tới</h4>
+                    <p>Chúng tôi đang chuẩn bị cho một nền tảng mới với: Giao diện hiện đại hơn, Tính năng mạnh mẽ hơn, Trải nghiệm tối ưu hơn. <strong>👉 Thông tin chi tiết sẽ được cập nhật trong thời gian tới.</strong></p>
+                    <div class="contact-small">
+                        <i class="fas fa-phone-alt"></i> <strong>Liên hệ:</strong> Email: lamphuquy04@gmail.com | Hotline: 0817813259
+                    </div>
+                    <p style="margin-top: 1rem;">Một lần nữa, xin chân thành cảm ơn và hẹn gặp lại trong những dự án mới! ❤️</p>
+                </div>
+                <div class="announcement-image">
+                    <img src="https://sf-static.upanhlaylink.com/img/image_202604039bfb33a758ba46a0a71a22b0105045c8.jpg" alt="Thông báo ngừng hoạt động lamphuquy.click">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -600,8 +727,7 @@
                 <div class="contact-info fade-up">
                     <div class="contact-item"><i class="fas fa-phone-alt"></i> <span>0817813259</span></div>
                     <div class="contact-item"><i class="fas fa-envelope-open-text"></i> <span>lamphuquy04@gmail.com</span></div>
-                    <div class="contact-item"><i class="fab fa-github"></i> <span>github.com/
-</span></div>
+                    <div class="contact-item"><i class="fab fa-github"></i> <span>github.com/lamphuquy</span></div>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
@@ -690,13 +816,10 @@
 
     // Animate progress bars when visible + scroll reveal observer
     const fadeElements = document.querySelectorAll('.fade-up');
-    const progressBars = document.querySelectorAll('.progress-fill');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // if the target is a skill card, fill its progress bar
                 if (entry.target.classList.contains('skill-card')) {
                     const fill = entry.target.querySelector('.progress-fill');
                     if (fill && !fill.style.width) {
@@ -704,7 +827,6 @@
                         fill.style.width = widthVal + '%';
                     }
                 }
-                // also trigger for any progress-fill directly not yet filled
                 if (entry.target.classList.contains('progress-fill') && !entry.target.style.width) {
                     const w = entry.target.getAttribute('data-width');
                     entry.target.style.width = w + '%';
@@ -714,7 +836,6 @@
     }, { threshold: 0.2 });
 
     fadeElements.forEach(el => observer.observe(el));
-    // Also observe all progress bars individually in case
     document.querySelectorAll('.progress-fill').forEach(bar => observer.observe(bar));
 
     // Smooth navigation and active link highlight
@@ -739,7 +860,6 @@
     window.addEventListener("scroll", updateActiveLink);
     window.addEventListener("load", updateActiveLink);
 
-    // Smooth scroll for nav links
     navLinks.forEach(link => {
         link.addEventListener("click", function(e) {
             e.preventDefault();
@@ -778,12 +898,12 @@
         });
     }
 
-    // Add extra fade-up class to all needed cards
-    document.querySelectorAll('.project-card, .skill-card, .about-text, .info-list, .contact-item, .contact-form, .hero-left, .hero-right').forEach(el => {
+    // Thêm fade-up cho các phần tử mới trong announcement
+    document.querySelectorAll('.announcement-card, .announcement-content, .announcement-image').forEach(el => {
         if (!el.classList.contains('fade-up')) el.classList.add('fade-up');
         observer.observe(el);
     });
-    // Manual trigger for already visible cards (progress bar load)
+    // Đảm bảo hiển thị progress bar nếu đã thấy
     window.addEventListener('load', () => {
         setTimeout(() => {
             document.querySelectorAll('.skill-card').forEach(card => {
