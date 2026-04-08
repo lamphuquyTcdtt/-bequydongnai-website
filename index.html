@@ -140,7 +140,7 @@
         }
 
         /* Buttons */
-        .btn-primary, .btn-outline {
+        .btn-primary, .btn-outline, .btn-sound {
             display: inline-block;
             padding: 0.8rem 2rem;
             border-radius: 2.5rem;
@@ -171,6 +171,24 @@
             background: rgba(108, 99, 255, 0.2);
             border-color: #b7acff;
             transform: translateY(-2px);
+        }
+        .btn-sound {
+            background: rgba(255, 180, 100, 0.2);
+            border: 1px solid #ffb46e;
+            color: #ffd9a5;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            backdrop-filter: blur(4px);
+        }
+        .btn-sound i {
+            margin-right: 0.5rem;
+        }
+        .btn-sound:hover {
+            background: rgba(255, 160, 80, 0.4);
+            transform: scale(1.02);
+            border-color: #ffcc88;
+            color: white;
         }
 
         /* Hero */
@@ -387,20 +405,28 @@
             font-size: 0.7rem;
         }
 
-        /* Announcement Section (mới) */
-        .announcement-card {
+        /* Announcement Card chung */
+        .announcement-card, .new-project-card {
             background: rgba(25, 20, 45, 0.7);
             backdrop-filter: blur(14px);
             border-radius: 2rem;
-            border-left: 6px solid #ff6b6b;
             padding: 2rem;
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             align-items: flex-start;
             transition: all 0.3s;
+            margin-bottom: 2rem;
         }
-        .announcement-content {
+        .announcement-card {
+            border-left: 6px solid #ff6b6b;
+        }
+        .new-project-card {
+            border-left: 6px solid #4caf50;
+            background: linear-gradient(135deg, rgba(30, 40, 60, 0.8), rgba(20, 25, 55, 0.8));
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.2);
+        }
+        .announcement-content, .project-content {
             flex: 2;
         }
         .announcement-image {
@@ -419,10 +445,9 @@
         .announcement-image img:hover {
             transform: scale(1.02);
         }
-        .announcement-title {
+        .announcement-title, .project-title {
             font-size: 1.9rem;
             font-weight: 800;
-            color: #ffb4a2;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -431,6 +456,9 @@
         .announcement-title i {
             font-size: 2rem;
             color: #ff8c6b;
+        }
+        .project-title i {
+            color: #7eff8c;
         }
         .notice-date {
             background: rgba(255, 107, 107, 0.2);
@@ -441,18 +469,14 @@
             margin-bottom: 1rem;
             border: 1px solid #ff8c6b;
         }
-        .announcement-content h4 {
-            font-size: 1.3rem;
-            margin: 1.2rem 0 0.5rem;
-            color: #d6ccff;
-        }
-        .announcement-content ul, .announcement-content p {
-            margin-bottom: 0.8rem;
-            opacity: 0.95;
-        }
-        .announcement-content li {
-            margin-left: 1.5rem;
-            margin-bottom: 0.3rem;
+        .project-badge {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
         }
         .divider-light {
             height: 1px;
@@ -569,7 +593,7 @@
             .container {
                 padding: 0 1.5rem;
             }
-            .announcement-card {
+            .announcement-card, .new-project-card {
                 flex-direction: column;
             }
         }
@@ -675,7 +699,7 @@
         </div>
     </section>
 
-    <!-- 🔔 THÔNG BÁO NGỪNG HOẠT ĐỘNG (Bài viết mới) -->
+    <!-- 🔔 THÔNG BÁO QUAN TRỌNG (ngừng hoạt động cũ) -->
     <section id="announcement">
         <div class="container">
             <h2 class="section-title">🔔 Thông báo quan trọng</h2>
@@ -703,17 +727,51 @@
                         <li>Các dịch vụ hiện tại sẽ dừng hoàn toàn sau thời gian thông báo</li>
                         <li>Người dùng nên sao lưu dữ liệu quan trọng trước thời điểm đóng</li>
                     </ul>
-                    <h4><i class="fas fa-heart"></i> 💬 Lời cảm ơn</h4>
-                    <p>Chúng tôi xin gửi lời cảm ơn chân thành đến tất cả những ai đã tin tưởng, sử dụng và đồng hành cùng lamphuquy.click trong suốt thời gian qua. Sự ủng hộ của bạn chính là động lực lớn nhất để chúng tôi phát triển những dự án tốt hơn trong tương lai.</p>
-                    <h4><i class="fas fa-rocket"></i> 🚀 Kế hoạch sắp tới</h4>
-                    <p>Chúng tôi đang chuẩn bị cho một nền tảng mới với: Giao diện hiện đại hơn, Tính năng mạnh mẽ hơn, Trải nghiệm tối ưu hơn. <strong>👉 Thông tin chi tiết sẽ được cập nhật trong thời gian tới.</strong></p>
                     <div class="contact-small">
                         <i class="fas fa-phone-alt"></i> <strong>Liên hệ:</strong> Email: lamphuquy04@gmail.com | Hotline: 0817813259
                     </div>
-                    <p style="margin-top: 1rem;">Một lần nữa, xin chân thành cảm ơn và hẹn gặp lại trong những dự án mới! ❤️</p>
                 </div>
                 <div class="announcement-image">
                     <img src="https://sf-static.upanhlaylink.com/img/image_202604039bfb33a758ba46a0a71a22b0105045c8.jpg" alt="Thông báo ngừng hoạt động lamphuquy.click">
+                </div>
+            </div>
+
+            <!-- 🚀 THÔNG BÁO DỰ ÁN MỚI (CÓ NHẠC CHUYÊN NGHIỆP) -->
+            <div class="new-project-card fade-up" id="newProjectAlert">
+                <div class="project-content">
+                    <div class="project-title">
+                        <i class="fas fa-rocket"></i>
+                        <span>🚀 THÔNG BÁO DỰ ÁN MỚI</span>
+                    </div>
+                    <div class="project-badge"><i class="fas fa-microphone-alt"></i> Admin Lâm Phú Quý</div>
+                    <p>Xin chào mọi người, <br>Mình là <strong>Admin Lâm Phú Quý</strong> – chuyên phát triển và xây dựng các giải pháp Web/App chuyên nghiệp.</p>
+                    <p>🔥 Hôm nay, mình chính thức khởi động một dự án mới với định hướng:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Thiết kế giao diện hiện đại, tối ưu trải nghiệm người dùng (UI/UX)</li>
+                        <li>Tối ưu tốc độ và hiệu suất (Performance)</li>
+                        <li>Bảo mật cao, ổn định lâu dài</li>
+                        <li>Tích hợp công nghệ mới nhất trong phát triển web</li>
+                    </ul>
+                    <p>💻 Dự án lần này hứa hẹn sẽ:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Mang lại trải nghiệm mượt mà, đẳng cấp</li>
+                        <li>Chuẩn SEO, tối ưu hiển thị trên mọi thiết bị</li>
+                        <li>Phù hợp cho cá nhân, doanh nghiệp và thương mại điện tử</li>
+                    </ul>
+                    <p>📢 Trong thời gian tới, mình sẽ liên tục cập nhật tiến độ, demo và các tính năng nổi bật của dự án.</p>
+                    <p>👉 Nếu bạn đang cần:<br>
+                    - Thiết kế website chuyên nghiệp <br>
+                    - Code hệ thống theo yêu cầu <br>
+                    - Nâng cấp hoặc tối ưu web <br>
+                    Đừng ngần ngại liên hệ để hợp tác!</p>
+                    <p>🙏 Cảm ơn mọi người đã luôn ủng hộ!<br>— Admin Lâm Phú Quý</p>
+                    
+                    <!-- Nút nhạc thông báo chuyên nghiệp -->
+                    <button id="playSoundBtn" class="btn-sound"><i class="fas fa-music"></i> 🔊 Nghe thông báo chuyên nghiệp</button>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-headphones"></i> Nhấn để trải nghiệm âm thanh thông báo dự án mới</p>
+                </div>
+                <div class="announcement-image">
+                    <img src="https://picsum.photos/id/26/400/300" alt="Dự án mới - Lâm Phú Quý" style="border-radius: 1.2rem;">
                 </div>
             </div>
         </div>
@@ -898,11 +956,74 @@
         });
     }
 
-    // Thêm fade-up cho các phần tử mới trong announcement
-    document.querySelectorAll('.announcement-card, .announcement-content, .announcement-image').forEach(el => {
-        if (!el.classList.contains('fade-up')) el.classList.add('fade-up');
-        observer.observe(el);
+    // ========== NHẠC THÔNG BÁO CHUYÊN NGHIỆP (Web Audio) ==========
+    const playSoundBtn = document.getElementById("playSoundBtn");
+    
+    function playProfessionalNotification() {
+        try {
+            // Sử dụng Web Audio API để tạo âm thanh chuông thông báo chuyên nghiệp (2 nốt)
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioCtx = new AudioContext();
+            const now = audioCtx.currentTime;
+            
+            // Tạo gain để fade out
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.setValueAtTime(0.3, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+            
+            // Nốt thứ nhất: 880Hz (A5) kéo dài 0.3s
+            const osc1 = audioCtx.createOscillator();
+            osc1.type = "sine";
+            osc1.frequency.value = 880;
+            osc1.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc1.start();
+            osc1.stop(now + 0.35);
+            
+            // Nốt thứ hai: 1046.5Hz (C6) sau 0.2s
+            const osc2 = audioCtx.createOscillator();
+            osc2.type = "sine";
+            osc2.frequency.value = 1046.5;
+            osc2.connect(gainNode);
+            osc2.start(now + 0.2);
+            osc2.stop(now + 0.55);
+            
+            // Thêm hiệu ứng ngắn nốt bass nhẹ
+            const osc3 = audioCtx.createOscillator();
+            osc3.type = "triangle";
+            osc3.frequency.value = 523.25; // C5
+            osc3.connect(gainNode);
+            osc3.start(now + 0.05);
+            osc3.stop(now + 0.45);
+            
+            // resume context nếu đang suspended (do user gesture đã được click)
+            audioCtx.resume();
+        } catch(e) {
+            console.warn("Web Audio API error: ", e);
+            // Fallback: không làm gì thêm
+        }
+    }
+    
+    if (playSoundBtn) {
+        playSoundBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            playProfessionalNotification();
+            // Thêm hiệu ứng phản hồi nhẹ
+            playSoundBtn.style.transform = "scale(0.97)";
+            setTimeout(() => { if(playSoundBtn) playSoundBtn.style.transform = ""; }, 150);
+        });
+    }
+    
+    // Thêm fade-up mới cho các phần tử trong new-project-card
+    document.querySelectorAll('.new-project-card, .new-project-card *').forEach(el => {
+        if (el.classList && !el.classList.contains('fade-up') && el.closest('.new-project-card') && !el.classList.contains('btn-sound')) {
+            // chỉ thêm cho container chính và phần tử lớn, nhưng tránh thừa
+        }
     });
+    const newProjectDiv = document.querySelector('.new-project-card');
+    if(newProjectDiv && !newProjectDiv.classList.contains('fade-up')) newProjectDiv.classList.add('fade-up');
+    observer.observe(newProjectDiv);
+    
     // Đảm bảo hiển thị progress bar nếu đã thấy
     window.addEventListener('load', () => {
         setTimeout(() => {
