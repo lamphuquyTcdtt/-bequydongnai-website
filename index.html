@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Lâm Phú Quý | Chuyên gia Sáng tạo Số</title>
-    <!-- Google Fonts & Font Awesome 6 (miễn phí) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <title>Thông báo chính thức | Lâm Phú Quý - Đóng cửa vĩnh viễn</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -16,1026 +16,544 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0b0c10;
-            color: #eef2ff;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
+            background: linear-gradient(145deg, #e9eef3 0%, #dce3ec 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            color: #1e2a3e;
+            position: relative;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1f1f2e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #6c63ff;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8a82ff;
-        }
-
-        /* Dynamic gradient background animation */
-        .animated-bg {
+        /* hiệu ứng nền nhẹ tinh tế */
+        body::before {
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 30%, #0a0f1e, #02040c);
-        }
-        .animated-bg::before {
-            content: "";
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle at 40% 50%, rgba(108, 99, 255, 0.15), transparent 70%);
-            animation: slowDrift 28s infinite alternate ease-in-out;
-        }
-        @keyframes slowDrift {
-            0% { transform: translate(0%, 0%) scale(1); opacity: 0.4; }
-            100% { transform: translate(-8%, -6%) scale(1.2); opacity: 0.8; }
+            background: radial-gradient(circle at 10% 20%, rgba(255,245,225,0.25) 0%, rgba(220,230,240,0.1) 80%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Glassmorphism + glow effects */
-        .glass-card {
-            background: rgba(18, 22, 35, 0.55);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            border: 1px solid rgba(108, 99, 255, 0.25);
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(108, 99, 255, 0.7);
-            box-shadow: 0 25px 40px -12px rgba(108, 99, 255, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .container {
-            max-width: 1280px;
+        .announcement-card {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(8, 10, 20, 0.75);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(108, 99, 255, 0.3);
-            padding: 1rem 0;
-        }
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF, #a28eff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #dfe6ff;
-            font-weight: 500;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(0px);
+            border-radius: 48px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12), 0 10px 25px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: #b1a9ff;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #6c63ff, #a97cff);
-            transition: 0.3s;
-        }
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
+            z-index: 2;
+            animation: fadeSlideUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        /* Buttons */
-        .btn-primary, .btn-outline, .btn-sound {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 2.5rem;
-            font-weight: 600;
-            transition: 0.3s;
-            text-decoration: none;
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-inner {
+            padding: 2.5rem 2.8rem;
+        }
+
+        /* header icon & title */
+        .notice-header {
             text-align: center;
-            cursor: pointer;
-            border: none;
-            font-size: 0.95rem;
-        }
-        .btn-primary {
-            background: linear-gradient(95deg, #6c63ff, #8a6eff);
-            color: white;
-            box-shadow: 0 8px 18px -6px #6c63ff80;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px -8px #6c63ff;
-            background: linear-gradient(95deg, #7f77ff, #9b7eff);
-        }
-        .btn-outline {
-            border: 1.5px solid #8f86ff;
-            background: transparent;
-            color: #dedeff;
-        }
-        .btn-outline:hover {
-            background: rgba(108, 99, 255, 0.2);
-            border-color: #b7acff;
-            transform: translateY(-2px);
-        }
-        .btn-sound {
-            background: rgba(255, 180, 100, 0.2);
-            border: 1px solid #ffb46e;
-            color: #ffd9a5;
-            padding: 0.6rem 1.2rem;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            backdrop-filter: blur(4px);
-        }
-        .btn-sound i {
-            margin-right: 0.5rem;
-        }
-        .btn-sound:hover {
-            background: rgba(255, 160, 80, 0.4);
-            transform: scale(1.02);
-            border-color: #ffcc88;
-            color: white;
+            margin-bottom: 2rem;
+            border-bottom: 2px dashed #cfdde6;
+            padding-bottom: 1.5rem;
         }
 
-        /* Hero */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            padding: 4rem 0 2rem;
-        }
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        .hero-badge {
-            background: rgba(108, 99, 255, 0.2);
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            backdrop-filter: blur(4px);
-            margin-bottom: 1rem;
-            border-left: 3px solid #6c63ff;
-        }
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin: 1rem 0;
-        }
-        .gradient-text {
-            background: linear-gradient(125deg, #ffffff, #cbb2ff, #a06eff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 5s infinite linear;
-        }
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        .typed-text {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #b5a9ff;
-            margin: 0.5rem 0 1.5rem;
-            min-height: 4rem;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        .avatar {
-            width: 100%;
-            max-width: 380px;
-            margin: 0 auto;
-            aspect-ratio: 1/1;
-            background: linear-gradient(135deg, #222842, #14182b);
-            border-radius: 38% 62% 62% 38% / 56% 48% 52% 44%;
-            display: flex;
+        .bell-icon {
+            font-size: 4rem;
+            color: #c44536;
+            background: #fff2ef;
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            border-radius: 50%;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5), inset 0 0 30px rgba(108,99,255,0.2);
-            border: 1px solid rgba(108,99,255,0.4);
-            transition: 0.5s;
-        }
-        .avatar span {
-            font-size: 5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f0eeff, #b9acff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2.5rem;
-            justify-content: flex-start;
-        }
-        .stat-item h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #cbb2ff;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 10px 20px rgba(196, 69, 54, 0.2);
+            animation: subtleRing 2s infinite ease;
         }
 
-        /* Section common */
-        section {
-            padding: 5rem 0;
-        }
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            text-align: center;
-            position: relative;
-        }
-        .section-title:after {
-            content: '';
-            width: 70px;
-            height: 4px;
-            background: linear-gradient(90deg, #6c63ff, #b37eff);
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 4px;
+        @keyframes subtleRing {
+            0% { transform: rotate(0deg); }
+            5% { transform: rotate(12deg); }
+            10% { transform: rotate(-8deg); }
+            15% { transform: rotate(5deg); }
+            20% { transform: rotate(-2deg); }
+            25% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
         }
 
-        /* About */
-        .about-content {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .about-text {
-            flex: 2;
-            font-size: 1.1rem;
-            background: rgba(20, 24, 40, 0.4);
-            padding: 1.8rem;
-            border-radius: 2rem;
-            backdrop-filter: blur(8px);
-        }
-        .info-list {
-            flex: 1;
-            background: rgba(28, 32, 52, 0.5);
-            border-radius: 2rem;
-            padding: 1.8rem;
-            backdrop-filter: blur(8px);
-        }
-        .info-list p {
-            margin: 1rem 0;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-        .info-list i {
-            width: 2rem;
-            color: #8f86ff;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .skill-card {
-            background: rgba(18, 22, 38, 0.7);
-            backdrop-filter: blur(8px);
-            padding: 1.2rem;
-            border-radius: 1.5rem;
-            transition: 0.3s;
-        }
-        .skill-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #2a2e4a;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #6c63ff, #b27dff);
-            border-radius: 8px;
-            width: 0%;
-            transition: width 1s ease-out;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            background: rgba(15, 19, 34, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 1.8rem;
-            padding: 1.5rem;
-            transition: 0.3s;
-            border: 1px solid rgba(108, 99, 255, 0.3);
-        }
-        .project-icon {
-            font-size: 2.5rem;
-            color: #a28eff;
-            margin-bottom: 1rem;
-        }
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin: 0.5rem 0;
-        }
-        .project-tags {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
-        }
-        .project-tags span {
-            background: rgba(108, 99, 255, 0.2);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-        }
-
-        /* Announcement Card chung */
-        .announcement-card, .new-project-card {
-            background: rgba(25, 20, 45, 0.7);
-            backdrop-filter: blur(14px);
-            border-radius: 2rem;
-            padding: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: flex-start;
-            transition: all 0.3s;
-            margin-bottom: 2rem;
-        }
-        .announcement-card {
-            border-left: 6px solid #ff6b6b;
-        }
-        .new-project-card {
-            border-left: 6px solid #4caf50;
-            background: linear-gradient(135deg, rgba(30, 40, 60, 0.8), rgba(20, 25, 55, 0.8));
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.2);
-        }
-        .announcement-content, .project-content {
-            flex: 2;
-        }
-        .announcement-image {
-            flex: 1;
-            min-width: 200px;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.5);
-        }
-        .announcement-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.4s;
-        }
-        .announcement-image img:hover {
-            transform: scale(1.02);
-        }
-        .announcement-title, .project-title {
+        h1 {
             font-size: 1.9rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .announcement-title i {
-            font-size: 2rem;
-            color: #ff8c6b;
-        }
-        .project-title i {
-            color: #7eff8c;
-        }
-        .notice-date {
-            background: rgba(255, 107, 107, 0.2);
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ff8c6b;
-        }
-        .project-badge {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid #4caf50;
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-        .divider-light {
-            height: 1px;
-            background: rgba(255,255,255,0.2);
-            margin: 1rem 0;
-        }
-        .contact-small {
-            background: rgba(0,0,0,0.3);
-            padding: 0.8rem;
-            border-radius: 1.2rem;
-            margin-top: 0.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #2c3e4e, #1a2a36);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-top: 0.5rem;
         }
 
-        /* Contact */
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+        .subhead {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #b13e2d;
+            background: #fff0ec;
+            display: inline-block;
+            padding: 0.3rem 1.4rem;
+            border-radius: 60px;
+            margin-top: 0.8rem;
+            letter-spacing: -0.2px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 2px 5px rgba(0,0,0,0.05);
         }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+
+        /* nội dung chính */
+        .content {
+            margin: 2rem 0 1.8rem;
         }
-        .contact-item {
+
+        .greeting {
+            font-size: 1rem;
+            color: #2c3e4e;
+            font-weight: 500;
+            background: #f8fafd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 28px;
+            margin-bottom: 1.8rem;
+            border-left: 6px solid #c44536;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+            color: #1f2f3c;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #b13e2d;
+        }
+
+        .important-box {
+            background: #fff7f5;
+            border-radius: 32px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0;
+            border: 1px solid #ffded6;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.05);
+        }
+
+        .important-box h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 1.2rem;
-            background: rgba(25, 29, 48, 0.6);
-            padding: 1rem;
-            border-radius: 2rem;
-            backdrop-filter: blur(6px);
+            gap: 10px;
+            color: #a33f2f;
         }
-        .contact-item i {
-            font-size: 1.6rem;
-            width: 3rem;
-            color: #9e92ff;
+
+        .important-box h3 i {
+            font-size: 1.5rem;
         }
-        .social-links {
+
+        .important-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .important-box li {
+            margin-bottom: 0.8rem;
             display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            align-items: flex-start;
+            gap: 12px;
+            font-weight: 500;
         }
-        .social-links a {
-            color: #cfcaff;
+
+        .important-box li i {
+            color: #c44536;
+            font-size: 1.2rem;
+            margin-top: 0.1rem;
+            width: 24px;
+        }
+
+        .thanks-block {
+            background: #eef4f0;
+            border-radius: 28px;
+            padding: 1.4rem 1.8rem;
+            margin: 1.8rem 0;
+            border-left: 8px solid #2c6e5c;
+            font-style: normal;
+        }
+
+        .thanks-block i {
+            color: #2c6e5c;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .future-note {
+            background: #eef2fa;
+            border-radius: 28px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-weight: 500;
+            border: 1px solid #cddfed;
+        }
+
+        .future-note i {
             font-size: 1.6rem;
-            transition: 0.2s;
+            color: #2c6e9e;
         }
-        .social-links a:hover {
-            color: #fff;
-            transform: translateY(-4px);
-        }
-        .contact-form {
-            background: rgba(18, 22, 38, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 1.8rem;
-            border-radius: 2rem;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            background: #11152a;
-            border: 1px solid #323a60;
-            padding: 0.9rem;
-            border-radius: 1.2rem;
+
+        .signature {
+            text-align: right;
+            margin-top: 2.2rem;
             margin-bottom: 1rem;
-            color: white;
-            font-family: inherit;
+            padding-top: 1rem;
+            border-top: 2px dotted #cfdde6;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1e2f3a;
         }
-        .contact-form button {
-            width: 100%;
+
+        .signature span {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #5c6f87;
+            display: block;
+            margin-top: 6px;
+        }
+
+        /* realtime datetime */
+        .datetime-panel {
+            background: #f0f4f9;
+            border-radius: 48px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        .live-clock {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .live-clock i {
+            color: #c44536;
+        }
+
+        .effective-date {
+            color: #2c5a6e;
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            border-top: 1px solid rgba(108, 99, 255, 0.2);
-            background: rgba(0,0,0,0.3);
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6b7c93;
+            border-top: 1px solid #e2edf2;
+            padding-top: 1.5rem;
         }
 
-        /* scroll reveal animation */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* responsive */
+        @media (max-width: 750px) {
+            body {
+                padding: 1rem;
+            }
+            .card-inner {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .subhead {
+                font-size: 1.1rem;
+                padding: 0.2rem 1rem;
+            }
+            .bell-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 3rem;
+                line-height: 70px;
+            }
+            .important-box {
+                padding: 1rem;
+            }
+            .datetime-panel {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
-        @media (max-width: 850px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+            .subhead {
+                font-size: 1rem;
+            }
+            .future-note {
+                flex-direction: column;
                 text-align: center;
             }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .stats {
-                justify-content: center;
-            }
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .nav-links {
-                gap: 1rem;
-            }
-            .hero-title {
-                font-size: 2.3rem;
-            }
-            .typed-text {
-                font-size: 1.3rem;
-            }
-            .container {
-                padding: 0 1.5rem;
-            }
-            .announcement-card, .new-project-card {
-                flex-direction: column;
-            }
+        }
+
+        /* interactive subtle hover */
+        .announcement-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 35px 55px rgba(0, 0, 0, 0.16);
+        }
+
+        button.dummy-btn {
+            background: none;
+            border: none;
         }
     </style>
 </head>
 <body>
-<div class="animated-bg"></div>
 
-<nav class="navbar">
-    <div class="container nav-content">
-        <div class="logo">LÂM PHÚ QUÝ</div>
-        <ul class="nav-links">
-            <li><a href="#home" class="nav-link active">Trang chủ</a></li>
-            <li><a href="#about" class="nav-link">Giới thiệu</a></li>
-            <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
-            <li><a href="#projects" class="nav-link">Dự án</a></li>
-            <li><a href="#announcement" class="nav-link">Thông báo</a></li>
-            <li><a href="#contact" class="nav-link">Liên hệ</a></li>
-        </ul>
+<div class="announcement-card">
+    <div class="card-inner">
+        
+        <div class="notice-header">
+            <div class="bell-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h1>🔔 THÔNG BÁO CHÍNH THỨC</h1>
+            <div class="subhead">
+                ADMIN LÂM PHÚ QUÝ CHÍNH THỨC ĐÓNG CỬA WEBSITE VĨNH VIỄN
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="greeting">
+                <i class="fas fa-envelope-open-text" style="margin-right: 8px; color: #c44536;"></i> 
+                Kính gửi quý người dùng, đối tác và toàn thể cộng đồng,
+            </div>
+
+            <p>Sau một thời gian hoạt động và phát triển, chúng tôi xin trân trọng thông báo: <strong class="highlight">Website do Admin Lâm Phú Quý quản lý sẽ chính thức ngừng hoạt động vĩnh viễn kể từ hôm nay.</strong></p>
+            
+            <p>Đây là một quyết định không hề dễ dàng, nhưng đã được cân nhắc kỹ lưỡng dựa trên định hướng phát triển trong tương lai cũng như các yếu tố liên quan đến vận hành và chiến lược lâu dài.</p>
+            
+            <p>Trong suốt hành trình vừa qua, chúng tôi vô cùng biết ơn sự đồng hành, ủng hộ và tin tưởng của tất cả các bạn. Chính sự quan tâm đó là động lực giúp chúng tôi không ngừng cải thiện và phát triển.</p>
+
+            <!-- Các lưu ý quan trọng -->
+            <div class="important-box">
+                <h3><i class="fas fa-circle-exclamation"></i> 🔹 Các lưu ý quan trọng:</h3>
+                <ul>
+                    <li><i class="fas fa-database"></i> Toàn bộ dữ liệu và dịch vụ trên website sẽ ngừng truy cập hoàn toàn.</li>
+                    <li><i class="fas fa-headset"></i> Mọi hoạt động hỗ trợ liên quan cũng sẽ chính thức kết thúc.</li>
+                    <li><i class="fas fa-cloud-arrow-up"></i> Người dùng vui lòng sao lưu các dữ liệu cần thiết (nếu có) trước thời điểm đóng cửa.</li>
+                </ul>
+            </div>
+
+            <!-- Lời cảm ơn chân thành -->
+            <div class="thanks-block">
+                <i class="fas fa-heart"></i> <strong>💬 Lời cảm ơn chân thành:</strong><br/>
+                Chúng tôi xin gửi lời cảm ơn sâu sắc đến tất cả các bạn đã từng ghé thăm, sử dụng và ủng hộ website trong suốt thời gian qua. Dù hành trình này khép lại, nhưng những giá trị và kỷ niệm sẽ luôn được trân trọng.
+            </div>
+
+            <!-- Dự án tương lai -->
+            <div class="future-note">
+                <i class="fas fa-rocket"></i>
+                <span><strong>📌 Trong tương lai, Admin Lâm Phú Quý có thể sẽ quay trở lại với những dự án mới, chuyên nghiệp hơn và chất lượng hơn.</strong></span>
+            </div>
+
+            <p style="font-style: italic; margin-top: 0.5rem;"><i class="fas fa-scroll"></i> Trân trọng thông báo!</p>
+
+            <div class="signature">
+                ADMIN LÂM PHÚ QUÝ
+                <span><i class="far fa-calendar-alt"></i> Chính thức có hiệu lực từ hôm nay</span>
+            </div>
+        </div>
+
+        <!-- Thời gian thực + ngày đóng cửa -->
+        <div class="datetime-panel">
+            <div class="live-clock">
+                <i class="fas fa-clock"></i> 
+                <span id="liveTime">--:--:--</span>
+            </div>
+            <div class="effective-date">
+                <i class="fas fa-calendar-check"></i> 
+                Ngày đóng cửa chính thức: <strong id="closureDate">Đang tải...</strong>
+            </div>
+            <div style="font-size:0.8rem; color:#4b6f8c;">
+                <i class="fas fa-info-circle"></i> Website ngừng hoạt động vĩnh viễn
+            </div>
+        </div>
+
+        <footer>
+            <i class="far fa-copyright"></i> 2025 - Thông báo chính thức từ Admin Lâm Phú Quý. Mọi thông tin đã được xác nhận.
+        </footer>
     </div>
-</nav>
-
-<main>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-left fade-up">
-                <div class="hero-badge"><i class="fas fa-code"></i> Sáng tạo không giới hạn</div>
-                <h1 class="hero-title">Xin chào, tôi là <span class="gradient-text">Lâm Phú Quý</span></h1>
-                <div class="typed-text" id="typedRole"></div>
-                <p style="margin-bottom: 1.2rem; opacity: 0.9;">Kiến tạo giải pháp số đỉnh cao, nơi công nghệ gặp cảm xúc. Tôi biến ý tưởng thành trải nghiệm đẳng cấp.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn-primary"><i class="fas fa-paper-plane"></i> Kết nối ngay</a>
-                    <a href="#" class="btn-outline" id="downloadCVBtn"><i class="fas fa-download"></i> Tải CV</a>
-                </div>
-                <div class="stats">
-                    <div class="stat-item"><h3>5+</h3><p>Dự án</p></div>
-                    <div class="stat-item"><h3>3+</h3><p>Năm KN</p></div>
-                    <div class="stat-item"><h3>12+</h3><p>Đối tác</p></div>
-                </div>
-            </div>
-            <div class="hero-right fade-up">
-                <div class="avatar">
-                    <span>LQ</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">Về tôi</h2>
-            <div class="about-content">
-                <div class="about-text fade-up">
-                    <p>👋 Tôi là <strong>Lâm Phú Quý</strong>, chuyên gia phát triển web và thiết kế giao diện với tình yêu mãnh liệt dành cho công nghệ hiện đại. Tôi đã xây dựng nhiều ứng dụng web phức tạp, tối ưu hiệu suất và mang đến trải nghiệm người dùng mượt mà.</p>
-                    <p style="margin-top: 1rem;">✨ Triết lý của tôi: "Mỗi dòng code đều kể một câu chuyện". Tôi luôn cập nhật xu hướng mới nhất, từ React, Vue đến thiết kế AI. Sẵn sàng hợp tác để tạo ra sản phẩm độc đáo.</p>
-                </div>
-                <div class="info-list fade-up">
-                    <p><i class="fas fa-user-astronaut"></i> <strong>Họ tên:</strong> Lâm Phú Quý</p>
-                    <p><i class="fas fa-map-marker-alt"></i> <strong>Địa điểm:</strong> TP. Hồ Chí Minh, Việt Nam</p>
-                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> lamphuquy04@gmail.com</p>
-                    <p><i class="fas fa-laptop-code"></i> <strong>Chuyên môn:</strong> Fullstack & UI/UX</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Kỹ năng chuyên môn</h2>
-            <div class="skills-grid" id="skillsContainer">
-                <!-- Dữ liệu sẽ được render bằng JS để progress fill animation -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Dự án nổi bật</h2>
-            <div class="projects-grid">
-                <div class="project-card fade-up">
-                    <div class="project-icon"><i class="fas fa-store"></i></div>
-                    <h3>Elysian Shop</h3>
-                    <p>Nền tảng thương mại điện tử với React, Node.js, thanh toán tự động, giao diện tối giản nhưng sang trọng.</p>
-                    <div class="project-tags"><span>React</span><span>Express</span><span>MongoDB</span></div>
-                </div>
-                <div class="project-card fade-up">
-                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Analytics Dashboard</h3>
-                    <p>Bảng điều khiển thông minh, trực quan hóa dữ liệu thời gian thực, tích hợp AI dự báo.</p>
-                    <div class="project-tags"><span>Vue.js</span><span>D3.js</span><span>Firebase</span></div>
-                </div>
-                <div class="project-card fade-up">
-                    <div class="project-icon"><i class="fas fa-brain"></i></div>
-                    <h3>AI Content Studio</h3>
-                    <p>Ứng dụng tạo nội dung bằng AI, hỗ trợ sinh ảnh và văn bản thông minh dành cho marketer.</p>
-                    <div class="project-tags"><span>Python</span><span>OpenAI</span><span>FastAPI</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🔔 THÔNG BÁO QUAN TRỌNG (ngừng hoạt động cũ) -->
-    <section id="announcement">
-        <div class="container">
-            <h2 class="section-title">🔔 Thông báo quan trọng</h2>
-            <div class="announcement-card fade-up">
-                <div class="announcement-content">
-                    <div class="announcement-title">
-                        <i class="fas fa-bell"></i> 
-                        <span>Ngừng hoạt động website lamphuquy.click</span>
-                    </div>
-                    <div class="notice-date"><i class="far fa-calendar-alt"></i> Hiệu lực từ ngày 08/04/2026</div>
-                    <p>Kính gửi quý người dùng và đối tác,</p>
-                    <p>Sau một thời gian hoạt động và phát triển, <strong>lamphuquy.click</strong> đã nhận được rất nhiều sự quan tâm, ủng hộ và đồng hành từ cộng đồng. Chúng tôi vô cùng trân trọng và biết ơn điều đó.</p>
-                    <p>Tuy nhiên, vì một số định hướng mới trong chiến lược phát triển cũng như việc tái cấu trúc hệ thống, chúng tôi xin chính thức thông báo:</p>
-                    <p><strong>👉 Website lamphuquy.click sẽ ngừng hoạt động kể từ ngày 08/04/2026.</strong></p>
-                    <div class="divider-light"></div>
-                    <h4><i class="fas fa-chart-line"></i> 📌 Lý do ngừng hoạt động</h4>
-                    <ul>
-                        <li>Thay đổi định hướng phát triển lâu dài</li>
-                        <li>Nâng cấp và chuyển sang nền tảng mới hiện đại hơn</li>
-                        <li>Tối ưu trải nghiệm người dùng trong tương lai</li>
-                    </ul>
-                    <h4><i class="fas fa-database"></i> 📂 Dữ liệu & dịch vụ</h4>
-                    <ul>
-                        <li>Tất cả dữ liệu liên quan sẽ được xử lý và lưu trữ theo chính sách bảo mật</li>
-                        <li>Các dịch vụ hiện tại sẽ dừng hoàn toàn sau thời gian thông báo</li>
-                        <li>Người dùng nên sao lưu dữ liệu quan trọng trước thời điểm đóng</li>
-                    </ul>
-                    <div class="contact-small">
-                        <i class="fas fa-phone-alt"></i> <strong>Liên hệ:</strong> Email: lamphuquy04@gmail.com | Hotline: 0817813259
-                    </div>
-                </div>
-                <div class="announcement-image">
-                    <img src="https://sf-static.upanhlaylink.com/img/image_202604039bfb33a758ba46a0a71a22b0105045c8.jpg" alt="Thông báo ngừng hoạt động lamphuquy.click">
-                </div>
-            </div>
-
-            <!-- 🚀 THÔNG BÁO DỰ ÁN MỚI (CÓ NHẠC CHUYÊN NGHIỆP) -->
-            <div class="new-project-card fade-up" id="newProjectAlert">
-                <div class="project-content">
-                    <div class="project-title">
-                        <i class="fas fa-rocket"></i>
-                        <span>🚀 THÔNG BÁO DỰ ÁN MỚI</span>
-                    </div>
-                    <div class="project-badge"><i class="fas fa-microphone-alt"></i> Admin Lâm Phú Quý</div>
-                    <p>Xin chào mọi người, <br>Mình là <strong>Admin Lâm Phú Quý</strong> – chuyên phát triển và xây dựng các giải pháp Web/App chuyên nghiệp.</p>
-                    <p>🔥 Hôm nay, mình chính thức khởi động một dự án mới với định hướng:</p>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>Thiết kế giao diện hiện đại, tối ưu trải nghiệm người dùng (UI/UX)</li>
-                        <li>Tối ưu tốc độ và hiệu suất (Performance)</li>
-                        <li>Bảo mật cao, ổn định lâu dài</li>
-                        <li>Tích hợp công nghệ mới nhất trong phát triển web</li>
-                    </ul>
-                    <p>💻 Dự án lần này hứa hẹn sẽ:</p>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
-                        <li>Mang lại trải nghiệm mượt mà, đẳng cấp</li>
-                        <li>Chuẩn SEO, tối ưu hiển thị trên mọi thiết bị</li>
-                        <li>Phù hợp cho cá nhân, doanh nghiệp và thương mại điện tử</li>
-                    </ul>
-                    <p>📢 Trong thời gian tới, mình sẽ liên tục cập nhật tiến độ, demo và các tính năng nổi bật của dự án.</p>
-                    <p>👉 Nếu bạn đang cần:<br>
-                    - Thiết kế website chuyên nghiệp <br>
-                    - Code hệ thống theo yêu cầu <br>
-                    - Nâng cấp hoặc tối ưu web <br>
-                    Đừng ngần ngại liên hệ để hợp tác!</p>
-                    <p>🙏 Cảm ơn mọi người đã luôn ủng hộ!<br>— Admin Lâm Phú Quý</p>
-                    
-                    <!-- Nút nhạc thông báo chuyên nghiệp -->
-                    <button id="playSoundBtn" class="btn-sound"><i class="fas fa-music"></i> 🔊 Nghe thông báo chuyên nghiệp</button>
-                    <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-headphones"></i> Nhấn để trải nghiệm âm thanh thông báo dự án mới</p>
-                </div>
-                <div class="announcement-image">
-                    <img src="https://picsum.photos/id/26/400/300" alt="Dự án mới - Lâm Phú Quý" style="border-radius: 1.2rem;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Kết nối với tôi</h2>
-            <div class="contact-wrapper">
-                <div class="contact-info fade-up">
-                    <div class="contact-item"><i class="fas fa-phone-alt"></i> <span>0817813259</span></div>
-                    <div class="contact-item"><i class="fas fa-envelope-open-text"></i> <span>lamphuquy04@gmail.com</span></div>
-                    <div class="contact-item"><i class="fab fa-github"></i> <span>github.com/lamphuquy</span></div>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-x-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form fade-up">
-                    <form id="contactForm">
-                        <input type="text" placeholder="Họ tên" id="nameInput" required>
-                        <input type="email" placeholder="Email liên hệ" id="emailInput" required>
-                        <textarea rows="3" placeholder="Lời nhắn của bạn..." id="msgInput" required></textarea>
-                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Gửi thông điệp</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <p>© 2025 Lâm Phú Quý — Thiết kế đỉnh cao, trải nghiệm tuyệt đối. <i class="fas fa-heart" style="color:#a97cff;"></i></p>
-</footer>
+</div>
 
 <script>
-    // Typing animation for roles
-    const roles = ["Fullstack Developer", "UI/UX Architect", "Creative Coder", "Digital Alchemist"];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typedElement = document.getElementById("typedRole");
-    function typeEffect() {
-        const currentRole = roles[roleIndex];
-        if (isDeleting) {
-            typedElement.textContent = currentRole.substring(0, charIndex - 1);
-            charIndex--;
-            if (charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                setTimeout(typeEffect, 200);
-            } else {
-                setTimeout(typeEffect, 60);
-            }
+    // Hàm cập nhật đồng hồ realtime và hiển thị ngày đóng cửa (hôm nay - ngày thông báo)
+    function updateDateTime() {
+        const now = new Date();
+        
+        // Định dạng giờ: HH:MM:SS
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        
+        const liveTimeElem = document.getElementById('liveTime');
+        if (liveTimeElem) liveTimeElem.textContent = timeString;
+        
+        // Hiển thị ngày đóng cửa (ngày hôm nay - định dạng đẹp)
+        // Nếu chưa có closureDate thì set lần đầu, hoặc cập nhật mỗi khi qua ngày? 
+        // Nhưng thực tế chỉ cần set 1 lần, nhưng để an toàn mỗi lần gọi vẫn set lại nếu cần.
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        const todayFormatted = now.toLocaleDateString('vi-VN', { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const closureElem = document.getElementById('closureDate');
+        if (closureElem && closureElem.textContent === 'Đang tải...') {
+            // lần đầu set full
+            closureElem.textContent = todayFormatted;
+        } else if (closureElem && closureElem.textContent === 'Đang tải...') {
+            closureElem.textContent = todayFormatted;
         } else {
-            typedElement.textContent = currentRole.substring(0, charIndex + 1);
-            charIndex++;
-            if (charIndex === currentRole.length) {
-                isDeleting = true;
-                setTimeout(typeEffect, 1800);
-            } else {
-                setTimeout(typeEffect, 100);
+            // Nếu đã set nhưng muốn đồng bộ ngày nếu nửa đêm thay đổi (trường hợp trang mở lâu)
+            // Kiểm tra nếu ngày hiện tại khác với ngày đã lưu trong data attribute, có thể cập nhật lại.
+            // để chính xác tuyệt đối, cập nhật closureDate nếu thay đổi ngày (hiếm nhưng tiện)
+            const currentDisplayDate = closureElem.textContent;
+            if (currentDisplayDate !== todayFormatted) {
+                closureElem.textContent = todayFormatted;
             }
         }
     }
-    typeEffect();
-
-    // Skills data with percentages
-    const skillsData = [
-        { name: "HTML5 / CSS3", percent: 95 },
-        { name: "JavaScript (ES6+)", percent: 92 },
-        { name: "React / Next.js", percent: 88 },
-        { name: "Node.js / Express", percent: 85 },
-        { name: "UI/UX Design (Figma)", percent: 86 },
-        { name: "Python / Django", percent: 78 }
-    ];
-
-    const skillsContainer = document.getElementById("skillsContainer");
-    function renderSkills() {
-        skillsContainer.innerHTML = "";
-        skillsData.forEach(skill => {
-            const card = document.createElement("div");
-            card.className = "skill-card fade-up";
-            card.innerHTML = `
-                <div class="skill-name">
-                    <span>${skill.name}</span>
-                    <span>${skill.percent}%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="${skill.percent}"></div>
-                </div>
-            `;
-            skillsContainer.appendChild(card);
-        });
-    }
-    renderSkills();
-
-    // Animate progress bars when visible + scroll reveal observer
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                if (entry.target.classList.contains('skill-card')) {
-                    const fill = entry.target.querySelector('.progress-fill');
-                    if (fill && !fill.style.width) {
-                        const widthVal = fill.getAttribute('data-width');
-                        fill.style.width = widthVal + '%';
-                    }
-                }
-                if (entry.target.classList.contains('progress-fill') && !entry.target.style.width) {
-                    const w = entry.target.getAttribute('data-width');
-                    entry.target.style.width = w + '%';
-                }
-            }
-        });
-    }, { threshold: 0.2 });
-
-    fadeElements.forEach(el => observer.observe(el));
-    document.querySelectorAll('.progress-fill').forEach(bar => observer.observe(bar));
-
-    // Smooth navigation and active link highlight
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    function updateActiveLink() {
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120;
-            const sectionBottom = sectionTop + section.offsetHeight;
-            if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                current = section.getAttribute("id");
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${current}`) {
-                link.classList.add("active");
-            }
-        });
-    }
-    window.addEventListener("scroll", updateActiveLink);
-    window.addEventListener("load", updateActiveLink);
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute("href").substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: "smooth" });
-                history.pushState(null, null, `#${targetId}`);
-            }
-        });
-    });
-
-    // Contact form handling (demo)
-    const contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-        contactForm.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const name = document.getElementById("nameInput").value.trim();
-            const email = document.getElementById("emailInput").value.trim();
-            const msg = document.getElementById("msgInput").value.trim();
-            if (name && email && msg) {
-                alert(`✨ Cảm ơn ${name}, Lâm Phú Quý sẽ liên hệ bạn sớm nhất! ✨`);
-                contactForm.reset();
-            } else {
-                alert("Vui lòng điền đầy đủ thông tin.");
-            }
-        });
-    }
-
-    // Fake Download CV Button (Demo)
-    const downloadBtn = document.getElementById("downloadCVBtn");
-    if (downloadBtn) {
-        downloadBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            alert("📄 CV của Lâm Phú Quý sẽ được gửi đến email của bạn (bản demo). Liên hệ trực tiếp để nhận file đầy đủ.");
-        });
-    }
-
-    // ========== NHẠC THÔNG BÁO CHUYÊN NGHIỆP (Web Audio) ==========
-    const playSoundBtn = document.getElementById("playSoundBtn");
     
-    function playProfessionalNotification() {
-        try {
-            // Sử dụng Web Audio API để tạo âm thanh chuông thông báo chuyên nghiệp (2 nốt)
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const audioCtx = new AudioContext();
-            const now = audioCtx.currentTime;
-            
-            // Tạo gain để fade out
-            const gainNode = audioCtx.createGain();
-            gainNode.gain.setValueAtTime(0.3, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
-            
-            // Nốt thứ nhất: 880Hz (A5) kéo dài 0.3s
-            const osc1 = audioCtx.createOscillator();
-            osc1.type = "sine";
-            osc1.frequency.value = 880;
-            osc1.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            osc1.start();
-            osc1.stop(now + 0.35);
-            
-            // Nốt thứ hai: 1046.5Hz (C6) sau 0.2s
-            const osc2 = audioCtx.createOscillator();
-            osc2.type = "sine";
-            osc2.frequency.value = 1046.5;
-            osc2.connect(gainNode);
-            osc2.start(now + 0.2);
-            osc2.stop(now + 0.55);
-            
-            // Thêm hiệu ứng ngắn nốt bass nhẹ
-            const osc3 = audioCtx.createOscillator();
-            osc3.type = "triangle";
-            osc3.frequency.value = 523.25; // C5
-            osc3.connect(gainNode);
-            osc3.start(now + 0.05);
-            osc3.stop(now + 0.45);
-            
-            // resume context nếu đang suspended (do user gesture đã được click)
-            audioCtx.resume();
-        } catch(e) {
-            console.warn("Web Audio API error: ", e);
-            // Fallback: không làm gì thêm
-        }
+    // Khởi tạo và set ngày đóng cửa chính xác + hiển thị thời gian
+    function initClosureInfo() {
+        const now = new Date();
+        const dayFormatted = now.toLocaleDateString('vi-VN', { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const closureSpan = document.getElementById('closureDate');
+        if (closureSpan) closureSpan.textContent = dayFormatted;
+        
+        // Cũng có thể set tooltip cho ngày dài
+        const fullDateString = now.toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' });
+        closureSpan.title = `Thông báo có hiệu lực từ ${fullDateString}`;
+        
+        // Cập nhật đồng hồ realtime
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
     }
     
-    if (playSoundBtn) {
-        playSoundBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            playProfessionalNotification();
-            // Thêm hiệu ứng phản hồi nhẹ
-            playSoundBtn.style.transform = "scale(0.97)";
-            setTimeout(() => { if(playSoundBtn) playSoundBtn.style.transform = ""; }, 150);
-        });
-    }
-    
-    // Thêm fade-up mới cho các phần tử trong new-project-card
-    document.querySelectorAll('.new-project-card, .new-project-card *').forEach(el => {
-        if (el.classList && !el.classList.contains('fade-up') && el.closest('.new-project-card') && !el.classList.contains('btn-sound')) {
-            // chỉ thêm cho container chính và phần tử lớn, nhưng tránh thừa
-        }
-    });
-    const newProjectDiv = document.querySelector('.new-project-card');
-    if(newProjectDiv && !newProjectDiv.classList.contains('fade-up')) newProjectDiv.classList.add('fade-up');
-    observer.observe(newProjectDiv);
-    
-    // Đảm bảo hiển thị progress bar nếu đã thấy
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.querySelectorAll('.skill-card').forEach(card => {
-                if (card.getBoundingClientRect().top < window.innerHeight - 100) {
-                    card.classList.add('visible');
-                    const fill = card.querySelector('.progress-fill');
-                    if (fill && !fill.style.width) fill.style.width = fill.getAttribute('data-width') + '%';
+    // Thêm hiệu ứng tương tác tinh tế: nhấp chuột vào thông báo lưu ý sao lưu?
+    // Tạo thông báo nhỏ console friendly? Hoặc không cần, nhưng thêm 1 chức năng nhẹ nhàng: 
+    // Khi click vào icon chuông sẽ hiện alert nhắc nhở sao lưu dữ liệu (không ép buộc nhưng tăng tính tương tác)
+    function addInteractiveFeatures() {
+        const bellElement = document.querySelector('.bell-icon');
+        if (bellElement) {
+            bellElement.style.cursor = 'pointer';
+            bellElement.addEventListener('click', function(e) {
+                // Tạo hiệu ứng nhẹ khi click
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, 150);
+                // Hiển thị lời nhắc thân thiện
+                const userConfirm = confirm('🔔 LÂM PHÚ QUÝ THÔNG BÁO:\n\nWebsite đã chính thức đóng cửa vĩnh viễn.\nHãy chắc chắn bạn đã sao lưu dữ liệu cá nhân (nếu có).\nCảm ơn bạn đã đồng hành!');
+                if (userConfirm) {
+                    // chỉ để tương tác, không làm gì thêm
+                    console.log('Người dùng đã xác nhận thông báo đóng cửa.');
                 }
             });
-        }, 300);
+        }
+        
+        // Thêm hiệu ứng hover cho các mục lưu ý
+        const listItems = document.querySelectorAll('.important-box li');
+        listItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                item.style.transform = 'translateX(5px)';
+                item.style.transition = '0.2s';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+        
+        // Lưu ý: người dùng có thể thấy thời gian thực và cảm nhận sự chính xác
+    }
+    
+    // Xử lý hiển thị thời gian và đảm bảo nội dung hiển thị ngay
+    document.addEventListener('DOMContentLoaded', () => {
+        initClosureInfo();
+        addInteractiveFeatures();
+        
+        // Thêm một đoạn nhật ký (log) nhẹ nhàng trong console để chào tạm biệt
+        console.log('%c🌸 WEBSITE LÂM PHÚ QUÝ CHÍNH THỨC ĐÓNG CỬA VĨNH VIỄN 🌸', 'color: #c44536; font-size: 14px; font-weight: bold;');
+        console.log('%cCảm ơn bạn đã đồng hành cùng hành trình vừa qua. Hẹn gặp lại trong tương lai!', 'color: #2c6e5c; font-size: 12px;');
+        
+        // Optional: Thêm hiệu ứng chào tạm biệt nhẹ - tự động điều chỉnh title theo thời gian thực? không cần.
+        // Tạo một class nhỏ để tôn trọng nội dung thông báo.
+        const noticeDate = new Date();
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'closure-date';
+        metaTag.content = noticeDate.toISOString().split('T')[0];
+        document.head.appendChild(metaTag);
     });
+    
+    // Bổ sung hiệu ứng thời gian thực cập nhật ngày nếu nửa đêm thay đổi (trường hợp trang mở nhiều giờ)
+    // Đã xử lý trong updateDateTime bằng cách so sánh và cập nhật lại closureDate nếu cần
+    // Chỉnh sửa hàm updateDateTime một lần nữa để đảm bảo closureDate thay đổi khi qua ngày mới mà không cần reload
+    // Ghi đè logic cũ một chút để hoàn hảo
+    // Ta sẽ cải tiến closureDate cập nhật linh hoạt hơn.
+    const originalUpdate = updateDateTime;
+    window.updateDateTime = function() {
+        originalUpdate();
+        const nowDate = new Date();
+        const todayStr = nowDate.toLocaleDateString('vi-VN');
+        const closureSpanElem = document.getElementById('closureDate');
+        if (closureSpanElem && closureSpanElem.textContent !== todayStr && closureSpanElem.textContent !== 'Đang tải...') {
+            closureSpanElem.textContent = todayStr;
+            // thêm effect nhẹ
+            closureSpanElem.style.opacity = '0.7';
+            setTimeout(() => { if(closureSpanElem) closureSpanElem.style.opacity = '1'; }, 300);
+        }
+    };
+    // replace interval mới
+    if (window._timeInterval) clearInterval(window._timeInterval);
+    window._timeInterval = setInterval(() => {
+        if (window.updateDateTime) window.updateDateTime();
+        else updateDateTime();
+    }, 1000);
+    // khởi tạo lần cuối
+    setTimeout(() => {
+        if (document.getElementById('closureDate') && document.getElementById('closureDate').textContent === 'Đang tải...') {
+            document.getElementById('closureDate').textContent = new Date().toLocaleDateString('vi-VN');
+        }
+    }, 10);
 </script>
 </body>
 </html>
