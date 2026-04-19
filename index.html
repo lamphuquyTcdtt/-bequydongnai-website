@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Lâm Phú Quý | Premium Portfolio</title>
+    <title>Lâm Phú Quý ❤️ Thanh Vân | Chuyện tình nghệ sĩ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -24,11 +24,13 @@
             --secondary: #FF5C8A;
             --accent: #3EE0D0;
             --gold: #FFD966;
+            --romance: #FF87A8;
             --text-primary: #FFFFFF;
             --text-secondary: #B0B3D0;
             --text-muted: #6E7191;
             --gradient-aurora: linear-gradient(135deg, #7C5CFF 0%, #FF5C8A 50%, #FFB45C 100%);
             --gradient-crystal: linear-gradient(120deg, #3EE0D0 0%, #7C5CFF 100%);
+            --gradient-romance: linear-gradient(145deg, #FF5C8A, #FF9F6E);
             --shadow-soft: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
             --shadow-glow: 0 0 20px rgba(124, 92, 255, 0.3);
             --border-radius-card: 28px;
@@ -96,7 +98,7 @@
             z-index: 2;
         }
 
-        /* header / navbar */
+        /* glass nav */
         .glass-nav {
             backdrop-filter: blur(16px);
             background: rgba(5, 5, 15, 0.55);
@@ -151,14 +153,14 @@
 
         @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
-        /* main grid */
+        /* grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 0.9fr;
             gap: 2rem;
         }
 
-        /* left column */
+        /* profile hero */
         .profile-hero {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -211,7 +213,7 @@
             color: var(--text-secondary);
             margin: 1.5rem 0;
             line-height: 1.6;
-            border-left: 3px solid var(--primary);
+            border-left: 3px solid var(--romance);
             padding-left: 1.2rem;
         }
 
@@ -254,6 +256,31 @@
             cursor: pointer;
         }
 
+        /* avatar lovers */
+        .avatar-lovers {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(145deg, #FF5C8A, #7C5CFF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem auto;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(124,92,255,0.5);
+            border: 2px solid rgba(255,255,240,0.5);
+        }
+        .avatar-lovers i {
+            font-size: 3.5rem;
+            color: white;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+        .avatar-lovers:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 30px -8px rgba(255,92,138,0.6);
+        }
+
         /* Skills section */
         .skills-wrap {
             margin-top: 2rem;
@@ -282,7 +309,7 @@
             border: 1px solid rgba(124, 92, 255, 0.3);
         }
 
-        /* right panel */
+        /* right stack */
         .right-stack {
             display: flex;
             flex-direction: column;
@@ -296,7 +323,6 @@
             border-radius: var(--border-radius-card);
             border: 1px solid var(--glass-edge);
             padding: 1.8rem;
-            transition: all 0.2s;
         }
 
         .player-header {
@@ -306,21 +332,11 @@
             margin-bottom: 1.5rem;
         }
 
-        .wave-icon {
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
         .track-info-panel {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 1.2rem;
             padding: 0.8rem 1rem;
             margin: 1rem 0;
-        }
-
-        .track-title-current {
-            font-weight: 700;
-            font-size: 1.1rem;
         }
 
         .progress-container {
@@ -337,14 +353,6 @@
             width: 0%;
             height: 100%;
             border-radius: 8px;
-        }
-
-        .time-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
         }
 
         .player-actions {
@@ -365,37 +373,79 @@
             cursor: pointer;
             box-shadow: var(--shadow-glow);
             transition: 0.2s;
-            border: none;
-            color: white;
-            font-size: 1.6rem;
         }
 
-        .play-circle:hover { transform: scale(1.05); }
-
-        .playlist-modern {
-            margin-top: 1.5rem;
-            max-height: 300px;
-            overflow-y: auto;
+        /* relationship card */
+        .relationship-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-card);
+            padding: 1.8rem;
+            border: 1px solid rgba(255, 92, 138, 0.5);
+            position: relative;
+            overflow: hidden;
         }
-
-        .playlist-item-modern {
+        .relationship-card::before {
+            content: "❤️";
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.05;
+            bottom: -20px;
+            right: -20px;
+            pointer-events: none;
+        }
+        .couple-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: var(--gradient-romance);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        .romance-timeline {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .milestone {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem;
-            border-radius: 1rem;
-            margin-bottom: 0.5rem;
-            background: rgba(255,255,255,0.02);
-            transition: all 0.2s;
+            gap: 12px;
+            background: rgba(255,255,255,0.03);
+            padding: 0.7rem 1rem;
+            border-radius: 1.2rem;
+            font-size: 0.9rem;
+        }
+        .milestone i {
+            font-size: 1.4rem;
+            color: var(--romance);
+        }
+        .send-heart-btn {
+            background: linear-gradient(95deg, #FF5C8A, #FF8A5C);
+            border: none;
+            padding: 0.8rem 1rem;
+            border-radius: 60px;
+            font-weight: bold;
+            color: white;
+            width: 100%;
+            margin-top: 1.2rem;
             cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        .send-heart-btn:hover {
+            transform: scale(0.97);
+            box-shadow: 0 0 15px #FF5C8A;
         }
 
-        .playlist-item-modern.active {
-            background: rgba(124, 92, 255, 0.2);
-            border-left: 3px solid var(--primary);
-        }
-
-        /* social grid premium */
+        /* social grid */
         .social-premium {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -403,14 +453,12 @@
             padding: 1.8rem;
             border: 1px solid var(--glass-edge);
         }
-
         .social-grid-premium {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-top: 1.2rem;
         }
-
         .social-icon-card {
             aspect-ratio: 1/1;
             background: rgba(255,255,255,0.03);
@@ -424,21 +472,17 @@
             text-decoration: none;
             border: 1px solid var(--glass-edge);
         }
-
         .social-icon-card:hover {
             transform: translateY(-5px);
             background: rgba(124, 92, 255, 0.3);
             border-color: var(--primary);
-            box-shadow: 0 12px 20px -10px rgba(124,92,255,0.4);
         }
-
         .contact-links {
             margin-top: 1.5rem;
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
         }
-
         .contact-row {
             display: flex;
             align-items: center;
@@ -472,6 +516,17 @@
             .container { padding: 1rem; }
             .name-large { font-size: 2.3rem; }
         }
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            animation: floatUp 1.2s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.6); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -485,29 +540,32 @@
 
 <div class="glass-nav">
     <div class="nav-inner">
-        <div class="logo">✦ LÂM PHÚ QUÝ</div>
-        <div class="status-chip"><span class="pulse-dot"></span> Online / Creative</div>
+        <div class="logo">✦ LÂM PHÚ QUÝ ❤️ THANH VÂN</div>
+        <div class="status-chip"><span class="pulse-dot"></span> In love • Creative Soul</div>
     </div>
 </div>
 
 <div class="container">
     <div class="dashboard-grid">
-        <!-- LEFT COLUMN: profile & skills -->
+        <!-- LEFT: profile & skills -->
         <div>
             <div class="profile-hero">
-                <div class="hero-badge"><i class="fas fa-crown" style="margin-right: 6px;"></i> Premium Creator</div>
+                <div class="avatar-lovers" id="avatarHeart">
+                    <i class="fas fa-heart"></i><i class="fas fa-heart" style="margin-left: 8px; color: #FFD966;"></i>
+                </div>
+                <div class="hero-badge"><i class="fas fa-crown" style="margin-right: 6px;"></i> Premium Creator & Người yêu của Vân</div>
                 <div class="name-large">Xin chào, tôi là <span>Lâm Phú Quý</span></div>
                 <div class="title-tag">
                     <span>🎧 Music Producer</span> 
                     <span>⚡ Full-Stack Dev</span>
-                    <span>📱 Content Director</span>
+                    <span>❤️ Đang hẹn hò cùng <strong style="color:#FF87A8;">Thanh Vân</strong></span>
                 </div>
                 <div class="verified-badge-modern" id="verifiedBtn">
                     <i class="fas fa-check-circle"></i> Tài khoản xác minh chính thức
                 </div>
                 <div class="bio-text">
-                    Sáng tạo không giới hạn — 3+ năm kinh nghiệm trong sản xuất âm nhạc & phát triển giải pháp số. 
-                    Tôi xây dựng trải nghiệm đa giác quan, kết hợp nghệ thuật và công nghệ.
+                    💞 Sáng tạo không giới hạn — 3+ năm trong âm nhạc & công nghệ. Mọi bản nhạc, mọi dòng code đều thấm đẫm cảm hứng từ tình yêu với Thanh Vân. 
+                    "Em là giai điệu đẹp nhất trong đời anh."
                 </div>
                 <div class="stats-row">
                     <div class="stat-block"><div class="stat-number" data-target="48">0</div><div>Dự án</div></div>
@@ -531,12 +589,12 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: music player + social -->
+        <!-- RIGHT: music + relationship + social -->
         <div class="right-stack">
-            <!-- nâng cấp music player pro -->
+            <!-- Music Player nâng cấp -->
             <div class="music-premium">
                 <div class="player-header">
-                    <h3><i class="fas fa-headphones" style="margin-right: 8px; color: var(--accent);"></i> Phúc Long Radio</h3>
+                    <h3><i class="fas fa-headphones" style="margin-right: 8px; color: var(--accent);"></i> Phúc Long Radio • Tặng Vân</h3>
                     <div class="wave-icon"><i class="fas fa-waveform"></i></div>
                 </div>
                 <div class="track-info-panel">
@@ -559,13 +617,28 @@
                     <i class="fas fa-volume-up"></i>
                     <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.7" style="flex:1; background:rgba(255,255,255,0.2); height:4px; border-radius: 5px;">
                 </div>
-
-                <div class="playlist-modern" id="playlistContainer">
-                    <!-- playlist js -->
-                </div>
+                <div class="playlist-modern" id="playlistContainer" style="max-height: 220px; overflow-y: auto; margin-top: 1rem;"></div>
             </div>
 
-            <!-- social + contact nâng cấp -->
+            <!-- MỚI: Relationship Card - Hẹn hò cùng Thanh Vân chuyên nghiệp -->
+            <div class="relationship-card">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <i class="fas fa-heart" style="font-size: 2rem; color: #FF5C8A;"></i>
+                    <div>
+                        <div class="couple-name">Quý 💞 Vân</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Chính thức hẹn hò · Kỷ niệm ngọt ngào</div>
+                    </div>
+                </div>
+                <div class="romance-timeline">
+                    <div class="milestone"><i class="fas fa-calendar-alt"></i> <span><strong>Ngày gặp gỡ:</strong> 14.02.2024 · Định mệnh tại phòng thu</span></div>
+                    <div class="milestone"><i class="fas fa-ring"></i> <span><strong>Chính thức yêu:</strong> 20.03.2024 · Lời tỏ tình qua bản nhạc "Gió và Em"</span></div>
+                    <div class="milestone"><i class="fas fa-clock"></i> <span><strong>Bên nhau được:</strong> <span id="daysTogether">0</span> ngày hạnh phúc</span></div>
+                </div>
+                <button class="send-heart-btn" id="sendLoveBtn"><i class="fas fa-heart"></i> Gửi yêu thương đến Thanh Vân <i class="fas fa-heart"></i></button>
+                <div style="margin-top: 12px; font-size: 0.7rem; text-align: center; color: #FFB8D2;">✨ Mỗi ngày trôi qua là một bản tình ca mới ✨</div>
+            </div>
+
+            <!-- Social premium -->
             <div class="social-premium">
                 <h3><i class="fas fa-share-nodes"></i> Kết nối & Follow</h3>
                 <div class="social-grid-premium">
@@ -585,12 +658,13 @@
     </div>
 </div>
 
-<div id="toastMsg" class="toast-notify">✨ Chào mừng đến studio của Quý</div>
+<div id="toastMsg" class="toast-notify">✨ Chào mừng đến không gian tình yêu & sáng tạo của Quý & Vân</div>
 
 <script>
     (function() {
-        // playlist nâng cấp với nhiều bài chất lượng
+        // ---------- PLAYLIST nâng cấp (thêm track tặng Thanh Vân) ----------
         const tracks = [
+            { title: "Melody for Vân 💖", artist: "Quý x Vân", src: "https://assets.mixkit.co/music/preview/mixkit-love-song-728.mp3", duration: "3:22" },
             { title: "Starlight Echo", artist: "Phúc Long", src: "https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3", duration: "3:45" },
             { title: "Midnight Drive", artist: "Phúc Long Remix", src: "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3", duration: "4:20" },
             { title: "Lofi Memories", artist: "Phúc Long x Mochi", src: "https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3", duration: "3:15" },
@@ -634,10 +708,10 @@
             if (isPlaying) {
                 audio.play().catch(e => console.log("autoplay blocked"));
             }
-            // reset progress
             progressBar.style.width = '0%';
             currentTimeSpan.innerText = '0:00';
-            durationSpan.innerText = track.duration || '0:00';
+            if(audio.duration) durationSpan.innerText = formatTime(audio.duration);
+            else durationSpan.innerText = track.duration;
         }
 
         function updateActivePlaylist(index) {
@@ -653,6 +727,14 @@
             tracks.forEach((track, idx) => {
                 const div = document.createElement('div');
                 div.className = `playlist-item-modern ${idx === currentIndex ? 'active' : ''}`;
+                div.style.display = 'flex';
+                div.style.alignItems = 'center';
+                div.style.justifyContent = 'space-between';
+                div.style.padding = '0.8rem';
+                div.style.borderRadius = '1rem';
+                div.style.marginBottom = '0.5rem';
+                div.style.background = 'rgba(255,255,255,0.02)';
+                div.style.cursor = 'pointer';
                 div.innerHTML = `
                     <div style="display:flex; gap:12px; align-items:center;">
                         <i class="fas fa-music" style="color:#7C5CFF;"></i>
@@ -663,11 +745,8 @@
                 div.addEventListener('click', () => {
                     currentIndex = idx;
                     loadTrack(currentIndex);
-                    if (isPlaying) {
-                        audio.play();
-                    } else {
-                        playPause();
-                    }
+                    if (isPlaying) audio.play();
+                    else playPause();
                 });
                 playlistContainer.appendChild(div);
             });
@@ -683,7 +762,7 @@
                     playIconMain.className = 'fas fa-pause';
                     isPlaying = true;
                 }).catch(() => {
-                    showToast("⚠️ Trình duyệt yêu cầu tương tác, hãy nhấn play lại");
+                    showToast("⚠️ Hãy tương tác trước, sau đó nhấn play nhé <3");
                 });
             }
         }
@@ -710,39 +789,22 @@
                 durationSpan.innerText = formatTime(audio.duration);
             }
         });
-
-        audio.addEventListener('ended', () => {
-            nextTrack();
-        });
-
+        audio.addEventListener('ended', () => nextTrack());
         progressContainer.addEventListener('click', (e) => {
             const rect = progressContainer.getBoundingClientRect();
             const percent = (e.clientX - rect.left) / rect.width;
-            if (audio.duration) {
-                audio.currentTime = percent * audio.duration;
-            }
+            if (audio.duration) audio.currentTime = percent * audio.duration;
         });
-
-        volumeSlider.addEventListener('input', (e) => {
-            audio.volume = e.target.value;
-        });
-
+        volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
         playPauseBtn.addEventListener('click', playPause);
         prevBtn.addEventListener('click', prevTrack);
         nextBtn.addEventListener('click', nextTrack);
 
-        // auto init
         renderPlaylist();
         loadTrack(0);
-        isPlaying = false; // không auto play tránh lỗi browser
-        // cho phép click đầu tiên để play
-        document.body.addEventListener('click', () => {
-            if (audio.paused && audio.src && !isPlaying) {
-                // optional, nhưng không ép buộc
-            }
-        }, { once: true });
+        isPlaying = false;
 
-        // stats counter animation
+        // stats counter
         function animateStats() {
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
@@ -762,38 +824,7 @@
         }
         animateStats();
 
-        // verified badge interaction
-        const verifiedBadge = document.getElementById('verifiedBtn');
-        verifiedBadge.addEventListener('click', () => {
-            showToast("✅ Tài khoản đã xác minh chính thức | Lâm Phú Quý Premium");
-            createParticles();
-        });
-
-        // avatar click effect (thêm ảnh avatar nâng cấp? nhưng có thể thêm confetti)
-        const profileHero = document.querySelector('.profile-hero');
-        const avatarImg = document.createElement('img');
-        // add ảnh avatar đẹp (nếu muốn)
-        const avatarContainer = document.createElement('div');
-        avatarContainer.style.display = 'flex';
-        avatarContainer.style.justifyContent = 'center';
-        avatarContainer.style.marginBottom = '1rem';
-        const avatarCircle = document.createElement('img');
-        avatarCircle.src = 'https://i.imgur.com/86qC9ZA.png';
-        avatarCircle.style.width = '100px';
-        avatarCircle.style.height = '100px';
-        avatarCircle.style.borderRadius = '50%';
-        avatarCircle.style.border = '2px solid #7C5CFF';
-        avatarCircle.style.objectFit = 'cover';
-        avatarCircle.style.cursor = 'pointer';
-        avatarCircle.alt = 'avatar';
-        avatarContainer.appendChild(avatarCircle);
-        const heroFirst = document.querySelector('.profile-hero');
-        heroFirst.insertBefore(avatarContainer, heroFirst.firstChild);
-        avatarCircle.addEventListener('click', () => {
-            showToast("🎧 Cảm ơn bạn đã ghé thăm không gian sáng tạo!");
-            createConfettiBurst();
-        });
-
+        // helper functions
         function showToast(msg) {
             const toast = document.getElementById('toastMsg');
             toast.innerText = msg;
@@ -803,13 +834,26 @@
             }, 3000);
         }
 
+        function createFloatingHearts(quantity = 15) {
+            for(let i=0; i<quantity; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = ['❤️','💖','💗','💓','💘'][Math.floor(Math.random()*5)];
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.bottom = '20px';
+                heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1200);
+            }
+        }
+
         function createConfettiBurst() {
-            for(let i=0;i<40;i++) {
+            for(let i=0;i<50;i++) {
                 const conf = document.createElement('div');
                 conf.style.position = 'fixed';
                 conf.style.width = Math.random() * 8 + 4 + 'px';
                 conf.style.height = Math.random() * 8 + 4 + 'px';
-                conf.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                conf.style.background = `hsl(${Math.random() * 360}, 80%, 65%)`;
                 conf.style.top = '50%';
                 conf.style.left = '50%';
                 conf.style.borderRadius = '50%';
@@ -823,35 +867,45 @@
             }
         }
 
-        function createParticles() {
-            for(let i=0;i<20;i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'fixed';
-                particle.style.width = '6px';
-                particle.style.height = '6px';
-                particle.style.background = '#1DA1F2';
-                particle.style.borderRadius = '50%';
-                particle.style.left = '50%';
-                particle.style.top = '40%';
-                particle.style.pointerEvents = 'none';
-                document.body.appendChild(particle);
-                const dx = (Math.random() - 0.5) * 100;
-                const dy = (Math.random() - 0.5) * 80 - 30;
-                particle.animate([{ transform: 'scale(1)', opacity:1 }, { transform: `translate(${dx}px, ${dy}px) scale(0)`, opacity:0 }], { duration: 800 });
-                setTimeout(()=> particle.remove(), 800);
-            }
-        }
+        // Verified badge click
+        document.getElementById('verifiedBtn').addEventListener('click', () => {
+            showToast("✅ Tài khoản chính thức: Lâm Phú Quý ❤️ Thanh Vân | Tình yêu xác thực");
+            createConfettiBurst();
+        });
 
-        // Thêm hover effect các link
+        // Avatar heart click
+        document.getElementById('avatarHeart').addEventListener('click', () => {
+            showToast("💞 Trái tim nghệ sĩ luôn hướng về Vân yêu dấu!");
+            createFloatingHearts(25);
+        });
+
+        // Nút gửi yêu thương
+        document.getElementById('sendLoveBtn').addEventListener('click', () => {
+            showToast("💌 Đã gửi yêu thương đến Thanh Vân! Em là nguồn cảm hứng bất tận.");
+            createFloatingHearts(40);
+            // thêm effect âm thanh tưởng tượng
+        });
+
+        // Tính số ngày bên nhau (mốc 20/03/2024)
+        function updateDaysTogether() {
+            const startDate = new Date(2024, 2, 20); // 20-03-2024
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const daysSpan = document.getElementById('daysTogether');
+            if(daysSpan) daysSpan.innerText = diffDays;
+        }
+        updateDaysTogether();
+
+        // Thêm hiệu ứng hover links
         document.querySelectorAll('.contact-row, .social-icon-card').forEach(el => {
             el.addEventListener('click', (e) => {
-                showToast(`🔗 Mở kết nối: ${el.href ? 'Chuyển hướng' : 'Liên kết'}`);
+                showToast(`🔗 Kết nối với Quý & Vân — lan tỏa yêu thương`);
             });
         });
-        
-        // thông báo chào mừng
+
         setTimeout(() => {
-            showToast("✨ Chào mừng đến portfolio nâng cấp | Lâm Phú Quý");
+            showToast("💖 Cùng Lâm Phú Quý & Thanh Vân — Nơi nghệ thuật kết nối trái tim 💖");
         }, 800);
     })();
 </script>
