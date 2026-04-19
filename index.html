@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Lâm Phú Quý ❤️ Thanh Vân | Chuyện tình nghệ sĩ</title>
+    <title>Lâm Phú Quý ❤️ Thanh Vân | Premium Interactive Studio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -84,12 +84,10 @@
             z-index: -1;
         }
 
-        /* custom scroll */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0A0A1A; }
         ::-webkit-scrollbar-thumb { background: #7C5CFF; border-radius: 8px; }
 
-        /* layout */
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -98,7 +96,6 @@
             z-index: 2;
         }
 
-        /* glass nav */
         .glass-nav {
             backdrop-filter: blur(16px);
             background: rgba(5, 5, 15, 0.55);
@@ -153,14 +150,12 @@
 
         @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
-        /* grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 0.9fr;
             gap: 2rem;
         }
 
-        /* profile hero */
         .profile-hero {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -256,7 +251,6 @@
             cursor: pointer;
         }
 
-        /* avatar lovers */
         .avatar-lovers {
             width: 110px;
             height: 110px;
@@ -281,7 +275,6 @@
             box-shadow: 0 20px 30px -8px rgba(255,92,138,0.6);
         }
 
-        /* Skills section */
         .skills-wrap {
             margin-top: 2rem;
             background: var(--bg-card);
@@ -309,14 +302,12 @@
             border: 1px solid rgba(124, 92, 255, 0.3);
         }
 
-        /* right stack */
         .right-stack {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
 
-        /* premium music player */
         .music-premium {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -375,7 +366,6 @@
             transition: 0.2s;
         }
 
-        /* relationship card */
         .relationship-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -445,7 +435,46 @@
             box-shadow: 0 0 15px #FF5C8A;
         }
 
-        /* social grid */
+        /* Virtual stats card mới */
+        .virtual-stats-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-card);
+            padding: 1.8rem;
+            border: 1px solid rgba(62, 224, 208, 0.3);
+        }
+        .virtual-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        .virtual-stat {
+            background: rgba(255,255,255,0.03);
+            border-radius: 1.2rem;
+            padding: 0.8rem;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid var(--glass-edge);
+        }
+        .virtual-stat .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .virtual-stat .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-aurora);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
         .social-premium {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -515,6 +544,7 @@
             .dashboard-grid { grid-template-columns: 1fr; }
             .container { padding: 1rem; }
             .name-large { font-size: 2.3rem; }
+            .virtual-stats-grid { grid-template-columns: 1fr 1fr; }
         }
         .floating-heart {
             position: fixed;
@@ -526,6 +556,10 @@
         @keyframes floatUp {
             0% { transform: translateY(0) scale(0.6); opacity: 1; }
             100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+        .playlist-item-modern.active {
+            background: rgba(124, 92, 255, 0.2);
+            border-left: 3px solid var(--primary);
         }
     </style>
 </head>
@@ -547,7 +581,7 @@
 
 <div class="container">
     <div class="dashboard-grid">
-        <!-- LEFT: profile & skills -->
+        <!-- LEFT COLUMN -->
         <div>
             <div class="profile-hero">
                 <div class="avatar-lovers" id="avatarHeart">
@@ -589,9 +623,9 @@
             </div>
         </div>
 
-        <!-- RIGHT: music + relationship + social -->
+        <!-- RIGHT COLUMN: nâng cấp với thống kê ảo -->
         <div class="right-stack">
-            <!-- Music Player nâng cấp -->
+            <!-- Music Player Pro -->
             <div class="music-premium">
                 <div class="player-header">
                     <h3><i class="fas fa-headphones" style="margin-right: 8px; color: var(--accent);"></i> Phúc Long Radio • Tặng Vân</h3>
@@ -620,7 +654,7 @@
                 <div class="playlist-modern" id="playlistContainer" style="max-height: 220px; overflow-y: auto; margin-top: 1rem;"></div>
             </div>
 
-            <!-- MỚI: Relationship Card - Hẹn hò cùng Thanh Vân chuyên nghiệp -->
+            <!-- Relationship Card -->
             <div class="relationship-card">
                 <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <i class="fas fa-heart" style="font-size: 2rem; color: #FF5C8A;"></i>
@@ -636,6 +670,17 @@
                 </div>
                 <button class="send-heart-btn" id="sendLoveBtn"><i class="fas fa-heart"></i> Gửi yêu thương đến Thanh Vân <i class="fas fa-heart"></i></button>
                 <div style="margin-top: 12px; font-size: 0.7rem; text-align: center; color: #FFB8D2;">✨ Mỗi ngày trôi qua là một bản tình ca mới ✨</div>
+            </div>
+
+            <!-- 🆕 VIRTUAL STATS CARD: lượt truy cập, thời gian online, tổng phát, next track ảo -->
+            <div class="virtual-stats-card">
+                <h3><i class="fas fa-chart-line"></i> Thống kê ảo · Tương tác sống</h3>
+                <div class="virtual-stats-grid">
+                    <div class="virtual-stat"><span class="stat-label">👁️ Lượt truy cập</span><span class="stat-value" id="visitCount">0</span></div>
+                    <div class="virtual-stat"><span class="stat-label">⏱️ Thời gian online</span><span class="stat-value" id="timeOnSite">00:00</span></div>
+                    <div class="virtual-stat"><span class="stat-label">🎵 Tổng lượt phát</span><span class="stat-value" id="totalPlays">0</span></div>
+                    <div class="virtual-stat"><span class="stat-label">⏩ Lượt chuyển bài (Next)</span><span class="stat-value" id="nextTrackCount">0</span></div>
+                </div>
             </div>
 
             <!-- Social premium -->
@@ -662,7 +707,54 @@
 
 <script>
     (function() {
-        // ---------- PLAYLIST nâng cấp (thêm track tặng Thanh Vân) ----------
+        // ========== VIRTUAL STATS (lưu trữ local) ==========
+        let totalVisits = parseInt(localStorage.getItem('virtualVisits') || '0');
+        totalVisits += 1;
+        localStorage.setItem('virtualVisits', totalVisits);
+        let totalPlaysStorage = parseInt(localStorage.getItem('totalPlaysCount') || '0');
+        let nextTrackStorage = parseInt(localStorage.getItem('nextTrackClicks') || '0');
+        
+        // display initial
+        const visitSpan = document.getElementById('visitCount');
+        const totalPlaysSpan = document.getElementById('totalPlays');
+        const nextTrackSpan = document.getElementById('nextTrackCount');
+        if(visitSpan) visitSpan.innerText = totalVisits;
+        if(totalPlaysSpan) totalPlaysSpan.innerText = totalPlaysStorage;
+        if(nextTrackSpan) nextTrackSpan.innerText = nextTrackStorage;
+        
+        function updateTotalPlaysUI(value) {
+            if(totalPlaysSpan) totalPlaysSpan.innerText = value;
+            localStorage.setItem('totalPlaysCount', value);
+        }
+        function updateNextTrackUI(value) {
+            if(nextTrackSpan) nextTrackSpan.innerText = value;
+            localStorage.setItem('nextTrackClicks', value);
+        }
+        function incrementPlayCount() {
+            totalPlaysStorage++;
+            updateTotalPlaysUI(totalPlaysStorage);
+            showToast("🎶 +1 lượt phát | Tổng: " + totalPlaysStorage);
+        }
+        function incrementNextCount() {
+            nextTrackStorage++;
+            updateNextTrackUI(nextTrackStorage);
+            showToast("⏩ +1 lượt chuyển bài (Next) | Tổng: " + nextTrackStorage);
+        }
+        
+        // ========== TIME ON SITE (giây ảo) ==========
+        let secondsElapsed = 0;
+        const timeElement = document.getElementById('timeOnSite');
+        function updateTimeDisplay() {
+            const mins = Math.floor(secondsElapsed / 60);
+            const secs = secondsElapsed % 60;
+            if(timeElement) timeElement.innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+        }
+        setInterval(() => {
+            secondsElapsed++;
+            updateTimeDisplay();
+        }, 1000);
+        
+        // ========== MUSIC PLAYER LOGIC + TÍCH HỢP ĐẾM LƯỢT PHÁT ==========
         const tracks = [
             { title: "Melody for Vân 💖", artist: "Quý x Vân", src: "https://assets.mixkit.co/music/preview/mixkit-love-song-728.mp3", duration: "3:22" },
             { title: "Starlight Echo", artist: "Phúc Long", src: "https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3", duration: "3:45" },
@@ -698,28 +790,43 @@
             return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
-        function loadTrack(index) {
-            const track = tracks[index];
-            audio.src = track.src;
-            audio.load();
-            currentTrackTitleSpan.innerText = track.title;
-            currentTrackArtistSpan.innerText = track.artist;
-            updateActivePlaylist(index);
-            if (isPlaying) {
-                audio.play().catch(e => console.log("autoplay blocked"));
-            }
-            progressBar.style.width = '0%';
-            currentTimeSpan.innerText = '0:00';
-            if(audio.duration) durationSpan.innerText = formatTime(audio.duration);
-            else durationSpan.innerText = track.duration;
-        }
-
         function updateActivePlaylist(index) {
             const items = document.querySelectorAll('.playlist-item-modern');
             items.forEach((item, i) => {
                 if (i === index) item.classList.add('active');
                 else item.classList.remove('active');
             });
+        }
+
+        // Hàm phát nhạc chính thức: tăng lượt phát
+        function startPlayAndCount() {
+            if (audio.src) {
+                audio.play().then(() => {
+                    playIconMain.className = 'fas fa-pause';
+                    isPlaying = true;
+                    incrementPlayCount();   // Mỗi lần play thực sự (từ stop hoặc chuyển bài) đều tăng
+                }).catch(e => {
+                    showToast("⚠️ Hãy tương tác trước, sau đó nhấn play nhé <3");
+                });
+            }
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            const track = tracks[index];
+            audio.src = track.src;
+            audio.load();
+            currentTrackTitleSpan.innerText = track.title;
+            currentTrackArtistSpan.innerText = track.artist;
+            updateActivePlaylist(index);
+            progressBar.style.width = '0%';
+            currentTimeSpan.innerText = '0:00';
+            durationSpan.innerText = track.duration;
+            if (autoPlay || isPlaying) {
+                startPlayAndCount();
+            } else {
+                isPlaying = false;
+                playIconMain.className = 'fas fa-play';
+            }
         }
 
         function renderPlaylist() {
@@ -744,9 +851,11 @@
                 `;
                 div.addEventListener('click', () => {
                     currentIndex = idx;
-                    loadTrack(currentIndex);
-                    if (isPlaying) audio.play();
-                    else playPause();
+                    loadTrack(currentIndex, isPlaying); // giữ trạng thái phát nếu đang play
+                    if (!isPlaying) {
+                        // Nếu đang dừng, sau khi load track thì play luôn? Theo logic, user click playlist thường muốn phát
+                        startPlayAndCount();
+                    }
                 });
                 playlistContainer.appendChild(div);
             });
@@ -758,27 +867,20 @@
                 playIconMain.className = 'fas fa-play';
                 isPlaying = false;
             } else {
-                audio.play().then(() => {
-                    playIconMain.className = 'fas fa-pause';
-                    isPlaying = true;
-                }).catch(() => {
-                    showToast("⚠️ Hãy tương tác trước, sau đó nhấn play nhé <3");
-                });
+                startPlayAndCount();
             }
         }
 
         function nextTrack() {
             currentIndex = (currentIndex + 1) % tracks.length;
-            loadTrack(currentIndex);
-            if (isPlaying) audio.play();
-            else playPause();
+            loadTrack(currentIndex, true);
+            incrementNextCount();   // tăng lượt chuyển bài (next)
         }
 
         function prevTrack() {
             currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-            loadTrack(currentIndex);
-            if (isPlaying) audio.play();
-            else playPause();
+            loadTrack(currentIndex, true);
+            // (prev không tính vào "lượt chuyển bài next", giữ nguyên)
         }
 
         audio.addEventListener('timeupdate', () => {
@@ -789,7 +891,9 @@
                 durationSpan.innerText = formatTime(audio.duration);
             }
         });
-        audio.addEventListener('ended', () => nextTrack());
+        audio.addEventListener('ended', () => {
+            nextTrack(); // tự động next -> sẽ kích hoạt incrementNextCount bên trong nextTrack
+        });
         progressContainer.addEventListener('click', (e) => {
             const rect = progressContainer.getBoundingClientRect();
             const percent = (e.clientX - rect.left) / rect.width;
@@ -798,13 +902,14 @@
         volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value);
         playPauseBtn.addEventListener('click', playPause);
         prevBtn.addEventListener('click', prevTrack);
-        nextBtn.addEventListener('click', nextTrack);
+        nextBtn.addEventListener('click', () => {
+            nextTrack();
+        });
 
         renderPlaylist();
-        loadTrack(0);
-        isPlaying = false;
-
-        // stats counter
+        loadTrack(0, false);
+        
+        // ========== CÁC HIỆU ỨNG VÀ TIỆN ÍCH KHÁC ==========
         function animateStats() {
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
@@ -824,14 +929,13 @@
         }
         animateStats();
 
-        // helper functions
         function showToast(msg) {
             const toast = document.getElementById('toastMsg');
             toast.innerText = msg;
             toast.style.transform = 'translateX(0)';
             setTimeout(() => {
                 toast.style.transform = 'translateX(400px)';
-            }, 3000);
+            }, 2800);
         }
 
         function createFloatingHearts(quantity = 15) {
@@ -867,28 +971,20 @@
             }
         }
 
-        // Verified badge click
         document.getElementById('verifiedBtn').addEventListener('click', () => {
             showToast("✅ Tài khoản chính thức: Lâm Phú Quý ❤️ Thanh Vân | Tình yêu xác thực");
             createConfettiBurst();
         });
-
-        // Avatar heart click
         document.getElementById('avatarHeart').addEventListener('click', () => {
             showToast("💞 Trái tim nghệ sĩ luôn hướng về Vân yêu dấu!");
             createFloatingHearts(25);
         });
-
-        // Nút gửi yêu thương
         document.getElementById('sendLoveBtn').addEventListener('click', () => {
             showToast("💌 Đã gửi yêu thương đến Thanh Vân! Em là nguồn cảm hứng bất tận.");
             createFloatingHearts(40);
-            // thêm effect âm thanh tưởng tượng
         });
-
-        // Tính số ngày bên nhau (mốc 20/03/2024)
         function updateDaysTogether() {
-            const startDate = new Date(2024, 2, 20); // 20-03-2024
+            const startDate = new Date(2024, 2, 20);
             const today = new Date();
             const diffTime = Math.abs(today - startDate);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -896,14 +992,11 @@
             if(daysSpan) daysSpan.innerText = diffDays;
         }
         updateDaysTogether();
-
-        // Thêm hiệu ứng hover links
         document.querySelectorAll('.contact-row, .social-icon-card').forEach(el => {
             el.addEventListener('click', (e) => {
                 showToast(`🔗 Kết nối với Quý & Vân — lan tỏa yêu thương`);
             });
         });
-
         setTimeout(() => {
             showToast("💖 Cùng Lâm Phú Quý & Thanh Vân — Nơi nghệ thuật kết nối trái tim 💖");
         }, 800);
