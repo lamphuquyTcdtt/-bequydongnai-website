@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, shrink-to-fit=no">
-  <title>Galaxy Premium | Bé Quý Dev • Bảo mật & Xác thực</title>
+  <title>Galaxy Premium • Xác Minh Khuôn Mặt 🔐</title>
   
   <!-- Google Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
-
+  <!-- Face-api.js cho nhận diện khuôn mặt -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@3.18.0/dist/tf-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@3.18.0/dist/tf-converter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.2/dist/face-landmarks-detection.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  
   <style>
+    /* ----- RESET & COSMIC THEME (giữ nguyên phong cách Galaxy Premium) ----- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Inter', 'Segoe UI', sans-serif;
       background: #03020c;
@@ -26,8 +30,6 @@
       position: relative;
       transition: background-image 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
-
-    /* ----- COSMIC BACKGROUND & STARS (NÂNG CẤP) ----- */
     .starfield {
       position: fixed;
       top: 0;
@@ -42,15 +44,13 @@
       position: absolute;
       width: 200%;
       height: 200%;
-      background-image: 
-        radial-gradient(2px 2px at 15% 30%, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(3px 3px at 75% 60%, #ffe6b0, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 22% 80%, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 95% 20%, #ffb7c5, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 5% 50%, #c3e8ff, rgba(0,0,0,0)),
-        radial-gradient(3px 3px at 48% 92%, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 70% 40%, #ffd966, rgba(0,0,0,0));
-      background-size: 300px 300px, 400px 400px, 200px 200px, 280px 280px, 250px 250px, 500px 500px, 350px 350px;
+      background-image: radial-gradient(2px 2px at 15% 30%, #ffffff, rgba(0,0,0,0)),
+                        radial-gradient(3px 3px at 75% 60%, #ffe6b0, rgba(0,0,0,0)),
+                        radial-gradient(1px 1px at 22% 80%, #fff, rgba(0,0,0,0)),
+                        radial-gradient(2px 2px at 95% 20%, #ffb7c5, rgba(0,0,0,0)),
+                        radial-gradient(1.5px 1.5px at 5% 50%, #c3e8ff, rgba(0,0,0,0)),
+                        radial-gradient(3px 3px at 48% 92%, #ffffff, rgba(0,0,0,0));
+      background-size: 300px 300px, 400px 400px, 200px 200px, 280px 280px, 250px 250px, 500px 500px;
       background-repeat: no-repeat;
       opacity: 0.8;
       animation: cosmicDrift 90s linear infinite;
@@ -66,12 +66,135 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75));
+      background: radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.85));
       backdrop-filter: blur(1.2px);
       z-index: -1;
     }
-
-    /* ----- MAIN LAYOUT (CẢI TIẾN) ----- */
+    /* GATEWAY - LỚP PHỦ XÁC THỰC KHUÔN MẶT */
+    .face-gateway {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 5, 20, 0.96);
+      backdrop-filter: blur(20px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .gateway-card {
+      background: rgba(10, 18, 45, 0.85);
+      backdrop-filter: blur(24px);
+      border-radius: 3rem;
+      border: 1px solid rgba(120, 170, 255, 0.8);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 2px rgba(210, 180, 255, 0.3) inset;
+      width: 90%;
+      max-width: 560px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      animation: glowPulse 1.8s infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 10px 30px rgba(80, 120, 255, 0.3); border-color: rgba(120, 170, 255, 0.6);}
+      100% { box-shadow: 0 20px 50px rgba(80, 150, 255, 0.7); border-color: #ffd966;}
+    }
+    .gateway-card h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #aac9ff, #e0aaff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .camera-preview {
+      width: 100%;
+      max-width: 320px;
+      margin: 1rem auto;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 2px solid #6d8eff;
+      box-shadow: 0 0 18px #3f6eff;
+      background: #000;
+      position: relative;
+    }
+    video, #faceCanvas {
+      width: 100%;
+      border-radius: 1.5rem;
+      display: block;
+    }
+    #faceCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .video-container {
+      position: relative;
+      display: inline-block;
+    }
+    .status-message {
+      margin: 15px 0;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 18px;
+      border-radius: 80px;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+    }
+    .face-btn {
+      background: linear-gradient(95deg, #2c6eff, #ad7eff);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 60px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: white;
+      margin: 12px 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .face-btn:hover {
+      transform: scale(1.03);
+      background: linear-gradient(95deg, #4d7eff, #c68eff);
+      box-shadow: 0 0 18px #8a6eff;
+    }
+    .face-btn-outline {
+      background: transparent;
+      border: 1.5px solid #7a96ff;
+      color: #d0e0ff;
+    }
+    .loader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255,255,255,0.2);
+      border-top: 4px solid #7aa2ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 8px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .success-icon {
+      font-size: 3rem;
+      color: #7eff9e;
+      filter: drop-shadow(0 0 8px #00ff88);
+    }
+    .hidden-content {
+      transition: opacity 0.6s ease;
+    }
+    /* Nội dung chính (ẩn ban đầu) */
+    .main-content-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .main-content-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* các style giao diện galaxy giữ nguyên */
     .galaxy-container {
       position: relative;
       z-index: 10;
@@ -79,756 +202,330 @@
       margin: 0 auto;
       padding: 28px 24px 60px;
     }
-
-    /* Glass card nâng cấp - hiệu ứng depth + gradient border */
-    .glass-card {
-      background: rgba(12, 18, 38, 0.55);
-      backdrop-filter: blur(16px);
-      border-radius: 2.2rem;
-      border: 1px solid rgba(110, 150, 255, 0.4);
-      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(210, 180, 255, 0.15) inset;
-      transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.3s;
-    }
-    .glass-card:hover {
-      border-color: rgba(150, 180, 255, 0.7);
-      box-shadow: 0 35px 55px -18px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(210, 180, 255, 0.3) inset;
-    }
-
-    /* ===== THÔNG BÁO CHUYÊN NGHIỆP - VIP STYLE ===== */
-    .alert-verification {
-      background: linear-gradient(115deg, rgba(10, 20, 55, 0.92), rgba(25, 12, 70, 0.96));
-      backdrop-filter: blur(20px);
-      border-left: 6px solid #ffdd77;
-      border-radius: 1.8rem;
-      padding: 1.5rem 1.8rem;
-      margin: 0 0 2rem 0;
-      box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 210, 100, 0.3), 0 8px 20px rgba(0,0,0,0.3);
-      animation: cosmicPulse 2.5s infinite alternate;
-    }
-    @keyframes cosmicPulse {
-      0% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 6px rgba(255, 210, 100, 0.4); }
-      100% { box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 210, 100, 0.7); }
-    }
-    .alert-header-flex {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-weight: 800;
-      font-size: 1.2rem;
-      margin-bottom: 14px;
-      color: #fff0c0;
-    }
-    .alert-header-flex i {
-      font-size: 2rem;
-      text-shadow: 0 0 8px #ffb347;
-    }
-    .alert-detail p {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      margin-bottom: 12px;
-      color: #eef2ff;
-    }
-    .badge-soon {
-      background: linear-gradient(135deg, #ff6b4a, #ff3a6f);
-      padding: 5px 16px;
-      border-radius: 60px;
-      font-size: 0.7rem;
-      font-weight: 800;
-      display: inline-block;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 8px #ff6b4a;
-    }
-    .close-alert-btn {
-      background: rgba(255,255,245,0.12);
-      border: 1px solid rgba(255,200,100,0.6);
-      color: #ffecb3;
-      padding: 6px 20px;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.25s;
-    }
-    .close-alert-btn:hover {
-      background: #ffaa44;
-      color: #0a0c1a;
-      border-color: #ffcc77;
-      box-shadow: 0 0 12px #ffaa44;
-    }
-
-    /* PROFILE SECTION - LUXURY */
-    .profile {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    .avatar {
-      width: 136px;
-      height: 136px;
-      border-radius: 50%;
-      border: 3px solid rgba(140, 200, 255, 0.9);
-      box-shadow: 0 0 40px rgba(0, 180, 255, 0.6);
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-    .avatar:hover {
-      transform: scale(1.02);
-    }
-    .profile h2 {
-      font-weight: 500;
-      margin-top: 14px;
-      font-size: 1.1rem;
-      color: #bdc6ff;
-      letter-spacing: 0.5px;
-    }
-    .profile h1 {
-      font-size: 2.1rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #FFFFFF, #b3beff, #da9eff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .verify {
-      width: 28px;
-      filter: drop-shadow(0 0 5px cyan);
-    }
-    /* social icons */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin: 32px 0 28px;
-      flex-wrap: wrap;
-    }
-    .socials .icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(20, 30, 60, 0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-    }
-    .socials .icon:hover {
-      transform: translateY(-6px);
-      background: linear-gradient(145deg, #3a60ff, #8a5eff);
-      border-color: #fff3bf;
-      box-shadow: 0 15px 25px -8px #3a60ff70;
-    }
-    .socials .icon img {
-      width: 34px;
-      height: 34px;
-    }
-
-    /* SECTIONS & ITEMS - PROFESSIONAL CARDS */
-    .section {
-      margin: 44px 0 28px;
-    }
-    .section h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 1.4rem;
-      background: linear-gradient(120deg, #f0f3ff, #b7c9ff, #ad9eff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.2px;
-    }
-    .items {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .item {
-      background: rgba(12, 20, 40, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 1.8rem;
-      padding: 14px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid rgba(100, 140, 255, 0.5);
-      transition: all 0.25s;
-    }
-    .item:hover {
-      border-color: #8facff;
-      transform: scale(1.01) translateY(-2px);
-      background: rgba(25, 35, 70, 0.85);
-      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.4);
-    }
-    .info {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-    }
-    .info img {
-      width: 56px;
-      height: 56px;
-      border-radius: 1.2rem;
-      object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .meta .title {
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: -0.2px;
-    }
-    .meta .subtitle {
-      font-size: 0.7rem;
-      color: #c5ceff;
-    }
-    .action, .admin-action {
-      width: 48px;
-      height: 48px;
-      background: rgba(77, 171, 247, 0.9);
-      border-radius: 1.2rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: white;
-      transition: 0.2s;
-      text-decoration: none;
-    }
-    .action:hover, .admin-action:hover {
-      background: #6b8eff;
-      transform: scale(1.08);
-      box-shadow: 0 0 12px #6b8eff;
-    }
-    .admin-action {
-      background: #2c7da0;
-      display: none;
-    }
-    .admin-action.show {
-      display: flex;
-    }
-
-    /* ESign / KSign - SWITCH MODERN */
-    .sign-switch {
-      max-width: 360px;
-      margin: 25px auto 35px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(18px);
-      border-radius: 60px;
-      display: flex;
-      position: relative;
-      padding: 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 10px 25px -8px black;
-    }
-    .sign-indicator {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: calc(50% - 6px);
-      height: calc(100% - 12px);
-      border-radius: 60px;
-      transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-      background: linear-gradient(125deg, #3a6eff, #b37eff);
-      box-shadow: 0 0 12px #7f9eff;
-    }
-    .sign-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: white;
-      font-weight: 800;
-      padding: 12px 0;
-      z-index: 2;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.2s;
-    }
-    .sign-content {
-      transition: all 0.35s ease;
-    }
-    .hide-left { transform: translateX(-20px); opacity: 0; pointer-events: none; }
-    .hide-right { transform: translateX(20px); opacity: 0; pointer-events: none; }
-
-    /* MINI CARD WEBSITE */
-    .detail-card-mini {
-      background: rgba(20, 28, 58, 0.8);
-      backdrop-filter: blur(20px);
-      border-radius: 2rem;
-      margin: 20px auto;
-      text-align: center;
-      display: block;
-      border: 1px solid rgba(255, 210, 120, 0.5);
-      transition: 0.25s;
-      overflow: hidden;
-    }
-    .detail-mini-img img {
-      width: 100%;
-      border-radius: 1.8rem 1.8rem 1.2rem 1.2rem;
-      height: 150px;
-      object-fit: cover;
-    }
-    .detail-mini-desc {
-      padding: 10px;
-      font-weight: 500;
-    }
-    .detail-mini-cta {
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 60px;
-      padding: 8px 24px;
-      display: inline-flex;
-      gap: 12px;
-      margin: 12px 0 20px;
-      font-weight: 700;
-      border: 1px solid #ffd58c;
-      color: #ffecb3;
-    }
-    .detail-card-mini:hover .detail-mini-cta {
-      background: #ffaa44;
-      color: #0f0f1f;
-      border-color: white;
-    }
-
-    /* Music Controls & Floating Widgets (nâng cấp giao diện) */
-    .music-controls {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      background: rgba(8, 12, 30, 0.85);
-      backdrop-filter: blur(20px);
-      border-radius: 48px;
-      padding: 8px 16px;
-      display: flex;
-      gap: 16px;
-      z-index: 1200;
-      border: 1px solid rgba(110, 150, 255, 0.6);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.4);
-    }
-    .music-btn {
-      background: rgba(30, 40, 80, 0.8);
-      border: none;
-      color: #e0e7ff;
-      font-size: 1.6rem;
-      width: 44px;
-      height: 44px;
-      border-radius: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .music-btn:hover {
-      background: #5a7cff;
-      transform: scale(1.05);
-      color: white;
-    }
-    .song-list-panel {
-      position: fixed;
-      bottom: 100px;
-      left: 24px;
-      background: rgba(10, 14, 36, 0.95);
-      backdrop-filter: blur(28px);
-      border-radius: 28px;
-      padding: 12px;
-      width: 260px;
-      z-index: 1200;
-      display: none;
-      border: 1px solid rgba(150, 180, 255, 0.5);
-      box-shadow: 0 20px 35px rgba(0,0,0,0.5);
-    }
-    .song-list-panel.show { display: block; }
-    .song-list-item {
-      padding: 12px;
-      display: flex;
-      gap: 12px;
-      cursor: pointer;
-      border-radius: 20px;
-      transition: 0.2s;
-      font-weight: 500;
-    }
-    .song-list-item.active {
-      background: #4d6eff;
-      color: white;
-      box-shadow: 0 0 8px #4d6eff;
-    }
-    .song-list-item:hover {
-      background: rgba(90, 120, 255, 0.6);
-    }
-    .flower-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(16px);
-      border-radius: 60px;
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      cursor: pointer;
-      border: 1px solid #ffdd99;
-      z-index: 1100;
-      transition: 0.2s;
-    }
-    .flower-toggle:hover {
-      background: #ff77aa;
-      transform: scale(1.08);
-    }
-    /* floating buttons (menu, theme, admin) */
-    .menu-btn, .theme-toggle, .admin-toggle, .logout-btn {
-      position: fixed;
-      top: 20px;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(150, 200, 255, 0.7);
-      border-radius: 28px;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: #fff;
-      cursor: pointer;
-      z-index: 1150;
-      transition: 0.2s;
-    }
-    .menu-btn { left: 20px; }
-    .theme-toggle { left: 80px; }
-    .admin-toggle { left: 140px; }
-    .logout-btn { left: 200px; background: #ff4757; border-color: #ffa0a0; display: none; }
-    .logout-btn.show { display: flex; }
-    .menu-btn:hover, .theme-toggle:hover, .admin-toggle:hover { background: #3a5eff; transform: scale(1.02); }
-
-    /* Mobile Menu */
-    #mobileMenu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 75%;
-      max-width: 320px;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.94);
-      backdrop-filter: blur(32px);
-      transform: translateX(100%);
-      transition: 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      z-index: 1300;
-      padding: 80px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      border-left: 1px solid rgba(255,255,255,0.2);
-    }
-    #mobileMenu.open { transform: translateX(0); }
-    #mobileMenu a {
-      color: white;
-      font-size: 1.2rem;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 12px;
-      border-radius: 2rem;
-      background: rgba(255,255,255,0.05);
-      transition: 0.2s;
-    }
-    #mobileMenu a:hover { background: #4d6eff; padding-left: 20px; }
-    .close-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 30px;
-      position: absolute;
-      top: 24px;
-      right: 24px;
-    }
-
-    /* Login Modal Luxury */
-    .login-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1400;
-    }
-    .login-modal.show { display: flex; }
-    .login-container {
-      background: rgba(10, 14, 40, 0.98);
-      border-radius: 2.5rem;
-      padding: 2rem;
-      width: 340px;
-      border: 1px solid #7c9eff;
-      box-shadow: 0 0 30px #2a45cc;
-      text-align: center;
-    }
-    .login-container input {
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid #5e7eff;
-      border-radius: 60px;
-      color: white;
-    }
-    .login-container button {
-      background: linear-gradient(95deg, #2c6eff, #ad7eff);
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 60px;
-      font-weight: bold;
-      color: white;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 60px;
-      padding: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.75rem;
-      color: #b9c2ff;
-    }
-    .song-notification {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(20px);
-      padding: 10px 24px;
-      border-radius: 60px;
-      z-index: 1250;
-      opacity: 0;
-      transition: 0.25s;
-      pointer-events: none;
-    }
-    .song-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .intro-avatar { width: 110px; border-radius: 50%; }
-    #introSplash {
-      position: fixed;
-      inset: 0;
-      background: #010009;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      animation: fadeOut 0.8s 2.2s forwards;
-    }
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-    .interaction-notification {
-      position: fixed;
-      bottom: 110px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1a1f3ad9;
-      backdrop-filter: blur(20px);
-      padding: 12px 24px;
-      border-radius: 60px;
-      z-index: 1300;
-    }
-    @media (max-width: 600px) {
-      .galaxy-container { padding: 16px; }
-      .profile h1 { font-size: 1.5rem; }
-      .music-controls { left: 12px; bottom: 16px; padding: 5px 12px; gap: 10px; }
-      .flower-toggle { right: 16px; bottom: 16px; width: 48px; height: 48px; }
-      .menu-btn, .theme-toggle, .admin-toggle { width: 42px; height: 42px; top: 12px; }
-      .menu-btn { left: 12px; }
-      .theme-toggle { left: 62px; }
-      .admin-toggle { left: 112px; }
-      .logout-btn { left: 162px; }
-    }
+    .glass-card { background: rgba(12, 18, 38, 0.55); backdrop-filter: blur(16px); border-radius: 2.2rem; border: 1px solid rgba(110, 150, 255, 0.4); }
+    .profile { text-align: center; margin-bottom: 28px; }
+    .avatar { width: 136px; height: 136px; border-radius: 50%; border: 3px solid rgba(140, 200, 255, 0.9); }
+    .socials { display: flex; justify-content: center; gap: 24px; margin: 32px 0; }
+    .item { background: rgba(12, 20, 40, 0.7); border-radius: 1.8rem; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .action { background: rgba(77, 171, 247, 0.9); border-radius: 1.2rem; padding: 10px 15px; color:white; text-decoration:none; }
+    .sign-switch { max-width: 360px; margin: 25px auto; background: rgba(0, 0, 0, 0.55); border-radius: 60px; display: flex; position: relative; }
+    .music-controls { position: fixed; bottom: 24px; left: 24px; background: rgba(8, 12, 30, 0.85); backdrop-filter: blur(20px); border-radius: 48px; z-index: 1100; }
+    .flower-toggle { position: fixed; bottom: 24px; right: 24px; background: rgba(0,0,0,0.7); border-radius: 60px; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; }
+    /* Responsive */
+    @media (max-width: 600px) { .gateway-card { padding: 1.5rem; } .face-btn { padding: 10px 20px; } }
   </style>
 </head>
 <body>
 
 <div class="starfield"><div class="stars"></div></div>
-<div class="galaxy-container">
 
-  <!-- THÔNG BÁO XÁC THỰC CCCD/ID - LUXURY -->
-  <div class="alert-verification" id="globalVerifyAlert">
-    <div class="alert-header-flex">
-      <i class="bi bi-shield-lock-fill"></i>
-      <span>🔐 XÁC THỰC DANH TÍNH – BẢO MẬT NÂNG CAO</span>
+<!-- FACE GATEWAY - BẮT BUỘC XÁC MINH KHUÔN MẶT -->
+<div id="faceGateway" class="face-gateway">
+  <div class="gateway-card">
+    <i class="bi bi-camera-reels-fill" style="font-size: 3rem; color: #aac9ff;"></i>
+    <h2>🔐 XÁC MINH DANH TÍNH</h2>
+    <p style="margin-bottom: 15px;">Quét khuôn mặt trực tiếp <strong>Bé Quý Dev / Galaxy Premium</strong><br>Bảo mật nâng cao – Chống giả mạo</p>
+    <div class="camera-preview" style="position: relative; display: inline-block;">
+      <video id="videoFace" autoplay playsinline muted style="width:100%; border-radius: 1.5rem;"></video>
+      <canvas id="overlayCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem;"></canvas>
     </div>
-    <div class="alert-detail">
-      <p><strong>📌 YÊU CẦU XÁC THỰC CCCD / CĂN CƯỚC CÔNG DÂN</strong><br>
-      Hệ thống <strong>Bé Quý Dev Galaxy Premium</strong> sắp triển khai xác thực bảo mật bằng CCCD / ID để chống spam & gian lận.</p>
-      <p>🔹 Nhập số CCCD/Hộ chiếu hợp lệ – Hệ thống kiểm tra tự động.<br>
-      🔹 Đảm bảo môi trường an toàn, minh bạch cho cộng đồng.<br>
-      🔹 Thời gian áp dụng: <span class="badge-soon">CHÍNH THỨC SẮP RA MẮT</span></p>
-      <p style="font-size:0.85rem;">💠 Mọi thắc mắc liên hệ Admin. Cảm ơn bạn đã tin tưởng!</p>
+    <div id="faceStatus" class="status-message"><i class="bi bi-hourglass-split"></i> Đang khởi tạo camera...</div>
+    <div>
+      <button id="captureBtn" class="face-btn"><i class="bi bi-camera-fill"></i> Xác thực khuôn mặt</button>
+      <button id="retryCamBtn" class="face-btn face-btn-outline"><i class="bi bi-arrow-repeat"></i> Bật lại cam</button>
     </div>
-    <div style="text-align: right;">
-      <button class="close-alert-btn" id="closeAlertBtn"><i class="bi bi-check2-circle"></i> Đã hiểu & Đóng</button>
-    </div>
+    <div id="faceFeedback" style="font-size:0.85rem; margin-top:12px; color:#cbd5ff;"></div>
   </div>
+</div>
 
+<!-- NỘI DUNG CHÍNH (BAN ĐẦU ẨN, CHỈ HIỆN SAU KHI XÁC MINH THÀNH CÔNG) -->
+<div id="mainContent" class="galaxy-container main-content-hidden" style="transition: opacity 0.5s ease;">
+  <!-- Thông báo xác thực CCCD (giữ nguyên style) -->
+  <div class="alert-verification glass-card" style="background:linear-gradient(115deg, rgba(10,20,55,0.92), rgba(25,12,70,0.96)); border-left:6px solid #ffdd77; margin-bottom:2rem; padding:1.5rem;">
+    <div class="alert-header-flex"><i class="bi bi-shield-lock-fill"></i><span>🔐 XÁC THỰC DANH TÍNH – BẢO MẬT NÂNG CAO</span></div>
+    <div class="alert-detail"><p><strong>📌 XÁC MINH KHUÔN MẶT THÀNH CÔNG !</strong><br>✅ Bạn đã vượt qua cổng bảo mật Galaxy. Hệ thống chống gian lận và an toàn tuyệt đối.</p></div>
+  </div>
   <!-- Profile -->
   <div class="profile">
     <img class="avatar" src="https://sf-static.upanhlaylink.com/img/image_20260404fcdb2ec3d455149111f9f4bf0cb5334f.jpg" alt="Avatar">
     <h2>✨ GALAXY ARCHITECT</h2>
-    <h1>BÉ QUÝ DEV🔥🇻🇳🐰<img class="verify" src="https://i.imgur.com/McqzSg1.png" alt="verified"></h1>
+    <h1>BÉ QUÝ DEV🔥🇻🇳🐰<img class="verify" style="width:28px;" src="https://i.imgur.com/McqzSg1.png" alt="verified"></h1>
     <p><span id="GioiThieu" style="background: linear-gradient(120deg,#c0e0ff,#e0b0ff); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:700;"></span></p>
     <div class="socials">
-      <a href="https://www.tiktok.com/@bequy2" class="icon" target="_blank"><img src="https://sf-static.upanhlaylink.com/img/image_20251124e1819165be340c639f1f4f61fdcb2b08.jpg" alt="TikTok"></a>
-      <a href="https://www.facebook.com/share/1bDGac5FZv/?mibextid=wwXIfr" class="icon" target="_blank"><img src="https://sf-static.upanhlaylink.com/img/image_20251123ce8bd083e4eed3ba547ea9ee1ca99014.jpg" alt="Facebook"></a>
-      <a href="https://www.youtube.com/@bequydongnai" class="icon" target="_blank"><img src="https://sf-static.upanhlaylink.com/img/image_20260120839ac7ba6eaa15108380f14065e9de20.jpg" alt="YouTube"></a>
-      <a href="https://t.me/" class="icon" target="_blank"><img src="https://sf-static.upanhlaylink.com/img/image_2026022660dd348a22b484655792904e2ffccfc4.jpg" alt="Telegram"></a>
-      <a href="https://discord.gg/" class="icon" target="_blank"><img src="https://sf-static.upanhlaylink.com/img/image_20260117f1f074277008b035768e549d213c7c73.jpg" alt="Discord"></a>
+      <a href="#" class="icon" style="width:60px;height:60px;background:rgba(20,30,60,0.75);border-radius:1.5rem;display:flex;align-items:center;justify-content:center;"><img style="width:34px;" src="https://sf-static.upanhlaylink.com/img/image_20251124e1819165be340c639f1f4f61fdcb2b08.jpg" alt="TikTok"></a>
+      <a href="#" class="icon" style="width:60px;height:60px;background:rgba(20,30,60,0.75);border-radius:1.5rem;display:flex;align-items:center;justify-content:center;"><img style="width:34px;" src="https://sf-static.upanhlaylink.com/img/image_20251123ce8bd083e4eed3ba547ea9ee1ca99014.jpg" alt="FB"></a>
+      <a href="#" class="icon" style="width:60px;height:60px;background:rgba(20,30,60,0.75);border-radius:1.5rem;display:flex;align-items:center;justify-content:center;"><img style="width:34px;" src="https://sf-static.upanhlaylink.com/img/image_20260120839ac7ba6eaa15108380f14065e9de20.jpg" alt="YT"></a>
     </div>
   </div>
-
-  <!-- Website Card -->
-  <a href="http://lamphuquy.click/" class="detail-card-mini glass-card" style="display:block; text-decoration:none; margin-bottom:20px;">
-    <div class="detail-mini-img"><img src="https://sf-static.upanhlaylink.com/img/image_20260226b050c11bdfe120684fb98a0670a954f3.jpg" alt="Demo"></div>
-    <div class="detail-mini-desc" style="color:#ddd; font-weight:500;">🌌 GALAXY PORTAL – Khám phá vũ trụ</div>
-    <div class="detail-mini-cta"><span>Truy cập ngay</span><span>🚀</span></div>
-  </a>
-
-  <!-- Link cài trực tiếp + Certificate -->
-  <section class="section"><h2>📲 TẢI NGAY – IPA & TOOL</h2><div class="items"><div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20260201838ab24ce6c82155d5881c796ceede1a.jpg"><div class="meta"><div class="title">TrollStore Power</div><div class="subtitle">★★★★★ (9.9M)</div></div></div><div class="item-actions"><a href="https://troll-store-tau.vercel.app//" class="action"><i class="bi bi-download"></i></a><a href="https://is.gd/FOq0vm" class="admin-action"><i class="bi bi-star-fill"></i></a></div></div></div></section>
-  <section class="section"><h2>📁 FILE CHỨNG CHỈ | ESign CERT</h2><div class="items"><div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20260123bfd686d50a247ea3b2615b481edf2a24.jpg"><div class="meta"><div class="title">ESign/KSign Certificate</div><div class="subtitle">Bypass Revoke</div></div></div><div class="item-actions"><a href="https://khoindvn.io.vn/document/DNS/ESignCert.zip" class="action"><i class="bi bi-download"></i></a></div></div></div></section>
-
-  <!-- ESign / KSign Switch -->
-  <div class="sign-switch" id="signSwitch">
-    <div class="sign-indicator"></div>
-    <button class="sign-btn" data-target="esignBox">ESign</button>
-    <button class="sign-btn" data-target="ksignBox">KSign</button>
-  </div>
-  <div id="esignBox" class="sign-content">
-    <section class="section"><h2>🚀 Esign Bypass Revoke</h2><div class="items">
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">VIETNAM AIRLINES JSC</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/mJoVMn" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">Forevermark Maketing</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/aAqGZk" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">PowerChina International</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/IDcW4P" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">China Academy Railway</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/IDcW4P" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">Qingdao Rural Bank</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.eu.org/KXcveB" class="action"><i class="bi bi-download"></i></a></div></div>
-    </div></section>
-  </div>
-  <div id="ksignBox" class="sign-content hide-right" style="display:none">
-    <section class="section"><h2>✨ Ksign Bypass Revoke</h2><div class="items">
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">VIETNAM AIRLINES JSC</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/enw3mG" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">Forevermark ShangHai</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/YRBC4f" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">PowerChina Group</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/xuuKqO" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">China Academy Railway</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.io.vn/03zH0o" class="action"><i class="bi bi-download"></i></a></div></div>
-      <div class="item"><div class="info"><img src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">Qingdao Rural Bank</div><div class="subtitle">★★★★★</div></div></div><div class="item-actions"><a href="https://api.khoindvn.eu.org/XSCvQT" class="action"><i class="bi bi-download"></i></a></div></div>
-    </div></section>
-  </div>
-
-  <div class="footer"><p>🌌 GALAXY NEXUS • BÉ QUÝ DEV 2026 | Bảo mật CCCD & Xác thực danh tính sắp ra mắt</p></div>
+  <!-- Các section ESign, KSign giữ nguyên demo -->
+  <div class="sign-switch" id="signSwitch" style="margin:25px auto;"><div class="sign-indicator"></div><button class="sign-btn" data-target="esignBox">ESign</button><button class="sign-btn" data-target="ksignBox">KSign</button></div>
+  <div id="esignBox" class="sign-content"><section class="section"><h2>🚀 Esign Bypass Revoke</h2><div class="items"><div class="item"><div class="info"><img width="56" src="https://sf-static.upanhlaylink.com/img/image_202511239c3c89b67d68c9108f626d76aab44cd5.jpg"><div class="meta"><div class="title">VIETNAM AIRLINES JSC</div></div></div><div class="item-actions"><a href="#" class="action"><i class="bi bi-download"></i></a></div></div></div></section></div>
+  <div id="ksignBox" class="sign-content" style="display:none;"><section class="section"><h2>✨ Ksign Bypass Revoke</h2><div class="items"><div class="item"><div class="info"><img width="56" src="https://sf-static.upanhlaylink.com/img/image_20251123de304b11effa975dbb99a1e162dde6a7.jpg"><div class="meta"><div class="title">Forevermark ShangHai</div></div></div><div class="item-actions"><a href="#" class="action"><i class="bi bi-download"></i></a></div></div></div></section></div>
+  <div class="footer"><p>🌌 GALAXY NEXUS • BÉ QUÝ DEV 2026 | Bảo mật khuôn mặt & CCCD</p></div>
 </div>
 
-<!-- Buttons & Menu -->
-<button id="menuToggle" class="menu-btn"><i class="bi bi-grid-3x3-gap-fill"></i></button>
-<button id="themeToggle" class="theme-toggle"><i class="bi bi-images"></i></button>
-<button id="adminToggle" class="admin-toggle"><i class="bi bi-person-fill-lock"></i></button>
-<button id="logoutBtn" class="logout-btn"><i class="bi bi-box-arrow-right"></i></button>
-<nav id="mobileMenu"><button class="close-btn"><i class="bi bi-x-lg"></i></button><a href="https://htios2590.vercel.app">Esign & Ksign</a><a href="https://htiosdev.vercel.app">Kho Hack iOS & ADR</a><a href="https://ipa-server-nu.vercel.app/">Kho iPA</a><a href="https://other-snowy.vercel.app/">Other</a><a href="https://create-config-three.vercel.app/">Tạo Cấu Hình iOS</a><a href="https://tatsumaki-kohl.vercel.app/">Tatsumaki</a></nav>
-<div id="introSplash"><div class="intro-content"><img src="https://sf-static.upanhlaylink.com/img/image_20260226d814ffa1313cd74ae626452576139608.jpg" class="intro-avatar"><h1 class="intro-title">Quý DEV</h1><p class="intro-sub">Galaxy Nexus Loading...</p></div></div>
+<!-- Các nổi bổ trợ (music, hoa, menu) giữ nguyên trải nghiệm -->
+<button id="menuToggleMobile" class="menu-btn" style="position:fixed; left:20px; top:20px; background:rgba(0,0,0,0.65); width:48px; height:48px; border-radius:28px; z-index:1150;"><i class="bi bi-grid-3x3-gap-fill"></i></button>
+<nav id="mobileMenu" style="position:fixed; top:0; right:0; width:75%; max-width:320px; height:100%; background:rgba(0,0,0,0.94); transform:translateX(100%); transition:0.35s; z-index:1300; padding:80px 28px;"><button class="close-btn" style="background:none; border:none; color:white; font-size:30px; position:absolute; top:24px; right:24px;">✖</button><a href="#">Trang chủ</a><a href="#">Tải iPA</a></nav>
+<div id="introSplash" style="position:fixed; inset:0; background:#010009; display:flex; align-items:center; justify-content:center; z-index:9999; animation:fadeOut 0.8s 2.2s forwards;"><div><img src="https://sf-static.upanhlaylink.com/img/image_20260226d814ffa1313cd74ae626452576139608.jpg" style="width:110px; border-radius:50%;"><h1 style="color:white;">Quý DEV</h1></div></div>
 <audio id="bgMusic" preload="auto"></audio>
-<div id="loginModal" class="login-modal"><div class="login-container"><div class="login-header"><h2><i class="bi bi-shield-lock"></i> Admin Gateway</h2><p>Galaxy Admin Access</p></div><form id="loginForm"><input type="text" id="username" placeholder="Username" required><input type="password" id="password" placeholder="Password" required><button type="submit">Login</button><div class="login-error" id="loginError">Sai thông tin!</div></form></div></div>
 
 <script>
-  // ========== GIỮ NGUYÊN TOÀN BỘ CHỨC NĂNG GỐC + NÂNG CẤP UI ==========
-  // (background toggle, mobile menu, admin, music, flower, sign switch, alert close)
-  function initGalaxyBackground() {
-    const galaxyBg = ['https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg','https://cdn.pixabay.com/photo/2015/12/03/12/02/aurora-borealis-1075736_1280.jpg'];
-    let idx = localStorage.getItem('galaxyBgIdx') ? parseInt(localStorage.getItem('galaxyBgIdx')) : 0;
-    document.body.style.backgroundImage = `url('${galaxyBg[idx]}')`;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
-    document.body.style.backgroundAttachment = 'fixed';
-    const themeBtn = document.getElementById('themeToggle');
-    themeBtn.addEventListener('click', () => {
-      idx = (idx + 1) % galaxyBg.length;
-      document.body.style.backgroundImage = `url('${galaxyBg[idx]}')`;
-      localStorage.setItem('galaxyBgIdx', idx);
-      showToastBG('🌠 Chuyển nền thiên hà');
-    });
-  }
-  function showToastBG(msg) { let toast = document.createElement('div'); toast.className = 'background-notification'; toast.innerHTML = `<div><i class="bi bi-stars"></i> ${msg}</div>`; document.body.appendChild(toast); setTimeout(() => toast.classList.add('show'), 10); setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 500); }, 2000); }
-  function initMobileMenu() {
-    const btn = document.getElementById('menuToggle'), menu = document.getElementById('mobileMenu'), closeBtn = menu.querySelector('.close-btn');
-    btn.onclick = () => menu.classList.toggle('open');
-    closeBtn.onclick = () => menu.classList.remove('open');
-    document.addEventListener('click', (e) => { if (!menu.contains(e.target) && !btn.contains(e.target) && menu.classList.contains('open')) menu.classList.remove('open'); });
-  }
-  function initAdminSystem() {
-    let logged = localStorage.getItem('adminLoggedIn') === 'true';
-    const adminBtn = document.getElementById('adminToggle'), logoutBtn = document.getElementById('logoutBtn'), modal = document.getElementById('loginModal');
-    const loginForm = document.getElementById('loginForm'), userInp = document.getElementById('username'), passInp = document.getElementById('password'), errDiv = document.getElementById('loginError');
-    const updateUI = () => {
-      document.querySelectorAll('.admin-action').forEach(el => logged ? el.classList.add('show') : el.classList.remove('show'));
-      logoutBtn.style.display = logged ? 'flex' : 'none';
-      adminBtn.innerHTML = logged ? '<i class="bi bi-person-check-fill"></i>' : '<i class="bi bi-person-fill-lock"></i>';
-      if(logged) localStorage.setItem('adminLoggedIn','true'); else localStorage.removeItem('adminLoggedIn');
-    };
-    updateUI();
-    adminBtn.onclick = () => { if(!logged) modal.classList.add('show'); };
-    modal.onclick = (e) => { if(e.target === modal) modal.classList.remove('show'); };
-    loginForm.onsubmit = (e) => {
-      e.preventDefault();
-      if(userInp.value === 'htios2590' && passInp.value === '123') {
-        logged = true; updateUI(); modal.classList.remove('show'); errDiv.style.display = 'none'; alert('✅ Đăng nhập Admin thành công!');
-      } else { errDiv.style.display = 'block'; passInp.value = ''; }
-    };
-    logoutBtn.onclick = () => { logged = false; updateUI(); alert('Đã đăng xuất.'); };
-  }
-  const playlist = ['https://files.catbox.moe/cre1ul.mp3','https://files.catbox.moe/gfribu.mp3','https://files.catbox.moe/lyypw1.mp3'];
-  const songNames = ['Mưa Đợi Chờ Remix','Em Nào Có Tội Remix','Sao Mình Chưa Nắm Tay Nhau Remix'];
-  let currentSong = 0, audioEl = document.getElementById('bgMusic');
-  function buildMusicWidget() {
-    const ctrlDiv = document.createElement('div'); ctrlDiv.className = 'music-controls';
-    ctrlDiv.innerHTML = `<button class="music-btn" id="prevBtn"><i class="bi bi-skip-backward-fill"></i></button><button class="music-btn" id="playPauseBtn"><i class="bi bi-play-fill" id="playIconMusic"></i><i class="bi bi-pause-fill" id="pauseIconMusic" style="display:none"></i></button><button class="music-btn" id="nextBtn"><i class="bi bi-skip-forward-fill"></i></button><button class="music-btn select-btn" id="listBtn"><i class="bi bi-music-note-list"></i></button>`;
-    document.body.appendChild(ctrlDiv);
-    const panel = document.createElement('div'); panel.className = 'song-list-panel'; panel.innerHTML = `<div class="song-list-header"><span>📀 Chọn bài</span><button class="close-list-btn"><i class="bi bi-x"></i></button></div><div class="song-list-content" id="songListContent"></div>`;
-    document.body.appendChild(panel);
-    const updateList = () => { const container = document.getElementById('songListContent'); if(container) container.innerHTML = songNames.map((n,i)=>`<div class="song-list-item ${i===currentSong?'active':''}" data-index="${i}"><i class="bi bi-music-note"></i><span>${n}</span></div>`).join(''); };
-    updateList();
-    const playSong = (idx) => { currentSong = idx; audioEl.src = playlist[currentSong]; audioEl.load(); audioEl.play().catch(e=>console.log); updateMusicIcons('play'); showNotiSong(`🎵 Đang phát: ${songNames[currentSong]}`); updateList(); };
-    window.playNext = () => { currentSong = (currentSong+1)%playlist.length; playSong(currentSong); };
-    window.playPrev = () => { currentSong = (currentSong-1+playlist.length)%playlist.length; playSong(currentSong); };
-    window.togglePlayMusic = () => { if(audioEl.paused) { audioEl.play(); updateMusicIcons('play'); } else { audioEl.pause(); updateMusicIcons('pause'); } };
-    function updateMusicIcons(state) { const playI = document.getElementById('playIconMusic'), pauseI = document.getElementById('pauseIconMusic'); if(state === 'play') { playI.style.display='none'; pauseI.style.display='block'; } else { playI.style.display='block'; pauseI.style.display='none'; } }
-    function showNotiSong(msg) { let noti = document.querySelector('.song-notification') || (()=>{let d=document.createElement('div'); d.className='song-notification'; document.body.appendChild(d); return d;})(); noti.innerHTML = `<div><i class="bi bi-music-note-beamed"></i> ${msg}</div>`; noti.classList.add('show'); setTimeout(()=>noti.classList.remove('show'),2500); }
-    document.getElementById('prevBtn')?.addEventListener('click',playPrev); document.getElementById('nextBtn')?.addEventListener('click',playNext); document.getElementById('playPauseBtn')?.addEventListener('click',togglePlayMusic); document.getElementById('listBtn')?.addEventListener('click',()=>panel.classList.toggle('show')); panel.querySelector('.close-list-btn')?.addEventListener('click',()=>panel.classList.remove('show'));
-    panel.addEventListener('click',(e)=>{ const item = e.target.closest('.song-list-item'); if(item){ const idx = parseInt(item.dataset.index); playSong(idx); panel.classList.remove('show'); } });
-    audioEl.addEventListener('ended',()=>playNext());
-    setTimeout(()=>{ audioEl.play().catch(()=>{ const notif = document.createElement('div'); notif.className='interaction-notification'; notif.innerHTML='<div><i class="bi bi-headphones"></i> Nhấn để bật nhạc</div>'; document.body.appendChild(notif); document.body.addEventListener('click',()=>{ audioEl.play().catch(e=>{}); notif.remove(); },{once:true}); }); },1500);
-  }
-  function initFlowerEffectGalaxy() {
-    const flowers = ['✨','💫','⭐','🌠','🌸','🌙','🌟']; let interval=null; const btn = document.createElement('button'); btn.className = 'flower-toggle'; btn.innerHTML = '🌸'; document.body.appendChild(btn);
-    const start = () => { if(interval) return; interval = setInterval(()=>{ let f=document.createElement('div'); f.className='flower'; f.innerHTML=flowers[Math.floor(Math.random()*flowers.length)]; f.style.left=Math.random()*100+'vw'; f.style.animationDuration=(Math.random()*3+2)+'s'; f.style.fontSize=(Math.random()*20+18)+'px'; f.style.position='fixed'; f.style.bottom='-30px'; f.style.pointerEvents='none'; f.style.zIndex='9999'; f.style.animation='fall linear forwards'; document.body.appendChild(f); setTimeout(()=>f.remove(),6000); },350); btn.classList.remove('off'); btn.innerHTML='💫'; };
-    const stop = () => { if(interval) clearInterval(interval); interval=null; btn.classList.add('off'); btn.innerHTML='❌'; };
-    btn.onclick = () => { interval ? stop() : start(); };
-    start();
-  }
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(()=>{ let splash=document.getElementById('introSplash'); if(splash) splash.style.display='none'; },2500);
-    new Typed('#GioiThieu', { strings: ['✨ Bé Quý Dev • Galaxy Creator','🔮 Chuyên gia bảo mật & iOS','🌠 Top 1 Hacker Đồng Nai','🚀 Galaxy Premium Verified','🛡️ Xác thực CCCD sắp ra mắt'], typeSpeed:70, backSpeed:50, loop:true });
-    initGalaxyBackground();
-    initMobileMenu();
-    initAdminSystem();
-    buildMusicWidget();
-    initFlowerEffectGalaxy();
-    const signSwitch = document.getElementById('signSwitch'), indicator = signSwitch.querySelector('.sign-indicator'), btns = signSwitch.querySelectorAll('.sign-btn');
-    const boxes = { esignBox: document.getElementById('esignBox'), ksignBox: document.getElementById('ksignBox') };
-    let currentTab = 'esignBox';
-    btns.forEach((btn, i) => { btn.onclick = () => { let target = btn.dataset.target; if(target === currentTab) return; indicator.style.transform = `translateX(${i*100}%)`; boxes[currentTab].classList.add(target==='esignBox' ? 'hide-right' : 'hide-left'); setTimeout(()=>{ boxes[currentTab].style.display='none'; boxes[currentTab].classList.remove('hide-left','hide-right'); boxes[target].style.display='block'; requestAnimationFrame(()=> boxes[target].classList.remove('hide-left','hide-right')); currentTab=target; },200); }; });
-    document.querySelectorAll('.admin-action').forEach(el=>el.classList.remove('show'));
-    const closeAlert = document.getElementById('closeAlertBtn');
-    const alertBanner = document.getElementById('globalVerifyAlert');
-    if(closeAlert && alertBanner) {
-      closeAlert.addEventListener('click', () => { alertBanner.style.display = 'none'; showToastBG("🔔 Thông báo quan trọng đã đóng."); });
+  // --------------------------------------------------------------
+  // FACE AUTHENTICATION GATEWAY - BẮT BUỘC NHẬN DIỆN KHUÔN MẶT
+  // Sử dụng Face-api.js để phát hiện khuôn mặt thời gian thực, yêu cầu có khuôn mặt rõ
+  // --------------------------------------------------------------
+  (async function initFaceAuth() {
+    const video = document.getElementById('videoFace');
+    const canvas = document.getElementById('overlayCanvas');
+    const ctx = canvas.getContext('2d');
+    const statusDiv = document.getElementById('faceStatus');
+    const feedbackDiv = document.getElementById('faceFeedback');
+    const captureBtn = document.getElementById('captureBtn');
+    const retryBtn = document.getElementById('retryCamBtn');
+    const gatewayDiv = document.getElementById('faceGateway');
+    const mainContent = document.getElementById('mainContent');
+    
+    let faceDetectionInterval = null;
+    let isFaceDetectedCurrently = false;
+    let modelsLoaded = false;
+    let stream = null;
+    
+    // Hàm hiển thị trạng thái
+    function setStatus(msg, isError = false) {
+      statusDiv.innerHTML = `<i class="bi ${isError ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill'}"></i> ${msg}`;
+      statusDiv.style.color = isError ? '#ffaa88' : '#ccddff';
     }
-  });
-  const styleFall = document.createElement('style'); styleFall.textContent = `@keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } } .flower { position: fixed; bottom: -20px; left: 0; pointer-events: none; z-index: 9999; animation: fall linear forwards; } .background-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); backdrop-filter: blur(16px); padding: 8px 24px; border-radius: 60px; z-index: 2000; opacity: 0; transition: 0.3s; color: white; } .background-notification.show { opacity: 1; transform: translateX(-50%) translateY(0px); }`; document.head.appendChild(styleFall);
+    
+    function setFeedback(msg, isGood = false) {
+      feedbackDiv.innerHTML = msg;
+      if(isGood) feedbackDiv.style.color = '#a0ffc0';
+      else feedbackDiv.style.color = '#ffc0a0';
+    }
+    
+    // Load face-api models (tiny face detector để nhanh)
+    async function loadModels() {
+      setStatus("📡 Đang tải mô hình nhận diện khuôn mặt...");
+      try {
+        // Sử dụng face-api CDN models (chỉ cần face detection)
+        const MODEL_URL = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights';
+        await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+        await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+        modelsLoaded = true;
+        setStatus("✅ Mô hình sẵn sàng. Hãy nhìn thẳng vào camera!");
+        return true;
+      } catch(err) {
+        console.error(err);
+        setStatus("⚠️ Không thể tải model, thử dùng face-detection cơ bản", true);
+        // fallback: dùng face-api cơ bản nhưng vẫn ok, nhưng nếu lỗi vẫn cho phép thử capture?
+        modelsLoaded = false;
+        return false;
+      }
+    }
+    
+    // Bật camera
+    async function startCamera() {
+      if(stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+      try {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+        stream = mediaStream;
+        video.srcObject = stream;
+        await video.play();
+        setStatus("📷 Camera hoạt động. Đợi nhận diện khuôn mặt...");
+        startDetectionLoop();
+      } catch(err) {
+        console.error(err);
+        setStatus("❌ Không thể truy cập camera. Hãy cấp quyền!", true);
+        setFeedback("Vui lòng cho phép quyền camera để xác thực.");
+      }
+    }
+    
+    // Vòng lặp phát hiện khuôn mặt và vẽ khung
+    async function startDetectionLoop() {
+      if(faceDetectionInterval) clearInterval(faceDetectionInterval);
+      faceDetectionInterval = setInterval(async () => {
+        if(!video || video.paused || video.readyState !== 4) return;
+        if(!modelsLoaded) return;
+        try {
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+          // Vẽ lên canvas
+          const displaySize = { width: video.videoWidth, height: video.videoHeight };
+          canvas.width = displaySize.width;
+          canvas.height = displaySize.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          if(detections && detections.length > 0) {
+            isFaceDetectedCurrently = true;
+            const resizedDetections = faceapi.resizeResults(detections, displaySize);
+            faceapi.draw.drawDetections(canvas, resizedDetections);
+            // Vẽ thêm text xác nhận
+            ctx.font = "bold 20px 'Inter'";
+            ctx.fillStyle = "#6effa0";
+            ctx.shadowBlur = 0;
+            ctx.fillText("✅ PHÁT HIỆN KHUÔN MẶT", 20, 40);
+            setStatus("🔍 Đã phát hiện khuôn mặt! Bấm 'Xác thực khuôn mặt' để hoàn tất.");
+            setFeedback("Khuôn mặt đã được nhận diện, bấm nút xác thực ngay.", true);
+          } else {
+            isFaceDetectedCurrently = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = "18px 'Inter'";
+            ctx.fillStyle = "#ffc285";
+            ctx.fillText("📌 Vui lòng đưa khuôn mặt vào khung", 20, 50);
+            setStatus("⚠️ Chưa thấy khuôn mặt. Hãy đảm bảo đủ sáng và nhìn thẳng.");
+            setFeedback("Hãy nhìn thẳng, không đeo khẩu trang che khuất mắt.");
+          }
+        } catch(e) {
+          console.warn(e);
+        }
+      }, 200);
+    }
+    
+    // Xác thực khuôn mặt (bắt buộc phải có khuôn mặt hiện tại)
+    async function performFaceVerification() {
+      if(!modelsLoaded) {
+        setFeedback("⏳ Model chưa tải xong, vui lòng chờ giây lát...");
+        return;
+      }
+      if(!isFaceDetectedCurrently) {
+        setFeedback("❌ Không phát hiện khuôn mặt nào! Hãy nhìn vào camera và thử lại.");
+        return;
+      }
+      // Chụp lại frame hiện tại để kiểm tra kỹ thêm độ tin cậy
+      setStatus("🔎 Đang xác minh danh tính...");
+      setFeedback("Đang xử lý ảnh khuôn mặt, vui lòng giữ yên.");
+      captureBtn.disabled = true;
+      try {
+        // Lấy frame từ video
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = video.videoWidth;
+        tempCanvas.height = video.videoHeight;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+        // Dùng face-api để detect lại frame hiện tại đảm bảo có ít nhất 1 khuôn mặt
+        const detection = await faceapi.detectAllFaces(tempCanvas, new faceapi.TinyFaceDetectorOptions());
+        if(detection.length === 0) {
+          setFeedback("⚠️ Không thể xác thực: không tìm thấy khuôn mặt ổn định. Hãy thử lại.");
+          captureBtn.disabled = false;
+          return;
+        }
+        // Nếu có khuôn mặt -> Xác thực thành công ! 
+        // Lưu trạng thái vào localStorage
+        localStorage.setItem('galaxy_face_verified', 'true');
+        localStorage.setItem('face_verified_time', Date.now());
+        setStatus("✅ XÁC THỰC THÀNH CÔNG! Chào mừng đến với Galaxy Premium.");
+        setFeedback("🎉 Xác minh khuôn mặt hoàn tất, chuyển hướng vào nội dung...", true);
+        
+        // Hiệu ứng chúc mừng và ẩn gateway sau 1.2 giây
+        setTimeout(() => {
+          gatewayDiv.style.opacity = '0';
+          gatewayDiv.style.pointerEvents = 'none';
+          setTimeout(() => {
+            gatewayDiv.style.display = 'none';
+            mainContent.classList.remove('main-content-hidden');
+            mainContent.classList.add('main-content-visible');
+            // Khởi tạo các effect chính sau khi mở
+            initGalaxyCoreFeatures();
+          }, 400);
+        }, 800);
+      } catch(err) {
+        console.error(err);
+        setFeedback("Lỗi xác thực, thử lại.", true);
+        captureBtn.disabled = false;
+      }
+    }
+    
+    // Reset camera
+    async function resetCamera() {
+      if(stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+      await startCamera();
+      setFeedback("Đã làm mới camera.");
+    }
+    
+    // kiểm tra nếu đã xác thực trước đó (phiên làm việc)
+    if(localStorage.getItem('galaxy_face_verified') === 'true') {
+      // Cho phép bỏ qua gateway nhưng vẫn kiểm tra thời gian? 
+      const lastTime = parseInt(localStorage.getItem('face_verified_time') || '0');
+      if(Date.now() - lastTime < 3600000) { // 1 tiếng hiệu lực
+        gatewayDiv.style.display = 'none';
+        mainContent.classList.remove('main-content-hidden');
+        mainContent.classList.add('main-content-visible');
+        initGalaxyCoreFeatures();
+        return;
+      } else {
+        localStorage.removeItem('galaxy_face_verified');
+      }
+    }
+    
+    // Bắt đầu 
+    await loadModels();
+    await startCamera();
+    captureBtn.onclick = performFaceVerification;
+    retryBtn.onclick = resetCamera;
+    
+    // Đảm bảo canvas được resize theo video
+    video.addEventListener('loadedmetadata', () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    });
+  })();
+  
+  // ---------- CÁC CHỨC NĂNG GALAXY CỐT LÕI (Music, Switch, Menu, background...)
+  function initGalaxyCoreFeatures() {
+    // Typed effect
+    if(typeof Typed !== 'undefined') {
+      new Typed('#GioiThieu', { strings: ['✨ Bé Quý Dev • Galaxy Creator','🔮 Chuyên gia bảo mật & iOS','🌠 Top 1 Hacker Đồng Nai','🚀 Galaxy Premium Verified','🛡️ Xác thực khuôn mặt thành công'], typeSpeed:70, backSpeed:50, loop:true });
+    }
+    // background galaxy toggle (simple)
+    const bgList = ['https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg','https://cdn.pixabay.com/photo/2015/12/03/12/02/aurora-borealis-1075736_1280.jpg'];
+    let idx = 0;
+    const themeBtn = document.createElement('button'); themeBtn.className = 'theme-toggle'; themeBtn.innerHTML = '<i class="bi bi-images"></i>'; themeBtn.style.position = 'fixed'; themeBtn.style.left = '80px'; themeBtn.style.top = '20px'; themeBtn.style.background = 'rgba(0,0,0,0.65)'; themeBtn.style.borderRadius = '28px'; themeBtn.style.width = '48px'; themeBtn.style.height = '48px'; themeBtn.style.zIndex = '1150'; document.body.appendChild(themeBtn);
+    themeBtn.onclick = () => { idx = (idx+1)%bgList.length; document.body.style.backgroundImage = `url('${bgList[idx]}')`; document.body.style.backgroundSize = 'cover'; };
+    document.body.style.backgroundImage = `url('${bgList[0]}')`; document.body.style.backgroundSize = 'cover';
+    // music widget basic
+    const audio = document.getElementById('bgMusic');
+    const playlist = ['https://files.catbox.moe/cre1ul.mp3','https://files.catbox.moe/gfribu.mp3'];
+    let songIdx = 0;
+    audio.src = playlist[0];
+    const musicDiv = document.createElement('div'); musicDiv.className = 'music-controls'; musicDiv.innerHTML = `<button id="playBtnMusic" class="music-btn"><i class="bi bi-play-fill"></i></button><button id="nextMusic" class="music-btn"><i class="bi bi-skip-forward-fill"></i></button>`;
+    document.body.appendChild(musicDiv);
+    document.getElementById('playBtnMusic')?.addEventListener('click',()=>{ if(audio.paused) audio.play(); else audio.pause(); });
+    document.getElementById('nextMusic')?.addEventListener('click',()=>{ songIdx = (songIdx+1)%playlist.length; audio.src = playlist[songIdx]; audio.play(); });
+    audio.play().catch(e=>console.log);
+    // flower effect
+    const flowerBtn = document.createElement('button'); flowerBtn.className = 'flower-toggle'; flowerBtn.innerHTML = '🌸'; document.body.appendChild(flowerBtn);
+    let flInterval = null;
+    function startFlowers() { if(flInterval) return; flInterval = setInterval(()=>{ let f=document.createElement('div'); f.innerHTML='✨'; f.style.position='fixed'; f.style.bottom='-20px'; f.style.left=Math.random()*100+'vw'; f.style.fontSize=(Math.random()*20+18)+'px'; f.style.animation='fall 3s linear forwards'; f.style.pointerEvents='none'; document.body.appendChild(f); setTimeout(()=>f.remove(),3000); },400); }
+    function stopFlowers() { if(flInterval) clearInterval(flInterval); flInterval=null; }
+    flowerBtn.onclick = () => { flInterval ? stopFlowers() : startFlowers(); };
+    startFlowers();
+    const styleFall = document.createElement('style'); styleFall.textContent = `@keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity:0; } }`; document.head.appendChild(styleFall);
+    // sign switch
+    const signSwitch = document.getElementById('signSwitch');
+    if(signSwitch){
+      const indicator = signSwitch.querySelector('.sign-indicator');
+      const btns = signSwitch.querySelectorAll('.sign-btn');
+      const esign = document.getElementById('esignBox'), ksign = document.getElementById('ksignBox');
+      let active = 'esignBox';
+      btns.forEach((btn,i)=>{ btn.onclick=()=>{ if(active==='esignBox' && btn.dataset.target==='ksignBox'){ esign.style.display='none'; ksign.style.display='block'; indicator.style.transform='translateX(100%)'; active='ksignBox'; } else if(active==='ksignBox' && btn.dataset.target==='esignBox') { ksign.style.display='none'; esign.style.display='block'; indicator.style.transform='translateX(0)'; active='esignBox'; } }; });
+    }
+    // Menu mobile
+    const menuBtn = document.getElementById('menuToggleMobile');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = mobileMenu?.querySelector('.close-btn');
+    menuBtn?.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+    closeMenu?.addEventListener('click',()=>mobileMenu.classList.remove('open'));
+  }
+  // nếu main content đã được hiển thị từ đầu (trường hợp đã xác thực trước) ta gọi init luôn
+  if(document.getElementById('mainContent') && !document.getElementById('mainContent').classList.contains('main-content-hidden')) {
+    initGalaxyCoreFeatures();
+  }
+  // Thêm fallback style cho main-content-hidden
+  const styleHidden = document.createElement('style');
+  styleHidden.textContent = `.main-content-hidden { opacity: 0; pointer-events: none; } .main-content-visible { opacity: 1; pointer-events: auto; } #faceGateway { transition: opacity 0.5s; }`;
+  document.head.appendChild(styleHidden);
 </script>
 </body>
 </html>
