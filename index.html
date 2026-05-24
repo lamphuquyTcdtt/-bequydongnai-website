@@ -1,77 +1,599 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lâm Phú Quý</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Chính Thức Cập Nhật · Trung Tâm Phát Hành</title>
+    <!-- 使用现代、干净的无衬线字体，柔和配色，官方质感 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, 'Noto Sans', sans-serif;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 柔和卡片式主容器 */
+        .official-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 3rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.15), 0 2px 5px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* 头部区域: 官方标识 + 更新时间戳 */
+        .hero-section {
+            background: #ffffff;
+            padding: 2.5rem 2.5rem 1.8rem 2.5rem;
+            border-bottom: 1px solid #e2edf2;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #eef4ff;
+            padding: 0.4rem 1.1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #1e6f5c;
+            margin-bottom: 1.2rem;
+            border: 1px solid #cde3e0;
+        }
+
+        .badge-status .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #2b9a7c;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 2px #d1f0e8;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(0.9);}
+            100% { opacity: 1; transform: scale(1.2);}
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1E4A5F, #2C7A6E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.1rem;
+            color: #4b6b7c;
+            max-width: 70%;
+            border-left: 3px solid #3b9e8a;
+            padding-left: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .last-updated {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: baseline;
+            color: #5e7e8c;
+        }
+
+        .timestamp {
+            font-family: monospace;
+            background: #f0f4f8;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* 主要内容: 更新列表区 + 侧边栏信息 (官方风格) */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            padding: 2.5rem;
+        }
+
+        /* 左侧更新流 */
+        .changelog-section h2, .sidebar-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .changelog-section h2:before {
+            content: "📋";
+            font-size: 1.6rem;
+        }
+
+        .update-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .update-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.5rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.25s;
+            border: 1px solid #eef3f7;
+        }
+
+        .update-card:hover {
+            transform: translateY(-3px);
+            border-color: #cde3e9;
+            box-shadow: 0 20px 30px -12px rgba(0, 50, 40, 0.08);
+        }
+
+        .version-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .version-tag {
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: #eefaf5;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            letter-spacing: -0.3px;
+            color: #1c6f5e;
+        }
+
+        .date-badge {
+            font-size: 0.8rem;
+            background: #f0f2f5;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #4f6f7e;
+        }
+
+        .update-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem 0;
+            color: #1a3e48;
+        }
+
+        .desc-list {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0 0.3rem 0;
+            list-style-type: none;
+        }
+
+        .desc-list li {
+            margin-bottom: 0.55rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .desc-list li::before {
+            content: "✓";
+            color: #2b9a7c;
+            font-weight: bold;
+            display: inline-block;
+            width: 1.2rem;
+        }
+
+        .feature-tag {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #2c6b5f;
+            margin-right: 0.6rem;
+        }
+
+        /* 右侧边栏风格 - 官方动态 & 最新资讯 */
+        .sidebar-card {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 1.5rem 1.6rem;
+            border: 1px solid #e4edf2;
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-panel {
+            margin-bottom: 2rem;
+        }
+
+        .info-panel:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-panel h3 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-left: 4px solid #2b9a7c;
+            padding-left: 12px;
+            margin-bottom: 1rem;
+            color: #1f4e5e;
+        }
+
+        .official-links {
+            list-style: none;
+        }
+
+        .official-links li {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .official-links li span:first-child {
+            font-size: 1.1rem;
+        }
+
+        .live-feed {
+            background: #f9fefb;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+            border-left: 2px solid #5ecfae;
+        }
+
+        .update-note {
+            font-weight: 500;
+            margin: 0.8rem 0 0.3rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: #e2edf2;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            background: #eef3f6;
+            padding: 1.2rem 2.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #557a88;
+            border-top: 1px solid #dde7ec;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        button {
+            background: none;
+            border: none;
+            font: inherit;
+        }
+
+        /* 响应式 */
+        @media (max-width: 800px) {
+            body {
+                padding: 1rem;
+            }
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            .subhead {
+                max-width: 100%;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+            .hero-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .version-tag {
+                font-size: 1.1rem;
+            }
+            .update-card {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div id="fps" class="fps-counter" aria-hidden="true">FPS: 0</div>
-  
-  <div class="snow" aria-hidden="true"></div>
 
-  <main class="container">
-    <header class="profile-header">
-      <img src="avatar.jpg" alt="Ảnh đại diện" class="avatar" loading="lazy" />
-      <h1 class="name">
-        Lâm Phú Quý 
-        <img src="verified.png" alt="Tích xanh xác minh" class="verified-img" />
-      </h1>
-    </header>
-    
-    <section class="info">
-      <p>THIẾT KẾ WEBSITE THEO YÊU CẦU</p>
-      <p>CHUẨN SEO, CHUẨN UX/UI</p>
-      <p class="highlight">BẢO HÀNH ĐẾN KHI SẬP GOOGLE</p>
-      <p>ZALO: <a href="https://zalo.me/0388838940" target="_blank" rel="noopener noreferrer">0388.838.940</a></p>
-    </section>
+<div class="official-container">
+    <!-- HEADER 官方权威区域 -->
+    <div class="hero-section">
+        <div class="badge-status">
+            <span class="live-dot"></span>
+            <span>TRẠNG THÁI CHÍNH THỨC · LUÔN CẬP NHẬT</span>
+        </div>
+        <h1>Trung tâm Cập nhật</h1>
+        <div class="subhead">
+            Ghi nhận phiên bản mới, cải tiến tính năng & vá lỗi bảo mật — dữ liệu thời gian thực.
+        </div>
+        <div class="last-updated">
+            <span>🕒 Lần cập nhật gần nhất:</span>
+            <span class="timestamp" id="liveTimestamp">Đang tải...</span>
+            <span>🌐 Bản phân phối ổn định · Bản quyền số</span>
+        </div>
+    </div>
 
-    <nav class="button-container">
-      <a href="tel:+84388838940" class="button btn-phone">
-        <div class="grid-container"><i class="fa-solid fa-phone"></i> Gọi cho tôi</div>
-      </a>
-      <a href="https://www.facebook.com/share/16LhJmELER/" target="_blank" rel="noopener noreferrer" class="button btn-facebook">
-        <div class="grid-container"><i class="fab fa-facebook"></i> Facebook</div>
-      </a>
-      <a href="https://www.tiktok.com/@vanh.love.it_11" target="_blank" rel="noopener noreferrer" class="button btn-tiktok">
-        <div class="grid-container"><i class="fab fa-tiktok"></i> TikTok</div>
-      </a>
-      <a href="https://github.com/zzzaaayyy1234" target="_blank" rel="noopener noreferrer" class="button btn-github">
-        <div class="grid-container"><i class="fab fa-github"></i> GitHub</div>
-      </a>
-    </nav>
+    <!-- MAIN CONTENT: CẬP NHẬT CHI TIẾT + SIDEBAR THÔNG BÁO -->
+    <div class="main-grid">
+        <!-- 左侧：更新日志列表 (动态 + 硬编码核心版本，保证数据丰富) -->
+        <div class="changelog-section">
+            <h2>Nhật ký thay đổi</h2>
+            <div class="update-list" id="changelogList">
+                <!-- Nội dung được render bằng JS nhưng vẫn giữ cấu trúc semantic
+                     Đảm bảo hiển thị version mới nhất và toàn bộ danh sách cập nhật chính thức -->
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.75rem; color: #588197;">
+                ⚡ Dữ liệu được đồng bộ từ hệ thống chính thức · Phiên bản ổn định mới nhất
+            </div>
+        </div>
 
-    <footer>
-      <div class="timer">
-        Date created: <span id="timer">00d 00h 00m 00s</span>
-      </div>
+        <!-- 右侧：官方信息 + 实时公告 -->
+        <div class="sidebar-card">
+            <div class="info-panel">
+                <h3>📢 Thông báo chính thức</h3>
+                <div class="live-feed" id="liveAnnouncement">
+                    <!-- JS sẽ cập nhật thông báo động -->
+                    <div>🔔 Đang tải thông báo mới nhất...</div>
+                </div>
+            </div>
+            <div class="info-panel">
+                <h3>⚙️ Tính năng nổi bật</h3>
+                <ul class="official-links">
+                    <li><span>✅</span> Giao diện Adaptive tối ưu</li>
+                    <li><span>🔒</span> Xác thực đa lớp & bảo mật</li>
+                    <li><span>🚀</span> Tải xuống tài nguyên siêu tốc</li>
+                    <li><span>📱</span> Hỗ trợ đa nền tảng (Web + Mobile)</li>
+                </ul>
+            </div>
+            <hr>
+            <div class="info-panel">
+                <h3>📎 Đường dẫn hỗ trợ</h3>
+                <ul class="official-links">
+                    <li><span>🖥️</span> <a href="#" id="fakeSupportLink" style="color:#2c7a6e; text-decoration: none; border-bottom: 1px dotted;">Trung tâm trợ giúp chính thức</a></li>
+                    <li><span>📧</span> support@chinhthuc.vn (demo)</li>
+                    <li><span>💬</span> Cộng đồng phát triển</li>
+                </ul>
+                <div style="margin-top: 12px; background:#f4fafd; border-radius: 1rem; padding: 0.6rem; font-size:0.75rem; text-align:center;">
+                    📌 Bản cập nhật hôm nay đảm bảo tương thích & hiệu suất cao nhất.
+                </div>
+            </div>
+        </div>
+    </div>
 
-      <div class="music-player">
-        <label for="songSelect" class="sr-only">Chọn nhạc nền:</label>
-        <select id="songSelect">
-          <option value="">Play Music 🎵</option>
-          <option value="./music/deanhluongthien.mp3">Để Anh Lương Thiện Remix</option>
-          <option value="./music/emcuoiroia.mp3">Em Cưới Rồi À Remix</option>
-          <option value="./music/passobemsolto.mp3">ALTXS - PASSO BEM SOLTO</option>
-          <option value="./music/slayphonk.mp3">Slay Phonk</option>
-          <option value="./music/thaproitudo.mp3">Tháp Rơi Tự Do Remix</option>
-        </select>
-        <audio id="bgMusic" loop></audio>
-      </div>
-    </footer>
-  </main>
+    <div class="footer-note">
+        <span>© 2025 Bản quyền thuộc về Nền tảng Chính Thức · Cập nhật liên tục</span>
+        <span id="footerVersionTag">phiên bản ổn định: 2.4.0</span>
+    </div>
+</div>
 
-  <script src="script.js" defer></script>
+<script>
+    // --------------------------------------------------------------
+    // DỮ LIỆU CẬP NHẬT CHÍNH THỨC (MÔ PHỎNG HỆ THỐNG UPDATE)
+    // Đảm bảo giao diện "website chính thức cập nhật" động & hiện đại
+    // --------------------------------------------------------------
+    const changelogData = [
+        {
+            version: "v2.5.0",
+            date: "18.05.2026",
+            title: "Cập nhật trọng tâm: Hiệu suất & Bảo mật thế hệ mới",
+            features: [
+                "Tối ưu cơ chế tải API, giảm 42% thời gian phản hồi.",
+                "Bổ sung lớp xác thực OTP động cho giao dịch nhạy cảm.",
+                "Nâng cấp giao diện trình duyệt tích hợp dark mode tự động.",
+                "Sửa lỗi hiển thị trên trình duyệt Safari và WebView."
+            ]
+        },
+        {
+            version: "v2.4.2",
+            date: "01.05.2026",
+            title: "Cải thiện trải nghiệm & sửa lỗi đồng bộ",
+            features: [
+                "Cập nhật thư viện lõi, tăng tốc độ tải trang 28%.",
+                "Sửa lỗi đồng bộ dữ liệu giữa các thiết bị khi offline.",
+                "Thêm widget thông báo thời gian thực cho quản trị viên.",
+                "Tinh chỉnh font chữ & bố cục responsive mượt mà hơn."
+            ]
+        },
+        {
+            version: "v2.4.0",
+            date: "15.04.2026",
+            title: "Phiên bản chính thức: Hỗ trợ đa ngôn ngữ & Dashboard",
+            features: [
+                "Hệ thống dashboard phân tích dữ liệu theo thời gian thực.",
+                "Tích hợp AI đề xuất nội dung thông minh (beta).",
+                "Cải tiến thanh tìm kiếm với gợi ý thông minh.",
+                "Tăng cường bảo mật đầu cuối với giao thức mới."
+            ]
+        },
+        {
+            version: "v2.3.1",
+            date: "28.03.2026",
+            title: "Bản vá bảo mật khẩn cấp & sửa lỗi truy cập",
+            features: [
+                "Vá lỗ hổng XSS trên module nhập liệu.",
+                "Tối ưu cache cho phiên làm việc đồng thời cao.",
+                "Sửa lỗi không hiển thị ảnh thumbnail trên một số thiết bị.",
+                "Cập nhật chính sách cookie và GDPR."
+            ]
+        }
+    ];
+
+    // Dữ liệu thông báo chính thức (động, có thể thay đổi theo thời gian thực giả lập)
+    const officialAnnouncements = [
+        "🎉 Bản cập nhật v2.5.0 đã sẵn sàng! Nâng cấp ngay để trải nghiệm tốc độ vượt trội.",
+        "🔧 Hệ thống bảo trì theo lịch: 22/05/2026 từ 02:00 - 04:00 (GMT+7).",
+        "✨ Ra mắt tính năng 'Phân tích nhanh' dành cho người dùng cao cấp.",
+        "📢 Chúng tôi lắng nghe phản hồi: Cập nhật giao diện theo xu hướng 2026."
+    ];
+
+    // Hàm format ngày tháng hiện tại VN
+    function getCurrentFormattedDate() {
+        const now = new Date();
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        return now.toLocaleString('vi-VN', options).replace(',', ' -');
+    }
+
+    // Cập nhật timestamp ở header
+    function updateTimestamp() {
+        const tsElement = document.getElementById('liveTimestamp');
+        if (tsElement) {
+            tsElement.textContent = getCurrentFormattedDate();
+        }
+    }
+
+    // Render danh sách changelog từ dữ liệu chính thức (hiển thị thứ tự mới nhất lên đầu)
+    function renderChangelog() {
+        const container = document.getElementById('changelogList');
+        if (!container) return;
+
+        // Đảm bảo thứ tự giảm dần theo version (mới nhất lên đầu) - v2.5.0 > v2.4.2 ...
+        // Dữ liệu đã được sắp xếp thủ công mới nhất đầu mảng, nhưng để an toàn, sort theo version.
+        const sortedData = [...changelogData].sort((a, b) => {
+            const toNum = (v) => parseInt(v.version.replace('v', '').replace(/\./g, ''), 10);
+            return toNum(b.version) - toNum(a.version);
+        });
+
+        let html = '';
+        sortedData.forEach(item => {
+            // tạo mô tả dạng danh sách
+            let listItems = '';
+            item.features.forEach(feat => {
+                listItems += `<li>${feat}</li>`;
+            });
+            html += `
+                <div class="update-card">
+                    <div class="version-row">
+                        <span class="version-tag">${item.version}</span>
+                        <span class="date-badge">📅 ${item.date}</span>
+                    </div>
+                    <div class="update-title">${item.title}</div>
+                    <ul class="desc-list">
+                        ${listItems}
+                    </ul>
+                    <div style="margin-top:10px;">
+                        <span class="feature-tag">Chính thức</span>
+                        <span class="feature-tag">Đã xác thực</span>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    // Cập nhật thông báo bên sidebar (chạy live feed xoay vòng theo giây hoặc lấy ngẫu nhiên)
+    let announcementInterval;
+    function updateLiveAnnouncement() {
+        const announcementDiv = document.getElementById('liveAnnouncement');
+        if (!announcementDiv) return;
+        // Lấy ngẫu nhiên 1 thông báo (mô phỏng feed chính thức)
+        const randomIndex = Math.floor(Math.random() * officialAnnouncements.length);
+        const message = officialAnnouncements[randomIndex];
+        // Thêm hiệu ứng nhẹ, kèm thời gian thực
+        const timeMark = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+        announcementDiv.innerHTML = `
+            <div style="display:flex; flex-direction:column; gap:6px;">
+                <div style="font-weight:600;">🔔 CẬP NHẬT MỚI (${timeMark})</div>
+                <div>${message}</div>
+                <div style="font-size:0.7rem; color:#588197; border-top: 0.5px dashed #c9e0e8; margin-top:5px; padding-top:5px;">✅ Nguồn: Trang thông tin chính thức</div>
+            </div>
+        `;
+    }
+
+    // Hàm mô phỏng thay đổi footer version tag (động theo bản mới nhất)
+    function updateFooterVersion() {
+        const footerTag = document.getElementById('footerVersionTag');
+        if (footerTag && changelogData.length) {
+            const latestVersion = changelogData.reduce((max, curr) => {
+                const currNum = parseFloat(curr.version.replace('v', ''));
+                const maxNum = parseFloat(max.version.replace('v', ''));
+                return currNum > maxNum ? curr : max;
+            }, changelogData[0]);
+            footerTag.textContent = `phiên bản ổn định: ${latestVersion.version} (mới nhất)`;
+        } else if (footerTag) {
+            footerTag.textContent = `phiên bản ổn định: 2.5.0`;
+        }
+    }
+
+    // Xử lý link hỗ trợ mô phỏng (không điều hướng thực tế nhưng giữ style official)
+    function initFakeLink() {
+        const link = document.getElementById('fakeSupportLink');
+        if (link) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Tạo thông báo nhẹ nhàng mang tính trực quan
+                alert("📘 Trang hỗ trợ chính thức (Demo) - Mọi thông tin cập nhật được đảm bảo chính xác.\nHotline: 1900 1234 (giả lập)");
+            });
+        }
+    }
+
+    // Khởi tạo hiệu ứng đồng bộ và lưu trạng thái "chính thức cập nhật"
+    function initOfficialDynamic() {
+        updateTimestamp();
+        renderChangelog();
+        updateLiveAnnouncement();
+        updateFooterVersion();
+        initFakeLink();
+
+        // Cập nhật timestamp mỗi giây (giữ cho người dùng thấy thời gian thực)
+        setInterval(() => {
+            updateTimestamp();
+        }, 1000);
+
+        // Xoay vòng thông báo mỗi 10 giây, tạo cảm giác luôn có tin mới nhưng vẫn ổn định
+        announcementInterval = setInterval(() => {
+            updateLiveAnnouncement();
+        }, 10000);
+    }
+
+    // Thêm một hiệu ứng nhỏ cho trang web: xác nhận tải thành công console (mang tính chuyên nghiệp)
+    window.addEventListener('DOMContentLoaded', () => {
+        initOfficialDynamic();
+        console.log("✅ Website chính thức cập nhật | Hệ thống sẵn sàng | Bản quyền thuộc nền tảng chính thức");
+    });
+
+    // Optional: Khi thoát trang hoặc có thể dọn dẹp interval (tránh rò rỉ nhưng không bắt buộc trong SPA đơn giản)
+    window.addEventListener('beforeunload', () => {
+        if (announcementInterval) clearInterval(announcementInterval);
+    });
+</script>
 </body>
 </html>
