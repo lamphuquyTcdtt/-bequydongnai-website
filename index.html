@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Lâm Phú Quý · Giới thiệu cá nhân</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Lâm Phú Quý - Giới thiệu cá nhân | MV Hồi Kết chính thức ngày 01/12/2026. Website cá nhân hiện đại, đẹp mắt.">
+  <title>Lâm Phú Quý · MV Hồi Kết & Profile</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%234f46e5' cx='50' cy='50' r='45'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3ELQ%3C/text%3E%3C/svg%3E">
-  
-  <!-- ⚡ Tối ưu hiệu suất cao: preconnect + font-display swap -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN với fallback tối ưu cache -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
   <style>
-    /* ========== RESET & BIẾN TOÀN CỤC ========== */
     * {
       margin: 0;
       padding: 0;
@@ -25,27 +21,24 @@
       --primary: #6366f1;
       --primary-glow: #818cf8;
       --dark-bg: #0a0a0f;
-      --card-bg: rgba(15, 15, 25, 0.65);
+      --card-bg: rgba(15, 15, 25, 0.7);
       --glass-border: rgba(255, 255, 255, 0.08);
       --text-light: #f1f5f9;
       --text-dim: #a1a1b9;
+      --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.3);
     }
 
-    /* ⚡ Tối ưu render: will-change, transform GPU */
     body {
       background: var(--dark-bg);
       font-family: 'Inter', sans-serif;
       color: var(--text-light);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* Background gradient nhẹ - giảm opacity để tiết kiệm CPU */
+    /* animated gradient background */
     body::before {
       content: '';
       position: fixed;
@@ -53,44 +46,43 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+      background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Orbs - giảm số lượng, dùng transform */
+    /* floating orbs */
     .orb {
       position: fixed;
       border-radius: 50%;
       filter: blur(60px);
-      opacity: 0.3;
+      opacity: 0.35;
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
     }
-    .orb-1 { width: 250px; height: 250px; background: #6366f1; top: -80px; left: -80px; }
-    .orb-2 { width: 300px; height: 300px; background: #ec4899; bottom: -100px; right: -100px; }
-    .orb-3 { width: 180px; height: 180px; background: #14b8a6; top: 60%; left: 85%; display: none; } /* ẩn bớt 1 orb trên mobile */
+    .orb-1 { width: 350px; height: 350px; background: #6366f1; top: -120px; left: -100px; }
+    .orb-2 { width: 450px; height: 450px; background: #ec4899; bottom: -150px; right: -150px; }
+    .orb-3 { width: 280px; height: 280px; background: #14b8a6; top: 60%; left: 75%; }
 
-    /* FPS counter nhẹ */
+    /* FPS panel */
     .fps-panel {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       backdrop-filter: blur(8px);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 30px;
-      font-size: 11px;
+      font-size: 12px;
       font-family: monospace;
       z-index: 999;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
       color: #a5f3c3;
-      pointer-events: none;
+      font-weight: 500;
     }
 
-    /* ===== SNOW LIGHTWEIGHT (ít bông hơn, dùng GPU) ===== */
+    /* Snow animation */
     .snow {
       position: fixed;
       top: 0;
@@ -103,101 +95,99 @@
     }
     .snowflake {
       position: absolute;
-      color: rgba(255,255,240,0.6);
+      color: rgba(255,255,245,0.7);
       user-select: none;
-      font-weight: 300;
       animation: snowDrift linear infinite;
-      will-change: transform;
+      text-shadow: 0 0 3px rgba(100,150,255,0.4);
     }
     @keyframes snowDrift {
       0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.2; }
+      10% { opacity: 0.8; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* ===== MAIN GLASS CARD (giữ nguyên style, thêm will-change) ===== */
-    .glass-card {
+    /* Main container: 2 columns trên desktop, mobile xếp dọc */
+    .main-grid {
+      max-width: 1280px;
+      margin: 0 auto;
       position: relative;
       z-index: 20;
-      width: 100%;
-      max-width: 540px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 1.8rem;
+      align-items: start;
+    }
+
+    /* Glass card chung */
+    .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px) saturate(180%);
       border-radius: 2rem;
       border: 1px solid var(--glass-border);
-      padding: 2rem 1.8rem;
-      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5), 0 1px 0 0 rgba(255,255,255,0.05) inset;
+      padding: 1.8rem;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.4), 0 1px 0 0 rgba(255,255,255,0.05) inset;
       transition: transform 0.2s ease;
     }
-    .glass-card:hover {
-      transform: translateY(-2px);
-    }
 
-    /* avatar ring animation - dùng GPU */
+    /* avatar + profile */
     .avatar-wrapper {
       position: relative;
       width: fit-content;
       margin: 0 auto 1rem;
     }
     .avatar {
-      width: 128px;
-      height: 128px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid rgba(99,102,241,0.6);
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      will-change: transform;
+      border: 3px solid rgba(99,102,241,0.7);
+      box-shadow: var(--shadow-neon);
+      transition: transform 0.4s ease;
     }
-    .avatar:hover {
-      transform: scale(1.02) rotate(3deg);
-    }
+    .avatar:hover { transform: scale(1.02) rotate(2deg); }
     .avatar-ring {
       position: absolute;
       inset: -6px;
       border-radius: 50%;
       background: conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1);
-      opacity: 0.5;
+      opacity: 0.6;
       z-index: -1;
       animation: spin 6s linear infinite;
-      will-change: transform;
     }
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
 
     .name {
       font-family: 'Space Grotesk', monospace;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
       text-align: center;
       background: linear-gradient(to right, #ffffff, #c7d2fe);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      width: 100%;
+      flex-wrap: wrap;
     }
     .verified-badge {
-      display: inline-flex;
       background: #1e1b4b;
       border-radius: 40px;
-      padding: 4px 8px;
+      padding: 4px 10px;
       font-size: 0.7rem;
       font-weight: bold;
       color: #a78bfa;
-      gap: 4px;
+      display: inline-flex;
       align-items: center;
+      gap: 6px;
     }
 
-    /* BIO SECTION */
     .bio-section {
       background: rgba(0,0,0,0.4);
       border-radius: 1.5rem;
-      padding: 1rem 1.2rem;
-      margin: 1rem 0 1.2rem;
+      padding: 1rem;
+      margin: 1.2rem 0;
       border-left: 3px solid #6366f1;
     }
     .bio-item {
@@ -209,373 +199,457 @@
       font-weight: 500;
       color: #e2e8f0;
       flex-wrap: wrap;
-      transition: transform 0.15s ease;
     }
-    .bio-item i {
-      width: 28px;
-      color: #818cf8;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-    .bio-item strong {
-      font-weight: 700;
-      color: #c4b5fd;
-      margin-right: 6px;
-    }
-    .badge-location {
-      background: #14b8a620;
-      padding: 4px 12px;
-      border-radius: 30px;
-      display: inline-block;
-      font-size: 0.8rem;
-      backdrop-filter: blur(2px);
-    }
-
-    .info-panel {
-      background: rgba(0,0,0,0.35);
-      border-radius: 1.5rem;
-      padding: 1rem;
-      margin: 1rem 0;
-      text-align: center;
-      backdrop-filter: blur(4px);
-    }
-    .highlight-text {
-      background: linear-gradient(120deg, #ff8a5c, #ff3a6f);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      font-weight: 800;
-    }
-    .zalo-link {
-      color: #2dd4bf;
-      font-weight: 600;
-      text-decoration: none;
-      border-bottom: 1px dashed #2dd4bf;
-    }
-
-    /* BUTTONS - tương tác nhẹ */
+    .bio-item i { width: 26px; color: #818cf8; }
     .social-buttons {
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
-      margin: 1.8rem 0 1.5rem;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
     }
     .social-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      background: rgba(20, 20, 35, 0.7);
+      gap: 0.7rem;
+      background: rgba(20,20,35,0.7);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 60px;
-      padding: 0.9rem 1rem;
-      color: white;
+      padding: 0.8rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
-      backdrop-filter: blur(4px);
-      cursor: pointer;
+      color: white;
+      transition: 0.2s;
     }
-    .social-btn i {
-      font-size: 1.3rem;
-      transition: transform 0.15s;
-    }
-    .social-btn:hover {
-      transform: translateY(-2px);
-      background: white;
-      color: #0f0f1a;
-      border-color: white;
-    }
+    .social-btn:hover { transform: translateY(-3px); background: white; color: #0f0f1a; }
     .btn-phone:hover { background: #22c55e; color: white; }
     .btn-facebook:hover { background: #1877f2; color: white; }
-    .btn-tiktok:hover { background: #000000; color: #fe2c55; }
-    .btn-github:hover { background: #2d3748; color: #f0f0f0; }
+    .btn-tiktok:hover { background: black; color: #fe2c55; }
+    .btn-github:hover { background: #2d3748; color: white; }
 
-    /* TIMER + MUSIC */
-    .timer-block {
-      background: rgba(0,0,0,0.45);
-      border-radius: 60px;
-      padding: 0.6rem;
-      text-align: center;
-      font-family: 'Space Grotesk', monospace;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
+    /* --- MV Article Style (bài viết) --- */
+    .mv-article {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      border: 1px solid var(--glass-border);
+      padding: 1.8rem;
+      position: relative;
+      transition: 0.2s;
     }
+    .mv-thumbnail {
+      width: 100%;
+      border-radius: 1.5rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 15px 30px -12px black;
+      transition: transform 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .mv-thumbnail:hover { transform: scale(1.01); }
+    .mv-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFB347, #FF6B6B);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+    .mv-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.2);
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+    }
+    .release-date {
+      background: #ec489920;
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    .sponsor {
+      color: #c084fc;
+    }
+    .mv-description {
+      line-height: 1.55;
+      color: #e2e8f0;
+      margin: 1rem 0;
+    }
+    .rating-stars {
+      background: rgba(0,0,0,0.3);
+      padding: 0.8rem;
+      border-radius: 1.2rem;
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stars-group i {
+      color: #fbbf24;
+      margin-right: 3px;
+    }
+    .review-list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .review-list span {
+      background: rgba(99,102,241,0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .stats-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      background: rgba(0,0,0,0.45);
+      flex: 1;
+      text-align: center;
+      padding: 0.8rem 0.5rem;
+      border-radius: 1.2rem;
+      backdrop-filter: blur(4px);
+    }
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: block;
+      color: #facc15;
+    }
+    .live-badge {
+      background: #ef4444;
+      border-radius: 40px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse { 0% { opacity: 0.7; } 100% { opacity: 1; } }
+    .idol-fan {
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: #1e1b4b;
+      border-radius: 60px;
+      padding: 8px 12px;
+      font-weight: 800;
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+
     .music-selector {
       width: 100%;
       background: #111111bb;
       border: 1px solid #2d2d44;
       border-radius: 40px;
-      padding: 12px 18px;
+      padding: 10px 16px;
       color: white;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      text-align: center;
+      margin-top: 12px;
       cursor: pointer;
     }
-    .music-note {
+    .timer-block {
+      background: rgba(0,0,0,0.45);
+      border-radius: 60px;
+      padding: 0.5rem;
       text-align: center;
-      font-size: 10px;
-      margin-top: 8px;
-      opacity: 0.6;
+      font-size: 0.75rem;
+      margin-top: 1rem;
     }
 
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      body { padding: 1rem; }
+      .mv-title { font-size: 1.5rem; }
+    }
     @media (max-width: 500px) {
-      .glass-card { padding: 1.5rem; }
-      .name { font-size: 1.7rem; }
-      .avatar { width: 100px; height: 100px; }
-      .orb-3 { display: none; }
-      .snowflake { font-size: 10px !important; }
+      .glass-card, .mv-article { padding: 1.2rem; }
+      .name { font-size: 1.5rem; }
+      .stats-cards { flex-direction: column; }
     }
-
-    /* Hiệu ứng ánh sáng theo chuột (không ảnh hưởng performance) */
-    .glass-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08) 0%, transparent 70%);
-      pointer-events: none;
-      border-radius: inherit;
-      transition: background 0.05s linear;
-    }
+    .fa-beat-fade { animation: fa-beat-fade 1s infinite; }
   </style>
 </head>
 <body>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="fps-panel" id="fpsMeter">⚡ FPS: --</div>
-  <div class="snow" id="snowfield"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="fps-panel" id="fpsMeter">⚡ FPS: 0</div>
+<div class="snow" id="snowfield"></div>
 
-  <main class="glass-card">
+<div class="main-grid">
+  <!-- Cột trái: Hồ sơ cá nhân -->
+  <div class="glass-card">
     <div class="avatar-wrapper">
       <div class="avatar-ring"></div>
-      <!-- Ảnh đại diện với fallback tối ưu -->
-      <img src="https://sf-static.upanhlaylink.com/img/image_20260531aebe1ef56462bdd6ab9fe674685d3374.jpg" alt="Lâm Phú Quý" class="avatar" id="avatarImg" loading="eager"
+      <img src="https://sf-static.upanhlaylink.com/img/image_20260531aebe1ef56462bdd6ab9fe674685d3374.jpg" alt="Lâm Phú Quý" class="avatar" id="avatarImg"
            onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?background=6366f1&color=fff&rounded=true&bold=true&size=128&name=Quy+2006';">
     </div>
-    <h1 class="name">
-      Lâm Phú Quý
-      <span class="verified-badge"><i class="fas fa-check-circle"></i> Gen Z</span>
-    </h1>
-
+    <h1 class="name">Lâm Phú Quý <span class="verified-badge"><i class="fas fa-check-circle"></i> Gen Z</span></h1>
     <div class="bio-section">
-      <div class="bio-item">
-        <i class="fas fa-calendar-alt"></i>
-        <span><strong>🎂 Sinh năm:</strong> 2006 · 20 tuổi</span>
-      </div>
-      <div class="bio-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <span><strong>📍 Quê quán:</strong> Nhơn Trạch, Đồng Nai</span>
-        <span class="badge-location"><i class="fas fa-home"></i> Đang sinh sống</span>
-      </div>
-      <div class="bio-item">
-        <i class="fas fa-laptop-code"></i>
-        <span><strong>💻 Thiết kế web:</strong> UI/UX hiện đại, tốc độ cao, chuẩn SEO</span>
-      </div>
-      <div class="bio-item">
-        <i class="fas fa-heart" style="color: #f472b6;"></i>
-        <span><strong>✨ Đam mê:</strong> Công nghệ, Lập trình, Sáng tạo nội dung</span>
-      </div>
+      <div class="bio-item"><i class="fas fa-calendar-alt"></i> <span><strong>🎂 Sinh năm:</strong> 2006 · 20 tuổi</span></div>
+      <div class="bio-item"><i class="fas fa-map-marker-alt"></i> <span><strong>📍 Quê quán:</strong> Nhơn Trạch, Đồng Nai</span></div>
+      <div class="bio-item"><i class="fas fa-laptop-code"></i> <span><strong>💻 Thiết kế web:</strong> UI/UX hiện đại, tốc độ cao</span></div>
+      <div class="bio-item"><i class="fas fa-heart" style="color:#f472b6;"></i> <span><strong>✨ Đam mê:</strong> Công nghệ, Sáng tạo nội dung</span></div>
     </div>
-
-    <div class="info-panel">
-      <p><i class="fas fa-code"></i> THIẾT KẾ WEBSITE THEO YÊU CẦU | CHUYÊN NGHIỆP</p>
-      <p><i class="fas fa-chart-line"></i> CHUẨN SEO, UX/UI, TỐI ƯU CHUYỂN ĐỔI</p>
-      <p class="highlight-text"><i class="fas fa-shield-alt"></i> BẢO HÀNH ĐẾN KHI HÀI LÒNG</p>
-      <p><i class="fab fa-zalo"></i> ZALO: <a href="https://zalo.me/0817813259" target="_blank" class="zalo-link">0817.813.259</a> | <i class="fas fa-phone-alt"></i> 0817.813.259</p>
-    </div>
-
     <div class="social-buttons">
       <a href="tel:+84817813259" class="social-btn btn-phone"><i class="fas fa-phone-alt"></i> Gọi ngay tư vấn</a>
       <a href="https://www.facebook.com/share/1CfHWo3sHx/?mibextid=wwXIfr" target="_blank" class="social-btn btn-facebook"><i class="fab fa-facebook"></i> Facebook cá nhân</a>
       <a href="https://www.tiktok.com/@bequy2" target="_blank" class="social-btn btn-tiktok"><i class="fab fa-tiktok"></i> TikTok · BeQuy2</a>
       <a href="https://github.com/lamphuquy" target="_blank" class="social-btn btn-github"><i class="fab fa-github"></i> GitHub Portfolio</a>
     </div>
+    <div class="timer-block">
+      🚀 <span>Ngày khởi tạo profile</span> · <span id="liveTimer">00d 00h 00m 00s</span>
+    </div>
+    <div>
+      <select id="songSelect" class="music-selector">
+        <option value="">🎵 Chọn nhạc nền thư giãn</option>
+        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🌿 Lofi Chill</option>
+        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">🎧 Deep & Melodic</option>
+        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">🎸 Acoustic Vibes</option>
+        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">⚡ Energetic</option>
+      </select>
+      <audio id="bgAudio" loop></audio>
+      <div class="music-note" style="font-size:10px; margin-top:6px; text-align:center;"><i class="fas fa-headphones"></i> Thư giãn cùng playlist</div>
+    </div>
+  </div>
 
-    <footer>
-      <div class="timer-block">
-        🚀 <span>Ngày khởi tạo profile</span> · <span id="liveTimer">00d 00h 00m 00s</span>
+  <!-- Cột phải: Bài viết MV HỒI KẾT -->
+  <div class="mv-article">
+    <!-- Thumbnail mới theo yêu cầu -->
+    <img class="mv-thumbnail" src="https://sf-static.upanhlaylink.com/img/image_202606022cb4090b84847572d780d314d38557d0.jpg" alt="MV Hồi Kết thumbnail" 
+         onerror="this.src='https://placehold.co/800x500/1e1b4b/white?text=MV+H%E1%BB%93i+K%E1%BA%BFt'">
+    
+    <div class="mv-title">
+      🎵 MV CA NHẠC MỚI: HỒI KẾT
+    </div>
+    <div class="mv-meta">
+      <span class="release-date"><i class="far fa-calendar-alt"></i> 01/12/2026</span>
+      <span class="sponsor"><i class="fas fa-trophy"></i> Nhà tài trợ: LPQ MEDIA</span>
+    </div>
+    <div class="mv-description">
+      <p>Sau nhiều thời gian ấp ủ và chuẩn bị, MV ca nhạc <strong>“HỒI KẾT”</strong> chính thức được công bố lịch phát hành vào ngày <strong>01/12/2026</strong>.</p>
+      <p style="margin-top: 10px;">Đây là một sản phẩm âm nhạc mang màu sắc cảm xúc sâu lắng, kể về những câu chuyện còn dang dở, những ký ức không thể quay trở lại và những lời tạm biệt cuối cùng trong một mối quan hệ. “HỒI KẾT” không chỉ là một bài hát, mà còn là hành trình nhìn lại những cảm xúc đã qua để khép lại một chương cũ của cuộc đời.</p>
+      <p style="margin-top: 8px;">🎬 Với sự đầu tư chỉn chu về hình ảnh, âm thanh và nội dung, MV hứa hẹn sẽ mang đến cho khán giả những thước phim đầy cảm xúc cùng những giai điệu chạm đến trái tim người nghe.</p>
+      <p style="margin-top: 10px;"><i class="fas fa-globe"></i> <strong>📅 Lịch phát hành chính thức:</strong> 01/12/2026 &nbsp;|&nbsp; <strong>🏢 Nhà tài trợ:</strong> LPQ MEDIA<br>
+      🌐 <strong>MV sẽ được công chiếu tại website chính thức:</strong> <a href="https://bequy.vercel.app" target="_blank" style="color:#a78bfa;">https://bequy.vercel.app</a></p>
+      <p style="margin-top: 12px;">❤️ Xin chân thành cảm ơn tất cả mọi người đã luôn đồng hành, ủng hộ và chờ đợi sản phẩm lần này. Hãy cùng đón chờ sự ra mắt của MV “HỒI KẾT” vào ngày 01/12/2026 và đừng quên chia sẻ để lan tỏa sản phẩm đến nhiều người hơn.</p>
+      <div style="margin-top: 12px; font-size:0.8rem; background: #00000040; padding: 8px; border-radius: 30px; text-align: center;">
+        #HoiKet #MVHoiKet #LPQMEDIA #BeQuyDongNai #MusicVideo #ComingSoon
       </div>
-      <div class="music-player">
-        <select id="songSelect" class="music-selector">
-          <option value="">🎵 Chọn nhạc nền thư giãn</option>
-          <option value="https://files.catbox.moe/vc4fbn.mp3">🎧 Nhạc nền chính (Tùy chỉnh)</option>
-          <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🌿 Lofi Chill</option>
-          <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">🎧 Deep & Melodic</option>
-          <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">🎸 Acoustic Vibes</option>
-        </select>
-        <audio id="bgAudio" loop preload="none"></audio>
-        <div class="music-note"><i class="fas fa-headphones"></i> Thư giãn cùng playlist | Nhấn chọn nhạc</div>
-      </div>
-    </footer>
-  </main>
+    </div>
 
-  <script>
-    (function() {
-      "use strict";
-      // ---------- FPS METER (nhẹ) ----------
-      let fpsCount = 0;
-      let lastFpsTime = performance.now();
-      function updateFPS() {
-        fpsCount++;
-        const now = performance.now();
-        if (now - lastFpsTime >= 1000) {
-          const fpsEl = document.getElementById('fpsMeter');
-          if (fpsEl) fpsEl.innerHTML = `⚡ FPS: ${fpsCount}`;
-          fpsCount = 0;
-          lastFpsTime = now;
-        }
-        requestAnimationFrame(updateFPS);
+    <!-- Lượt đánh giá + sao -->
+    <div class="rating-stars">
+      <div class="stars-group">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        <span style="margin-left: 5px;">5.0 · 5 sao tuyệt vời</span>
+      </div>
+      <div class="review-list">
+        <span>⭐ Hoàng Tuấn Kha 5★</span>
+        <span>⭐ Hải Hân 5★</span>
+        <span>⭐ Giao Trung 5★</span>
+      </div>
+    </div>
+
+    <!-- Thống kê: like, bình luận, lượt truy cập server, IDOL nữ đang phát trực tiếp -->
+    <div class="stats-cards">
+      <div class="stat-item"><span class="stat-number">56K</span><span style="font-size:0.7rem;"> ❤️ Lượt like</span></div>
+      <div class="stat-item"><span class="stat-number">90</span><span style="font-size:0.7rem;"> 💬 Bình luận</span></div>
+      <div class="stat-item"><span class="stat-number">12M</span><span style="font-size:0.7rem;"> 🌐 Truy cập server</span></div>
+      <div class="stat-item"><span class="stat-number">56</span><span style="font-size:0.7rem;"> 🎤 IDOL NỮ trực tiếp</span></div>
+    </div>
+    
+    <!-- trạng thái live + idol -->
+    <div class="idol-fan">
+      <i class="fas fa-circle text-danger" style="color: #ef4444; font-size: 12px; animation: pulse 1.2s infinite;"></i> ĐANG PHÁT TRỰC TIẾP · IDOL NỮ 56 người tham gia · <i class="fas fa-chart-line"></i> Xu hướng #1
+    </div>
+    <div class="timer-block" style="margin-top: 1rem; background: rgba(0,0,0,0.5);">
+      ⏳ Đếm ngược tới ngày ra mắt MV: <span id="countdownMV" style="color:#facc15; font-weight:bold;"></span>
+    </div>
+    <div style="margin-top: 12px; text-align: center; font-size: 12px;">
+      <i class="fas fa-chart-simple"></i> Máy chủ đạt 12 triệu lượt truy cập · LPQ MEDIA
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    // FPS
+    let fpsCount = 0;
+    let lastFpsTime = performance.now();
+    function updateFPS(){
+      fpsCount++;
+      const now = performance.now();
+      if(now - lastFpsTime >= 1000){
+        const fpsEl = document.getElementById('fpsMeter');
+        if(fpsEl) fpsEl.innerHTML = `⚡ FPS: ${fpsCount}`;
+        fpsCount = 0;
+        lastFpsTime = now;
       }
       requestAnimationFrame(updateFPS);
+    }
+    requestAnimationFrame(updateFPS);
 
-      // ---------- SNOWFALL TỐI ƯU (giảm số lượng, dùng class + transform) ----------
-      const snowContainer = document.getElementById('snowfield');
-      if (snowContainer) {
-        const snowChars = ['❄️', '❄', '✧', '✨'];
-        // Giảm số lượng bông tuyết: 30-40 thay vì 70 để tiết kiệm CPU khi lượng truy cập lớn
-        const flakeCount = Math.min(38, window.innerWidth < 768 ? 28 : 38);
-        for (let i = 0; i < flakeCount; i++) {
-          const flake = document.createElement('div');
-          flake.classList.add('snowflake');
-          flake.innerHTML = snowChars[Math.floor(Math.random() * snowChars.length)];
-          const size = 8 + Math.random() * 16;
-          const leftPos = Math.random() * 100;
-          const duration = 4 + Math.random() * 7;
-          const delay = Math.random() * -15;
-          const opacity = 0.3 + Math.random() * 0.5;
-          flake.style.cssText = `left: ${leftPos}%; font-size: ${size}px; animation-duration: ${duration}s; animation-delay: ${delay}s; opacity: ${opacity};`;
-          snowContainer.appendChild(flake);
-        }
+    // Snow
+    const snowContainer = document.getElementById('snowfield');
+    if(snowContainer){
+      const snowChars = ['❄️','❄','✧','✨','❅'];
+      const flakeCount = Math.min(65, window.innerWidth<768?45:65);
+      for(let i=0;i<flakeCount;i++){
+        const flake = document.createElement('div');
+        flake.classList.add('snowflake');
+        flake.innerHTML = snowChars[Math.floor(Math.random()*snowChars.length)];
+        const size = 8+Math.random()*20;
+        const leftPos = Math.random()*100;
+        const duration = 3.5+Math.random()*8;
+        const delay = Math.random()*-15;
+        flake.style.cssText = `left:${leftPos}%; font-size:${size}px; animation-duration:${duration}s; animation-delay:${delay}s; opacity:${0.3+Math.random()*0.6};`;
+        snowContainer.appendChild(flake);
       }
+    }
 
-      // ---------- MUSIC PLAYER (CẬP NHẬT NHẠC NỀN TỪ FILE MP3 MỚI) ----------
-      const audio = document.getElementById('bgAudio');
-      const selectSong = document.getElementById('songSelect');
-      if (audio && selectSong) {
-        audio.volume = 0.3;
-        let userInteracted = false;
-        
-        // Lưu lựa chọn nhạc từ localStorage (tăng trải nghiệm)
-        const savedSong = localStorage.getItem('preferredSong');
-        if (savedSong && savedSong !== '') {
-          selectSong.value = savedSong;
-          // Không tự phát, chỉ lưu lại nguồn
-          if (savedSong) {
-            audio.src = savedSong;
-            audio.load();
-          }
-        }
-        
-        selectSong.addEventListener('change', async (e) => {
-          const url = e.target.value;
-          localStorage.setItem('preferredSong', url);
-          if (!url) {
-            audio.pause();
-            audio.src = '';
-            return;
-          }
+    // audio
+    const audio = document.getElementById('bgAudio');
+    const selectSong = document.getElementById('songSelect');
+    if(audio && selectSong){
+      audio.volume = 0.3;
+      selectSong.addEventListener('change', async (e) => {
+        const url = e.target.value;
+        if(!url){ audio.pause(); audio.src = ''; return; }
+        try{
           audio.src = url;
           audio.load();
-          // Chỉ phát nếu người dùng đã tương tác (click chuột vào trang)
-          if (userInteracted) {
-            try {
-              await audio.play();
-            } catch (err) { console.log("autoplay blocked, need interaction"); }
-          } else {
-            // Đợi lần tương tác đầu tiên
-            const startPlayback = async () => {
-              if (selectSong.value !== '' && audio.src && audio.paused) {
-                try {
-                  await audio.play();
-                  userInteracted = true;
-                } catch(e) {}
-              }
-              document.removeEventListener('click', startPlayback);
-              document.removeEventListener('touchstart', startPlayback);
-            };
-            document.addEventListener('click', startPlayback);
-            document.addEventListener('touchstart', startPlayback);
-          }
-        });
-        
-        // Ghi nhận tương tác toàn trang để phát nhạc sau khi chọn
-        const setInteraction = () => { userInteracted = true; };
-        document.body.addEventListener('click', setInteraction);
-        document.body.addEventListener('touchstart', setInteraction);
+          await audio.play();
+        } catch(err){
+          const playOnInteraction = () => {
+            if(selectSong.value !== '' && audio.paused && audio.src){
+              audio.play().catch(e=>{});
+            }
+            document.removeEventListener('click', playOnInteraction);
+            document.removeEventListener('touchstart', playOnInteraction);
+          };
+          document.addEventListener('click', playOnInteraction);
+          document.addEventListener('touchstart', playOnInteraction);
+        }
+      });
+    }
+    let audioGlobal = false;
+    const globalHandler = () => {
+      if(!audioGlobal && audio && selectSong && selectSong.value !== '' && audio.paused && audio.src){
+        audio.play().catch(()=>{});
+        audioGlobal = true;
       }
+    };
+    document.body.addEventListener('click', globalHandler);
+    document.body.addEventListener('touchstart', globalHandler);
 
-      // ---------- TIMER (từ mốc 01/06/2025) ----------
-      const timerSpan = document.getElementById('liveTimer');
-      if (timerSpan) {
-        const startDate = new Date(2025, 5, 1, 0, 0, 0);
-        function updateTimer() {
-          const now = new Date();
-          const diffSeconds = Math.floor((now - startDate) / 1000);
-          if (diffSeconds <= 0) {
-            timerSpan.innerText = `0d 00h 00m 00s`;
-            return;
-          }
-          const days = Math.floor(diffSeconds / 86400);
-          const hours = Math.floor((diffSeconds % 86400) / 3600);
-          const mins = Math.floor((diffSeconds % 3600) / 60);
-          const secs = diffSeconds % 60;
+    // timer profile from 1/6/2025
+    const timerSpan = document.getElementById('liveTimer');
+    if(timerSpan){
+      const startDate = new Date(2025,5,1,0,0,0);
+      function updateTimer(){
+        const now = new Date();
+        const diff = Math.floor((now-startDate)/1000);
+        if(diff<=0) timerSpan.innerText = `0d 00h 00m 00s`;
+        else{
+          const days = Math.floor(diff/86400);
+          const hours = Math.floor((diff%86400)/3600);
+          const mins = Math.floor((diff%3600)/60);
+          const secs = diff%60;
           timerSpan.innerText = `${days}d ${hours.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;
         }
-        updateTimer();
-        setInterval(updateTimer, 1000);
       }
+      updateTimer();
+      setInterval(updateTimer,1000);
+    }
 
-      // ---------- HIỆU ỨNG ÁNH SÁNG CHUỘT (dùng CSS thuần, không ảnh hưởng JS) ----------
-      const card = document.querySelector('.glass-card');
-      if (card) {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mouse-x', `${x}%`);
-          card.style.setProperty('--mouse-y', `${y}%`);
-        });
+    // Countdown MV: 01/12/2026
+    const countdownSpan = document.getElementById('countdownMV');
+    if(countdownSpan){
+      const targetDate = new Date(2026, 11, 1, 0, 0, 0);
+      function updateCountdown(){
+        const now = new Date();
+        const diffMs = targetDate - now;
+        if(diffMs <= 0){
+          countdownSpan.innerText = "Đã phát hành! 🎬";
+          return;
+        }
+        const days = Math.floor(diffMs / (1000*60*60*24));
+        const hours = Math.floor((diffMs % (86400000))/3600000);
+        const mins = Math.floor((diffMs % 3600000)/60000);
+        const secs = Math.floor((diffMs % 60000)/1000);
+        countdownSpan.innerText = `${days} ngày ${hours.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;
       }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
 
-      // ---------- FALLBACK ẢNH ĐẠI DIỆN ----------
-      const avatar = document.getElementById('avatarImg');
-      if (avatar) {
-        avatar.addEventListener('error', () => {
-          if (!avatar.src.includes('ui-avatars')) {
-            avatar.src = 'https://ui-avatars.com/api/?background=8b5cf6&color=fff&rounded=true&bold=true&size=120&name=Quy+2006';
-          }
-        });
-      }
-
-      // ---------- THÊM HIỆU ỨNG HOVER NHẸ CHO BIO (không nặng) ----------
-      const bioItems = document.querySelectorAll('.bio-item');
-      bioItems.forEach(item => {
-        item.addEventListener('mouseenter', () => { item.style.transform = 'translateX(4px)'; });
-        item.addEventListener('mouseleave', () => { item.style.transform = 'translateX(0px)'; });
+    // ảnh avatar fallback
+    const avatarImg = document.getElementById('avatarImg');
+    if(avatarImg){
+      avatarImg.addEventListener('error', ()=>{
+        if(!avatarImg.src.includes('ui-avatars')) avatarImg.src = 'https://ui-avatars.com/api/?background=8b5cf6&color=fff&rounded=true&bold=true&size=120&name=Quy+2006';
       });
+    }
 
-      // ---------- THÔNG BÁO CONSOLE THÂN THIỆN ----------
-      console.log('✨ Profile Lâm Phú Quý | Sinh 2006 - Nhơn Trạch | Optimized for 3M visits/day | Nhạc nền đã cập nhật');
-      
-      // ---------- TỐI ƯU LƯU LƯỢNG: preload các liên kết chính ----------
-      const prefetchLinks = [
-        'https://www.facebook.com/share/1CfHWo3sHx/',
-        'https://www.tiktok.com/@bequy2'
-      ];
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          prefetchLinks.forEach(link => {
-            const prelink = document.createElement('link');
-            prelink.rel = 'prefetch';
-            prelink.href = link;
-            document.head.appendChild(prelink);
-          });
-        });
+    // Glass shine effect
+    const cardLeft = document.querySelector('.glass-card');
+    const cardRight = document.querySelector('.mv-article');
+    function addShineEffect(card){
+      if(!card) return;
+      card.style.position = 'relative';
+      card.style.overflow = 'hidden';
+      const styleId = 'shineEffectStyle';
+      if(!document.getElementById(styleId)){
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          .glass-card::after, .mv-article::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            border-radius: inherit;
+            transition: background 0.1s;
+          }
+        `;
+        document.head.appendChild(style);
       }
-    })();
-  </script>
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    }
+    addShineEffect(cardLeft);
+    addShineEffect(cardRight);
+
+    // hiệu ứng hover cho bio
+    document.querySelectorAll('.bio-item').forEach(item => {
+      item.style.transition = 'transform 0.2s';
+      item.addEventListener('mouseenter',()=>item.style.transform = 'translateX(5px)');
+      item.addEventListener('mouseleave',()=>item.style.transform = 'translateX(0)');
+    });
+
+    console.log("🔥 Lâm Phú Quý | MV Hồi Kết 01/12/2026 | Nhơn Trạch Đồng Nai | 56k like, 12tr truy cập");
+  })();
+</script>
 </body>
 </html>
