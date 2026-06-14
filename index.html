@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="description" content="Lâm Phú Quý - MV Hồi Kết & Hồi Hết | Mua Key chính thức xem MV chất lượng cao tại bequy.vercel.app">
-  <title>Lâm Phú Quý · MV Hồi Kết & Hồi Hết · Mua Key</title>
+  <title>Lâm Phú Quý · MV Hồi Kết & Hồi Hết · Vlog Đại Nam</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%234f46e5' cx='50' cy='50' r='45'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3ELQ%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -111,7 +111,7 @@
       align-items: start;
     }
 
-    .glass-card, .mv-article, .key-section {
+    .glass-card, .mv-article, .key-section, .vlog-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px) saturate(180%);
       border-radius: 2rem;
@@ -217,7 +217,7 @@
     .btn-tiktok:hover { background: black; color: #fe2c55; }
     .btn-github:hover { background: #2d3748; color: white; }
 
-    .mv-thumbnail {
+    .mv-thumbnail, .vlog-thumbnail {
       width: 100%;
       border-radius: 1.5rem;
       margin-bottom: 1.2rem;
@@ -234,7 +234,16 @@
       color: transparent;
       margin-bottom: 0.5rem;
     }
-    .mv-meta {
+    .vlog-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .mv-meta, .vlog-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -250,7 +259,7 @@
       border-radius: 40px;
       font-weight: 600;
     }
-    .mv-description {
+    .mv-description, .vlog-description {
       line-height: 1.55;
       color: #e2e8f0;
       margin: 1rem 0;
@@ -393,10 +402,17 @@
       font-size: 0.75rem;
       margin-top: 1rem;
     }
+    .vlog-highlight {
+      border-left: 4px solid #facc15;
+      background: rgba(250,204,21,0.08);
+      padding: 0.8rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+    }
     @media (max-width: 900px) {
       .main-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       body { padding: 1rem; }
-      .mv-title { font-size: 1.5rem; }
+      .mv-title, .vlog-title { font-size: 1.5rem; }
     }
     @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
     .live-badge { background: #ef4444; border-radius: 40px; padding: 2px 8px; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 4px; animation: pulse 1.2s infinite; }
@@ -443,7 +459,7 @@
       <div class="music-note" style="font-size:10px; margin-top:6px; text-align:center;"><i class="fas fa-headphones"></i> Thư giãn cùng playlist</div>
     </div>
 
-    <!-- KHU VỰC MUA KEY MV HỒI HẾT (đặt dưới profile) -->
+    <!-- KHU VỰC MUA KEY MV HỒI HẾT -->
     <div class="key-section" style="margin-top: 1.8rem;">
       <div class="key-title"><i class="fas fa-key"></i> MUA KEY XEM MV HỒI HẾT</div>
       <p style="margin: 10px 0; font-size:0.9rem;"><strong>HỒI HẾT</strong> – Tác phẩm âm nhạc được mong chờ, đầu tư chỉn chu hình ảnh, âm thanh và nội dung điện ảnh. Sở hữu key chính thức để trải nghiệm Full HD, âm thanh sống động.</p>
@@ -474,68 +490,99 @@
         ✔ Đội ngũ hỗ trợ 24/7 nếu gặp lỗi.<br>
         🔒 Bảo mật thông tin tuyệt đối.
       </div>
-      <div style="font-size: 0.7rem; margin-top: 12px; text-align: center; color: #cbd5e1;">
-        <i class="fas fa-shield-alt"></i> Cam kết giao key nhanh chóng · Hệ thống ổn định
-      </div>
     </div>
   </div>
 
-  <!-- Cột phải: Bài viết MV HỒI KẾT + Key xem + Thumbnail mới -->
-  <div class="mv-article">
-    <!-- Thumbnail mới từ link IBB (CAF69FB8...) -->
-    <a href="https://ibb.co/V4cwsLw" target="_blank">
-      <img class="mv-thumbnail" src="https://i.ibb.co/Rwkjqgj/CAF69-FB8-9132-40-C9-995-C-EBD41-EB2-DB7-C.png" alt="MV Hồi Kết thumbnail" 
-           onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=MV+H%E1%BB%93i+K%E1%BA%BFt'">
-    </a>
-    
-    <div class="mv-title">🎵 MV CA NHẠC MỚI: HỒI KẾT</div>
-    <div class="mv-meta">
-      <span class="release-date"><i class="far fa-calendar-alt"></i> 01/12/2026</span>
-      <span class="sponsor"><i class="fas fa-trophy"></i> Nhà tài trợ: LPQ MEDIA</span>
-    </div>
-    <div class="mv-description">
-      <p>Sau nhiều thời gian ấp ủ, MV ca nhạc <strong>“HỒI KẾT”</strong> chính thức được công bố lịch phát hành vào ngày <strong>01/12/2026</strong>.</p>
-      <p>Đây là sản phẩm âm nhạc mang màu sắc cảm xúc sâu lắng, kể về những câu chuyện còn dang dở, những ký ức không thể quay trở lại. “HỒI KẾT” không chỉ là bài hát mà còn là hành trình nhìn lại những cảm xúc đã qua.</p>
-      <p>🎬 Với sự đầu tư chỉn chu về hình ảnh, âm thanh và nội dung, MV hứa hẹn mang đến những thước phim đầy cảm xúc cùng giai điệu chạm đến trái tim.</p>
-      <p><i class="fas fa-globe"></i> <strong>📅 Phát hành chính thức:</strong> 01/12/2026 &nbsp;|&nbsp; <strong>🏢 LPQ MEDIA</strong><br>
-      🌐 <strong>MV công chiếu tại:</strong> <a href="https://bequy.vercel.app" target="_blank" style="color:#a78bfa;">bequy.vercel.app</a></p>
-      <p>❤️ Cảm ơn mọi người đã đồng hành, cùng đón chờ MV “HỒI KẾT” và chia sẻ để lan tỏa!</p>
-      <div style="margin-top: 12px; background: #00000040; padding: 8px; border-radius: 30px; text-align: center; font-size:0.8rem;">
-        #HoiKet #MVHoiKet #LPQMEDIA #BeQuyDongNai #MusicVideo
+  <!-- Cột phải: BỐ CỤC 2 BÀI VIẾT: MV HỒI KẾT + VLOG MỚI TRƯỜNG ĐUA ĐẠI NAM (ĐÃ CẬP NHẬT ẢNH MỚI NHẤT) -->
+  <div>
+    <!-- BÀI 1: MV HỒI KẾT -->
+    <div class="mv-article">
+      <a href="https://ibb.co/V4cwsLw" target="_blank">
+        <img class="mv-thumbnail" src="https://i.ibb.co/Rwkjqgj/CAF69-FB8-9132-40-C9-995-C-EBD41-EB2-DB7-C.png" alt="MV Hồi Kết thumbnail" 
+             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=MV+H%E1%BB%93i+K%E1%BA%BFt'">
+      </a>
+      <div class="mv-title">🎵 MV CA NHẠC MỚI: HỒI KẾT</div>
+      <div class="mv-meta">
+        <span class="release-date"><i class="far fa-calendar-alt"></i> 01/12/2026</span>
+        <span class="sponsor"><i class="fas fa-trophy"></i> Nhà tài trợ: LPQ MEDIA</span>
       </div>
+      <div class="mv-description">
+        <p>Sau nhiều thời gian ấp ủ, MV ca nhạc <strong>“HỒI KẾT”</strong> chính thức được công bố lịch phát hành vào ngày <strong>01/12/2026</strong>.</p>
+        <p>Đây là sản phẩm âm nhạc mang màu sắc cảm xúc sâu lắng, kể về những câu chuyện còn dang dở. “HỒI KẾT” không chỉ là bài hát mà còn là hành trình nhìn lại những cảm xúc đã qua.</p>
+        <p>🎬 Với sự đầu tư chỉn chu về hình ảnh, âm thanh và nội dung, MV hứa hẹn mang đến những thước phim đầy cảm xúc.</p>
+        <p><i class="fas fa-globe"></i> <strong>📅 Phát hành chính thức:</strong> 01/12/2026 &nbsp;|&nbsp; <strong>🏢 LPQ MEDIA</strong><br>🌐 <strong>MV công chiếu tại:</strong> <a href="https://bequy.vercel.app" target="_blank" style="color:#a78bfa;">bequy.vercel.app</a></p>
+        <div style="margin-top: 12px; background: #00000040; padding: 8px; border-radius: 30px; text-align: center; font-size:0.8rem;">#HoiKet #MVHoiKet #LPQMEDIA #BeQuyDongNai</div>
+      </div>
+      <div class="rating-stars">
+        <div class="stars-group"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <span>5.0 · 5 sao tuyệt vời</span></div>
+        <div class="review-list"><span>⭐ Hoàng Tuấn Kha 5★</span><span>⭐ Hải Hân 5★</span><span>⭐ Giao Trung 5★</span></div>
+      </div>
+      <div class="stats-cards">
+        <div class="stat-item"><span class="stat-number">56K</span><span>❤️ Lượt like</span></div>
+        <div class="stat-item"><span class="stat-number">90</span><span>💬 Bình luận</span></div>
+        <div class="stat-item"><span class="stat-number">12M</span><span>🌐 Truy cập</span></div>
+        <div class="stat-item"><span class="stat-number">56</span><span>🎤 IDOL NỮ</span></div>
+      </div>
+      <div class="idol-fan"><i class="fas fa-circle text-danger" style="color: #ef4444; font-size: 12px; animation: pulse 1.2s infinite;"></i> ĐANG PHÁT TRỰC TIẾP · IDOL NỮ 56 người tham gia · <i class="fas fa-chart-line"></i> Xu hướng #1</div>
+      <div class="timer-block" style="margin-top: 1rem;">⏳ Đếm ngược tới ngày ra mắt MV: <span id="countdownMV" style="color:#facc15; font-weight:bold;"></span></div>
     </div>
 
-    <!-- Rating + thống kê -->
-    <div class="rating-stars">
-      <div class="stars-group"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <span>5.0 · 5 sao tuyệt vời</span></div>
-      <div class="review-list"><span>⭐ Hoàng Tuấn Kha 5★</span><span>⭐ Hải Hân 5★</span><span>⭐ Giao Trung 5★</span></div>
-    </div>
-    <div class="stats-cards">
-      <div class="stat-item"><span class="stat-number">56K</span><span>❤️ Lượt like</span></div>
-      <div class="stat-item"><span class="stat-number">90</span><span>💬 Bình luận</span></div>
-      <div class="stat-item"><span class="stat-number">12M</span><span>🌐 Truy cập server</span></div>
-      <div class="stat-item"><span class="stat-number">56</span><span>🎤 IDOL NỮ trực tiếp</span></div>
-    </div>
-    <div class="idol-fan"><i class="fas fa-circle text-danger" style="color: #ef4444; font-size: 12px; animation: pulse 1.2s infinite;"></i> ĐANG PHÁT TRỰC TIẾP · IDOL NỮ 56 người tham gia · <i class="fas fa-chart-line"></i> Xu hướng #1</div>
-    <div class="timer-block" style="margin-top: 1rem;">⏳ Đếm ngược tới ngày ra mắt MV: <span id="countdownMV" style="color:#facc15; font-weight:bold;"></span></div>
-    
-    <!-- Thông báo mua key bổ sung trong bài viết -->
-    <div class="key-buy-box">
-      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: space-between;">
-        <div><i class="fas fa-ticket-alt" style="font-size: 1.5rem; color: #facc15;"></i> <strong>Mua Key Xem MV HỒI HẾT Chất Lượng Cao</strong></div>
-        <a href="https://bequy.vercel.app" target="_blank" style="background: #22c55e; padding: 6px 18px; border-radius: 40px; text-decoration: none; color: white; font-weight: bold; font-size: 0.8rem;"><i class="fas fa-shopping-cart"></i> Mua ngay</a>
+    <!-- BÀI 2: VIDEO MỚI – VLOG TRƯỜNG ĐUA ĐẠI NAM (ĐÃ CẬP NHẬT ẢNH THUMBNAIL TỪ POSTIMG) -->
+    <div class="vlog-card" style="margin-top: 1.8rem;">
+      <!-- ẢNH THUMBNAIL MỚI NHẤT: sử dụng link trực tiếp từ postimg.cc -->
+      <a href="https://postimg.cc/NyqSsTvW" target="_blank">
+        <img class="vlog-thumbnail" src="https://i.postimg.cc/fbJNvj2T/IMG-8759.jpg" alt="Bé Quý Đồng Nai & Hải Hân Cute tại Trường Đua Đại Nam - Ảnh mới nhất" 
+             onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e1b4f/white?text=Vlog+Đại+Nam+-+Bé+Quý+%26+Hải+Hân'">
+      </a>
+      <div class="vlog-title">🎬 SẮP RA MẮT VIDEO MỚI: MỘT NGÀY CỦA BÉ QUÝ ĐỒNG NAI VỚI HẢI HÂN CUTE TẠI TRƯỜNG ĐUA ĐẠI NAM</div>
+      <div class="vlog-meta">
+        <span class="release-date"><i class="far fa-clock"></i> Công bố sắp tới · Hot trend</span>
+        <span><i class="fas fa-film"></i> Vlog trải nghiệm tốc độ</span>
       </div>
-      <p style="font-size: 0.75rem; margin-top: 10px;">🎬 Truy cập <strong>bequy.vercel.app</strong> – Giao diện đơn giản, hiện đại, chọn gói key, thanh toán nhanh, nhận key tức thì. Trải nghiệm MV Full HD, âm thanh đỉnh cao.</p>
+      <div class="vlog-description">
+        <p><strong>Hé lộ dự án vlog mới đầy hấp dẫn của Bé Quý Đồng Nai</strong> – Sau thời gian chuẩn bị kỹ lưỡng, Bé Quý Đồng Nai chính thức thông báo sắp ra mắt video mới với chủ đề <strong>“Một Ngày Của Bé Quý Đồng Nai Với Hải Hân Cute Ở Trường Đua Đại Nam”</strong>. Đây là nội dung được cộng đồng người xem mong chờ bởi sự kết hợp giữa trải nghiệm thực tế thú vị và những khoảnh khắc vui vẻ, đáng nhớ.</p>
+        <div class="vlog-highlight">
+          <i class="fas fa-flag-checkered" style="color:#facc15; margin-right: 8px;"></i> <strong>🎥 Những điểm hấp dẫn trong video mới:</strong>
+          <ul style="margin-top: 8px; margin-left: 20px;">
+            <li>🏁 Trải nghiệm thực tế tại Trường Đua Đại Nam (Bình Dương) – địa điểm giải trí tốc độ nổi tiếng</li>
+            <li>😂 Những khoảnh khắc vui nhộn, hài hước giữa Bé Quý và Hải Hân Cute</li>
+            <li>🏎️ Khám phá đường đua chuyên nghiệp dành cho ô tô, mô tô và xe Go-Kart</li>
+            <li>📸 Cảnh quay đẹp mắt, chất lượng cao, phong cách vlog hiện đại</li>
+          </ul>
+        </div>
+        <p><strong>Trường Đua Đại Nam</strong> – Một trong những trường đua quy mô lớn tại Việt Nam, thu hút đông đảo du khách đến tham quan và trải nghiệm. Với hệ thống đường đua hiện đại cùng nhiều hoạt động giải trí đa dạng, nơi đây trở thành địa điểm lý tưởng để tạo nên những nội dung hấp dẫn.</p>
+        <p><strong>Bé Quý Đồng Nai & Hải Hân Cute</strong> – Bộ đôi được yêu thích hứa hẹn mang đến nhiều khoảnh khắc đáng yêu, gần gũi. Đây là lần kết hợp được nhiều người hâm mộ mong đợi trong thời gian gần đây.</p>
+        <p>📢 <strong>Thời gian phát hành:</strong> Video sẽ sớm được phát hành trên các nền tảng chính thức của Bé Quý Đồng Nai. 👉 Hãy theo dõi website và các kênh mạng xã hội để không bỏ lỡ dự án đặc biệt này!</p>
+        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
+          <span style="background:#6366f1aa; padding: 4px 12px; border-radius: 30px;">#BéQuýĐồngNai</span>
+          <span style="background:#6366f1aa; padding: 4px 12px; border-radius: 30px;">#HảiHânCute</span>
+          <span style="background:#6366f1aa; padding: 4px 12px; border-radius: 30px;">#TrườngĐuaĐạiNam</span>
+          <span style="background:#6366f1aa; padding: 4px 12px; border-radius: 30px;">#VlogĐạiNam</span>
+        </div>
+      </div>
+      <div class="stats-cards" style="margin: 0.8rem 0;">
+        <div class="stat-item"><span class="stat-number">4K+</span><span>🔥 Lượt xem dự kiến</span></div>
+        <div class="stat-item"><span class="stat-number">1.2K</span><span>❤️ Yêu thích sớm</span></div>
+        <div class="stat-item"><span class="stat-number">500+</span><span>💬 Bình luận chờ</span></div>
+      </div>
+      <div class="idol-fan" style="background: linear-gradient(90deg, #a1c4fd, #c2e9fb); color:#0f172a;"><i class="fas fa-bell"></i> ĐĂNG KÝ THÔNG BÁO · RA MẮT TRONG THÁNG 12 · CỰC KỲ MONG CHỜ</div>
+      <div class="timer-block" style="margin-top: 1rem;"><i class="fas fa-stopwatch"></i> Dự kiến công chiếu: <strong>Tháng 12/2026</strong> · Hãy sẵn sàng!</div>
+      <!-- Nút gợi ý hỗ trợ -->
+      <div class="key-buy-box" style="margin-top: 1rem;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: space-between;">
+          <div><i class="fas fa-ticket-alt" style="font-size: 1.5rem; color: #facc15;"></i> <strong>Ủng hộ Bé Quý & Hải Hân</strong></div>
+          <a href="https://bequy.vercel.app" target="_blank" style="background: #ec4899; padding: 6px 18px; border-radius: 40px; text-decoration: none; color: white; font-weight: bold;"><i class="fas fa-gift"></i> Xem sớm nhất</a>
+        </div>
+        <p style="font-size: 0.75rem; margin-top: 10px;">🎬 Đón chờ Vlog tại <strong>bequy.vercel.app</strong> – Hỗ trợ kỹ thuật, cập nhật nhanh nhất.</p>
+      </div>
     </div>
-    <div style="margin-top: 8px; text-align: center; font-size: 11px;"><i class="fas fa-lock"></i> Hệ thống bảo mật an toàn · Hỗ trợ kỹ thuật 24/7</div>
   </div>
 </div>
 
 <script>
   (function() {
-    // FPS
-    let fpsCount = 0;
-    let lastFpsTime = performance.now();
+    // FPS counter
+    let fpsCount = 0, lastFpsTime = performance.now();
     function updateFPS() {
       fpsCount++;
       const now = performance.now();
@@ -549,7 +596,7 @@
     }
     requestAnimationFrame(updateFPS);
 
-    // Snow
+    // Snow effect
     const snowContainer = document.getElementById('snowfield');
     if (snowContainer) {
       const snowChars = ['❄️', '❄', '✧', '✨', '❅'];
@@ -592,17 +639,13 @@
         }
       });
     }
-    let audioGlobal = false;
     const globalHandler = () => {
-      if (!audioGlobal && audio && selectSong && selectSong.value !== '' && audio.paused && audio.src) {
-        audio.play().catch(() => {});
-        audioGlobal = true;
-      }
+      if (audio && selectSong && selectSong.value !== '' && audio.paused && audio.src) audio.play().catch(()=>{});
     };
     document.body.addEventListener('click', globalHandler);
     document.body.addEventListener('touchstart', globalHandler);
 
-    // Timer profile from June 1, 2025
+    // Profile timer since June 1, 2025
     const timerSpan = document.getElementById('liveTimer');
     if (timerSpan) {
       const startDate = new Date(2025, 5, 1, 0, 0, 0);
@@ -622,7 +665,7 @@
       setInterval(updateTimer, 1000);
     }
 
-    // Countdown MV HỒI KẾT 01/12/2026
+    // Countdown MV HỒI KẾT (01/12/2026)
     const countdownSpan = document.getElementById('countdownMV');
     if (countdownSpan) {
       const targetDate = new Date(2026, 11, 1, 0, 0, 0);
@@ -645,31 +688,12 @@
 
     // Avatar fallback
     const avatarImg = document.getElementById('avatarImg');
-    if (avatarImg) {
-      avatarImg.addEventListener('error', () => {
-        if (!avatarImg.src.includes('ui-avatars')) avatarImg.src = 'https://ui-avatars.com/api/?background=8b5cf6&color=fff&rounded=true&bold=true&size=120&name=Quy+2006';
-      });
-    }
+    if (avatarImg) avatarImg.addEventListener('error', () => {
+      if (!avatarImg.src.includes('ui-avatars')) avatarImg.src = 'https://ui-avatars.com/api/?background=8b5cf6&color=fff&rounded=true&bold=true&size=120&name=Quy+2006';
+    });
 
-    // Glass shine effect
-    const cards = document.querySelectorAll('.glass-card, .mv-article, .key-section');
-    if (!document.getElementById('shineEffect')) {
-      const style = document.createElement('style');
-      style.id = 'shineEffect';
-      style.textContent = `
-        .glass-card, .mv-article, .key-section { position: relative; overflow: hidden; }
-        .glass-card::after, .mv-article::after, .key-section::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.1) 0%, transparent 70%);
-          pointer-events: none;
-          border-radius: inherit;
-          transition: background 0.1s;
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    // Glass shine mouse effect
+    const cards = document.querySelectorAll('.glass-card, .mv-article, .key-section, .vlog-card');
     cards.forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -679,14 +703,19 @@
         card.style.setProperty('--mouse-y', `${y}%`);
       });
     });
+    if (!document.getElementById('shineEffect')) {
+      const style = document.createElement('style');
+      style.id = 'shineEffect';
+      style.textContent = `.glass-card,.mv-article,.key-section,.vlog-card{position:relative;overflow:hidden;}.glass-card::after,.mv-article::after,.key-section::after,.vlog-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(255,255,255,0.1) 0%,transparent 70%);pointer-events:none;border-radius:inherit;transition:background 0.1s;}`;
+      document.head.appendChild(style);
+    }
 
     document.querySelectorAll('.bio-item').forEach(item => {
       item.style.transition = 'transform 0.2s';
       item.addEventListener('mouseenter', () => item.style.transform = 'translateX(5px)');
       item.addEventListener('mouseleave', () => item.style.transform = 'translateX(0)');
     });
-
-    console.log("🔥 Lâm Phú Quý | MV Hồi Kết & Hồi Hết | Mua Key tại bequy.vercel.app | Nhơn Trạch Đồng Nai");
+    console.log("✅ Đã cập nhật bài viết mới: Vlog Trường Đua Đại Nam | ẢNH THUMBNAIL MỚI TỪ POSTIMG ĐÃ HIỂN THỊ | Bé Quý Đồng Nai & Hải Hân Cute");
   })();
 </script>
 </body>
