@@ -420,6 +420,60 @@
     }
     @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
     .live-badge { background: #ef4444; border-radius: 40px; padding: 2px 8px; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 4px; animation: pulse 1.2s infinite; }
+
+    /* Professional verified badge styling */
+    .verified-badge-pro {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border-radius: 40px;
+      padding: 4px 14px 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(99,102,241,0.4);
+      box-shadow: 0 0 12px rgba(99,102,241,0.2);
+      letter-spacing: 0.3px;
+    }
+    .verified-badge-pro i {
+      color: #34d399;
+      font-size: 0.9rem;
+      filter: drop-shadow(0 0 4px rgba(52,211,153,0.4));
+    }
+    .verified-badge-pro .badge-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 2px;
+    }
+    .verified-badge-pro .badge-label {
+      background: rgba(99,102,241,0.2);
+      padding: 1px 8px;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #a78bfa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .name-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .name-text {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #c7d2fe);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
   </style>
 </head>
 <body>
@@ -438,7 +492,17 @@
         <img src="https://sf-static.upanhlaylink.com/img/image_20260531aebe1ef56462bdd6ab9fe674685d3374.jpg" alt="Lâm Phú Quý" class="avatar" id="avatarImg"
              onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?background=6366f1&color=fff&rounded=true&bold=true&size=128&name=Bé+Quý';">
       </div>
-      <h1 class="name">Bé Quý Đồng Nai <span class="verified-badge"><i class="fas fa-check-circle"></i> LPQ Media</span></h1>
+      <!-- Professional name with verified badge -->
+      <div class="name-wrapper">
+        <span class="name-text">AGC_BÉ QUÝ</span>
+        <span class="verified-badge-pro">
+          <i class="fas fa-check-circle"></i>
+          <span class="badge-divider"></span>
+          <span>Đã xác minh</span>
+          <span class="badge-divider"></span>
+          <span class="badge-label">LPQ Media</span>
+        </span>
+      </div>
       <div class="bio-section">
         <div class="bio-item"><i class="fas fa-calendar-alt"></i> <span><strong>🎂 Sinh năm:</strong> 2006 · 19 tuổi</span></div>
         <div class="bio-item"><i class="fas fa-map-marker-alt"></i> <span><strong>📍 Quê quán:</strong> Nhơn Trạch, Đồng Nai</span></div>
