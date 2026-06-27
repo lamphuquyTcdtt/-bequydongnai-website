@@ -1,999 +1,673 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="description" content="Lâm Phú Quý - Bé Quý Đồng Nai | MV Hồi Kết & Hồi Hết | Thông báo chính thức ngừng hoạt động Facebook Messenger | Xem key MV chất lượng cao">
-  <title>Bé Quý Đồng Nai · LPQ Media · MV & Vlog Đại Nam</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%234f46e5' cx='50' cy='50' r='45'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3ELQ%3C/text%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúng tôi đã chuyển sang Website mới | Bé Quý Đồng Nai</title>
+    <meta name="description" content="Chúng tôi đã chuyển sang website mới. Cảm ơn bạn đã đồng hành. Tự động chuyển hướng sau 10 giây.">
+    <link rel="canonical" href="https://tenmienmoi.com">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Chúng tôi đã chuyển sang Website mới">
+    <meta property="og:description" content="Cảm ơn bạn đã đồng hành. Vui lòng truy cập website mới để tiếp tục sử dụng dịch vụ.">
+    <meta property="og:url" content="https://tenmienmoi.com">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/1a1a2e/ffffff?text=BeQuyDongNai">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chúng tôi đã chuyển sang Website mới">
+    <meta name="twitter:description" content="Cảm ơn bạn đã đồng hành. Vui lòng truy cập website mới.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630/1a1a2e/ffffff?text=BeQuyDongNai">
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <style>
+        /* ===== style.css ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --primary: #6366f1;
-      --primary-glow: #818cf8;
-      --dark-bg: #0a0a0f;
-      --card-bg: rgba(15, 15, 25, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --text-light: #f1f5f9;
-      --text-dim: #a1a1b9;
-      --shadow-neon: 0 0 20px rgba(99, 102, 241, 0.3);
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a1a;
+            overflow-x: hidden;
+            position: relative;
+            color: #fff;
+            padding: 20px;
+        }
 
-    body {
-      background: var(--dark-bg);
-      font-family: 'Inter', sans-serif;
-      color: var(--text-light);
-      min-height: 100vh;
-      padding: 2rem 1.5rem;
-      position: relative;
-      overflow-x: hidden;
-    }
+        /* Aurora + Gradient background */
+        .aurora-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(10, 10, 40, 0.9) 0%, #0a0a1a 70%),
+                radial-gradient(circle at 80% 30%, rgba(80, 40, 120, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 180, 200, 0.2) 0%, transparent 50%),
+                linear-gradient(145deg, #0d0d2b, #1a0e2e);
+            background-blend-mode: overlay, screen, normal, normal;
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
+        /* Particle canvas */
+        #particle-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
 
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .orb-1 { width: 350px; height: 350px; background: #6366f1; top: -120px; left: -100px; }
-    .orb-2 { width: 450px; height: 450px; background: #ec4899; bottom: -150px; right: -150px; }
-    .orb-3 { width: 280px; height: 280px; background: #14b8a6; top: 60%; left: 75%; }
+        /* Glow light orbs */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow-orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -10%;
+            left: -5%;
+            background: #5f3dc4;
+        }
+        .glow-orb-2 {
+            width: 600px;
+            height: 600px;
+            bottom: -20%;
+            right: -10%;
+            background: #0b6b8a;
+        }
 
-    .fps-panel {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(8px);
-      padding: 4px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-family: monospace;
-      z-index: 999;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #a5f3c3;
-      font-weight: 500;
-    }
+        /* Main card - Glassmorphism */
+        .glass-card {
+            position: relative;
+            z-index: 10;
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 48px;
+            padding: 40px 36px;
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            animation: fadeInUp 1s ease both;
+            transition: box-shadow 0.3s ease;
+            text-align: center;
+        }
 
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-      overflow: hidden;
-    }
-    .snowflake {
-      position: absolute;
-      color: rgba(255,255,245,0.7);
-      user-select: none;
-      animation: snowDrift linear infinite;
-      text-shadow: 0 0 3px rgba(100,150,255,0.4);
-    }
-    @keyframes snowDrift {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.2; }
-      10% { opacity: 0.8; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
+        /* Mouse glow effect via JS will add a pseudo-element */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 48px;
+            padding: 1px;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15), transparent 70%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            transition: opacity 0.1s;
+        }
 
-    .main-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 20;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 1.8rem;
-      align-items: start;
-    }
+        /* Floating icon */
+        .floating-icon {
+            font-size: 70px;
+            line-height: 1;
+            display: inline-block;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 20px rgba(100, 200, 255, 0.5));
+            animation: floatY 3s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite alternate;
+        }
 
-    .glass-card, .mv-article, .key-section, .vlog-card, .announcement-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px) saturate(180%);
-      border-radius: 2rem;
-      border: 1px solid var(--glass-border);
-      padding: 1.8rem;
-      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.4), 0 1px 0 0 rgba(255,255,255,0.05) inset;
-      transition: transform 0.2s ease;
-    }
+        /* Title */
+        h1 {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #f0f4ff, #b7c9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 8px 0 16px;
+            line-height: 1.2;
+        }
 
-    .avatar-wrapper {
-      position: relative;
-      width: fit-content;
-      margin: 0 auto 1rem;
-    }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(99,102,241,0.7);
-      box-shadow: var(--shadow-neon);
-      transition: transform 0.4s ease;
-    }
-    .avatar:hover { transform: scale(1.02) rotate(2deg); }
-    .avatar-ring {
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1);
-      opacity: 0.6;
-      z-index: -1;
-      animation: spin 6s linear infinite;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
+        .sub {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 520px;
+            margin: 0 auto 20px;
+            font-weight: 300;
+        }
 
-    .name {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      background: linear-gradient(to right, #ffffff, #c7d2fe);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    .verified-badge {
-      background: #1e1b4b;
-      border-radius: 40px;
-      padding: 4px 10px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      color: #a78bfa;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .bio-section {
-      background: rgba(0,0,0,0.4);
-      border-radius: 1.5rem;
-      padding: 1rem;
-      margin: 1.2rem 0;
-      border-left: 3px solid #6366f1;
-    }
-    .bio-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 10px 0;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #e2e8f0;
-      flex-wrap: wrap;
-    }
-    .bio-item i { width: 26px; color: #818cf8; }
-    .social-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-    }
-    .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.7rem;
-      background: rgba(20,20,35,0.7);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 60px;
-      padding: 0.8rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: white;
-      transition: 0.2s;
-    }
-    .social-btn:hover { transform: translateY(-3px); background: white; color: #0f0f1a; }
-    .btn-phone:hover { background: #22c55e; color: white; }
-    .btn-facebook:hover { background: #1877f2; color: white; }
-    .btn-tiktok:hover { background: black; color: #fe2c55; }
-    .btn-github:hover { background: #2d3748; color: white; }
+        .new-url {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            color: #b3d9ff;
+            margin-bottom: 28px;
+            word-break: break-all;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
 
-    .mv-thumbnail, .vlog-thumbnail {
-      width: 100%;
-      border-radius: 1.5rem;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 15px 30px -12px black;
-      transition: transform 0.3s;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .mv-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #FFB347, #FF6B6B);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .vlog-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .announce-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #FDE047, #FB923C);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .mv-meta, .vlog-meta, .announce-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px dashed rgba(255,255,255,0.2);
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-    }
-    .release-date {
-      background: #ec489920;
-      padding: 5px 12px;
-      border-radius: 40px;
-      font-weight: 600;
-    }
-    .badge-important {
-      background: #dc2626;
-      padding: 4px 12px;
-      border-radius: 40px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .description-box {
-      line-height: 1.55;
-      color: #e2e8f0;
-      margin: 1rem 0;
-    }
-    .warning-highlight {
-      background: rgba(220,38,38,0.2);
-      border-left: 4px solid #ef4444;
-      padding: 1rem;
-      border-radius: 1.2rem;
-      margin: 1rem 0;
-    }
-    .rating-stars {
-      background: rgba(0,0,0,0.3);
-      padding: 0.8rem;
-      border-radius: 1.2rem;
-      margin: 1rem 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .stars-group i { color: #fbbf24; margin-right: 3px; }
-    .stats-cards {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin: 1.2rem 0;
-      flex-wrap: wrap;
-    }
-    .stat-item {
-      background: rgba(0,0,0,0.45);
-      flex: 1;
-      text-align: center;
-      padding: 0.8rem 0.5rem;
-      border-radius: 1.2rem;
-    }
-    .stat-number {
-      font-size: 1.5rem;
-      font-weight: 800;
-      display: block;
-      color: #facc15;
-    }
-    .idol-fan {
-      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
-      color: #1e1b4b;
-      border-radius: 60px;
-      padding: 8px 12px;
-      font-weight: 800;
-      text-align: center;
-      margin-top: 0.8rem;
-    }
-    .music-selector {
-      width: 100%;
-      background: #111111bb;
-      border: 1px solid #2d2d44;
-      border-radius: 40px;
-      padding: 10px 16px;
-      color: white;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      cursor: pointer;
-    }
-    .timer-block {
-      background: rgba(0,0,0,0.45);
-      border-radius: 60px;
-      padding: 0.5rem;
-      text-align: center;
-      font-size: 0.75rem;
-      margin-top: 1rem;
-    }
-    .key-buy-box {
-      margin-top: 1.8rem;
-      border-top: 2px dashed rgba(255,255,255,0.2);
-      padding-top: 1.5rem;
-    }
-    .key-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #A5F0FF, #F9D56E);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.75rem;
-    }
-    .benefit-list {
-      background: rgba(0,0,0,0.4);
-      border-radius: 1.5rem;
-      padding: 1rem 1.5rem;
-      margin: 1rem 0;
-      list-style: none;
-    }
-    .benefit-list li {
-      margin: 0.6rem 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .benefit-list li i { color: #4ade80; width: 24px; }
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      margin: 1rem 0;
-    }
-    .step {
-      background: rgba(99,102,241,0.25);
-      border-radius: 1.2rem;
-      padding: 0.8rem;
-      flex: 1;
-      min-width: 100px;
-      text-align: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-    }
-    .key-button {
-      display: block;
-      background: linear-gradient(95deg, #6366f1, #a855f7);
-      text-align: center;
-      padding: 14px;
-      border-radius: 60px;
-      font-weight: 800;
-      font-size: 1.2rem;
-      text-decoration: none;
-      color: white;
-      margin: 1.5rem 0 1rem;
-      transition: 0.2s;
-      box-shadow: 0 0 12px rgba(99,102,241,0.5);
-    }
-    .key-button:hover { transform: scale(1.02); background: linear-gradient(95deg, #818cf8, #c084fc); }
-    .faq {
-      background: rgba(0,0,0,0.25);
-      border-radius: 1rem;
-      padding: 0.8rem;
-      font-size: 0.75rem;
-      margin-top: 1rem;
-    }
-    @media (max-width: 900px) {
-      .main-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      body { padding: 1rem; }
-      .mv-title, .vlog-title, .announce-title { font-size: 1.5rem; }
-    }
-    @keyframes pulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-    .live-badge { background: #ef4444; border-radius: 40px; padding: 2px 8px; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 4px; animation: pulse 1.2s infinite; }
+        .new-url i {
+            font-style: normal;
+            margin-right: 8px;
+        }
 
-    /* Professional verified badge styling */
-    .verified-badge-pro {
-      background: linear-gradient(145deg, #1e293b, #0f172a);
-      border-radius: 40px;
-      padding: 4px 14px 4px 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(99,102,241,0.4);
-      box-shadow: 0 0 12px rgba(99,102,241,0.2);
-      letter-spacing: 0.3px;
-    }
-    .verified-badge-pro i {
-      color: #34d399;
-      font-size: 0.9rem;
-      filter: drop-shadow(0 0 4px rgba(52,211,153,0.4));
-    }
-    .verified-badge-pro .badge-divider {
-      width: 1px;
-      height: 16px;
-      background: rgba(255,255,255,0.15);
-      margin: 0 2px;
-    }
-    .verified-badge-pro .badge-label {
-      background: rgba(99,102,241,0.2);
-      padding: 1px 8px;
-      border-radius: 20px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      color: #a78bfa;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .name-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.25rem;
-    }
-    .name-text {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(to right, #ffffff, #c7d2fe);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-  </style>
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            margin: 24px 0 18px;
+        }
+
+        .btn {
+            position: relative;
+            padding: 14px 38px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+            min-width: 160px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6c5ce7, #00b4d8);
+            border: none;
+            color: #fff;
+            box-shadow: 0 8px 24px -6px rgba(0, 180, 216, 0.4);
+        }
+        .btn-primary:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 32px -8px rgba(0, 180, 216, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Ripple */
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: rippleAnim 0.6s linear;
+            pointer-events: none;
+        }
+
+        /* Countdown */
+        .countdown-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px 18px;
+            margin: 16px 0 8px;
+            background: rgba(0,0,0,0.2);
+            padding: 12px 20px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .countdown-text {
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+        .countdown-number {
+            font-weight: 600;
+            font-size: 1.5rem;
+            min-width: 3rem;
+            display: inline-block;
+            color: #b7d9ff;
+        }
+        .countdown-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .countdown-actions .btn-sm {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .countdown-actions .btn-sm:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
+        /* Typing effect (phụ đề) */
+        .typing-wrapper {
+            display: inline-block;
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #b7d9ff;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            animation: blink 0.9s step-end infinite;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.3px;
+        }
+        .footer strong {
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+        }
+        .footer p {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatY {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.3)); }
+            100% { filter: drop-shadow(0 0 35px rgba(100, 200, 255, 0.8)); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .glass-card {
+                padding: 28px 18px;
+                border-radius: 32px;
+            }
+            .floating-icon { font-size: 50px; }
+            h1 { font-size: 1.9rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            .countdown-wrap { flex-direction: column; gap: 8px; }
+            .new-url { font-size: 1rem; padding: 10px 18px; }
+        }
+
+        @media (max-width: 400px) {
+            .glass-card { padding: 20px 12px; }
+        }
+
+        /* Loading animation (fade in applied to body) */
+        body {
+            animation: bodyFade 0.6s ease both;
+        }
+        @keyframes bodyFade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glass reflection (via pseudo) */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 10%;
+            width: 40%;
+            height: 60px;
+            background: radial-gradient(ellipse at 20% 0%, rgba(255,255,255,0.15), transparent 70%);
+            border-radius: 50%;
+            filter: blur(8px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
-<div class="fps-panel" id="fpsMeter">⚡ FPS: 0</div>
-<div class="snow" id="snowfield"></div>
+    <!-- Background -->
+    <div class="aurora-bg"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
 
-<div class="main-grid">
-  <!-- Cột trái: Profile + Key giới thiệu MV HỒI HẾT -->
-  <div>
-    <div class="glass-card">
-      <div class="avatar-wrapper">
-        <div class="avatar-ring"></div>
-        <img src="https://sf-static.upanhlaylink.com/img/image_20260531aebe1ef56462bdd6ab9fe674685d3374.jpg" alt="Lâm Phú Quý" class="avatar" id="avatarImg"
-             onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?background=6366f1&color=fff&rounded=true&bold=true&size=128&name=Bé+Quý';">
-      </div>
-      <!-- Professional name with verified badge -->
-      <div class="name-wrapper">
-        <span class="name-text">LÂM PHÚ QUÝ</span>
-        <span class="verified-badge-pro">
-          <i class="fas fa-check-circle"></i>
-          <span class="badge-divider"></span>
-          <span>Đã xác minh</span>
-          <span class="badge-divider"></span>
-          <span class="badge-label">LPQ Media</span>
-        </span>
-      </div>
-      <div class="bio-section">
-        <div class="bio-item"><i class="fas fa-calendar-alt"></i> <span><strong>🎂 Sinh năm:</strong> 2006 · 19 tuổi</span></div>
-        <div class="bio-item"><i class="fas fa-map-marker-alt"></i> <span><strong>📍 Quê quán:</strong> Nhơn Trạch, Đồng Nai</span></div>
-        <div class="bio-item"><i class="fas fa-laptop-code"></i> <span><strong>💻 Sáng tạo nội dung:</strong> MV, Vlog, Trải nghiệm</span></div>
-        <div class="bio-item"><i class="fas fa-heart" style="color:#f472b6;"></i> <span><strong>✨ Đam mê:</strong> Công nghệ, Sáng tạo không giới hạn</span></div>
-      </div>
-      <div class="social-buttons">
-        <a href="tel:+84817813259" class="social-btn btn-phone"><i class="fas fa-phone-alt"></i> Gọi ngay tư vấn</a>
-        <a href="https://www.facebook.com/share/1CfHWo3sHx/?mibextid=wwXIfr" target="_blank" class="social-btn btn-facebook"><i class="fab fa-facebook"></i> Facebook cá nhân</a>
-        <a href="https://www.tiktok.com/@bequy2" target="_blank" class="social-btn btn-tiktok"><i class="fab fa-tiktok"></i> TikTok · BeQuy2</a>
-        <a href="https://github.com/lamphuquy" target="_blank" class="social-btn btn-github"><i class="fab fa-github"></i> GitHub Portfolio</a>
-      </div>
-      <div class="timer-block">🚀 <span>Ngày khởi tạo profile</span> · <span id="liveTimer">00d 00h 00m 00s</span></div>
-      <select id="songSelect" class="music-selector">
-        <option value="">🎵 Chọn nhạc nền thư giãn</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🌿 Lofi Chill</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">🎧 Deep & Melodic</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">🎸 Acoustic Vibes</option>
-        <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">⚡ Energetic</option>
-      </select>
-      <audio id="bgAudio" loop></audio>
-      <div class="music-note" style="font-size:10px; margin-top:6px; text-align:center;"><i class="fas fa-headphones"></i> Thư giãn cùng playlist</div>
-    </div>
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
 
-    <!-- KHU VỰC MUA KEY MV HỒI HẾT -->
-    <div class="key-section" style="margin-top: 1.8rem;">
-      <div class="key-title"><i class="fas fa-key"></i> MUA KEY XEM MV HỒI HẾT</div>
-      <p style="margin: 10px 0; font-size:0.9rem;"><strong>HỒI HẾT</strong> – Tác phẩm âm nhạc được mong chờ, đầu tư chỉn chu hình ảnh, âm thanh và nội dung điện ảnh. Sở hữu key chính thức để trải nghiệm Full HD, âm thanh sống động.</p>
-      
-      <ul class="benefit-list">
-        <li><i class="fas fa-check-circle"></i> Xem MV chất lượng Full HD sắc nét</li>
-        <li><i class="fas fa-check-circle"></i> Âm thanh chất lượng cao, sống động</li>
-        <li><i class="fas fa-check-circle"></i> Truy cập nhanh, không giới hạn thiết bị</li>
-        <li><i class="fas fa-check-circle"></i> Hệ thống bảo mật an toàn</li>
-        <li><i class="fas fa-check-circle"></i> Hỗ trợ kỹ thuật 24/7</li>
-        <li><i class="fas fa-check-circle"></i> Ủng hộ nghệ sĩ và đội ngũ sản xuất</li>
-      </ul>
-      
-      <div class="steps">
-        <div class="step"><i class="fas fa-globe"></i> B1: Truy cập bequy.vercel.app</div>
-        <div class="step"><i class="fas fa-tag"></i> B2: Chọn gói Key</div>
-        <div class="step"><i class="fas fa-credit-card"></i> B3: Thanh toán</div>
-        <div class="step"><i class="fas fa-envelope"></i> B4: Nhận Key ngay</div>
-        <div class="step"><i class="fas fa-play-circle"></i> B5: Xem MV HỒI HẾT</div>
-      </div>
-      
-      <a href="https://bequy.vercel.app" target="_blank" class="key-button"><i class="fas fa-key"></i> MUA NGAY KEY CHÍNH THỨC TẠI BEQUY.VERCEL.APP</a>
-      
-      <div class="faq">
-        <i class="fas fa-question-circle"></i> <strong>Câu hỏi thường gặp:</strong><br>
-        ✔ Key xem MV sử dụng được ngay sau thanh toán.<br>
-        ✔ Hỗ trợ xem trên điện thoại, máy tính bảng, PC.<br>
-        ✔ Đội ngũ hỗ trợ 24/7 nếu gặp lỗi.<br>
-        🔒 Bảo mật thông tin tuyệt đối.
-      </div>
-    </div>
-  </div>
+    <!-- Main Card -->
+    <main class="glass-card" id="mainCard" role="main">
+        <!-- Icon -->
+        <div class="floating-icon" aria-hidden="true">🚀</div>
 
-  <!-- Cột phải: BỐ CỤC CÁC BÀI VIẾT -->
-  <div>
-    <!-- BÀI VIẾT MỚI NHẤT: CÔNG BỐ WEBSITE MỚI -->
-    <div class="announcement-card" style="margin-bottom: 1.8rem;">
-      <a href="https://sf-static.upanhlaylink.com/img/image_20260626043481937e053153ccef7cccb49997f8.jpg" target="_blank">
-        <img class="vlog-thumbnail" src="https://sf-static.upanhlaylink.com/img/image_20260626043481937e053153ccef7cccb49997f8.jpg" alt="LÂM PHÚ QUÝ CÔNG BỐ WEBSITE MỚI" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=Website+Mới+LPQ'">
-      </a>
-      <div class="announce-title"><i class="fas fa-rocket"></i> LÂM PHÚ QUÝ CHÍNH THỨC CÔNG BỐ WEBSITE MỚI – BƯỚC TIẾN MỚI, TRẢI NGHIỆM TỐT HƠN!</div>
-      <div class="announce-meta">
-        <span class="badge-important"><i class="fas fa-globe"></i> CÔNG BỐ</span>
-        <span><i class="far fa-calendar-alt"></i> 26/06/2026</span>
-      </div>
-      <div class="description-box">
-        <p>Xin gửi lời cảm ơn chân thành đến tất cả khách hàng và anh em đã luôn tin tưởng, đồng hành cùng <strong>LÂM PHÚ QUÝ</strong> trong suốt thời gian vừa qua.</p>
-        <p>Sau thời gian dài nghiên cứu, nâng cấp và tối ưu hệ thống, chúng tôi chính thức thông báo:</p>
-        <p><strong>🌐 Website mới sắp chính thức ra mắt!</strong></p>
-        <p>Website mới được xây dựng hoàn toàn với công nghệ hiện đại, mang đến tốc độ nhanh hơn, giao diện đẹp mắt hơn và trải nghiệm ổn định hơn cho tất cả khách hàng.</p>
-        
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#facc15;">
-          <i class="fas fa-star" style="color:#facc15;"></i> <strong>✨ Những điểm nổi bật trên website mới</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>⚡ Tốc độ tải trang nhanh hơn.</li>
-            <li>🛡️ Bảo mật nâng cao.</li>
-            <li>🚀 Hệ thống máy chủ mạnh mẽ, chịu tải lớn.</li>
-            <li>📱 Giao diện tối ưu trên điện thoại, máy tính và máy tính bảng.</li>
-            <li>🎯 Dễ dàng tìm kiếm và sử dụng các dịch vụ.</li>
-            <li>💳 Quy trình đặt hàng và thanh toán thuận tiện hơn.</li>
-            <li>💬 Hỗ trợ khách hàng nhanh chóng.</li>
-          </ul>
+        <!-- Title -->
+        <h1>CHÚNG TÔI ĐÃ CHUYỂN SANG WEBSITE MỚI</h1>
+
+        <!-- Sub with Typing effect -->
+        <div class="sub typing-wrapper" id="subText">
+            Cảm ơn bạn đã đồng hành.
+            Website cũ đã ngừng hoạt động.
+            Vui lòng truy cập website mới để tiếp tục sử dụng dịch vụ.
+            <span class="typing-cursor"></span>
         </div>
 
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#4ade80;">
-          <i class="fas fa-question-circle" style="color:#4ade80;"></i> <strong>📢 Vì sao phải thay đổi?</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>Trong thời gian vừa qua, website cũ đã ghi nhận lượng truy cập rất lớn, gây quá tải hệ thống ở một số thời điểm, ảnh hưởng đến trải nghiệm sử dụng.</li>
-            <li>Để phục vụ khách hàng tốt hơn, đội ngũ đã quyết định chuyển sang hệ thống website hoàn toàn mới với hạ tầng mạnh hơn, ổn định hơn và sẵn sàng đáp ứng lượng truy cập lớn trong tương lai.</li>
-          </ul>
+        <!-- New URL -->
+        <div class="new-url">
+            <i>🌐</i> https://tenmienmoi.com
         </div>
 
-        <div class="warning-highlight" style="background:rgba(220,38,38,0.15); border-left-color:#ef4444;">
-          <i class="fas fa-exclamation-triangle" style="color:#ef4444;"></i> <strong>❌ Website cũ sẽ ngừng sử dụng</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>Website cũ sẽ được ngừng hoạt động sau khi website mới chính thức vận hành.</li>
-            <li>Vui lòng theo dõi các kênh chính thức của LÂM PHÚ QUÝ để nhận địa chỉ website mới và các thông báo quan trọng.</li>
-          </ul>
+        <!-- Main Buttons -->
+        <div class="btn-group">
+            <button class="btn btn-primary" id="redirectNowBtn">
+                ➡ Truy cập Website mới
+            </button>
         </div>
 
-        <p><strong>❤️ Cảm ơn sự đồng hành của mọi người!</strong></p>
-        <p>Sự tin tưởng và ủng hộ của các bạn chính là động lực để chúng tôi không ngừng nâng cấp và phát triển.</p>
-        <p><strong>🎉 Hãy theo dõi ngay hôm nay để trở thành những người đầu tiên trải nghiệm WEBSITE MỚI của LÂM PHÚ QUÝ!</strong></p>
-        <p style="font-size: 1.1rem; font-weight: 700; color: #a78bfa; text-align: center; margin-top: 0.5rem;">Nhanh hơn – Ổn định hơn – Bảo mật hơn – Chuyên nghiệp hơn. 🚀</p>
+        <!-- Countdown -->
+        <div class="countdown-wrap" id="countdownWrap">
+            <span class="countdown-text">⏳ Tự động chuyển sau</span>
+            <span class="countdown-number" id="countdownNumber">10</span>
+            <span class="countdown-text">giây</span>
+            <div class="countdown-actions">
+                <button class="btn-sm" id="stopCountdownBtn">⏹ Dừng chuyển</button>
+                <button class="btn-sm" id="redirectNowSmallBtn">↗ Chuyển ngay</button>
+            </div>
+        </div>
 
-        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#LamPhuQuy</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#WebsiteMới</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#NângCấpHệThống</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#CôngNghệMới</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#LPQMedia</span>
-        </div>
-      </div>
-      <div class="stats-cards" style="margin: 0.5rem 0;">
-        <div class="stat-item"><span class="stat-number">18K+</span><span>📢 Lượt tiếp cận</span></div>
-        <div class="stat-item"><span class="stat-number">4K+</span><span>🔄 Chia sẻ</span></div>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #a1c4fd, #c2e9fb); color:#0f172a;"><i class="fas fa-globe"></i> Cập nhật liên tục tại bequy.vercel.app</div>
-    </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div>© 2026 <strong>BÉ QUÝ ĐỒNG NAI</strong></div>
+            <p>Cảm ơn bạn đã luôn tin tưởng và đồng hành.</p>
+        </footer>
+    </main>
 
-    <!-- BÀI VIẾT: TOOL HỖ TRỢ TIKTOK CHẠY TRÊN TERMUX -->
-    <div class="announcement-card" style="margin-bottom: 1.8rem;">
-      <a href="https://sf-static.upanhlaylink.com/img/image_202606241ef9fef723f2ef85662300f9ea771bb7.jpg" target="_blank">
-        <img class="vlog-thumbnail" src="https://sf-static.upanhlaylink.com/img/image_202606241ef9fef723f2ef85662300f9ea771bb7.jpg" alt="LÂM PHÚ QUÝ GIỚI THIỆU TOOL HỖ TRỢ TIKTOK CHẠY TRÊN TERMUX" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=Tool+Termux+TikTok'">
-      </a>
-      <div class="announce-title"><i class="fas fa-rocket"></i> LÂM PHÚ QUÝ GIỚI THIỆU TOOL HỖ TRỢ TIKTOK CHẠY TRÊN TERMUX</div>
-      <div class="announce-meta">
-        <span class="badge-important"><i class="fas fa-code"></i> CÔNG NGHỆ</span>
-        <span><i class="far fa-calendar-alt"></i> 24/06/2026</span>
-      </div>
-      <div class="description-box">
-        <p><strong>LÂM PHÚ QUÝ</strong> mang đến một dự án thú vị dành cho cộng đồng yêu thích lập trình và Termux. Bạn đam mê công nghệ, yêu thích khám phá những công cụ tự động hóa trên nền tảng Android? Đây chính là dự án dành cho bạn.</p>
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#facc15;">
-          <i class="fas fa-robot" style="color:#facc15;"></i> <strong>📱 Điểm nổi bật của dự án:</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>✅ Chạy trực tiếp trên ứng dụng Termux.</li>
-            <li>✅ Giao diện đơn giản, dễ thao tác.</li>
-            <li>✅ Tự động hóa quy trình hoạt động.</li>
-            <li>✅ Dễ cài đặt và sử dụng ngay trên điện thoại.</li>
-            <li>✅ Hoạt động liên tục 24/7.</li>
-          </ul>
-        </div>
-        <p>💻 Với mục tiêu chia sẻ kiến thức công nghệ và nâng cao trải nghiệm cho người dùng, LÂM PHÚ QUÝ luôn không ngừng nghiên cứu, phát triển và cập nhật những dự án mới, giúp mọi người tiếp cận công nghệ một cách dễ dàng hơn.</p>
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#4ade80;">
-          <i class="fas fa-fire" style="color:#4ade80;"></i> <strong>🔥 Những ưu điểm nổi bật:</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>Tốc độ xử lý nhanh.</li>
-            <li>Thiết lập đơn giản.</li>
-            <li>Phù hợp với cả người mới bắt đầu tìm hiểu về Termux.</li>
-            <li>Hỗ trợ học tập, nghiên cứu và khám phá các ứng dụng tự động hóa.</li>
-          </ul>
-        </div>
-        <p>🌟 Hãy theo dõi <strong>LÂM PHÚ QUÝ</strong> để cập nhật thêm nhiều nội dung hấp dẫn về Termux, lập trình, công nghệ và các dự án mới nhất.</p>
-        <p><strong>📢 LÂM PHÚ QUÝ – Chia sẻ kiến thức, kết nối đam mê công nghệ!</strong></p>
-        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#LamPhuQuy</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#Termux</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#TikTok</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#CongNghe</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#AutoTool</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#LapTrinh</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#Android</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#Tech</span>
-        </div>
-      </div>
-      <div class="stats-cards" style="margin: 0.5rem 0;">
-        <div class="stat-item"><span class="stat-number">15K+</span><span>📢 Lượt tiếp cận</span></div>
-        <div class="stat-item"><span class="stat-number">3K+</span><span>🔄 Chia sẻ</span></div>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #a1c4fd, #c2e9fb); color:#0f172a;"><i class="fas fa-globe"></i> Cập nhật liên tục tại bequy.vercel.app</div>
-    </div>
+    <script>
+        // ===== script.js =====
+        (function() {
+            'use strict';
 
-    <!-- BÀI: BÉ QUÝ ĐỒNG NAI CÓ MẶT TẠI PHƯỜNG NHƠN TRẠCH XIN VIẾT ĐƠN TÌNH NGUYỆN NGHĨA VỤ QUÂN SỰ -->
-    <div class="announcement-card" style="margin-bottom: 1.8rem;">
-      <a href="https://sf-static.upanhlaylink.com/img/image_20260617b78ec56a4473f7fca8a0829c73abc327.jpg" target="_blank">
-        <img class="vlog-thumbnail" src="https://sf-static.upanhlaylink.com/img/image_20260617b78ec56a4473f7fca8a0829c73abc327.jpg" alt="BÉ QUÝ ĐỒNG NAI có mặt tại phường Nhơn Trạch viết đơn tình nguyện tham gia nghĩa vụ quân sự" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=Th%C3%B4ng+B%C3%A1o+Quan+Tr%E1%BB%8Dng'">
-      </a>
-      <div class="announce-title"><i class="fas fa-flag"></i> BÉ QUÝ ĐỒNG NAI CÓ MẶT TẠI PHƯỜNG NHƠN TRẠCH XIN VIẾT ĐƠN TÌNH NGUYỆN THAM GIA NGHĨA VỤ QUÂN SỰ</div>
-      <div class="announce-meta">
-        <span class="badge-important"><i class="fas fa-star"></i> NỔI BẬT</span>
-        <span><i class="far fa-calendar-alt"></i> 17/06/2026 · 1h30</span>
-      </div>
-      <div class="description-box">
-        <p><strong>BÉ QUÝ ĐỒNG NAI</strong> chính thức đánh dấu một cột mốc quan trọng trong hành trình trưởng thành của mình khi có mặt tại phường Nhơn Trạch vào lúc 1h30 ngày 17/06/2026 để xin viết đơn tình nguyện tham gia nghĩa vụ quân sự.</p>
-        <p>Đây không chỉ là một quyết định mang ý nghĩa cá nhân mà còn thể hiện tinh thần trách nhiệm, lòng yêu nước và mong muốn được đóng góp sức trẻ cho Tổ quốc.</p>
-        <p>Việc tự nguyện đăng ký tham gia nghĩa vụ quân sự là một hành động đáng trân trọng, thể hiện sự bản lĩnh, ý chí và tinh thần sẵn sàng cống hiến của thế hệ trẻ ngày nay.</p>
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#facc15;">
-          <i class="fas fa-flag-checkered" style="color:#facc15;"></i> <strong>Một dấu mốc trưởng thành đầy ý nghĩa</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>📅 <strong>Ngày:</strong> 17/06/2026</li>
-            <li>🕜 <strong>Thời gian:</strong> 1 giờ 30 phút</li>
-            <li>📍 <strong>Địa điểm:</strong> Phường Nhơn Trạch</li>
-            <li>🇻🇳 <strong>Nội dung:</strong> Xin viết đơn tình nguyện tham gia nghĩa vụ quân sự</li>
-          </ul>
-        </div>
-        <p>Trong thời gian qua, BÉ QUÝ ĐỒNG NAI đã luôn nhận được rất nhiều sự yêu mến, đồng hành và ủng hộ từ cộng đồng người theo dõi trên các nền tảng mạng xã hội. Chính vì vậy, quyết định lần này cũng nhận được sự quan tâm đặc biệt từ đông đảo người hâm mộ.</p>
-        <p><strong>Lời nhắn gửi đến người hâm mộ:</strong> BÉ QUÝ ĐỒNG NAI mong muốn tiếp tục nhận được sự động viên, ủng hộ và những lời chúc tốt đẹp từ tất cả mọi người trong chặng đường sắp tới. Dù ở bất kỳ môi trường nào, BÉ QUÝ ĐỒNG NAI vẫn sẽ luôn cố gắng nỗ lực, giữ vững hình ảnh tích cực và lan tỏa những giá trị tốt đẹp đến cộng đồng.</p>
-        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#BéQuýĐồngNai</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#NghĩaVụQuânSự</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#TìnhNguyện</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#NhơnTrạch</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#17/06/2026</span>
-        </div>
-      </div>
-      <div class="stats-cards" style="margin: 0.5rem 0;">
-        <div class="stat-item"><span class="stat-number">25K+</span><span>📢 Lượt tiếp cận</span></div>
-        <div class="stat-item"><span class="stat-number">5K+</span><span>🔄 Chia sẻ</span></div>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #ffcc80, #ffb74d);"><i class="fas fa-globe"></i> Cập nhật liên tục tại bequy.vercel.app</div>
-    </div>
+            // ---------- PARTICLES ----------
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const PARTICLE_COUNT = 90;
 
-    <!-- BÀI 1: Bé Quý rời khỏi Kazen Protection -->
-    <div class="announcement-card" style="margin-bottom: 1.8rem;">
-      <a href="https://sv2.anhsieuviet.com/2026/06/16/920.jpg" target="_blank">
-        <img class="vlog-thumbnail" src="https://sv2.anhsieuviet.com/2026/06/16/920.jpg" alt="Thông tin xác nhận Bé Quý rời Kazen Protection" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=Th%C3%B4ng+B%C3%A1o+Quan+Tr%E1%BB%8Dng'">
-      </a>
-      <div class="announce-title"><i class="fas fa-bullhorn"></i> THÔNG TIN ĐƯỢC XÁC NHẬN: BÉ QUÝ ĐỒNG NAI CHÍNH THỨC RỜI KHỎI TẬP ĐOÀN KAZEN PROTECTION</div>
-      <div class="announce-meta">
-        <span class="badge-important"><i class="fas fa-exclamation-triangle"></i> XÁC NHẬN CHÍNH THỨC</span>
-        <span><i class="far fa-calendar-alt"></i> Cập nhật: 16/06/2026</span>
-      </div>
-      <div class="description-box">
-        <p>Theo thông tin mới nhất được xác nhận bởi <strong>Trưởng nhóm Trần Việt Anh – Admin của Tập đoàn Kazen Protection</strong>, thành viên được cộng đồng biết đến với tên gọi <strong>Bé Quý Đồng Nai</strong> đã chính thức rời khỏi hệ thống Kazen Protection.</p>
-        <p>Thông tin này đã thu hút sự quan tâm của đông đảo thành viên và những người đang theo dõi các hoạt động của tập đoàn trong thời gian vừa qua. Việc Bé Quý Đồng Nai không còn đồng hành cùng Kazen Protection đánh dấu một bước chuyển mới đối với cá nhân cũng như tập thể liên quan.</p>
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#facc15;">
-          <i class="fas fa-info-circle" style="color:#facc15;"></i> <strong>Thông tin từ phía quản lý:</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>✅ Quyết định đã được xác nhận chính thức và có hiệu lực kể từ thời điểm thông báo.</li>
-            <li>📌 Các hoạt động của Kazen Protection vẫn diễn ra bình thường dưới sự điều hành của đội ngũ quản lý và ban lãnh đạo.</li>
-            <li>⚠️ Cộng đồng được khuyến khích tiếp nhận thông tin từ các nguồn chính thức để tránh hiểu lầm hoặc lan truyền thông tin chưa được kiểm chứng.</li>
-          </ul>
-        </div>
-        <p><strong>Xin cảm ơn tất cả các thành viên đã luôn đồng hành, theo dõi và ủng hộ trong suốt thời gian qua.</strong> Mọi thông báo tiếp theo liên quan đến Kazen Protection sẽ được cập nhật trên các kênh chính thức của tập đoàn.</p>
-        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#BéQuýĐồngNai</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#KazenProtection</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#TrầnViệtAnh</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#ThôngTinChínhThức</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#XácNhận</span>
-        </div>
-      </div>
-      <div class="stats-cards" style="margin: 0.5rem 0;">
-        <div class="stat-item"><span class="stat-number">15K+</span><span>📢 Lượt tiếp cận</span></div>
-        <div class="stat-item"><span class="stat-number">3K+</span><span>🔄 Chia sẻ</span></div>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #ffcc80, #ffb74d);"><i class="fas fa-globe"></i> Cập nhật liên tục tại bequy.vercel.app</div>
-    </div>
-
-    <!-- BÀI 2: MV HỒI KẾT -->
-    <div class="mv-article">
-      <a href="https://ibb.co/V4cwsLw" target="_blank">
-        <img class="mv-thumbnail" src="https://i.ibb.co/Rwkjqgj/CAF69-FB8-9132-40-C9-995-C-EBD41-EB2-DB7-C.png" alt="MV Hồi Kết thumbnail" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=MV+H%E1%BB%93i+K%E1%BA%BFt'">
-      </a>
-      <div class="mv-title">🎵 MV CA NHẠC MỚI: HỒI KẾT</div>
-      <div class="mv-meta">
-        <span class="release-date"><i class="far fa-calendar-alt"></i> 01/12/2026</span>
-        <span class="sponsor"><i class="fas fa-trophy"></i> LPQ MEDIA</span>
-      </div>
-      <div class="description-box">
-        <p>MV ca nhạc <strong>“HỒI KẾT”</strong> chính thức phát hành ngày <strong>01/12/2026</strong>. Đây là sản phẩm âm nhạc mang màu sắc cảm xúc sâu lắng, kể về những câu chuyện còn dang dở.</p>
-        <p>🎬 Với sự đầu tư chỉn chu về hình ảnh, âm thanh và nội dung, MV hứa hẹn mang đến những thước phim đầy cảm xúc.</p>
-        <p><i class="fas fa-globe"></i> <strong>📅 Phát hành chính thức:</strong> 01/12/2026 &nbsp;|&nbsp; <strong>🏢 LPQ MEDIA</strong><br>🌐 <strong>MV công chiếu tại:</strong> <a href="https://bequy.vercel.app" target="_blank" style="color:#a78bfa;">bequy.vercel.app</a></p>
-      </div>
-      <div class="rating-stars">
-        <div class="stars-group"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <span>5.0 · 5 sao tuyệt vời</span></div>
-      </div>
-      <div class="stats-cards">
-        <div class="stat-item"><span class="stat-number">56K</span><span>❤️ Lượt like</span></div>
-        <div class="stat-item"><span class="stat-number">90</span><span>💬 Bình luận</span></div>
-        <div class="stat-item"><span class="stat-number">12M</span><span>🌐 Truy cập</span></div>
-      </div>
-      <div class="timer-block" style="margin-top: 1rem;">⏳ Đếm ngược tới ngày ra mắt MV: <span id="countdownMV" style="color:#facc15; font-weight:bold;"></span></div>
-    </div>
-
-    <!-- BÀI 3: VLOG TRƯỜNG ĐUA ĐẠI NAM -->
-    <div class="vlog-card" style="margin-top: 1.8rem;">
-      <a href="https://postimg.cc/Js7YtwrH" target="_blank">
-        <img class="vlog-thumbnail" src="https://i.postimg.cc/Js7YtwrH/IMG-8778.jpg" alt="Bé Quý Đồng Nai & Hải Hân Cute - Trường Đua Đại Nam (Cập nhật mới)" 
-             onerror="this.onerror=null; this.src='https://placehold.co/800x500/1e1b4f/white?text=Vlog+Đại+Nam+2026'">
-      </a>
-      <div class="vlog-title">🎬 SẮP RA MẮT VIDEO: MỘT NGÀY CỦA BÉ QUÝ & HẢI HÂN TẠI TRƯỜNG ĐUA ĐẠI NAM</div>
-      <div class="vlog-meta">
-        <span class="release-date"><i class="far fa-clock"></i> Ra mắt trong tháng 12 · Hot trend</span>
-      </div>
-      <div class="description-box">
-        <p><strong>Hé lộ dự án vlog mới đầy hấp dẫn của Bé Quý Đồng Nai</strong> – Sau thời gian chuẩn bị kỹ lưỡng, Bé Quý Đồng Nai chính thức thông báo sắp ra mắt video với chủ đề <strong>“Một Ngày Của Bé Quý Đồng Nai Với Hải Hân Cute Ở Trường Đua Đại Nam”</strong>. Đây là nội dung được cộng đồng người xem mong chờ bởi sự kết hợp giữa trải nghiệm thực tế thú vị và những khoảnh khắc vui vẻ, đáng nhớ.</p>
-        <div class="warning-highlight" style="background:rgba(99,102,241,0.15); border-left-color:#facc15;">
-          <i class="fas fa-flag-checkered" style="color:#facc15;"></i> <strong>🏁 Những điểm hấp dẫn:</strong>
-          <ul style="margin-top: 8px; margin-left: 20px;">
-            <li>🏎️ Khám phá đường đua chuyên nghiệp, xe Go-Kart</li>
-            <li>😂 Khoảnh khắc hài hước giữa Bé Quý và Hải Hân Cute</li>
-            <li>📸 Cảnh quay chất lượng cao, phong cách vlog hiện đại</li>
-          </ul>
-        </div>
-        <p>📢 <strong>Thời gian phát hành:</strong> Sớm nhất trong tháng 12/2026. 👉 Theo dõi bequy.vercel.app và fanpage để không bỏ lỡ!</p>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #a1c4fd, #c2e9fb); color:#0f172a;"><i class="fas fa-bell"></i> ĐĂNG KÝ THÔNG BÁO · RA MẮT TRONG THÁNG 12</div>
-    </div>
-
-    <!-- BÀI 4: THÔNG BÁO CHÍNH THỨC - NGỪNG HOẠT ĐỘNG FACEBOOK MESSENGER -->
-    <div class="announcement-card" style="margin-top: 1.8rem;">
-      <a href="https://postimg.cc/LqqQSzDM" target="_blank">
-        <img class="vlog-thumbnail" src="https://i.postimg.cc/LqqQSzDM/IMG-8771.jpg" alt="Thông báo chính thức Bé Quý Đồng Nai" 
-             onerror="this.src='https://placehold.co/800x500/1e1b4f/white?text=Thông+Báo+Quan+Trọng'">
-      </a>
-      <div class="announce-title"><i class="fas fa-bullhorn"></i> THÔNG BÁO CHÍNH THỨC: NGỪNG HOẠT ĐỘNG TRÊN FACEBOOK MESSENGER</div>
-      <div class="announce-meta">
-        <span class="badge-important"><i class="fas fa-exclamation-triangle"></i> QUAN TRỌNG</span>
-        <span><i class="far fa-calendar-alt"></i> Cập nhật: 12/2026</span>
-      </div>
-      <div class="description-box">
-        <p><strong>Bé Quý Đồng Nai xin thông báo:</strong> Tài khoản Facebook Messenger sẽ <strong>không còn được sử dụng để liên lạc và hỗ trợ</strong> từ thời điểm hiện tại, nhằm tối ưu quản lý và tập trung phát triển các kênh nội dung chính thức.</p>
-        <div class="warning-highlight">
-          <i class="fas fa-comment-slash"></i> <strong>Lý do ngừng hoạt động Messenger:</strong>
-          <ul style="margin-top: 6px; margin-left: 20px;">
-            <li>✅ Tập trung quản lý thông tin trên nền tảng chính thức</li>
-            <li>✅ Cập nhật nội dung nhanh chóng, chính xác hơn</li>
-            <li>✅ Hạn chế bỏ sót tin nhắn, nâng cao chất lượng tương tác</li>
-          </ul>
-        </div>
-        <p><strong>📢 Theo dõi Bé Quý Đồng Nai tại các kênh chính thức:</strong><br>
-        🌐 Website: <strong>bequy.vercel.app</strong><br>
-        📘 Fanpage Facebook (chính thức) | 🎵 TikTok: @bequy2 | 🎬 YouTube (sắp ra mắt)<br>
-        📧 Hỗ trợ qua hệ thống website hoặc liên hệ số điện thoại.</p>
-        <p><em>“Bé Quý Đồng Nai xin chân thành cảm ơn sự yêu mến, ủng hộ và đồng hành của quý khán giả. Sự tin tưởng của mọi người là động lực để chúng tôi tiếp tục sáng tạo nội dung chất lượng.”</em></p>
-        <p style="margin-top: 8px;"><strong>Trân trọng,<br>LPQ MEDIA – Bé Quý Đồng Nai</strong></p>
-        <div style="background: rgba(0,0,0,0.4); border-radius: 1rem; padding: 0.6rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#BéQuýĐồngNai</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#NgừngHoạtĐộngMessenger</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#LPQMedia</span>
-          <span style="background:#f97316aa; padding: 4px 12px; border-radius: 30px;">#ThôngBáoChínhThức</span>
-        </div>
-      </div>
-      <div class="stats-cards" style="margin: 0.5rem 0;">
-        <div class="stat-item"><span class="stat-number">10K+</span><span>📢 Lượt tiếp cận</span></div>
-        <div class="stat-item"><span class="stat-number">2K+</span><span>🔄 Chia sẻ</span></div>
-      </div>
-      <div class="idol-fan" style="background: linear-gradient(90deg, #ffcc80, #ffb74d);"><i class="fas fa-globe"></i> Cập nhật liên tục tại bequy.vercel.app</div>
-    </div>
-  </div>
-</div>
-
-<script>
-  (function() {
-    // FPS counter
-    let fpsCount = 0, lastFpsTime = performance.now();
-    function updateFPS() {
-      fpsCount++;
-      const now = performance.now();
-      if (now - lastFpsTime >= 1000) {
-        const fpsEl = document.getElementById('fpsMeter');
-        if (fpsEl) fpsEl.innerHTML = `⚡ FPS: ${fpsCount}`;
-        fpsCount = 0;
-        lastFpsTime = now;
-      }
-      requestAnimationFrame(updateFPS);
-    }
-    requestAnimationFrame(updateFPS);
-
-    // Snow effect
-    const snowContainer = document.getElementById('snowfield');
-    if (snowContainer) {
-      const snowChars = ['❄️', '❄', '✧', '✨', '❅'];
-      const flakeCount = Math.min(65, window.innerWidth < 768 ? 45 : 65);
-      for (let i = 0; i < flakeCount; i++) {
-        const flake = document.createElement('div');
-        flake.classList.add('snowflake');
-        flake.innerHTML = snowChars[Math.floor(Math.random() * snowChars.length)];
-        const size = 8 + Math.random() * 20;
-        const leftPos = Math.random() * 100;
-        const duration = 3.5 + Math.random() * 8;
-        const delay = Math.random() * -15;
-        flake.style.cssText = `left:${leftPos}%; font-size:${size}px; animation-duration:${duration}s; animation-delay:${delay}s; opacity:${0.3 + Math.random() * 0.6};`;
-        snowContainer.appendChild(flake);
-      }
-    }
-
-    // Audio background
-    const audio = document.getElementById('bgAudio');
-    const selectSong = document.getElementById('songSelect');
-    if (audio && selectSong) {
-      audio.volume = 0.3;
-      selectSong.addEventListener('change', async (e) => {
-        const url = e.target.value;
-        if (!url) { audio.pause(); audio.src = ''; return; }
-        try {
-          audio.src = url;
-          audio.load();
-          await audio.play();
-        } catch (err) {
-          const playOnInteraction = () => {
-            if (selectSong.value !== '' && audio.paused && audio.src) {
-              audio.play().catch(e => {});
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
             }
-            document.removeEventListener('click', playOnInteraction);
-            document.removeEventListener('touchstart', playOnInteraction);
-          };
-          document.addEventListener('click', playOnInteraction);
-          document.addEventListener('touchstart', playOnInteraction);
-        }
-      });
-    }
-    const globalHandler = () => {
-      if (audio && selectSong && selectSong.value !== '' && audio.paused && audio.src) audio.play().catch(()=>{});
-    };
-    document.body.addEventListener('click', globalHandler);
-    document.body.addEventListener('touchstart', globalHandler);
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
 
-    // Profile timer since June 1, 2025
-    const timerSpan = document.getElementById('liveTimer');
-    if (timerSpan) {
-      const startDate = new Date(2025, 5, 1, 0, 0, 0);
-      function updateTimer() {
-        const now = new Date();
-        const diff = Math.floor((now - startDate) / 1000);
-        if (diff <= 0) timerSpan.innerText = `0d 00h 00m 00s`;
-        else {
-          const days = Math.floor(diff / 86400);
-          const hours = Math.floor((diff % 86400) / 3600);
-          const mins = Math.floor((diff % 3600) / 60);
-          const secs = diff % 60;
-          timerSpan.innerText = `${days}d ${hours.toString().padStart(2, '0')}h ${mins.toString().padStart(2, '0')}m ${secs.toString().padStart(2, '0')}s`;
-        }
-      }
-      updateTimer();
-      setInterval(updateTimer, 1000);
-    }
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2.8 + 0.6;
+                    this.speedX = (Math.random() - 0.5) * 0.35;
+                    this.speedY = (Math.random() - 0.5) * 0.35;
+                    this.opacity = Math.random() * 0.6 + 0.2;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(180, 200, 255, ${this.opacity})`;
+                    ctx.fill();
+                    // small glow
+                    ctx.shadowColor = 'rgba(150, 180, 255, 0.3)';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
 
-    // Countdown MV HỒI KẾT (01/12/2026)
-    const countdownSpan = document.getElementById('countdownMV');
-    if (countdownSpan) {
-      const targetDate = new Date(2026, 11, 1, 0, 0, 0);
-      function updateCountdown() {
-        const now = new Date();
-        const diffMs = targetDate - now;
-        if (diffMs <= 0) {
-          countdownSpan.innerText = "Đã phát hành! 🎬";
-          return;
-        }
-        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diffMs % (86400000)) / 3600000);
-        const mins = Math.floor((diffMs % 3600000) / 60000);
-        const secs = Math.floor((diffMs % 60000) / 1000);
-        countdownSpan.innerText = `${days} ngày ${hours.toString().padStart(2, '0')}h ${mins.toString().padStart(2, '0')}m ${secs.toString().padStart(2, '0')}s`;
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    }
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            initParticles();
 
-    // Avatar fallback
-    const avatarImg = document.getElementById('avatarImg');
-    if (avatarImg) avatarImg.addEventListener('error', () => {
-      if (!avatarImg.src.includes('ui-avatars')) avatarImg.src = 'https://ui-avatars.com/api/?background=8b5cf6&color=fff&rounded=true&bold=true&size=120&name=B%C3%A9+Qu%C3%BD';
-    });
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
 
-    // Glass shine mouse effect
-    const cards = document.querySelectorAll('.glass-card, .mv-article, .key-section, .vlog-card, .announcement-card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty('--mouse-x', `${x}%`);
-        card.style.setProperty('--mouse-y', `${y}%`);
-      });
-    });
-    if (!document.getElementById('shineEffect')) {
-      const style = document.createElement('style');
-      style.id = 'shineEffect';
-      style.textContent = `.glass-card,.mv-article,.key-section,.vlog-card,.announcement-card{position:relative;overflow:hidden;}.glass-card::after,.mv-article::after,.key-section::after,.vlog-card::after,.announcement-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(255,255,255,0.1) 0%,transparent 70%);pointer-events:none;border-radius:inherit;transition:background 0.1s;}`;
-      document.head.appendChild(style);
-    }
+            // ---------- MOUSE GLOW ----------
+            const card = document.getElementById('mainCard');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
 
-    document.querySelectorAll('.bio-item').forEach(item => {
-      item.style.transition = 'transform 0.2s';
-      item.addEventListener('mouseenter', () => item.style.transform = 'translateX(5px)');
-      item.addEventListener('mouseleave', () => item.style.transform = 'translateX(0)');
-    });
-    console.log("✅ Đã cập nhật bài viết mới nhất về công bố website mới lên đầu trang.");
-  })();
-</script>
+            // ---------- RIPPLE EFFECT ----------
+            function createRipple(e, btn) {
+                const rect = btn.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple-effect';
+                const size = Math.max(rect.width, rect.height) * 0.8;
+                ripple.style.width = ripple.style.height = size + 'px';
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 700);
+            }
+
+            // Attach ripple to buttons
+            document.querySelectorAll('.btn, .btn-sm').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    createRipple(e, this);
+                });
+            });
+
+            // ---------- COUNTDOWN LOGIC ----------
+            let countdown = 10;
+            let countdownInterval = null;
+            let isStopped = false;
+            const countdownEl = document.getElementById('countdownNumber');
+            const stopBtn = document.getElementById('stopCountdownBtn');
+            const redirectNowBtn = document.getElementById('redirectNowBtn');
+            const redirectNowSmall = document.getElementById('redirectNowSmallBtn');
+
+            function redirectToNewSite() {
+                window.location.href = 'https://tenmienmoi.com';
+            }
+
+            function updateCountdownDisplay() {
+                countdownEl.textContent = countdown;
+            }
+
+            function stopCountdown() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                isStopped = true;
+                countdownEl.textContent = '⏸';
+                stopBtn.textContent = '▶ Tiếp tục';
+            }
+
+            function startCountdown() {
+                if (countdownInterval) return;
+                isStopped = false;
+                stopBtn.textContent = '⏹ Dừng chuyển';
+                countdownInterval = setInterval(() => {
+                    if (isStopped) return;
+                    countdown -= 1;
+                    updateCountdownDisplay();
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null;
+                        redirectToNewSite();
+                    }
+                }, 1000);
+            }
+
+            function resetCountdown() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                countdown = 10;
+                isStopped = false;
+                stopBtn.textContent = '⏹ Dừng chuyển';
+                updateCountdownDisplay();
+                startCountdown();
+            }
+
+            // Init countdown
+            startCountdown();
+
+            // Stop / Resume
+            stopBtn.addEventListener('click', function() {
+                if (isStopped) {
+                    // resume
+                    isStopped = false;
+                    stopBtn.textContent = '⏹ Dừng chuyển';
+                    if (!countdownInterval) {
+                        startCountdown();
+                    }
+                } else {
+                    stopCountdown();
+                }
+            });
+
+            // Redirect now buttons
+            function handleRedirectNow(e) {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+                redirectToNewSite();
+            }
+            redirectNowBtn.addEventListener('click', handleRedirectNow);
+            redirectNowSmall.addEventListener('click', handleRedirectNow);
+
+            // Reset countdown if page visibility changes (optional)
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && countdownInterval === null && !isStopped) {
+                    // if countdown was killed but not stopped, resume
+                    startCountdown();
+                }
+            });
+
+            // ---------- TYPING EFFECT (phụ đề) ----------
+            // Chỉ hiệu ứng con trỏ nhấp nháy đã có CSS, nhưng để tăng thêm hiệu ứng gõ chữ (mô phỏng)
+            // Ta sẽ làm hiệu ứng xuất hiện từng chữ một cho đoạn sub (lần đầu)
+            const subElement = document.getElementById('subText');
+            const fullText = subElement.textContent.replace('▌', '').trim(); // lấy text gốc
+            // Giữ nguyên nội dung, chỉ tạo hiệu ứng gõ cho lần đầu (mỗi lần load)
+            // Xóa nội dung cũ, thêm từng ký tự
+            const cursorSpan = subElement.querySelector('.typing-cursor');
+            // Giữ lại cursor
+            subElement.innerHTML = '';
+            let charIndex = 0;
+            const typeSpeed = 28;
+
+            function typeWriter() {
+                if (charIndex < fullText.length) {
+                    const char = fullText.charAt(charIndex);
+                    // Thêm ký tự mới (giữ nguyên khoảng cách)
+                    const textNode = document.createTextNode(char);
+                    subElement.insertBefore(textNode, cursorSpan);
+                    charIndex++;
+                    setTimeout(typeWriter, typeSpeed);
+                } else {
+                    // gõ xong
+                    cursorSpan.style.animation = 'blink 0.9s step-end infinite';
+                }
+            }
+
+            // Đợi một chút rồi bắt đầu gõ
+            setTimeout(typeWriter, 400);
+
+            // ---------- CLEANUP ----------
+            window.addEventListener('beforeunload', function() {
+                if (countdownInterval) clearInterval(countdownInterval);
+            });
+
+        })();
+    </script>
 </body>
 </html>
